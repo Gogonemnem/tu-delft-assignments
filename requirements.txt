@@ -1,0 +1,11 @@
+pytest
+pylint
+coverage
+pytest-cov
+decorators
+mock
+
+matplotlib
+beautifulsoup4
+lxml
+html5lib
