@@ -26,7 +26,7 @@
   `Repository URL` on the left  
   `Version control: Git` on the right  
   copy and paste you SSH Git URL from your project main page into the `URL` field:
-  `git@gitlab.ewi.tudelft.nl:ti3115tu/2020-2021/group-XX.git` (where XX is your group number)  
+  `git@gitlab.ewi.tudelft.nl:ewi3615tu/2020-2021/data/dt_-XX.git` (where XX is your group number)  
   
 Pycharm will now clone your group repository into its project folder. While PyCharm is setting up some stuff, you still need to configure some settings for your project.
 
