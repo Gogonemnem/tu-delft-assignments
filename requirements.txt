@@ -7,3 +7,4 @@ mock
 pyqt5
 numpy
 pandas
+scipy
