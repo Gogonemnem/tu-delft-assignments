@@ -2,6 +2,7 @@ from PyQt5 import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
+from traceback import *
 import sys
 
 class mainwindow(QMainWindow):
@@ -9,13 +10,16 @@ class mainwindow(QMainWindow):
         super(mainwindow, self).__init__(*args, **kwargs)
         self.setGeometry(400, 400, 400, 400)
         self.setWindowTitle("Breaksum")
+        self.func()
         self.show()
 
     def catch_exceptions(t, val, tb):
+
         QMessageBox.critical(None,
                              "fout met Waarde",
                              "Een ingevulde waarde veroorzaakt een fout in de berekening\n"
-                              f"type fout: {t}")
+                              f"type fout: {t}\n"
+                             f"traceback: {format_tb(tb)[-1]}")
 
 
 hook = sys.excepthook
