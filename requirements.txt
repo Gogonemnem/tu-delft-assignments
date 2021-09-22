@@ -8,4 +8,6 @@ pyqt5
 numpy
 pandas
 datetime
+print("Test")
 scipy
+
