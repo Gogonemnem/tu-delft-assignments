@@ -10,7 +10,6 @@ class mainwindow(QMainWindow):
         super(mainwindow, self).__init__(*args, **kwargs)
         self.setGeometry(400, 400, 400, 400)
         self.setWindowTitle("Breaksum")
-        self.func()
         self.show()
 
     def catch_exceptions(t, val, tb):
