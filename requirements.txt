@@ -9,3 +9,5 @@ numpy
 pandas
 datetime
 print("Test")
+scipy
+
