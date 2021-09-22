@@ -6,3 +6,4 @@ decorators
 mock
 pyqt5
 numpy
+pandas
