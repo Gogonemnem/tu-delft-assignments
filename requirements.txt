@@ -5,3 +5,4 @@ pytest-cov
 decorators
 mock
 pyqt5
+numpy
