@@ -1,30 +1,32 @@
-from PyQt5 import *
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-from PyQt5.QtWidgets import *
-from traceback import *
-import sys
+# import traceback
+# import PyQt5
+# from PyQt5 import QtGui
+# from PyQt5 import QtCore
 
-class mainwindow(QMainWindow):
+
+import sys
+from PyQt5 import QtWidgets
+
+
+class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, *args, **kwargs):
-        super(mainwindow, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.setGeometry(400, 400, 400, 400)
         self.setWindowTitle("Breaksum")
         self.show()
 
     def catch_exceptions(t, val, tb):
-
-        QMessageBox.critical(None,
-                             "fout met Waarde",
-                             "Een ingevulde waarde veroorzaakt een fout in de berekening\n"
-                              f"type fout: {t}\n"
-                             f"traceback: {format_tb(tb)[-1]}")
+        QtWidgets.QMessageBox.critical(None,
+                                       "fout met Waarde",
+                                       "Een ingevulde waarde veroorzaakt een fout in de berekening\n"
+                                       f"type fout: {t}\n"
+                                       f"traceback: {format_tb(tb)[-1]}")
 
 
 hook = sys.excepthook
-sys.excepthook = mainwindow.catch_exceptions
+sys.excepthook = MainWindow.catch_exceptions
 
 if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    window = mainwindow()
+    app = QtWidgets.QApplication(sys.argv)
+    window = MainWindow()
     app.exec_()
