@@ -1,11 +1,10 @@
 from PyQt5 import QtWidgets
 
 
-class AgendaWidget(QtWidgets.QGroupBox):
+class TaskListTab(QtWidgets.QWidget):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.setTitle("The agenda can be seen below")
-        self.button = QtWidgets.QPushButton('agenda')
+        self.button = QtWidgets.QPushButton('import task list')
         layout = QtWidgets.QVBoxLayout()
         layout.addWidget(self.button)
         self.setLayout(layout)
