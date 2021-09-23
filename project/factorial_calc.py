@@ -1,3 +1,4 @@
+from PyQt5 import *
 # Asks the user to input a number to perform the factorial calculation for
 # @return: the number the user has input
 def ask_factorial():
@@ -38,3 +39,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+

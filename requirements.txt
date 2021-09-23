@@ -4,3 +4,8 @@ coverage
 pytest-cov
 decorators
 mock
+pyqt5
+numpy
+pandas
+datetime
+
