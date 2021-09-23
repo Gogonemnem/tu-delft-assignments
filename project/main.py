@@ -1,8 +1,5 @@
-from PyQt5 import *
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-from PyQt5.QtWidgets import *
-from traceback import *
+import PyQt5
+import traceback
 import sys
 
 class mainwindow(QMainWindow):
