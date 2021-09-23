@@ -1,11 +1,12 @@
-from PyQt5 import *
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-from PyQt5.QtWidgets import *
-from traceback import *
+import PyQt5
+from PyQt5 import QtGui
+from PyQt5 import QtCore
+import traceback
+
+from PyQt5 import QtWidgets
 import sys
 
-class mainwindow(QMainWindow):
+class mainwindow(QtWidgets.QMainWindow):
     def __init__(self, *args, **kwargs):
         super(mainwindow, self).__init__(*args, **kwargs)
         self.setGeometry(400, 400, 400, 400)
@@ -14,7 +15,7 @@ class mainwindow(QMainWindow):
 
     def catch_exceptions(t, val, tb):
 
-        QMessageBox.critical(None,
+        QtWidgets.QMessageBox.critical(None,
                              "fout met Waarde",
                              "Een ingevulde waarde veroorzaakt een fout in de berekening\n"
                               f"type fout: {t}\n"
@@ -25,6 +26,6 @@ hook = sys.excepthook
 sys.excepthook = mainwindow.catch_exceptions
 
 if __name__ == '__main__':
-    app = QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
     window = mainwindow()
     app.exec_()
