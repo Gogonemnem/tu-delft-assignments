@@ -1,9 +1,8 @@
-# import traceback
 # import PyQt5
 # from PyQt5 import QtGui
 # from PyQt5 import QtCore
 
-
+import traceback
 import sys
 from PyQt5 import QtWidgets
 
@@ -19,9 +18,8 @@ class MainWindow(QtWidgets.QMainWindow):
         QtWidgets.QMessageBox.critical(None,
                                        "fout met Waarde",
                                        "Een ingevulde waarde veroorzaakt een fout in de berekening\n"
-                                       f"type fout: {t}\n"
-                                       f"traceback: {format_tb(tb)[-1]}")
-
+                                       f"type fout: {t, val}\n"
+                                       f"traceback: {traceback.format_tb(tb)[-1]}")
 
 hook = sys.excepthook
 sys.excepthook = MainWindow.catch_exceptions
