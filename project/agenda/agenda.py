@@ -15,8 +15,8 @@ class Agenda:
         today = datetime.today()
         self.remove_activity_over()
         for activity in self.agenda:
-            if today.year == activity.start_time.year and today.month == activity.start_time.month and \
-                    today.day == activity.start_time.day:
+            if today.year == activity.start_time.year and today.month == \
+                    activity.start_time.month and today.day == activity.start_time.day:
                 today_agenda.append(activity)
             else:
                 break
@@ -45,12 +45,13 @@ class Activity:
         self.start_time = start_time
 
         if all(var is None for var in [end_time, duration]):
-            raise ValueError('Please add tell us when this activity end or how long you will be doing this activity')
+            raise ValueError('Please add tell us when this activity end or '
+                             'how long you will be doing this activity')
 
         self.end_time = end_time if end_time else start_time + duration
         self.duration = duration if duration else end_time - start_time
         self.summary = summary
-        self.active = True if datetime.now() >= start_time else False
+        self.active = datetime.now() >= start_time
 
     def change_activity(self, activity):
         self.activity = activity
@@ -74,14 +75,16 @@ class Activity:
 
     def __str__(self):
         # Assumes the activity is stopping on the same day
-        return f'Doing: {self.activity}, starting from: {self.start_time.hour}:{self.start_time.minute:02},' \
-               f' ending at: {self.end_time.hour}:{self.end_time.minute:02}, doing it for: {self.duration}' \
+        return f'Doing: {self.activity}, starting from: {self.start_time.hour}:' \
+               f'{self.start_time.minute:02}, ending at: {self.end_time.hour}:' \
+               f'{self.end_time.minute:02}, doing it for: {self.duration}' \
                f' active: {self.active}'
 
     def __repr__(self):
         # Assumes the activity is stopping on the same day
-        return f'Doing: {self.activity}, starting from: {self.start_time.hour}:{self.start_time.minute:02},' \
-               f' ending at: {self.end_time.hour}:{self.end_time.minute:02}, doing it for: {self.duration}' \
+        return f'Doing: {self.activity}, starting from: {self.start_time.hour}:' \
+               f'{self.start_time.minute:02}, ending at: {self.end_time.hour}:' \
+               f'{self.end_time.minute:02}, doing it for: {self.duration}' \
                f' active: {self.active}'
 
 
@@ -126,4 +129,5 @@ if __name__ == '__main__':
 
     # Lastly, importing .ics files might be doable, but how do we give priorities to the activities
     # We only have ['No work', 'Work', 'Planned break', 'Do not disturb me', 'Doing task']
-    # Should we convert each activity to a number? And that you give a priority inside Apple/Google Calendar?
+    # Should we convert each activity to a number?
+    # And that you give a priority inside Apple/Google Calendar?
