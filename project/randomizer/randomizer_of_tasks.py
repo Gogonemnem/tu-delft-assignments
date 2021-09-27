@@ -1,9 +1,10 @@
 import random
-from project.task_list.data_for_database import database
+from project.task_list.data_for_database import TaskList
 
 
 def randomize_tasks():
-    dictionaryObject = database().to_dict()
+    database = TaskList()
+    dictionaryObject = database.data.to_dict()
     list_priority_low = []
     list_priority_normal = []
     list_priority_today = []
