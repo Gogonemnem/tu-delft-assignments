@@ -8,10 +8,14 @@ class TaskList:
                                   'Estimated time (minutes)': [30, 10, 15, 5],
                                   'Priority': ['normal', 'low', 'must be done today', 'high'],
                                   'Periodic': [True, True, False, True],
-                                  'Preferred start time': ['10:00', '10:00', '14:00', '9:00'],
-                                  'Preferred end time': ['17:00', '17:00', '16:00', '19:00']})
+                                  'Preferred time': ['Whole day', 'Morning', 'Afternoon', 'Whole day'],
+                                  'Delete task': [None, None, None, None],
+                                  'Edit task': [None, None, None, None]})
 
     def add_task(self, task):
         new_task = {'Task': task[0], 'Estimated time (minutes)': task[1], 'Priority': task[2],
-                    'Periodic': task[3], 'Preferred start time': task[4], 'Preferred end time': task[5]}
-        self.data.append(new_task, ignore_index=True)
+                    'Periodic': task[3], 'Preferred time': task[4], 'Delete task': None, 'Edit task': None}
+        self.data = self.data.append(new_task, ignore_index=True)
+
+    def delete_task(self, index):
+        self.data = self.data.drop(index)

@@ -34,10 +34,11 @@ class TaskListDatabase(QAbstractTableModel):
 
     # def flags(self, index):
     #     return Qt.ItemIsSelectable | Qt.ItemIsEnabled | Qt.ItemIsEditable
-
+    #
     # def setData(self, index, value, role):
     #     if role == Qt.EditRole:
     #         self._database.iloc[index.row(), index.column()] = value
+    #         self.dataChanged.emit(index, index)
     #         return True
     #
     # def data(self, index, role=Qt.DisplayRole):
