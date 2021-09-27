@@ -8,8 +8,9 @@
 pyqt5
 pyqtwebengine
 numpy
-pandas~=1.3.3
-datetime~=4.3
+pandas
+datetime
 
 
-mock~=4.0.3
+mock
+plotly
