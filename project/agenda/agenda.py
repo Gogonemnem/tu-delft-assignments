@@ -12,7 +12,7 @@ class Agenda:
 
     def add_activity(self, activity):
         """Insert the activity with activities occurring earlier appearing earlier on the list"""
-        activity.id, self.id = self.id, self.id+1
+        activity.id, self.id = str(self.id), self.id+1
         bisect.insort(self.agenda, activity)
 
     def today(self):
