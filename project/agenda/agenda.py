@@ -1,5 +1,8 @@
 from datetime import datetime, timedelta
 import bisect
+from PyQt5 import QtCore, QtWidgets, QtWebEngineWidgets
+import plotly.express as px
+import pandas as pd
 
 
 class Agenda:
@@ -27,6 +30,17 @@ class Agenda:
             if datetime.today() >= activity.end_time:
                 self.agenda.remove(activity)
             break
+
+    def plot(self):
+        df = pd.DataFrame([
+            dict(Task="Job A", Start='2009-01-01', Finish='2009-02-28'),
+            dict(Task="Job B", Start='2009-03-05', Finish='2009-04-15'),
+            dict(Task="Job C", Start='2009-02-20', Finish='2009-05-30')
+        ])
+
+        fig = px.timeline(df, x_start="Start", x_end="Finish", y="Task")
+        fig.update_yaxes(autorange="reversed")  # otherwise tasks are listed from the bottom up
+        fig.show()
 
     def __str__(self):
         return f'{self.agenda}'
@@ -88,6 +102,36 @@ class Activity:
                f' active: {self.active}'
 
 
+class Widget(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.button = QtWidgets.QPushButton('Plot', self)
+        self.browser = QtWebEngineWidgets.QWebEngineView(self)
+
+        vlayout = QtWidgets.QVBoxLayout(self)
+        vlayout.addWidget(self.button, alignment=QtCore.Qt.AlignHCenter)
+        vlayout.addWidget(self.browser)
+
+        self.button.clicked.connect(self.show_graph)
+        self.resize(1000,800)
+
+    def show_graph(self):
+        df = pd.DataFrame([
+            dict(Task="Job A", Start='2009-01-01', Finish='2009-02-28'),
+            dict(Task="Job B", Start='2009-03-05', Finish='2009-04-15'),
+            dict(Task="Job C", Start='2009-02-20', Finish='2009-05-30')
+        ])
+
+        fig = px.timeline(df, x_start="Start", x_end="Finish", y="Task")
+        fig.update_yaxes(autorange="reversed")  # otherwise tasks are listed from the bottom up
+        # fig.show()
+
+        # df = px.data.tips()
+        # fig = px.box(df, x="day", y="total_bill", color="smoker")
+        # fig.update_traces(quartilemethod="exclusive") # or "inclusive", or "linear" by default
+        self.browser.setHtml(fig.to_html(include_plotlyjs='cdn'))
+
+
 if __name__ == '__main__':
     now = datetime.today()
 
@@ -131,3 +175,11 @@ if __name__ == '__main__':
     # We only have ['No work', 'Work', 'Planned break', 'Do not disturb me', 'Doing task']
     # Should we convert each activity to a number?
     # And that you give a priority inside Apple/Google Calendar?
+    app = QtWidgets.QApplication([])
+    widget = Widget()
+    widget.show()
+    app.exec()
+
+
+
+

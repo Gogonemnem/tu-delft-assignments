@@ -5,9 +5,8 @@
 #decorators
 #mock
 
-
-
-pyqt5~=5.15.4
+pyqt5
+pyqtwebengine
 numpy
 pandas~=1.3.3
 datetime~=4.3
