@@ -24,5 +24,24 @@ class TaskListDatabase(QAbstractTableModel):
             return self._database.columns[col]
         return None
 
+    @property
     def database(self):
         return self._database
+
+
+# The beneath code gives the option to manually edit the table.
+# I don't know if it changes the database, but I think it can break the rest of the code if we allow it.
+
+    # def flags(self, index):
+    #     return Qt.ItemIsSelectable | Qt.ItemIsEnabled | Qt.ItemIsEditable
+
+    # def setData(self, index, value, role):
+    #     if role == Qt.EditRole:
+    #         self._database.iloc[index.row(), index.column()] = value
+    #         return True
+    #
+    # def data(self, index, role=Qt.DisplayRole):
+    #     if index.isValid():
+    #         if role == Qt.DisplayRole or role == Qt.EditRole:
+    #             value = self._database.iloc[index.row(), index.column()]
+    #             return str(value)
