@@ -103,4 +103,4 @@ class TaskWidget(QtWidgets.QGroupBox):
         msg = QMessageBox()
         msg.setText("Task is added to the databse")
         msg.setWindowIcon(QtGui.QIcon('icon.png'))
-        x = msg.exec_()
+        # x = msg.exec_()

@@ -3,7 +3,7 @@
 # A comma-separated list of package or module names from where C extensions may
 # be loaded. Extensions are loading into the active Python interpreter and may
 # run arbitrary code.
-extension-pkg-whitelist=
+extension-pkg-whitelist=PyQt5
 
 # Add files or directories to the blacklist. They should be base names, not
 # paths.
@@ -439,7 +439,7 @@ method-naming-style=snake_case
 
 # Regular expression matching correct method names. Overrides method-naming-
 # style.
-#method-rgx=
+method-rgx=(([a-z_][a-z0-9_]{2,30})|(rowCount)|(columnCount)|(headerData))$
 
 # Naming style matching correct module names.
 module-naming-style=snake_case

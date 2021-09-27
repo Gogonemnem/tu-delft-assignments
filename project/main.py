@@ -24,12 +24,13 @@ class MainWindow(QtWidgets.QMainWindow):
         self.task_list = QtWidgets.QWidget()
         self.visual()
 
-    def catch_exceptions(self, t, val, tb):
+    @staticmethod
+    def catch_exceptions(failure_type, val, trace_back):
         QtWidgets.QMessageBox.critical(None,
                                        "Problem with application",
                                        "A fault has been detected somewhere in the program.\n"
-                                       f"Failure type: {t, val}\n"
-                                       f"Traceback: {traceback.format_tb(tb)[-1]}")
+                                       f"Failure type: {failure_type, val}\n"
+                                       f"Traceback: {traceback.format_tb(trace_back)[-1]}")
 
     def visual(self):
         layout = QtWidgets.QGridLayout()

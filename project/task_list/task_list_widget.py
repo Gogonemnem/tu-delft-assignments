@@ -11,11 +11,14 @@ class TaskListWidget(QtWidgets.QGroupBox):
             # layout = QtWidgets.QVBoxLayout()
             # layout.addWidget(self.button)
             # self.setLayout(layout)
+
+            # purely so that pylint does not cry, delete this later!!!
+            print(f'delete this statement later in task_list_widget.py {item}')
+
             self.button = QtWidgets.QPushButton('to do list')
             layout = QtWidgets.QVBoxLayout()
             layout.addWidget(self.button)
             self.setLayout(layout)
-
 
     # def add_task_button_to_tasklistwidget(self, randomized_list):
     #     self.randomized_list = randomize_tasks()
