@@ -24,6 +24,9 @@ class TaskListDatabase(QAbstractTableModel):
             return self._database.columns[col]
         return None
 
+    def removeRow(self, row, parent=None):
+        return True
+
     @property
     def database(self):
         return self._database

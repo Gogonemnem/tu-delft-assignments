@@ -19,3 +19,4 @@ class TaskList:
 
     def delete_task(self, index):
         self.data = self.data.drop(index)
+        self.data = self.data.reset_index(drop=True)
