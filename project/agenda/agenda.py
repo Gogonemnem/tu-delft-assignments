@@ -56,24 +56,35 @@ class Activity:
             raise ValueError('Please add tell us when this activity end or '
                              'how long you will be doing this activity')
 
-        self.end_time = end_time if end_time else start_time + duration
-        self.duration = duration if duration else end_time - start_time
+        if end_time:
+            self.end_time = end_time
+            self.duration = end_time - self.start_time
+        # elif makes sure user does not 'wrong' input both
+        elif duration:
+            self.duration = duration
+            self.end_time = self.start_time + duration
+
         self.summary = summary
-        self.active = datetime.now() >= start_time
 
-    def change_activity(self, activity):
-        self.activity = activity
+    @property
+    def active(self):
+        return datetime.now() >= self.start_time
 
-    def change_start(self, time):
-        self.start_time = time
-
-    def change_end(self, time):
-        self.end_time = time
-        self.duration = time - self.start_time
-
-    def change_duration(self, duration):
-        self.duration = duration
-        self.end_time = self.start_time + duration
+    # I actually think this function may be redundant
+    def modify_activity(self, activity=None, start_time=None, end_time=None, duration=None, summary=None):
+        if activity:
+            self.activity = activity
+        if start_time:
+            self.start_time = start_time
+        if summary:
+            self.summary = summary
+        if end_time:
+            self.end_time = end_time
+            self.duration = end_time - self.start_time
+        # elif makes sure user does not input both
+        elif duration:
+            self.duration = duration
+            self.end_time = self.start_time + duration
 
     def __le__(self, other):
         return self.start_time <= other.start_time
@@ -111,12 +122,17 @@ class Widget(QtWidgets.QWidget):
 
     def show_graph(self, agenda):
         dics = []
+        start_times = (o.start_time for o in agenda.agenda)
         for activity in agenda.agenda:
             ac_dic = activity.__dict__
             dics.append({key: ac_dic[key] for key in ['activity', 'start_time', 'end_time', 'id']})
         df = pd.DataFrame(dics)
-
-        fig = px.timeline(df, x_start="start_time", x_end="end_time", y="activity", color="id")
+        if agenda.agenda:
+            x_start = agenda.agenda[0].start_time
+            x_range = [x_start, x_start+timedelta(days=1)]
+        else:
+            x_range = None
+        fig = px.timeline(df, x_start="start_time", x_end="end_time", y="activity", color="id", range_x=x_range)
         fig.update_yaxes(autorange="reversed")  # otherwise tasks are listed from the bottom up
         self.browser.setHtml(fig.to_html(include_plotlyjs='cdn'))
 
