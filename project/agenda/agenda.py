@@ -122,13 +122,13 @@ class Widget(QtWidgets.QWidget):
 
     def show_graph(self, agenda):
         dics = []
-        start_times = (o.start_time for o in agenda.agenda)
-        for activity in agenda.agenda:
+        today = agenda.today()
+        for activity in today:
             ac_dic = activity.__dict__
             dics.append({key: ac_dic[key] for key in ['activity', 'start_time', 'end_time', 'id']})
         df = pd.DataFrame(dics)
-        if agenda.agenda:
-            x_start = agenda.agenda[0].start_time
+        if today:
+            x_start = today[0].start_time
             x_range = [x_start, x_start+timedelta(days=1)]
         else:
             x_range = None
