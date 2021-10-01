@@ -12,19 +12,18 @@ class Agenda:
 
     def add_activity(self, activity):
         """Insert the activity with activities occurring earlier appearing earlier on the list"""
-        activity.id, self.id = str(self.id), self.id+1
+        activity.id = str(self.id)
+        self.id += 1
         bisect.insort(self.agenda, activity)
 
     def today(self):
         today_agenda = []
-        today = datetime.today()
+        today = datetime.today().date()
         self.remove_activity_over()
         for activity in self.agenda:
-            if today.year == activity.end_time.year and today.month == \
-                    activity.end_time.month and today.day == activity.end_time.day:
+            if activity.end_time.date() == today:
                 today_agenda.append(activity)
-            elif today.year == activity.start_time.year and today.month == \
-                    activity.start_time.month and today.day == activity.start_time.day:
+            elif activity.start_time.date() == today:
                 today_agenda.append(activity)
             else:
                 break
