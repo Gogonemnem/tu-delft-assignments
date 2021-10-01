@@ -1,8 +1,7 @@
 from datetime import datetime, timedelta
 import bisect
-from PyQt5 import QtCore, QtWidgets, QtWebEngineWidgets
-import plotly.express as px
-import pandas as pd
+from PyQt5 import QtWidgets
+from agenda_widget import Widget
 
 
 class Agenda:
@@ -106,36 +105,6 @@ class Activity:
                f"duration={self.duration}, " \
                f"summary={self.summary}, " \
                f"active={self.active})"
-
-
-class Widget(QtWidgets.QWidget):
-    def __init__(self, agenda, parent=None):
-        super().__init__(parent)
-        self.button = QtWidgets.QPushButton('Show Agenda', self)
-        self.browser = QtWebEngineWidgets.QWebEngineView(self)
-
-        vlayout = QtWidgets.QVBoxLayout(self)
-        vlayout.addWidget(self.button, alignment=QtCore.Qt.AlignHCenter)
-        vlayout.addWidget(self.browser)
-
-        self.button.clicked.connect(lambda: self.show_graph(agenda))
-        self.resize(1000, 800)
-
-    def show_graph(self, agenda):
-        dics = []
-        today = agenda.agenda
-        for activity in today:
-            ac_dic = activity.__dict__
-            dics.append({key: ac_dic[key] for key in ['activity', 'start_time', 'end_time', 'id']})
-        df = pd.DataFrame(dics)
-        if today:
-            x_start = today[0].start_time
-            x_range = [x_start, x_start+timedelta(days=1)]
-        else:
-            x_range = None
-        fig = px.timeline(df, x_start="start_time", x_end="end_time", y="activity", color="id", range_x=x_range)
-        fig.update_yaxes(autorange="reversed")  # otherwise tasks are listed from the bottom up
-        self.browser.setHtml(fig.to_html(include_plotlyjs='cdn'))
 
 
 if __name__ == '__main__':
