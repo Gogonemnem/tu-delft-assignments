@@ -93,23 +93,25 @@ class Activity:
 
     def __str__(self):
         # Assumes the activity is stopping on the same day
-        return f'Doing: {self.activity}, starting from: {self.start_time.hour}:' \
-               f'{self.start_time.minute:02}, ending at: {self.end_time.hour}:' \
-               f'{self.end_time.minute:02}, doing it for: {self.duration}' \
-               f' active: {self.active}'
+        return f"Doing: {self.activity}, starting from: {self.start_time.strftime('%D %H:%M')}, " \
+               f"ending at: {self.end_time.strftime('%D %H:%M')}, " \
+               f"doing it for: {self.duration}, " \
+               f"active: {self.active}"
 
     def __repr__(self):
         # Assumes the activity is stopping on the same day
-        return f'Doing: {self.activity}, starting from: {self.start_time.hour}:' \
-               f'{self.start_time.minute:02}, ending at: {self.end_time.hour}:' \
-               f'{self.end_time.minute:02}, doing it for: {self.duration}' \
-               f' active: {self.active}'
+        return f"Activity(activity={self.activity}, " \
+               f"start_time={self.start_time}, " \
+               f"end_time={self.end_time}, " \
+               f"duration={self.duration}, " \
+               f"summary={self.summary}, " \
+               f"active={self.active})"
 
 
 class Widget(QtWidgets.QWidget):
     def __init__(self, agenda, parent=None):
         super().__init__(parent)
-        self.button = QtWidgets.QPushButton('Plot', self)
+        self.button = QtWidgets.QPushButton('Show Agenda', self)
         self.browser = QtWebEngineWidgets.QWebEngineView(self)
 
         vlayout = QtWidgets.QVBoxLayout(self)
@@ -121,7 +123,7 @@ class Widget(QtWidgets.QWidget):
 
     def show_graph(self, agenda):
         dics = []
-        today = agenda.today()
+        today = agenda.agenda
         for activity in today:
             ac_dic = activity.__dict__
             dics.append({key: ac_dic[key] for key in ['activity', 'start_time', 'end_time', 'id']})
@@ -155,7 +157,7 @@ if __name__ == '__main__':
     agenda0.add_activity(activity2)
     agenda0.add_activity(activity1)
 
-    agenda0.add_activity(Activity('No work', now-2*durat_short, duration=durat_short))
+    agenda0.add_activity(Activity('No work', now+5*durat_long, duration=durat_short))
     agenda0.add_activity(Activity('Work', now + 2*durat_short, duration=2 * durat_short))
 
     # Check if activity happens earlier
