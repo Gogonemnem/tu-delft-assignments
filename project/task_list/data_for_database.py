@@ -42,3 +42,11 @@ class TaskList:
             print(*task, sep=';', file=file)
 
         self.__add_task(task)
+
+    def data_output(self):
+        data_dict = dict()
+        for i in range(len(self.data)):
+            data_dict[self.data.iloc[i][0]] = list(self.data.iloc[i][1:5])
+
+        return data_dict
+
