@@ -5,8 +5,6 @@ from project.agenda.agenda_widget import Widget
 
 
 class Agenda:
-    """"""
-
     def __init__(self):
         # this is list of activities that are planned
         # with activities occurring earlier appearing earlier on the list
@@ -50,8 +48,6 @@ class Agenda:
         for activity in self.agenda:
             if datetime.today() >= activity.end_time:
                 self.agenda.remove(activity)
-            else:
-                break
 
     def __str__(self):
         return f'{self.agenda}'
