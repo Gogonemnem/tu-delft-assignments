@@ -1,4 +1,4 @@
-from datetime import timedelta
+from datetime import datetime, timedelta
 
 import pandas as pd
 import plotly.express as px
@@ -54,6 +54,7 @@ class Widget(QtWidgets.QWidget):
         fig = px.timeline(
             df, x_start="start_time", x_end="end_time", y="activity", color="id", range_x=x_range)
         fig.update_yaxes(autorange="reversed")  # otherwise tasks are listed from the bottom up
+        fig.add_vline(x=datetime.now(), line_width=1, line_color="red")  # current time indication
 
         # Turn the HTML plot into a widget and do not open it within a browser
         self.browser.setHtml(fig.to_html(include_plotlyjs='cdn'))
