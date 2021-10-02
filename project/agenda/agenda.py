@@ -5,6 +5,7 @@ from project.agenda.agenda_widget import Widget
 
 
 class Agenda:
+    """"""
     def __init__(self):
         self.id = 0
         self.agenda = []
