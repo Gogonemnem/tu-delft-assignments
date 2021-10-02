@@ -7,14 +7,18 @@ from project.agenda.agenda_widget import Widget
 class Agenda:
     """"""
     def __init__(self):
-        self.id = 0
         self.agenda = []
 
     def add_activity(self, activity):
         """Insert the activity with activities occurring earlier appearing earlier on the list"""
-        activity.id = str(self.id)
-        self.id += 1
         bisect.insort(self.agenda, activity)
+
+    def modify_activity(
+            self, id: int, activity=None, start_time=None, end_time=None, duration=None, summary=None):
+        self.agenda[id].modify_activity(activity, start_time, end_time, duration, summary)
+
+    def delete_activity(self, id:int):
+        del self.agenda[id]
 
     def today(self):
         if not self.agenda:
@@ -52,9 +56,6 @@ class Activity:
         self.end_time = None
         self._set_and_check_end_and_duration(end_time, duration)
         self.summary = summary
-
-        # ID is set in agenda
-        self.id = None
 
     # This property decorator helps with setting the duration
     # as this is mutually dependent with the end_time

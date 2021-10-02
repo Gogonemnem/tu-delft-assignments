@@ -35,10 +35,11 @@ class Widget(QtWidgets.QWidget):
     def show_graph(self, agenda):
         dics = []
         activities = agenda.agenda
-        for activity in activities:
+        for id, activity in enumerate(activities):
             # Turn every activity object attributes into a dictionary
             # and add it to a list and turn it into a dataframe
             ac_dic = activity.__dict__
+            ac_dic['id'] = str(id)
             dics.append({key: ac_dic[key] for key in ['activity', 'start_time', 'end_time', 'id']})
         df = pd.DataFrame(dics)
 
