@@ -16,17 +16,14 @@ class Agenda:
         bisect.insort(self.agenda, activity)
 
     def today(self):
-        today_agenda = []
+        if not self.agenda:
+            return []
         today = datetime.today().date()
         self.remove_activity_over()
-        for activity in self.agenda:
-            if activity.end_time.date() <= today:
-                today_agenda.append(activity)
-            elif activity.start_time.date() == today:
-                today_agenda.append(activity)
-            else:
-                break
-        return today_agenda
+        for i in range(len(self.agenda)):
+            if self.agenda[i].start_time.date() > today:
+                return self.agenda[:i]
+        return self.agenda
 
     def remove_activity_over(self):
         for activity in self.agenda:
@@ -54,6 +51,7 @@ class Activity:
         self.end_time = None
         self._set_and_check_end_and_duration(end_time, duration)
         self.summary = summary
+
         # ID is set in agenda
         self.id = None
 
@@ -157,7 +155,7 @@ if __name__ == '__main__':
     print(f'All: {agenda0}')
 
     # Add activity from yesterday
-    activity0 = Activity('No work', now - durat_long, end_time=now)
+    activity0 = Activity('No work', now - timedelta(days=1), end_time=now-durat_long)
     print(f'Yesterday task: {activity0}')
     agenda0.add_activity(activity0)
 
