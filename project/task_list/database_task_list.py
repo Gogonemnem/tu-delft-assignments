@@ -10,10 +10,12 @@ class TaskListDatabase(QAbstractTableModel):
     # Is it possible to do this without overriding these methods?
     # Pylint doesn't like them, but I (Gonem) added manual exceptions in the config file
     # I also deleted the parent=None in rowCount and columnCount
-    def rowCount(self):
+
+    # Added it back again
+    def rowCount(self, parent=None):
         return len(self._database.index)
 
-    def columnCount(self):
+    def columnCount(self, parent=None):
         return len(self._database.columns)
 
     def data(self, index, role=Qt.DisplayRole):
