@@ -20,7 +20,7 @@ class Agenda:
         today = datetime.today().date()
         self.remove_activity_over()
         for activity in self.agenda:
-            if activity.end_time.date() == today:
+            if activity.end_time.date() <= today:
                 today_agenda.append(activity)
             elif activity.start_time.date() == today:
                 today_agenda.append(activity)
@@ -32,7 +32,8 @@ class Agenda:
         for activity in self.agenda:
             if datetime.today() >= activity.end_time:
                 self.agenda.remove(activity)
-            break
+            else:
+                break
 
     def __str__(self):
         return f'{self.agenda}'
