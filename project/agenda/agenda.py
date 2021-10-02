@@ -46,27 +46,29 @@ class Activity:
         else:
             self.activity = activity
 
+        # We do not need to check instances if the input is coded correctly
         if not isinstance(start_time, datetime):
-            raise ValueError('Please add tell us when this activity starts')
+            raise ValueError('Please tell us when this activity starts')
         self.start_time = start_time
-
-        if all(var is None for var in [end_time, duration]):
-            raise ValueError('Please add tell us when this activity end or '
-                             'how long you will be doing this activity')
-
-        if end_time:
-            self.end_time = end_time
-            self.duration = end_time - self.start_time
-        # elif makes sure user does not 'wrong' input both
-        elif duration:
-            self.duration = duration
-            self.end_time = self.start_time + duration
-
+        self.end_time = None
+        self._set_and_check_end_and_duration(end_time, duration)
         self.summary = summary
+
+    # This property decorator helps with setting the duration
+    # as this is mutually dependent with the end_time
+    @property
+    def duration(self):
+        return self.end_time - self.start_time
+
+    @duration.setter
+    def duration(self, duration):
+        self.end_time = self.start_time + duration
 
     @property
     def active(self):
-        return datetime.now() >= self.start_time
+        moment = datetime.now()
+        print(self.start_time <= moment <= self.end_time)
+        return self.start_time <= moment <= self.end_time
 
     # I actually think this function may be redundant
     def modify_activity(self, activity=None, start_time=None, end_time=None, duration=None, summary=None):
@@ -76,13 +78,28 @@ class Activity:
             self.start_time = start_time
         if summary:
             self.summary = summary
-        if end_time:
+
+        self._set_and_check_end_and_duration(end_time, duration)
+
+    def _set_and_check_end_and_duration(self, end_time, duration):
+        # both variables were not filled in
+        if not isinstance(end_time, datetime) and not isinstance(duration, timedelta):
+            raise ValueError('Please tell us when this activity end or '
+                             'how long you will be doing this activity.')
+
+        # user inputs both variables
+        if end_time and duration:
+            if end_time - duration != self.start_time:
+                raise ValueError('Then ending time and duration are not consistent with each other.')
             self.end_time = end_time
-            self.duration = end_time - self.start_time
-        # elif makes sure user does not input both
-        elif duration:
+
+        # user inputs only end_Time
+        elif end_time:
+            self.end_time = end_time
+
+        # user inputs only duration
+        else:
             self.duration = duration
-            self.end_time = self.start_time + duration
 
     def __le__(self, other):
         return self.start_time <= other.start_time
@@ -126,8 +143,10 @@ if __name__ == '__main__':
     agenda0.add_activity(activity2)
     agenda0.add_activity(activity1)
 
+    # Extra Activities
     agenda0.add_activity(Activity('No work', now+5*durat_long, duration=durat_short))
-    agenda0.add_activity(Activity('Work', now + 2*durat_short, duration=2 * durat_short))
+    activity3 = Activity('Work', now - 2*durat_short, duration=4 * durat_short)
+    agenda0.add_activity(activity3)
 
     # Check if activity happens earlier
     print(f'Is act1 earlier than act2? {activity1 <= activity2}')
@@ -160,3 +179,4 @@ if __name__ == '__main__':
     widget = Widget(agenda0)
     widget.show()
     app.exec()
+
