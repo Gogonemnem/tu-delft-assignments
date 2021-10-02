@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 import bisect
 from PyQt5 import QtWidgets
-from agenda_widget import Widget
+from project.agenda.agenda_widget import Widget
 
 
 class Agenda:
@@ -53,6 +53,8 @@ class Activity:
         self.end_time = None
         self._set_and_check_end_and_duration(end_time, duration)
         self.summary = summary
+        # ID is set in agenda
+        self.id = None
 
     # This property decorator helps with setting the duration
     # as this is mutually dependent with the end_time
@@ -67,11 +69,11 @@ class Activity:
     @property
     def active(self):
         moment = datetime.now()
-        print(self.start_time <= moment <= self.end_time)
         return self.start_time <= moment <= self.end_time
 
     # I actually think this function may be redundant
-    def modify_activity(self, activity=None, start_time=None, end_time=None, duration=None, summary=None):
+    def modify_activity(
+            self, activity=None, start_time=None, end_time=None, duration=None, summary=None):
         if activity:
             self.activity = activity
         if start_time:
@@ -90,7 +92,8 @@ class Activity:
         # user inputs both variables
         if end_time and duration:
             if end_time - duration != self.start_time:
-                raise ValueError('Then ending time and duration are not consistent with each other.')
+                raise ValueError(
+                    'Then ending time and duration are not consistent with each other.')
             self.end_time = end_time
 
         # user inputs only end_Time
@@ -179,4 +182,3 @@ if __name__ == '__main__':
     widget = Widget(agenda0)
     widget.show()
     app.exec()
-

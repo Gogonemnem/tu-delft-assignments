@@ -7,7 +7,7 @@ from PyQt5 import QtWidgets, QtWebEngineWidgets, QtCore
 
 # This is added by Nils
 class AgendaWidget(QtWidgets.QGroupBox):
-    def __init__(self, agenda, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setTitle("The agenda can be seen below")
         self.button = QtWidgets.QPushButton('agenda')
@@ -42,8 +42,7 @@ class Widget(QtWidgets.QWidget):
             x_range = [x_start, x_start+timedelta(days=1)]
         else:
             x_range = None
-        fig = px.timeline(df, x_start="start_time", x_end="end_time", y="activity", color="id", range_x=x_range)
+        fig = px.timeline(
+            df, x_start="start_time", x_end="end_time", y="activity", color="id", range_x=x_range)
         fig.update_yaxes(autorange="reversed")  # otherwise tasks are listed from the bottom up
         self.browser.setHtml(fig.to_html(include_plotlyjs='cdn'))
-
-
