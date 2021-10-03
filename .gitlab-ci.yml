@@ -1,6 +1,6 @@
 image: 
-  python:latest
-  entrypoint:["/usr/bin/env"]
+  python: latest
+  entrypoint: ["/usr/bin/env"]
 
 
 before_script:
