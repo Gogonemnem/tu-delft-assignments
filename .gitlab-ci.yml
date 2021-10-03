@@ -1,5 +1,5 @@
 image: 
-  python: latest
+  name: venv
   entrypoint: ["/usr/bin/env"]
 
 
