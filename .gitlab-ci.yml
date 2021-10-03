@@ -1,6 +1,7 @@
 image: python:latest
 
 before_script:
+  - cd project/venv
   - python --version
   - pip install --upgrade pip
   - pip install -r requirements.txt
