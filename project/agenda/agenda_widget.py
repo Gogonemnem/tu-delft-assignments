@@ -19,14 +19,14 @@ class AgendaWidget(QtWidgets.QGroupBox):
     def __init__(self, agenda, parent=None):
         super().__init__(parent)
         self.setTitle("The agenda can be seen below")
-        self.button = QtWidgets.QPushButton('Show/Update Agenda', self)
+        self.update_button = QtWidgets.QPushButton('Show/Update Agenda', self)
         self.browser = QtWebEngineWidgets.QWebEngineView(self)
 
         layout = QtWidgets.QVBoxLayout(self)
-        layout.addWidget(self.button, alignment=QtCore.Qt.AlignHCenter)
+        layout.addWidget(self.update_button, alignment=QtCore.Qt.AlignHCenter)
         layout.addWidget(self.browser)
 
-        self.button.clicked.connect(lambda: self.show_graph(agenda))
+        self.update_button.clicked.connect(lambda: self.show_graph(agenda))
         # self.resize(1000, 800)
 
     def show_graph(self, agenda):

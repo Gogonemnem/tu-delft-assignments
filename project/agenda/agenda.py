@@ -15,13 +15,14 @@ class Agenda:
         bisect.insort(self.agenda, activity)
 
     def modify_activity(
-            self, id: int, activity=None, start_time=None, end_time=None, duration=None, summary=None):
+            self, identifier, activity=None, start_time=None,
+            end_time=None, duration=None, summary=None):
         """Modifies the information of an activity in the agenda list"""
-        self.agenda[id].modify_activity(activity, start_time, end_time, duration, summary)
+        self.agenda[identifier].modify_activity(activity, start_time, end_time, duration, summary)
 
-    def delete_activity(self, id: int):
+    def delete_activity(self, identifier):
         """Removes the activity from the agenda list"""
-        del self.agenda[id]
+        del self.agenda[identifier]
 
     def today(self):
         """Returns a list of activities that (will) happen today"""
@@ -36,8 +37,8 @@ class Agenda:
 
         # Find the first activity that is starting later than today
         # It only needs to find the first as the list is sorted on starting times
-        for i in range(len(self.agenda)):
-            if self.agenda[i].start_time.date() > today:
+        for i, activity in enumerate(self.agenda):
+            if activity.start_time.date() > today:
                 return self.agenda[:i]
 
         # Return the whole agenda list if nothing is starting later than today
@@ -191,5 +192,3 @@ if __name__ == '__main__':
     # We only have ['No work', 'Work', 'Planned break', 'Do not disturb me', 'Doing task']
     # Should we convert each activity to a number?
     # And that you give a priority inside Apple/Google Calendar?
-
-

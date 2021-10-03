@@ -52,7 +52,7 @@ hook = sys.excepthook
 sys.excepthook = MainWindow.catch_exceptions
 
 if __name__ == '__main__':
-    agenda = Agenda()
+    agenda0 = Agenda()
     app = QtWidgets.QApplication(sys.argv)
-    window = MainWindow(agenda)
+    window = MainWindow(agenda0)
     app.exec_()
