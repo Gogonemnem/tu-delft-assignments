@@ -3,7 +3,6 @@ image: python:latest
 before_script:
   - python --version
   - pip install --upgrade pip
-  - venv gitlab-env
   - pip install -r requirements.txt
 
 stages:
