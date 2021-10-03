@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 import bisect
 from PyQt5 import QtWidgets
-from project.agenda.agenda_widget import Widget
+from project.agenda.agenda_widget import AgendaWidget
 
 
 class Agenda:
@@ -179,20 +179,17 @@ if __name__ == '__main__':
     print(f'Today: {agenda0.today()}')
     print(f'All without yesterday: {agenda0}')
 
-    # Modifying one activity is easy
-    # I did not bother checking this
-    # But how do we select the activity when it's in the agenda (list)?
+    # Visualization
+    app = QtWidgets.QApplication([])
+    widget = AgendaWidget(agenda0)
+    widget.show()
+    app.exec()
 
-    # Activities have a name, but now we have to relay the info to the randomizer/optimizer
+    # Activities to relay the info to the randomizer/optimizer
 
     # Lastly, importing .ics files might be doable, but how do we give priorities to the activities
     # We only have ['No work', 'Work', 'Planned break', 'Do not disturb me', 'Doing task']
     # Should we convert each activity to a number?
     # And that you give a priority inside Apple/Google Calendar?
 
-    # Visualization
-    # Still need to combine it with the main layout
-    app = QtWidgets.QApplication([])
-    widget = Widget(agenda0)
-    widget.show()
-    app.exec()
+
