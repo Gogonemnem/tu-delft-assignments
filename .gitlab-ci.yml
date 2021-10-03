@@ -1,7 +1,4 @@
-image: 
-  name: venv
-  entrypoint: ["/usr/bin/env"]
-
+image: python:latest
 
 before_script:
   - cd venv
