@@ -1,7 +1,6 @@
 import traceback
 import sys
-from PyQt5.QtWidgets import QMainWindow, QWidget, QTabWidget, \
-    QMessageBox, QGridLayout, QApplication  # QtWidgets
+from PyQt5 import QtWidgets
 from project.agenda.agenda_widget import AgendaWidget
 from project.task_list.task_list_widget import TaskListWidget
 from project.task_list.task_list_tab import TaskListTab
@@ -10,7 +9,7 @@ from project.settings.settings_tab import SettingsTab
 from project.agenda.agenda import Agenda
 
 
-class MainWindow(QMainWindow):
+class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, agenda, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -20,22 +19,22 @@ class MainWindow(QMainWindow):
         self.tasklisttab = TaskListTab()
         self.task = TaskWidget()
         self.settings = SettingsTab()
-        self.home = QWidget()
-        self.tabs = QTabWidget()
-        self.file = QWidget()
-        self.task_list = QWidget()
+        self.home = QtWidgets.QWidget()
+        self.tabs = QtWidgets.QTabWidget()
+        self.file = QtWidgets.QWidget()
+        self.task_list = QtWidgets.QWidget()
         self.visual()
 
     @staticmethod
     def catch_exceptions(failure_type, val, trace_back):
-        QMessageBox.critical(None,
+        QtWidgets.QMessageBox.critical(None,
                                        "Problem with application",
                                        "A fault has been detected somewhere in the program.\n"
                                        f"Failure type: {failure_type, val}\n"
                                        f"Traceback: {traceback.format_tb(trace_back)[-1]}")
 
     def visual(self):
-        layout = QGridLayout()
+        layout = QtWidgets.QGridLayout()
         layout.addWidget(self.agenda, 0, 1, 2, 1)
         layout.addWidget(self.tasklist, 0, 0)
         layout.addWidget(self.task, 1, 0)
@@ -54,6 +53,6 @@ sys.excepthook = MainWindow.catch_exceptions
 
 if __name__ == '__main__':
     agenda0 = Agenda()
-    app = QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
     window = MainWindow(agenda0)
     app.exec_()
