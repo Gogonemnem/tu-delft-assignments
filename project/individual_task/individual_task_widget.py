@@ -1,6 +1,7 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
 from PyQt5.QtWidgets import QLineEdit, QCheckBox, QComboBox, QPushButton, QMessageBox, QLabel
 
+
 class TaskWidget(QtWidgets.QGroupBox):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -32,6 +33,7 @@ class TaskWidget(QtWidgets.QGroupBox):
         self.priority.addItem('low')
         self.priority.addItem('normal')
         self.priority.addItem('high')
+        self.priority.addItem('must be done today')
         #self.priority.currentIndexChanged.connect(self.prioritychange)
         self.priority.move(160,120)
         self.priority.resize(120, 30)
