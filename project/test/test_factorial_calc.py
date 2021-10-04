@@ -1,10 +1,10 @@
 import unittest
 from textwrap import dedent
 
-import mock
-from project.factorial_calc import ask_factorial, calc_factorial
 from contextlib import redirect_stdout
 from io import StringIO
+import mock
+from project.factorial_calc import ask_factorial, calc_factorial
 
 # This class is used as a helper for the unit tests.
 # It is needed since our program heavily depends on input/output behaviour.
@@ -17,6 +17,7 @@ class InputIter:
     def fake_input(self, prompt=''):
         self.out.write(prompt)
         return next(self.return_values_iter)
+
 
 # The main test suite class.
 # Note: These test are not exhaustive and nowhere near that.
@@ -42,7 +43,8 @@ class TestSuite(unittest.TestCase):
     # and the program output the correct statement in the console.
     def test_ask_factorial_number_float(self):
         out = StringIO()
-        with redirect_stdout(out), mock.patch('builtins.input', InputIter(['1.1', '12'], out).fake_input):
+        with redirect_stdout(out), mock.patch('builtins.input',
+                                              InputIter(['1.1', '12'], out).fake_input):
             number = ask_factorial()
             self.assertEqual(12, number)
             self.assertEqual(dedent("""\
@@ -64,4 +66,3 @@ class TestSuite(unittest.TestCase):
             self.assertEqual(dedent("""\
                 Enter a number to find its factorial: 
                 result: 6\n"""), out.getvalue())
-

@@ -1,14 +1,16 @@
-#pytest
-#pylint
-#coverage
-#pytest-cov
-#decorators
-#mock
-
-
+pytest
+pylint
+coverage
+pytest-cov
+decorators
+mock
 
 pyqt5
+pyqtwebengine
 numpy
 pandas
 datetime
 
+
+mock
+plotly
