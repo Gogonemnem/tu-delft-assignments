@@ -29,6 +29,9 @@ class TaskListDatabase(QAbstractTableModel):
             return self._database.columns[col]
         return None
 
+    def removeRow(self, row, parent=None):
+        return True
+
     @property
     def database(self):
         return self._database
@@ -40,10 +43,11 @@ class TaskListDatabase(QAbstractTableModel):
 
     # def flags(self, index):
     #     return Qt.ItemIsSelectable | Qt.ItemIsEnabled | Qt.ItemIsEditable
-
+    #
     # def setData(self, index, value, role):
     #     if role == Qt.EditRole:
     #         self._database.iloc[index.row(), index.column()] = value
+    #         self.dataChanged.emit(index, index)
     #         return True
     #
     # def data(self, index, role=Qt.DisplayRole):
