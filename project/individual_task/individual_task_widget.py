@@ -20,6 +20,7 @@ class TaskWidget(QtWidgets.QGroupBox):
         self.estimated.addItem('5 min')
         self.estimated.addItem('10 min')
         self.estimated.addItem('15 min')
+        self.estimated.addItem('30 min')
         #self.estimated.currentIndexChanged.connect(self.estimatedchange)
         self.estimated.move(160, 80)
         self.estimated.resize(120, 30)
@@ -32,6 +33,7 @@ class TaskWidget(QtWidgets.QGroupBox):
         self.priority.addItem('low')
         self.priority.addItem('normal')
         self.priority.addItem('high')
+        self.priority.addItem('must be done today')
         #self.priority.currentIndexChanged.connect(self.prioritychange)
         self.priority.move(160,120)
         self.priority.resize(120, 30)
@@ -53,9 +55,6 @@ class TaskWidget(QtWidgets.QGroupBox):
         self.preferred.addItem('Morning')
         self.preferred.addItem('Evening')
         self.preferred.addItem('Aternoon')
-        self.preferred.addItem('Mor + Eve')
-        self.preferred.addItem('Mor + Aft')
-        self.preferred.addItem('Eve + Aft')
         #self.preferred.currentIndexChanged.connect(self.preferredtime)
         self.preferred.move(160, 200)
         self.preferred.resize(120, 30)
@@ -88,16 +87,20 @@ class TaskWidget(QtWidgets.QGroupBox):
     #def preferredtime(self):
     #    print('Current index is', self.preferred.currentText())
 
-    def buttonclicked(self, state):
-        print(self.textbox.text())
-        print('Current index is', self.estimated.currentText())
-        print('Current index is', self.priority.currentText())
-        if state == QtCore.Qt.Checked:
-            print('Periodic')
-        else:
-            print('Not periodic')
-        print('Current index is', self.preferred.currentText())
-
+    def buttonclicked(self):
+        #print(self.textbox.text())
+        #print('Current index is', self.estimated.currentText())
+        #print('Current index is', self.priority.currentText())
+        #if self.checkbox.isChecked() == True:
+        #    print('Periodic')
+        #else:
+        #    print('Not periodic')
+        #print('Current index is', self.preferred.currentText())
+        with open('task_list_file', 'a') as file:
+            if self.checkbox.isChecked() == True:
+                print(self.textbox.text(), self.estimated.currentText(), self.priority.currentText(), 'True', self.preferred.currentText(), sep=';', file=file)
+            else:
+                print(self.textbox.text(), self.estimated.currentText(), self.priority.currentText(), 'False', self.preferred.currentText(), sep=';', file=file)
 
     def show_popup(self):
         msg = QMessageBox()
