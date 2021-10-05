@@ -49,8 +49,6 @@ class TaskListTab(QtWidgets.QTableView):
             # The text should be able be edited
             # Possibilities:
             # 1. Give a pop-up where you can write data (reuse widget?), from where the original dataframe is edited
-            # 2. use the edit possibility from TaskList(), but you can't control the input/ don't know how to store it?
-            # 1 is probably easiest.
 
     def refresh(self):
         self.database = TaskList()
@@ -58,7 +56,6 @@ class TaskListTab(QtWidgets.QTableView):
         self.setModel(self.model)
         self.resizeColumnsToContents()
         self.horizontalHeader().setMinimumSectionSize(250)
-        # self.horizontalHeader().setStretchLastSection(True) ## why doesn't this work after refresh?
 
         for index in range(len(self.database.data.index)):
             self.delete_button = QtWidgets.QPushButton('Delete')
