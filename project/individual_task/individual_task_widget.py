@@ -1,5 +1,7 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
 from PyQt5.QtWidgets import QLineEdit, QCheckBox, QComboBox, QPushButton, QMessageBox, QLabel
+from project.task_list.data_for_database import TaskList
+from project.task_list.task_list_tab import TaskListTab
 
 
 class TaskWidget(QtWidgets.QGroupBox):
@@ -96,11 +98,21 @@ class TaskWidget(QtWidgets.QGroupBox):
         #else:
         #    print('Not periodic')
         #print('Current index is', self.preferred.currentText())
-        with open('task_list_file', 'a') as file:
-            if self.checkbox.isChecked() == True:
-                print(self.textbox.text(), self.estimated.currentText(), self.priority.currentText(), 'True', self.preferred.currentText(), sep=';', file=file)
-            else:
-                print(self.textbox.text(), self.estimated.currentText(), self.priority.currentText(), 'False', self.preferred.currentText(), sep=';', file=file)
+        # with open('task_list_file', 'a') as file:
+        #     if self.checkbox.isChecked() == True:
+        #         print(self.textbox.text(), self.estimated.currentText(), self.priority.currentText(), 'True', self.preferred.currentText(), sep=';', file=file)
+        #     else:
+        #         print(self.textbox.text(), self.estimated.currentText(), self.priority.currentText(), 'False', self.preferred.currentText(), sep=';', file=file)
+        task = [self.textbox.text(),
+                int(self.estimated.currentText()[:-4]),
+                self.priority.currentText(),
+                True,
+                self.preferred.currentText()]
+        if self.checkbox.isChecked() is False:
+            task[3] = False
+
+        database = TaskList()
+        database.add_task(task)
 
     def show_popup(self):
         msg = QMessageBox()
