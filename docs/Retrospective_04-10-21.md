@@ -17,9 +17,10 @@ Type: Retrospective
 # **What went well?**
 
 - We used the milestones a bit and our progression can be seen on it
+- We had a plan for the whole week and more things were accomplished than before
 - A lot of code was produced
     - The add a task widget is almost finished
-    - The delete button works in the task list.
+    - The delete button works in the task list
     - An external database is added
     - There is a template for the agenda
     - There is a beginning of the daily task list
