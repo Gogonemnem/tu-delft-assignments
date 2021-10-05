@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 
 class TaskList:
@@ -8,7 +9,7 @@ class TaskList:
 
     def add_task(self, task):
         new_task = {'Task': task[0], 'Estimated time (minutes)': task[1], 'Priority': task[2],
-                    'Periodic': task[3], 'Preferred time': task[4], 'Delete task': None, 'Edit task': None}
+                    'Periodic': task[3], 'Preferred time': task[4], 'Delete task': np.nan, 'Edit task': np.nan}
         self.data = self.data.append(new_task, ignore_index=True)
         self.__write_to_file()
 
