@@ -1,5 +1,6 @@
-Take a walk;30;normal;True;Whole day
-Get some coffee;10;low;True;Morning
-Vacuum the room;15;must be done today;False;Afternoon
-Do some stretching;5;high;True;Whole day
-Call grandma;30;high;False;Afternoon
+Task$Estimated time (minutes)$Priority$Periodic$Preferred time$Delete task$Edit task
+Take a walk$30.0$normal$True$Whole day$$
+Get some coffee$10.0$low$True$Morning$$
+Vacuum the room$15.0$must be done today$False$Afternoon$$
+Do some stretching$5.0$high$True$Whole day$$
+Call my grandma$50.0$normal$False$Whole day$$
