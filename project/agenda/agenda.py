@@ -152,18 +152,13 @@ if __name__ == '__main__':
     durat_long = timedelta(minutes=50)
     stop_time = now + durat_long
 
-    # Create agenda and add later activity first
+    # Create agenda and some activities
     agenda0 = Agenda()
     agenda0.add_activity(Activity('No work', stop_time, duration=durat_long))
     agenda0.add_activity(Activity('Work', now, duration=durat_short))
-
-    # Extra Activities
     agenda0.add_activity(Activity('No work', now + 5 * durat_long, duration=durat_short))
     agenda0.add_activity(Activity('Work', now - 2 * durat_short, duration=4 * durat_short))
-
-    # Add activity from yesterday
-    activity0 = Activity('No work', now - timedelta(days=1), end_time=now - durat_long)
-    agenda0.add_activity(activity0)
+    agenda0.add_activity(Activity('No work', now - timedelta(days=1), end_time=now - durat_long))
 
     # Visualization
     app = QtWidgets.QApplication([])
