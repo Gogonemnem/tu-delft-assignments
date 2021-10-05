@@ -46,9 +46,7 @@ class Agenda:
 
     def remove_activity_over(self):
         """Removes activities in the agenda list that have happened"""
-        for activity in self.agenda:
-            if datetime.today() >= activity.end_time:
-                self.agenda.remove(activity)
+        self.agenda[:] = [x for x in self.agenda if not x.over]
 
     def __str__(self):
         return f'{self.agenda}'
@@ -84,6 +82,11 @@ class Activity:
     def active(self):
         moment = datetime.now()
         return self.start_time <= moment <= self.end_time
+
+    @property
+    def over(self):
+        moment = datetime.now()
+        return moment > self.end_time
 
     # I actually think this function may be redundant
     def modify_activity(
@@ -145,50 +148,25 @@ class Activity:
 if __name__ == '__main__':
     now = datetime.today()
 
-    # Do we want to implement end_time or duration on GUI? or both? and how?
     durat_short = timedelta(minutes=30)
     durat_long = timedelta(minutes=50)
     stop_time = now + durat_long
 
-    # How do we want to create activities via GUI?
-    activity1 = Activity('Work', now, duration=durat_short)
-    print(f'Short: {activity1}')
-    activity2 = Activity('No work', stop_time, duration=durat_long)
-    print(f'Long: {activity2}')
-
     # Create agenda and add later activity first
     agenda0 = Agenda()
-    agenda0.add_activity(activity2)
-    agenda0.add_activity(activity1)
+    agenda0.add_activity(Activity('No work', stop_time, duration=durat_long))
+    agenda0.add_activity(Activity('Work', now, duration=durat_short))
 
     # Extra Activities
     agenda0.add_activity(Activity('No work', now + 5 * durat_long, duration=durat_short))
-    activity3 = Activity('Work', now - 2 * durat_short, duration=4 * durat_short)
-    agenda0.add_activity(activity3)
-
-    # Check if activity happens earlier
-    print(f'Is act1 earlier than act2? {activity1 <= activity2}')
-    print(f'All: {agenda0}')
+    agenda0.add_activity(Activity('Work', now - 2 * durat_short, duration=4 * durat_short))
 
     # Add activity from yesterday
     activity0 = Activity('No work', now - timedelta(days=1), end_time=now - durat_long)
-    print(f'Yesterday task: {activity0}')
     agenda0.add_activity(activity0)
-
-    # Check whether the agenda clears yesterday's task and only displays today's task
-    print(f'All including yesterday: {agenda0}')
-    print(f'Today: {agenda0.today()}')
-    print(f'All without yesterday: {agenda0}')
 
     # Visualization
     app = QtWidgets.QApplication([])
     widget = AgendaWidget(agenda0)
     widget.show()
     app.exec()
-
-    # Activities to relay the info to the randomizer/optimizer
-
-    # Lastly, importing .ics files might be doable, but how do we give priorities to the activities
-    # We only have ['No work', 'Work', 'Planned break', 'Do not disturb me', 'Doing task']
-    # Should we convert each activity to a number?
-    # And that you give a priority inside Apple/Google Calendar?

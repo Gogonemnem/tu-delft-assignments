@@ -52,3 +52,53 @@ class TestAgenda(unittest.TestCase):
 
         with self.assertRaises(ValueError):
             Activity(activity_name, now, duration=duration, end_time=end_time+duration)
+
+    def test_old_activity_removed(self):
+        agenda = Agenda()
+        now = datetime.now()
+        duration = timedelta(hours=1)
+        activity0 = Activity('Work', now-duration, duration=duration)
+        activity1 = Activity('Work', now, duration=duration)
+        activities = [
+            # is needed to check whether elements of self.agenda are equal
+            activity0,
+            activity1,
+            # these are gonna be deleted
+            Activity('Work', now-2*duration, duration=duration),
+            Activity('Work', now-3*duration, duration=duration)
+        ]
+
+        for activity in activities:
+            agenda.add_activity(activity)
+
+        agenda.remove_activity_over()
+        self.assertCountEqual([activity0, activity1], agenda.agenda)
+
+    def test_today_activities(self):
+        agenda = Agenda()
+        now = datetime.now()
+        day = timedelta(days=1)
+        duration = timedelta(hours=1)
+
+        # today
+        activity0 = Activity('Work', now, duration=duration)
+        activity1 = Activity('Work', now - duration, duration=duration)
+
+        activities = [
+            # is needed to check whether elements of self.agenda are equal
+            activity0,
+            activity1,
+
+            # these are gonna be deleted
+            Activity('Work', now + day, duration=duration),
+            Activity('Work', now + 2 * day, duration=duration),
+            Activity('Work', now + 3 * day, duration=duration),
+            Activity('Work', now - day, duration=duration),
+            Activity('Work', now - 2 * day, duration=duration),
+            Activity('Work', now - 3 * day, duration=duration)
+        ]
+
+        for activity in activities:
+            agenda.add_activity(activity)
+
+        self.assertCountEqual([activity0, activity1], agenda.today())
