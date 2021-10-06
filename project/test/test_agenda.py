@@ -83,7 +83,7 @@ class TestAgenda(unittest.TestCase):
         agenda = Agenda()
         now = datetime.now()
         duration = timedelta(hours=1)
-        activity0 = Activity('Work', now-duration, duration=duration)
+        activity0 = Activity('Work', now - 1/2 * duration, duration=duration)
         activity1 = Activity('Work', now, duration=duration)
         activities = [
             # is needed to check whether elements of self.agenda are equal
