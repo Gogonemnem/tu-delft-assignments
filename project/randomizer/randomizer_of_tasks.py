@@ -27,5 +27,5 @@ def randomize_tasks():
     normal = random.choices(list_priority_normal, k=len(list_priority_normal))
     low = random.choices(list_priority_low, k=len(list_priority_low))
     total_list.extend([high, today, normal, low])
-    print(total_list)
+    # print(total_list)
     return total_list
