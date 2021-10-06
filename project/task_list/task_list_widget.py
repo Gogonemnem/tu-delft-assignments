@@ -1,21 +1,25 @@
-from PyQt5.QtWidgets import QPushButton, QCheckBox, QRadioButton, QGridLayout, QButtonGroup, QGroupBox
+from PyQt5.QtWidgets import QPushButton, QRadioButton, QGridLayout, QButtonGroup, QGroupBox
 from project.randomizer.randomizer_of_tasks import randomize_tasks
 
 
 class TaskListWidget(QGroupBox):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.setTitle("Below you can see the to do list")
+        self.setTitle("Daily to-do list")
         i = 0
         self.complete = 0
         self.layout = QGridLayout()
         self.ButtonGroup_task = QButtonGroup()
         self.ButtonGroup_remove = QButtonGroup()
         self.ButtonGroup_done = QButtonGroup()
+        self.tasks = []
+        for cat in randomize_tasks():
+            for task in cat:
+                self.tasks.append(task)
 
-        for item in randomize_tasks():
+        for item in self.tasks:
             self.task = QRadioButton(f'Button {i + 1}', self)
-            self.task.setText(f'The item is {item}')
+            self.task.setText(f'Task {i + 1} for today is: {item}')
             self.task.setMinimumWidth(450)
             self.ButtonGroup_task.addButton(self.task, i)
             self.remove = QPushButton(f'Button {i + 1}', self)
@@ -71,7 +75,8 @@ class TaskListWidget(QGroupBox):
             if i == self.ButtonGroup_task.id(self.ButtonGroup_task.checkedButton()):
                 selected_task = self.ButtonGroup_task.button(i)
                 selected_task.setStyleSheet("color:  rgb(100, 175, 100)")
-                selected_task.setText(u'\u2713' + selected_task.text())
+                selected_task.setText(u'\u2713' + 'Completed:' + selected_task.text().replace(
+                    f'Task {i + 1} for today is:', ''))
                 selected_remove = self.ButtonGroup_remove.button(i)
                 selected_remove.setDisabled(True)
                 selected_remove.setStyleSheet("background-color:  rgb(175, 175, 175)")
@@ -85,4 +90,3 @@ class TaskListWidget(QGroupBox):
                 self.layout.addWidget(selected_done, self.number_of_buttons + self.complete, 2)
                 self.setLayout(self.layout)
                 self.complete += 1
-
