@@ -1,7 +1,7 @@
 from PyQt5 import QtWidgets
 # from PyQt5.QtGui import QStandardItemModel
 # import pandas as pd
-# from PyQt5 import QtCore
+from PyQt5 import QtCore
 from project.task_list.database_task_list import TaskListDatabase
 from project.task_list.data_for_database import TaskList
 
@@ -9,13 +9,20 @@ from project.task_list.data_for_database import TaskList
 class TaskListTab(QtWidgets.QTableView):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.database = None
         self.model = None
         self.delete_button = None
         self.edit_button = None  # those three self.statements aren't needed but pycharm is annoying
-        self.database = TaskList()
         self.refresh()
 
+        layout = QtWidgets.QVBoxLayout()
+        self.refresh_button = QtWidgets.QPushButton('Update the table')
+        layout.addWidget(self.refresh_button, alignment=QtCore.Qt.AlignBottom)
+        self.setLayout(layout)
+        self.refresh_button.clicked.connect(self.refresh)
+
     def delete_button_clicked(self):
+        self.database = TaskList()
         button = self.sender()
         print('the delete button is clicked')
         index = self.indexAt(button.pos())
@@ -25,6 +32,7 @@ class TaskListTab(QtWidgets.QTableView):
             self.refresh()
 
     def edit_button_clicked(self):
+        self.database = TaskList()
         button = self.sender()
         print('the edit button is clicked')
         index = self.indexAt(button.pos())
@@ -41,15 +49,13 @@ class TaskListTab(QtWidgets.QTableView):
             # The text should be able be edited
             # Possibilities:
             # 1. Give a pop-up where you can write data (reuse widget?), from where the original dataframe is edited
-            # 2. use the edit possibility from TaskList(), but you can't control the input/ don't know how to store it?
-            # 1 is probably easiest.
 
     def refresh(self):
+        self.database = TaskList()
         self.model = TaskListDatabase(self.database.data)
         self.setModel(self.model)
         self.resizeColumnsToContents()
         self.horizontalHeader().setMinimumSectionSize(250)
-        # self.horizontalHeader().setStretchLastSection(True) ## why doesn't this work after refresh?
 
         for index in range(len(self.database.data.index)):
             self.delete_button = QtWidgets.QPushButton('Delete')
