@@ -108,7 +108,7 @@ class TestAgenda(unittest.TestCase):
 
         # today
         activity0 = Activity('Work', now, duration=duration)
-        activity1 = Activity('Work', now - duration, duration=duration)
+        activity1 = Activity('Work', now - 1/2 * duration, duration=duration)
 
         activities = [
             # is needed to check whether elements of self.agenda are equal
