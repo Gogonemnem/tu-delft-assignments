@@ -3,7 +3,7 @@ from project.randomizer.randomizer_of_tasks import randomize_tasks
 
 
 class TaskListWidget(QGroupBox):
-    def __init__(self, *args, **kwargs):
+    def __init__(self,  *args, rand_task=randomize_tasks, **kwargs):
         super().__init__(*args, **kwargs)
         self.setTitle("Daily to-do list")
         i = 0
@@ -13,7 +13,7 @@ class TaskListWidget(QGroupBox):
         self.ButtonGroup_remove = QButtonGroup()
         self.ButtonGroup_done = QButtonGroup()
         self.tasks = []
-        for cat in randomize_tasks():
+        for cat in rand_task():
             for task in cat:
                 self.tasks.append(task)
 
