@@ -1,5 +1,6 @@
-from PyQt5.QtWidgets import QPushButton, QRadioButton, QGridLayout, QButtonGroup, QGroupBox
+from PyQt5.QtWidgets import QPushButton, QRadioButton, QGridLayout, QButtonGroup, QGroupBox, QApplication
 from project.randomizer.randomizer_of_tasks import randomize_tasks
+import sys
 
 
 class TaskListWidget(QGroupBox):
@@ -43,6 +44,7 @@ class TaskListWidget(QGroupBox):
         self.ButtonGroup_remove.buttonClicked.connect(lambda: self.removed())
         self.ButtonGroup_done.buttonClicked.connect(lambda: self.completed())
         self.select()
+        self.show()
 
     def select(self):
         for i in range(self.number_of_buttons):
@@ -90,3 +92,8 @@ class TaskListWidget(QGroupBox):
                 self.layout.addWidget(selected_done, self.number_of_buttons + self.complete, 2)
                 self.setLayout(self.layout)
                 self.complete += 1
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    window = TaskListWidget()
+    app.exec_()
