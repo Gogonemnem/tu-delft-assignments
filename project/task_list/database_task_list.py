@@ -7,10 +7,12 @@ class TaskListDatabase(QAbstractTableModel):
         QAbstractTableModel.__init__(self)
         self._database = database
 
-    def rowCount(self, parent=None):
+    # add underscore as it is not used,
+    # so that pylint will not warn us about unused arguments
+    def rowCount(self, _parent=None):
         return len(self._database.index)
 
-    def columnCount(self, parent=None):
+    def columnCount(self, _parent=None):
         return len(self._database.columns)
 
     def data(self, index, role=Qt.DisplayRole):
@@ -24,7 +26,7 @@ class TaskListDatabase(QAbstractTableModel):
             return self._database.columns[col]
         return None
 
-    def removeRow(self, row, parent=None):
+    def removeRow(self, _row, _parent=None):
         return True
 
     @property
