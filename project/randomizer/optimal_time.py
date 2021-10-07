@@ -1,6 +1,6 @@
 import sys
-from PyQt5.QtWidgets import QGroupBox, QPushButton, QApplication, QListWidget, QGridLayout, QLabel
-from PyQt5.QtCore import QTimer, QDateTime
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtCore import QTimer
 
 
 class TimeRandomizer:
