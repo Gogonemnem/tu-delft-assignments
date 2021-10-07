@@ -1,9 +1,5 @@
 import random
 from project.task_list.data_for_database import TaskList
-from project.task_list.data_for_database import TaskObject
-from project.task_list.database_task_list import TaskListDatabase
-from project.agenda.agenda import Agenda
-from project.agenda.agenda import Activity
 
 
 class Randomizer:
@@ -11,6 +7,7 @@ class Randomizer:
         self.database = TaskList().data_output()
 
     def randomize_tasks(self):
+        "Returns a list with the tasks that must be done today."
         list_priority_today = []
         for task in self.database:
             if task.priority == "must be done today":
@@ -18,6 +15,12 @@ class Randomizer:
         return list_priority_today
 
     def randomize_tasks_other(self):
+        "Should return a list with all the tasks that are planned for today, also known as a to-do list. \
+        The first tasks in this list are the tasks that must happen today. \
+        The other tasks in the list have either high, normal or low priority. \
+        These are in randomized order, but the tasks with high priority are 4 times more likely \
+        to be added to the to-do list than the low priority tasks and the normal priority tasks \
+        are twice as much more likely to get added to the to-do list than the low priority tasks."
         tasks_today = []
         for task1 in self.randomize_tasks():
             tasks_today.append(task1)
@@ -43,40 +46,11 @@ class Randomizer:
                     d[task2] = 1
                 else:
                     d[task2] += 1
-            print(list_today)
-            print(d)
-            if max(d) not in tasks_today:
-                tasks_today.append(max(d))
-        print(tasks_today)
+            biggest = max(d, key=lambda k: d[k])
+            if biggest not in tasks_today:
+                tasks_today.append(biggest)
         return tasks_today
 
-# class RandomizedTasks:
-#     def __init__(self, database, agenda):
-#         self.database = database
-#         self.agenda = agenda
-#
-#     def add_randomized_tasks_must_today(self):
-#         for task in Randomizer.randomize_tasks_today():
-#             pref = self.database.data_output()[task][-1]
-#             duration = self.database.data_output()[task][1]
-#             while task not in self.agenda.today():
-#                 for i in range(len(self.agenda.today())):
-#                     if vars(i+1)['start_time'] - vars(i)['end_time'] >= duration:
-#                         if pref == "Morning" and vars(i)['start_time'] >= 6 and vars(i+1)['end_time'] < 12:
-#                             self.agenda.today().append(task)
-#                         elif pref == "Afternoon" and vars(i)['start_time'] >= 12 and vars(i+1)['end_time'] < 18:
-#                             self.agenda.today().append(task)
-#                         elif pref == "Evening" and vars(i)['start_time'] >= 18 and vars(i+1)['end_time'] < 24:
-#                             self.agenda.today().append(task)
-#                         elif pref == "Whole day":
-#                             self.agenda.today().append(task)
-#                         elif pref == "Mor + Aft" and vars(i)['start_time'] >= 6 and vars(i+1)['end_time'] < 18:
-#                             self.agenda.today().append(task)
-#                         elif pref == "Mor + Eve" and 6 <= vars(i)['start_time'] < 12 and 18 <= vars(i+1)['start_time'] < 24:
-#                             self.agenda.today().append(task)
-#                         elif pref == "Aft + Eve" and 12 <= vars(i)['start_time'] and vars(i+1)['end_time'] < 24:
-#                             self.agenda.today().append(task)
-#                 return self.agenda.today()
 
 test = Randomizer()
 test.randomize_tasks_other()
