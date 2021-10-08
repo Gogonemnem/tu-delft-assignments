@@ -1,21 +1,26 @@
 import sys
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtCore import QTimer
+import numpy as np
 
 
 class TimeRandomizer:
     def __init__(self, to_do_list: list):
         self.to_do_list = to_do_list
         # self.last_time = QDateTime.currentDateTime()
+
+        # 45 minutes = 2700000 milliseconds
+        self.average_break_time = 2700000
         self.deterministic = True
 
         self.timer = QTimer()
 
     @property
     def break_time(self):
-        # 45 minutes = 2700000 milliseconds
-        # TO_DO: implement stochastic break_time
-        return 2700000 if self.deterministic else 2700000
+        if self.deterministic:
+            return self.average_break_time
+        else:
+            return np.random.exponential(self.average_break_time)
 
     def start(self):
         self.timer.start(self.break_time)
