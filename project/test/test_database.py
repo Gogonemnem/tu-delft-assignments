@@ -1,6 +1,6 @@
+import unittest
 import pandas as pd
 import numpy as np
-import unittest
 from project.task_list.data_for_database import TaskList, TaskObject
 
 
