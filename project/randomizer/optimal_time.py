@@ -11,7 +11,7 @@ class TimeRandomizer:
 
         # 45 minutes = 2700000 milliseconds
         self.average_break_time = 2700000
-        self.deterministic = True
+        self.deterministic = False
 
         self.timer = QTimer()
 
@@ -20,7 +20,8 @@ class TimeRandomizer:
         if self.deterministic:
             return self.average_break_time
         else:
-            return np.random.exponential(self.average_break_time)
+            time = np.random.geometric(1/self.average_break_time)
+            return time
 
     def start(self):
         self.timer.start(self.break_time)
