@@ -1,21 +1,9 @@
-import sys
 from datetime import datetime, timedelta
 import pandas as pd
 import plotly.express as px
-from PyQt5 import QtWidgets, QtWebEngineWidgets, QtCore
-
-
-# This is added by Nils
-# class AgendaWidget(QtWidgets.QGroupBox):
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
-#         self.setTitle("The agenda can be seen below")
-#         self.button = QtWidgets.QPushButton('agenda')
-#         layout = QtWidgets.QVBoxLayout()
-#         layout.addWidget(self.button)
-#         self.setLayout(layout)
-from PyQt5.QtCore import QTimer, QDateTime
-from PyQt5.QtWidgets import QApplication, QListWidget, QLabel, QPushButton, QGridLayout, QWidget, QHBoxLayout
+from PyQt5 import QtWidgets, QtWebEngineWidgets
+from PyQt5.QtCore import QTimer
+from PyQt5.QtWidgets import QWidget, QHBoxLayout
 
 
 class AgendaWidget(QtWidgets.QGroupBox):
@@ -57,6 +45,7 @@ class AgendaWidget(QtWidgets.QGroupBox):
         self.stop_button.setEnabled(False)
 
     def show_graph(self):
+        self.agenda.remove_activity_over()
         activities = self.agenda.agenda
         now = datetime.now()
 
