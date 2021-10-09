@@ -3,6 +3,9 @@ from PyQt5.QtWidgets import QApplication
 from PyQt5.QtCore import QTimer
 
 
+# TESTING IS VIRTUALLY IMPOSSIBLE FOR THIS CLASS
+# WEIRDLY, IT NEEDS THE GUI FOR IT TO WORK
+# Therefore, only manual testing is possible
 class TimeRandomizer:
     def __init__(self, to_do_list: list):
         self.to_do_list = to_do_list
