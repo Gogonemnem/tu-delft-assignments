@@ -7,7 +7,8 @@ class Randomizer:
         self.database = TaskList().data_output()
 
     def must_be_done_tasks_morning(self):
-        "Returns a list with the tasks that must be done today."
+        "Returns a list with the tasks that must be done today and for which the preferred \
+        moment is in the morning."
         list_priority_today_morning = []
         for task in self.database:
             if task.priority == "must be done today" and task.preferred_time == "Morning":
@@ -15,6 +16,8 @@ class Randomizer:
         return list_priority_today_morning
 
     def must_be_done_tasks_evening(self):
+        "Returns a list with the tasks that must be done today and for which the preferred \
+        moment is in the evening."
         list_priority_today_evening = []
         for task in self.database:
             if task.priority == "must be done today" and task.preferred_time == "Evening":
@@ -22,6 +25,8 @@ class Randomizer:
         return list_priority_today_evening
 
     def must_be_done_tasks_afternoon(self):
+        "Returns a list with the tasks that must be done today and for which the preferred \
+        moment is in the afternoon."
         list_priority_today_afternoon = []
         for task in self.database:
             if task.priority == "must be done today" and task.preferred_time == "Afternoon":
@@ -30,9 +35,10 @@ class Randomizer:
 
 
     def randomize_tasks_other_morning(self):
-        "Should return a list with all the tasks that are planned for today, also known as a to-do list. \
-        The first tasks in this list are the tasks that must happen today. \
-        The other tasks in the list have either high, normal or low priority. \
+        "Returns a list with all the tasks that are planned for this morning. \
+        The first tasks in this list are the tasks that must happen this morning. \
+        The other tasks in the list have either high, normal or low priority and their preferred \
+        moment is either in the morning or it has no preferred time. \
         These are in randomized order, but the tasks with high priority are 4 times more likely \
         to be added to the to-do list than the low priority tasks and the normal priority tasks \
         are twice as much more likely to get added to the to-do list than the low priority tasks."
@@ -68,6 +74,8 @@ class Randomizer:
         return print(tasks_today_morning)
 
     def randomize_tasks_other_evening(self):
+        "Does the same as the randomize_tasks_other_morning() method, but for the evening instead of \
+        the morning."
         tasks_today_evening= []
 
         for task in self.must_be_done_tasks_evening():
@@ -100,6 +108,8 @@ class Randomizer:
         return print(tasks_today_evening)
 
     def randomize_tasks_other_afternoon(self):
+        "Does the same as the randomize_tasks_other_morning() method, but for the afternoon instead of \
+        the morning."
         tasks_today_afternoon= []
 
         for task in self.must_be_done_tasks_afternoon():
