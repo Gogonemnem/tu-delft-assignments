@@ -7,6 +7,6 @@ Call grandma$30$high$False$Afternoon$$
 Call dokter$5$high$False$Evening$$
 Help friend with moving$5$low$False$Aternoon$$
 Walk dog$10$normal$True$Whole day$$
-Help Betsie with programming$30$high$False$Whole day$$
-Drink water$5$normal$True$Whole day$$
-Clean room$10$must be done today$True$Whole day$$
+Help Betsie with programming$30$high$False$Morning$$
+Drink water$5$normal$True$Morning$$
+Clean room$10$must be done today$True$Morning$$
