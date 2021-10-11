@@ -1,5 +1,5 @@
 import unittest
-from PyQt5.QtWidgets import QWidget, QApplication
+from PyQt5.QtWidgets import QApplication
 import sys
 from project.randomizer.randomizer_of_tasks import randomize_tasks
 from project.task_list.task_list_widget import TaskListWidget
