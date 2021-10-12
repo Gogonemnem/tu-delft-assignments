@@ -19,14 +19,14 @@ class AgendaWidget(QtWidgets.QGroupBox):
         self.timer = QTimer()
         self.timer.timeout.connect(self.show_graph)
 
-        self.buttonsWidget = QWidget()
-        self.buttons_layout = QHBoxLayout(self.buttonsWidget)
+        self.buttons_widget = QWidget()
+        self.buttons_layout = QHBoxLayout(self.buttons_widget)
         self.buttons_layout.addWidget(self.update_button)
         self.buttons_layout.addWidget(self.stop_button)
-        self.buttonsWidget.setFixedHeight(40)
+        self.buttons_widget.setFixedHeight(40)
 
         layout = QtWidgets.QVBoxLayout(self)
-        layout.addWidget(self.buttonsWidget)
+        layout.addWidget(self.buttons_widget)
         layout.addWidget(self.browser)
 
         self.update_button.clicked.connect(self.start)
