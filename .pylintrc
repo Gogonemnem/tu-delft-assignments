@@ -420,6 +420,8 @@ function-naming-style=snake_case
 good-names=i,
            j,
            k,
+           id,
+           df,
            ex,
            Run,
            _
@@ -439,7 +441,7 @@ method-naming-style=snake_case
 
 # Regular expression matching correct method names. Overrides method-naming-
 # style.
-method-rgx=(([a-z_][a-z0-9_]{2,30})|(rowCount)|(columnCount)|(headerData))$
+method-rgx=(([a-z_][a-z0-9_]{2,30})|(rowCount)|(columnCount)|(removeRow)|(headerData))$
 
 # Naming style matching correct module names.
 module-naming-style=snake_case

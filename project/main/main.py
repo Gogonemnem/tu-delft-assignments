@@ -6,14 +6,15 @@ from project.task_list.task_list_widget import TaskListWidget
 from project.task_list.task_list_tab import TaskListTab
 from project.individual_task.individual_task_widget import TaskWidget
 from project.settings.settings_tab import SettingsTab
+from project.agenda.agenda import Agenda
 
 
 class MainWindow(QtWidgets.QMainWindow):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, agenda, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         self.setWindowTitle("Breaksum")
-        self.agenda = AgendaWidget()
+        self.agenda = AgendaWidget(agenda)
         self.tasklist = TaskListWidget()
         self.tasklisttab = TaskListTab()
         self.task = TaskWidget()
@@ -51,6 +52,7 @@ hook = sys.excepthook
 sys.excepthook = MainWindow.catch_exceptions
 
 if __name__ == '__main__':
+    agenda0 = Agenda()
     app = QtWidgets.QApplication(sys.argv)
-    window = MainWindow()
+    window = MainWindow(agenda0)
     app.exec_()
