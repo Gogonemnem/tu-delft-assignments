@@ -39,16 +39,19 @@ class TaskListTab(QtWidgets.QTableView):
         if index.isValid():
             print(index.row())
             pop_up = QtWidgets.QMessageBox()
-            pop_up.setText(f'You can now edit the following task:\n "{self.database.data.Task[index.row()]}"')
+            pop_up.setText(
+                f'You can now edit the following task:\n "{self.database.data.Task[index.row()]}"')
             pop_up.exec_()
 
             self.refresh()  # must happen at the end, after editing
 
-            # TODO: finish function
+            # Do not have 'TO-DO' in these comments in main!!!!
+            # TO_DO: finish function
 
             # The text should be able be edited
             # Possibilities:
-            # 1. Give a pop-up where you can write data (reuse widget?), from where the original dataframe is edited
+            # 1. Give a pop-up where you can write data (reuse widget?),
+            # from where the original dataframe is edited
 
     def refresh(self):
         self.database = TaskList()
