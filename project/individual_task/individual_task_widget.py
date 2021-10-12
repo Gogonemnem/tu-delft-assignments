@@ -51,7 +51,7 @@ class TaskWidget(QtWidgets.QGroupBox):
         self.preferred.addItem('Whole day')
         self.preferred.addItem('Morning')
         self.preferred.addItem('Evening')
-        self.preferred.addItem('Aternoon')
+        self.preferred.addItem('Afternoon')
         # self.preferred.currentIndexChanged.connect(self.preferredtime)
         self.preferred.move(160, 200)
         self.preferred.resize(120, 30)
