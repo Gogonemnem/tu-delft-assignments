@@ -1,9 +1,9 @@
 from PyQt5.QtWidgets import QPushButton, QRadioButton, QGridLayout, QButtonGroup, QGroupBox
-from project.randomizer.randomizer_of_tasks import randomize_tasks
+# from project.randomizer.randomizer_of_tasks import Randomizer
 
 
 class TaskListWidget(QGroupBox):
-    def __init__(self,  *args, rand_task=randomize_tasks, **kwargs):
+    def __init__(self,  *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setTitle("Daily to-do list")
         i = 0
@@ -13,9 +13,9 @@ class TaskListWidget(QGroupBox):
         self.button_group_remove = QButtonGroup()
         self.button_group_done = QButtonGroup()
         self.tasks = []
-        for cat in rand_task():
-            for task in cat:
-                self.tasks.append(task)
+        # for cat in Randomizer.randomize_tasks():
+        #     for task in cat:
+        #         self.tasks.append(task)
 
         for item in self.tasks:
             self.task = QRadioButton(f'Button {i + 1}', self)
