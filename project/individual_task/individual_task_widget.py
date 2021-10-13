@@ -1,11 +1,14 @@
 from PyQt5 import QtWidgets, QtGui
-from PyQt5.QtWidgets import QLineEdit, QCheckBox, QComboBox, QPushButton, QMessageBox, QLabel, QFormLayout
+from PyQt5.QtWidgets import QLineEdit, QCheckBox, QComboBox, QPushButton, QMessageBox, QFormLayout
 from project.task_list.data_for_database import TaskList
+from project.task_list.task_list_tab import TaskListTab
 
 
 class TaskWidget(QtWidgets.QGroupBox):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, tasklisttab, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.tasklisttab = tasklisttab
+
         self.setTitle('Individual tasks can be added here')
 
         # Textbox for inserting name of the task
@@ -114,5 +117,16 @@ class TaskWidget(QtWidgets.QGroupBox):
     def show_popup(self):
         msg = QMessageBox()
         msg.setText("Task is added to the databse")
+        msg.setWindowTitle("Success!")
         msg.setWindowIcon(QtGui.QIcon('icon.png'))
-        # x = msg.exec_()
+        msg.setStandardButtons(QMessageBox.Ok)
+        # msg.buttonClicked.connect()
+        x = msg.exec()
+
+        if x == QMessageBox.Ok:
+            self.tasklisttab.refresh()
+
+
+
+
+
