@@ -36,7 +36,7 @@ class TimeRandomizer:
             self.timer.stop()
 
         # task cannot be done right now
-        elif self.agenda.is_free():
+        elif not self.agenda.is_free():
             # check if person wants task right after activity
             right_after, duration = self.agenda.task_right_after()
             break_time = duration + 300000 if right_after else self.break_time()
