@@ -8,7 +8,7 @@ class Agenda:
     def __init__(self):
         # this is list of activities that are planned
         # with activities occurring earlier appearing earlier on the list
-        self.agenda = []
+        self.agenda: list[Activity] = []
 
     def add_activity(self, activity):
         """Inserts an activity to the agenda list while keeping the correct order"""
@@ -23,6 +23,24 @@ class Agenda:
     def delete_activity(self, identifier):
         """Removes the activity from the agenda list"""
         del self.agenda[identifier]
+
+    def is_free(self):
+        """Return T|F whether you are free (or have any activity right now)"""
+        if not self.agenda:
+            return True
+
+        self.remove_activity_over()
+        return not self.agenda[0].active
+
+    def task_right_after(self):
+        """Return T|F whether a task should be right after activity"""
+        if not self.agenda:
+            return False, -1
+
+        self.remove_activity_over()
+        activity = self.agenda[0]
+        duration_in_ms = int((activity.end_time - datetime.now()).total_seconds() * 1000)
+        return activity.activity == 'Work', duration_in_ms
 
     def today(self):
         """Returns a list of activities that (will) happen today"""
