@@ -230,6 +230,3 @@ class TestAgenda(unittest.TestCase):
 
     def test_main(self):
         ag.main()
-
-    # def test_empty_main(self):
-    #     ag.empty_main()

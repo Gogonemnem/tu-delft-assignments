@@ -202,15 +202,5 @@ def main():
     app.exec()
 
 
-def empty_main():
-    agenda0 = Agenda()
-
-    # Visualization
-    app = QtWidgets.QApplication([])
-    widget = AgendaWidget(agenda0)
-    widget.show()
-    app.exec()
-
-
 if __name__ == '__main__':
     main()
