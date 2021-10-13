@@ -30,20 +30,20 @@ class Agenda:
 
     def is_free(self):
         """Return T|F whether you are free (or have any activity right now)"""
+        self.remove_activity_over()
         if not self.agenda:
             return True
 
-        self.remove_activity_over()
         return not self.agenda[0].active
 
     def task_right_after(self):
         """Return T|F whether a task should be right after activity"""
+        self.remove_activity_over()
         if not self.agenda:
             return False, -1
 
-        self.remove_activity_over()
         activity = self.agenda[0]
-        duration_in_ms = int((activity.end_time - datetime.now()).total_seconds() * 1000)
+        duration_in_ms = int((activity.end_time - self.now).total_seconds() * 1000)
         return activity.activity == 'Work', duration_in_ms
 
     def today(self):
@@ -180,7 +180,7 @@ class Activity:
                f"active={self.active})"
 
 
-if __name__ == '__main__':
+def main():
     now = datetime.today()
 
     durat_short = timedelta(minutes=30)
@@ -200,3 +200,7 @@ if __name__ == '__main__':
     widget = AgendaWidget(agenda0)
     widget.show()
     app.exec()
+
+
+if __name__ == '__main__':
+    main()
