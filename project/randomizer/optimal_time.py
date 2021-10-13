@@ -1,6 +1,7 @@
 import sys
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtCore import QTimer
+from project.agenda.agenda import Agenda
 import numpy as np
 
 
@@ -8,17 +9,16 @@ import numpy as np
 # WEIRDLY, IT NEEDS THE GUI FOR IT TO WORK
 # Therefore, only manual testing is possible
 class TimeRandomizer:
-    def __init__(self, to_do_list: list):
+    def __init__(self, to_do_list: list, agenda: Agenda):
         self.to_do_list = to_do_list
-        # self.last_time = QDateTime.currentDateTime()
+        self.agenda = agenda
 
         # 45 minutes = 2700000 milliseconds
-        self.average_break_time = 2700000
+        self.average_break_time = 1000
         self.deterministic = False
 
         self.timer = QTimer()
 
-    @property
     def break_time(self):
         if self.deterministic:
             return self.average_break_time
@@ -27,13 +27,25 @@ class TimeRandomizer:
             return time
 
     def start(self):
-        self.timer.start(self.break_time)
+        self.timer.start(self.break_time())
         self.timer.timeout.connect(self.next_task)
 
     def next_task(self):
-        if self.to_do_list:  # check if there are still tasks left
-            self.timer.start(self.break_time)
-            # self.last_time = QDateTime.currentDateTime()
+        # check if there are tasks left to be done
+        if not self.to_do_list:
+            self.timer.stop()
+            return
+
+        # task cannot be done right now
+        if not self.agenda.is_free():
+            # check if person wants task right after activity
+            right_after, duration = agenda.task_right_after()
+            break_time = duration + 300000 if right_after else self.break_time()
+            self.timer(break_time)
+
+        # task can be done right now
+        else:
+            self.timer.start(self.break_time())
 
             # TO_DO: Call pop-up function to do first task in list
 
@@ -45,16 +57,15 @@ class TimeRandomizer:
                 print(self.to_do_list.pop(0))
             else:  # TO_DO: use task status to reschedule, snooze or skip, etc.
                 pass
-        else:
-            self.timer.stop()
+
 
 
 # EXAMPLE FUNCTION TO SEE HOW QTIMER WORKS
 # https://pythonpyqt.com/qtimer/
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-
-    tr = TimeRandomizer([1, 2, 3, 4])
+    agenda = Agenda()
+    tr = TimeRandomizer([1, 2, 3, 4], agenda)
     tr.start()
 
     sys.exit(app.exec_())
