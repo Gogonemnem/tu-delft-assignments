@@ -1,5 +1,5 @@
 from PyQt5 import QtWidgets, QtGui
-from PyQt5.QtWidgets import QLineEdit, QCheckBox, QComboBox, QPushButton, QMessageBox, QLabel
+from PyQt5.QtWidgets import QLineEdit, QCheckBox, QComboBox, QPushButton, QMessageBox, QLabel, QFormLayout
 from project.task_list.data_for_database import TaskList
 
 
@@ -8,62 +8,49 @@ class TaskWidget(QtWidgets.QGroupBox):
         super().__init__(*args, **kwargs)
         self.setTitle('Individual tasks can be added here')
 
-        # textbox for inserting name of the task
+        # Textbox for inserting name of the task
         self.textbox = QLineEdit(self)
-        self.textbox.move(165, 40)
-        self.textbox.resize(150, 20)
-        self.title_textbox = QLabel("Name", self)
-        self.title_textbox.move(20, 45)
 
         # Estimated time
         self.estimated = QComboBox(self)
-        self.estimated.addItem('5 min')
-        self.estimated.addItem('10 min')
-        self.estimated.addItem('15 min')
-        self.estimated.addItem('30 min')
-        # self.estimated.currentIndexChanged.connect(self.estimatedchange)
-        self.estimated.move(160, 80)
-        self.estimated.resize(120, 30)
-        self.title_estimated = QLabel("Estimated time", self)
-        self.title_estimated.move(20, 85)
+        durations = [f'{x} min' for x in range(5, 35, 5)]
+        for duration in durations:
+            self.estimated.addItem(duration)
 
         # Priority slider
         self.priority = QComboBox(self)
-        self.priority.addItem('low')
-        self.priority.addItem('normal')
-        self.priority.addItem('high')
-        self.priority.addItem('must be done today')
-        # self.priority.currentIndexChanged.connect(self.prioritychange)
-        self.priority.move(160, 120)
-        self.priority.resize(120, 30)
-        self.title_priority = QLabel("Priority", self)
-        self.title_priority.move(20, 125)
+        priorities = ['low', 'normal', 'high', 'must be done today']
+        for priority in priorities:
+            self.priority.addItem(priority)
 
-        # checkbox, is it periodic or not
+        # Checkbox, is it periodic or not
         self.checkbox = QCheckBox('', self)
-        # self.checkbox.stateChanged.connect(self.periodicstate)
-        self.checkbox.move(160, 165)
-        self.title_checkbox = QLabel("Periodic", self)
-        self.title_checkbox.move(20, 165)
 
         # Preferred time
         self.preferred = QComboBox(self)
-        self.preferred.addItem('Whole day')
-        self.preferred.addItem('Morning')
-        self.preferred.addItem('Evening')
-        self.preferred.addItem('Afternoon')
-        # self.preferred.currentIndexChanged.connect(self.preferredtime)
-        self.preferred.move(160, 200)
-        self.preferred.resize(120, 30)
-        self.title_preferred = QLabel("Preferred time", self)
-        self.title_preferred.move(20, 205)
+        day_parts = ['Whole day', 'Morning', 'Afternoon', 'Evening']
+        for day_part in day_parts:
+            self.preferred.addItem(day_part)
 
-        # add to the list button
+        # Add to the list button
         self.button = QPushButton('Add task', self)
-        self.button.move(80, 240)
-        self.button.resize(150, 30)
         self.button.clicked.connect(self.buttonclicked)
         self.button.clicked.connect(self.show_popup)
+
+        # Layout
+        layout = QFormLayout()
+        layout.addRow("Name", self.textbox)
+        layout.addRow("Estimated time", self.estimated)
+        layout.addRow("Priority", self.priority)
+        layout.addRow("Periodic", self.checkbox)
+        layout.addRow("Preferred time", self.preferred)
+        layout.addWidget(self.button)
+        self.setLayout(layout)
+
+    # self.estimated.currentIndexChanged.connect(self.estimatedchange)
+    # self.priority.currentIndexChanged.connect(self.prioritychange)
+    # self.checkbox.stateChanged.connect(self.periodicstate)
+    # self.preferred.currentIndexChanged.connect(self.preferredtime)
 
     # All tests to see if the buttons and sliders are connected
 
