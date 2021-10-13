@@ -1,6 +1,5 @@
 import unittest
 import sys
-from datetime import datetime, timedelta
 
 from PyQt5.QtWidgets import QApplication, QWidget
 
@@ -25,15 +24,16 @@ from project.randomizer.optimal_time import TimeRandomizer
 
 class TestTime2(unittest.TestCase):
 
-    def main(self, lst):
-        self.app = QApplication(sys.argv)
+    @staticmethod
+    def main(lst):
+        app = QApplication(sys.argv)
         wdgt = QWidget()
         agenda0 = Agenda()
-        tr = TimeRandomizer(lst, agenda0)
-        tr.start()
+        time_randomizer = TimeRandomizer(lst, agenda0)
+        time_randomizer.start()
 
         wdgt.show()
-        self.app.exec_()
+        app.exec_()
 
     def test_do_all_tasks(self):
         lst = [1, 2, 3, 4]

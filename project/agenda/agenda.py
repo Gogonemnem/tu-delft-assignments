@@ -74,11 +74,11 @@ class Agenda:
         """Return the daypart of the given time or right now"""
         hour = time.hour if time else self.now.hour
 
-        if (hour >= 0) and (hour < 6):
+        if 0 <= hour < 6:
             return 'Night'
-        elif (hour >= 6) and (hour < 12):
+        elif 6 <= hour < 12:
             return 'Morning'
-        elif (hour >= 12) and (hour < 18):
+        elif 12 <= hour < 18:
             return 'Afternoon'
         else:
             return 'Evening'
@@ -184,7 +184,7 @@ def main():
     now = datetime.today()
 
     durat_short = timedelta(minutes=1)
-    durat_long = timedelta(minutes=50)
+    # durat_long = timedelta(minutes=50)
     # stop_time = now + durat_long
 
     # Create agenda and some activities

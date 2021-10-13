@@ -1,6 +1,6 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget
-from PyQt5.QtCore import QTimer, QDateTime, QTime, Qt
+from PyQt5.QtCore import QTimer, QDateTime, QTime
 import numpy as np
 from project.agenda.agenda import Agenda
 
@@ -75,13 +75,14 @@ class TimeRandomizer:
         # TO_DO: Link with task status
         task_status = 'Done'
 
-        if task_status == 'Done' or task_status == 'Skipped':
+        if task_status in ('Done', 'Skipped'):
             # this print is for debugging for now
             print(self.to_do_list.pop(0))
             break_time = self.generate_break_time()
 
         elif task_status == 'Snooze':
-            break_time = self.generate_break_time(minimum=300000)  # Standard snooze time of 5 minutes
+            # Standard snooze time of 5 minutes = 300000 milliseconds
+            break_time = self.generate_break_time(minimum=300000)
 
         elif task_status == 'Reschedule':
             task = self.to_do_list.pop(0)
@@ -120,8 +121,8 @@ def main():
     app = QApplication(sys.argv)
 
     agenda0 = Agenda()
-    tr = TimeRandomizer([1, 2, 3, 4], agenda0)
-    tr.start()
+    time_randomizer = TimeRandomizer([1, 2, 3, 4], agenda0)
+    time_randomizer.start()
 
     wdgt = QWidget()
     wdgt.setWindowTitle('Useless window, for debugging purposes only')
