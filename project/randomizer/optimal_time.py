@@ -1,8 +1,8 @@
 import sys
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtCore import QTimer
-from project.agenda.agenda import Agenda
 import numpy as np
+from project.agenda.agenda import Agenda
 
 
 # TESTING IS VIRTUALLY IMPOSSIBLE FOR THIS CLASS
@@ -23,7 +23,7 @@ class TimeRandomizer:
         if self.deterministic:
             return self.average_break_time
         else:
-            time = np.random.geometric(1/self.average_break_time)
+            time = np.random.geometric(1 / self.average_break_time)
             return time
 
     def start(self):
@@ -39,7 +39,7 @@ class TimeRandomizer:
         # task cannot be done right now
         if not self.agenda.is_free():
             # check if person wants task right after activity
-            right_after, duration = agenda.task_right_after()
+            right_after, duration = self.agenda.task_right_after()
             break_time = duration + 300000 if right_after else self.break_time()
             self.timer(break_time)
 
@@ -59,13 +59,12 @@ class TimeRandomizer:
                 pass
 
 
-
 # EXAMPLE FUNCTION TO SEE HOW QTIMER WORKS
 # https://pythonpyqt.com/qtimer/
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    agenda = Agenda()
-    tr = TimeRandomizer([1, 2, 3, 4], agenda)
+    agenda0 = Agenda()
+    tr = TimeRandomizer([1, 2, 3, 4], agenda0)
     tr.start()
 
     sys.exit(app.exec_())
