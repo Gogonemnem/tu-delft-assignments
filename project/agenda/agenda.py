@@ -10,6 +10,10 @@ class Agenda:
         # with activities occurring earlier appearing earlier on the list
         self.agenda: list[Activity] = []
 
+    @property
+    def now(self):
+        return datetime.now()
+
     def add_activity(self, activity):
         """Inserts an activity to the agenda list while keeping the correct order"""
         bisect.insort(self.agenda, activity)
@@ -65,6 +69,19 @@ class Agenda:
     def remove_activity_over(self):
         """Removes activities in the agenda list that have happened"""
         self.agenda[:] = [x for x in self.agenda if not x.over]
+
+    def get_day_part(self, time: datetime = None):
+        """Return the daypart of the given time or right now"""
+        hour = time.hour if time else self.now.hour
+
+        if (hour >= 0) and (hour < 6):
+            return 'Night'
+        elif (hour >= 6) and (hour < 12):
+            return 'Morning'
+        elif (hour >= 12) and (hour < 18):
+            return 'Afternoon'
+        else:
+            return 'Evening'
 
     def __str__(self):
         return f'{self.agenda}'
