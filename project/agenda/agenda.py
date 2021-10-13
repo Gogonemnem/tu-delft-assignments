@@ -183,17 +183,17 @@ class Activity:
 def main():
     now = datetime.today()
 
-    durat_short = timedelta(minutes=30)
+    durat_short = timedelta(minutes=1)
     durat_long = timedelta(minutes=50)
-    stop_time = now + durat_long
+    # stop_time = now + durat_long
 
     # Create agenda and some activities
     agenda0 = Agenda()
-    agenda0.add_activity(Activity('No work', stop_time, duration=durat_long))
-    agenda0.add_activity(Activity('Work', now, duration=durat_short))
-    agenda0.add_activity(Activity('No work', now + 5 * durat_long, duration=durat_short))
-    agenda0.add_activity(Activity('Work', now - 2 * durat_short, duration=4 * durat_short))
-    agenda0.add_activity(Activity('No work', now - timedelta(days=1), end_time=now - durat_long))
+    agenda0.add_activity(Activity('No work', now, duration=durat_short))
+    # agenda0.add_activity(Activity('Work', now, duration=durat_short))
+    # agenda0.add_activity(Activity('No work', now + 5 * durat_long, duration=durat_short))
+    # agenda0.add_activity(Activity('Work', now - 2 * durat_short, duration=4 * durat_short))
+    # agenda0.add_activity(Activity('No work', now - timedelta(days=1), end_time=now - durat_long))
 
     # Visualization
     app = QtWidgets.QApplication([])
