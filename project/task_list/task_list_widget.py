@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QPushButton, QRadioButton, QGridLayout, QButtonGroup, QGroupBox
 from project.randomizer.randomizer_of_tasks import Randomizer
+from project.task_list.to_do_list import ToDoList
 
 
 class TaskListWidget(QGroupBox):
@@ -13,10 +14,7 @@ class TaskListWidget(QGroupBox):
         self.group_remove = QButtonGroup()
         self.group_done = QButtonGroup()
         self.group_doing = QButtonGroup()
-        self.tasks = []
-        self.tasks.extend(Randomizer().randomize_tasks_other_morning())
-        self.tasks.extend(Randomizer().randomize_tasks_other_afternoon())
-        self.tasks.extend(Randomizer().randomize_tasks_other_evening())
+        self.tasks = self.initial()
 
         for item in self.tasks:
             self.task = QRadioButton(f'Button {i + 1}', self)
@@ -53,6 +51,22 @@ class TaskListWidget(QGroupBox):
         self.group_doing.buttonClicked.connect(self.ongoing)
         self.select()
 
+    @staticmethod
+    def initial():
+        tasks_list = []
+        tasks_list.extend(Randomizer().randomize_tasks_other_morning())
+        tasks_list.extend(Randomizer().randomize_tasks_other_afternoon())
+        tasks_list.extend(Randomizer().randomize_tasks_other_evening())
+        file = open("ToDoList.txt", 'w')
+        for i in range(len(tasks_list)):
+            file.writelines(tasks_list[i] + '\n')
+        file.close()
+        file2 = open("DoingList.txt", 'w')
+        file2.close()
+        file3 = open("DoneList.txt", 'w')
+        file3.close()
+        return tasks_list
+
     def select(self):
         for i in range(self.NumberOfButtons):
             if not self.group_task.button(i) is None and\
@@ -82,6 +96,8 @@ class TaskListWidget(QGroupBox):
     def removed(self):
         for i in range(self.NumberOfButtons):
             if i == self.group_task.id(self.group_task.checkedButton()):
+                ToDoList.remove(self.group_task.checkedButton().text().replace(
+                    f'Task {i + 1} for today is: ', ''))
                 self.group_task.button(i).setVisible(False)
                 self.group_done.button(i).setVisible(False)
                 self.group_remove.button(i).setVisible(False)
@@ -90,16 +106,21 @@ class TaskListWidget(QGroupBox):
     def ongoing(self):
         for i in range(self.NumberOfButtons):
             if i == self.group_doing.id(self.group_doing.checkedButton()):
+                ToDoList.execute(self.group_task.checkedButton().text().replace(
+                    f'Task {i + 1} for today is: ', ''))
                 self.group_remove.button(i).setVisible(False)
                 self.group_done.button(i).setVisible(True)
 
     def completed(self):
         for i in range(self.NumberOfButtons):
             if i == self.group_task.id(self.group_task.checkedButton()):
+                ToDoList.complete(self.group_task.checkedButton().text().replace(
+                    f'Task {i + 1} for today is: ', ''))
+                print(ToDoList().done())
                 selected_task = self.group_task.button(i)
                 selected_task.setStyleSheet("color:  rgb(100, 175, 100)")
                 selected_task.setText('\u2713' + 'Completed:' + selected_task.text().replace(
-                    f'Task {i + 1} for today is:', ''))
+                    f'Task {i + 1} for today is: ', ''))
                 selected_remove = self.group_remove.button(i)
                 selected_remove.setDisabled(True)
                 selected_remove.setStyleSheet("background-color:  rgb(175, 175, 175)")
