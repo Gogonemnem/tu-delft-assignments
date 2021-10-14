@@ -2,12 +2,15 @@ import unittest
 import pandas as pd
 import numpy as np
 from project.task_list.data_for_database import TaskList, TaskObject
+# coverage report works only with the absolute path
+# path = r'C:\Users\janin\PycharmProjects\group-08\project\test\task_list_file'
+path = 'task_list_file'
 
 
 class TestDatabase(unittest.TestCase):
 
     def test_delete_task(self):
-        task_list = TaskList()
+        task_list = TaskList(file=path)
         task_list.delete_task(1)
         remaining_task = pd.DataFrame({
                                     'Task': ['Take a walk'],
@@ -34,7 +37,7 @@ class TestDatabase(unittest.TestCase):
                 pass
 
     def test_data_output(self):
-        task_list = TaskList()
+        task_list = TaskList(file=path)
         object_list = task_list.data_output()
 
         self.assertIsInstance(object_list[0], TaskObject)
@@ -54,7 +57,7 @@ class TestDatabase(unittest.TestCase):
             self.assertTrue(hasattr(task_object, attribute))
 
     def test_edit_task(self):
-        task_list = TaskList()
+        task_list = TaskList(file=path)
         categories = ['Task', 'Estimated time (minutes)', 'Priority', 'Periodic', 'Preferred time']
         original_values = ['Take a walk', 30, 'normal', True, 'Whole day']
         new_values = ['Take a very long walk', 5, 'high', False, 'Afternoon']
@@ -80,8 +83,8 @@ class TestDatabase(unittest.TestCase):
             self.assertEqual(task_list.data.iloc[0][i], original_values[i])
 
     def test_create_dataframe(self):
-        database = TaskList.add_file_data()
-        task_list = TaskList()
+        database = TaskList.add_file_data(path)
+        task_list = TaskList(file=path)
 
         self.assertIsInstance(database, pd.DataFrame)
         self.assertIsInstance(task_list.data, pd.DataFrame)
