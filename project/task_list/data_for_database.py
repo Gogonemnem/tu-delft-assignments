@@ -1,9 +1,14 @@
 import pandas as pd
 import numpy as np
+import os
 #  this is the path I need to take for MacOS,
 #  I will always change it to the original when committing
 #  path = '/Users/cristiancotovanu/Documents/GitHub/group-08/project/main/task_list_file'
-path = 'task_list_file'
+# path = 'task_list_file'
+absolute_path = os.path.abspath(__file__)
+fileDirectory = os.path.dirname(absolute_path)
+parent = os.path.dirname(fileDirectory)
+path = os.path.join(parent, 'main', 'task_list_file')
 
 
 class TaskList:

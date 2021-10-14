@@ -1,10 +1,14 @@
 import unittest
 import pandas as pd
 import numpy as np
+import os
 from project.task_list.data_for_database import TaskList, TaskObject
 # coverage report works only with the absolute path
 # path = r'C:\Users\janin\PycharmProjects\group-08\project\test\task_list_file'
-path = 'task_list_file'
+absolute_path = os.path.abspath(__file__)
+fileDirectory = os.path.dirname(absolute_path)
+path = os.path.join(fileDirectory, 'task_list_file')
+# path = 'task_list_file'
 
 
 class TestDatabase(unittest.TestCase):
