@@ -179,6 +179,8 @@ class Activity:
     # as this is mutually dependent with the end_time
     @property
     def duration(self):
+        if not self.end_time:
+            return None
         return self.end_time - self.start_time
 
     @duration.setter
@@ -212,7 +214,8 @@ class Activity:
         """Checks if the input from the user for end_time and duration are valid,
          and sets the variables accordingly"""
         # both variables were not filled in
-        if not isinstance(end_time, datetime) and not isinstance(duration, timedelta):
+        if not isinstance(end_time, datetime) and not isinstance(duration, timedelta)\
+                and None in [self.end_time, self.duration]:
             raise ValueError('Please tell us when this activity end or '
                              'how long you will be doing this activity.')
 
@@ -228,7 +231,7 @@ class Activity:
             self.end_time = end_time
 
         # user inputs only duration
-        else:
+        elif duration:
             self.duration = duration
 
     def __le__(self, other):
@@ -267,15 +270,12 @@ def main():
     # agenda0.add_activity(Activity('Work', now - 2 * durat_short, duration=4 * durat_short))
     # agenda0.add_activity(Activity('No work', now - timedelta(days=1), end_time=now - durat_long))
     # print(agenda0.agenda)
-    agenda0.add_activity(Activity('Planned break', now, duration=durat_short, summary='shopping'))
+    # agenda0.add_activity(Activity('Planned break', now, duration=durat_short, summary='shopping'))
     # print(agenda0.agenda)
     # agenda0.delete_activity(2)
+    # agenda0.modify_activity(4, summary='long meeting')
     # print(agenda0.agenda)
     # print(agenda0.today())
-
-
-
-
 
     # Visualization
     app = QtWidgets.QApplication([])
