@@ -38,6 +38,8 @@ class MainWindow(QtWidgets.QMainWindow):
         layout.addWidget(self.agenda, 0, 1, 2, 1)
         layout.addWidget(self.tasklist, 0, 0)
         layout.addWidget(self.task, 1, 0)
+        layout.setColumnStretch(0, 1)
+        layout.setColumnStretch(1, 1)
         self.home.setLayout(layout)
 
         self.tabs.addTab(self.settings, "File")
