@@ -1,149 +1,69 @@
 import random
 from project.task_list.data_for_database import TaskList
 
+already_chosen = []
 
 class Randomizer:
     def __init__(self):
         self.database = TaskList().data_output()
 
-    def must_be_done_tasks_morning(self):
-        "Returns a list with the tasks that must be done today and for which the preferred \
-        moment is in the morning."
-        list_priority_today_morning = []
+    def hof_must_be_done_today(self, prior, pref):
+        lst = [task.name for task in self.database if task.priority == prior and task.preferred_time == pref]
         for task in self.database:
-            if task.priority == "must be done today" and task.preferred_time == "Morning":
-                list_priority_today_morning.append(task.name)
-        return list_priority_today_morning
+            if len(lst) < 3 and task.priority == prior and task.preferred_time == "Whole day" and task.name not in already_chosen:
+                lst.append(task.name)
+                already_chosen.append(task.name)
+        return lst
 
-    def must_be_done_tasks_evening(self):
-        "Returns a list with the tasks that must be done today and for which the preferred \
-        moment is in the evening."
-        list_priority_today_evening = []
-        for task in self.database:
-            if task.priority == "must be done today" and task.preferred_time == "Evening":
-                list_priority_today_evening.append(task.name)
-        return list_priority_today_evening
+    def must_be_done_tasks_morning(self):
+        return self.hof_must_be_done_today("must be done today", "Morning")
 
     def must_be_done_tasks_afternoon(self):
-        "Returns a list with the tasks that must be done today and for which the preferred \
-        moment is in the afternoon."
-        list_priority_today_afternoon = []
-        for task in self.database:
-            if task.priority == "must be done today" and task.preferred_time == "Afternoon":
-                list_priority_today_afternoon.append(task.name)
-        return list_priority_today_afternoon
+        return self.hof_must_be_done_today("must be done today", "Afternoon")
 
+    def must_be_done_tasks_evening(self):
+        return self.hof_must_be_done_today("must be done today", "Evening")
+
+    def hof_randomize_tasks_other_today(self, task_list, pref):
+        print(len(task_list))
+        while len(task_list) < 3:
+            dict_priority_less = dict()
+            for task in self.database:
+                if (task.preferred_time == pref or (task.preferred_time == "Whole day" and task.name not in already_chosen)):
+                    if task.priority == "high":
+                        weight = 4
+                    elif task.priority == "normal":
+                        weight = 2
+                    elif task.priority == "low":
+                        weight = 1
+                    else:
+                        weight = 0
+                    dict_priority_less[task.name] = weight
+                    already_chosen.append(task.name)
+            list_random = random.choices(list(dict_priority_less.keys()), weights=dict_priority_less.values(),
+                                                k=5)
+            d = dict()
+            for task2 in list_random:
+                if task2 not in d:
+                    d[task2] = 1
+                else:
+                    d[task2] += 1
+            biggest = max(d, key=lambda k: d[k])
+            if biggest not in task_list:
+                task_list.append(biggest)
+            return task_list
 
     def randomize_tasks_other_morning(self):
-        "Returns a list with all the tasks that are planned for this morning. \
-        The first tasks in this list are the tasks that must happen this morning. \
-        The other tasks in the list have either high, normal or low priority and their preferred \
-        moment is either in the morning or it has no preferred time. \
-        These are in randomized order, but the tasks with high priority are 4 times more likely \
-        to be added to the to-do list than the low priority tasks and the normal priority tasks \
-        are twice as much more likely to get added to the to-do list than the low priority tasks."
-        tasks_today_morning = []
-
-        for task in self.must_be_done_tasks_morning():
-            tasks_today_morning.append(task)
-
-        while len(tasks_today_morning) < 3:
-            dict_priority_less = dict()
-            for task in self.database:
-                if task.preferred_time == "Morning" or task.preferred_time == "Whole day" :
-                    if task.priority == "high":
-                        weight = 4
-                    elif task.priority == "normal":
-                        weight = 2
-                    elif task.priority == "low":
-                        weight = 1
-                    else:
-                        weight = 0
-                    dict_priority_less[task.name] = weight
-            list_today_morning = random.choices(list(dict_priority_less.keys()), weights=dict_priority_less.values(),k=5)
-
-            d = dict()
-            for task2 in list_today_morning:
-                if task2 not in d:
-                    d[task2] = 1
-                else:
-                    d[task2] += 1
-            biggest = max(d, key=lambda k: d[k])
-            if biggest not in tasks_today_morning:
-                tasks_today_morning.append(biggest)
-        return print(tasks_today_morning)
-
-    def randomize_tasks_other_evening(self):
-        "Does the same as the randomize_tasks_other_morning() method, but for the evening instead of \
-        the morning."
-        tasks_today_evening= []
-
-        for task in self.must_be_done_tasks_evening():
-            tasks_today_evening.append(task)
-
-        while len(tasks_today_evening) < 3:
-            dict_priority_less = dict()
-            for task in self.database:
-                if task.preferred_time == "Evening" or task.preferred_time == "Whole day" :
-                    if task.priority == "high":
-                        weight = 4
-                    elif task.priority == "normal":
-                        weight = 2
-                    elif task.priority == "low":
-                        weight = 1
-                    else:
-                        weight = 0
-                    dict_priority_less[task.name] = weight
-            list_today_morning = random.choices(list(dict_priority_less.keys()), weights=dict_priority_less.values(),k=5)
-
-            d = dict()
-            for task2 in list_today_morning:
-                if task2 not in d:
-                    d[task2] = 1
-                else:
-                    d[task2] += 1
-            biggest = max(d, key=lambda k: d[k])
-            if biggest not in tasks_today_evening:
-                tasks_today_evening.append(biggest)
-        return print(tasks_today_evening)
+        return self.hof_randomize_tasks_other_today(self.must_be_done_tasks_morning(), "Morning")
 
     def randomize_tasks_other_afternoon(self):
-        "Does the same as the randomize_tasks_other_morning() method, but for the afternoon instead of \
-        the morning."
-        tasks_today_afternoon= []
+        return self.hof_randomize_tasks_other_today(self.must_be_done_tasks_afternoon(), "Afternoon")
 
-        for task in self.must_be_done_tasks_afternoon():
-            tasks_today_afternoon.append(task)
+    def randomize_tasks_other_evening(self):
+        return self.hof_randomize_tasks_other_today(self.must_be_done_tasks_evening(), "Evening")
 
-        while len(tasks_today_afternoon) < 3:
-            dict_priority_less = dict()
-            for task in self.database:
-                if task.preferred_time == "Afternoon" or task.preferred_time == "Whole day" :
-                    if task.priority == "high":
-                        weight = 4
-                    elif task.priority == "normal":
-                        weight = 2
-                    elif task.priority == "low":
-                        weight = 1
-                    else:
-                        weight = 0
-                    dict_priority_less[task.name] = weight
-            list_today_morning = random.choices(list(dict_priority_less.keys()), weights=dict_priority_less.values(),k=5)
-
-            d = dict()
-            for task2 in list_today_morning:
-                if task2 not in d:
-                    d[task2] = 1
-                else:
-                    d[task2] += 1
-            biggest = max(d, key=lambda k: d[k])
-            if biggest not in tasks_today_afternoon:
-                tasks_today_afternoon.append(biggest)
-        return print(tasks_today_afternoon)
 
 test = Randomizer()
-test.randomize_tasks_other_morning()
-test.randomize_tasks_other_evening()
-test.randomize_tasks_other_afternoon()
-
-
+# print(test.must_be_done_tasks_afternoon())
+# print(test.must_be_done_tasks_afternoon())
+print(test.randomize_tasks_other_evening())
