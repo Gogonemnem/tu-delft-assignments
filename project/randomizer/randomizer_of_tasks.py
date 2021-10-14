@@ -28,7 +28,6 @@ class Randomizer:
                 list_priority_today_afternoon.append(task.name)
         return list_priority_today_afternoon
 
-
     def randomize_tasks_other_morning(self):
         "Should return a list with all the tasks that are planned for today, also known as a to-do list. \
         The first tasks in this list are the tasks that must happen today. \
@@ -65,7 +64,7 @@ class Randomizer:
             biggest = max(d, key=lambda k: d[k])
             if biggest not in tasks_today_morning:
                 tasks_today_morning.append(biggest)
-        return print(tasks_today_morning)
+        return tasks_today_morning
 
     def randomize_tasks_other_evening(self):
         tasks_today_evening= []
@@ -97,7 +96,7 @@ class Randomizer:
             biggest = max(d, key=lambda k: d[k])
             if biggest not in tasks_today_evening:
                 tasks_today_evening.append(biggest)
-        return print(tasks_today_evening)
+        return tasks_today_evening
 
     def randomize_tasks_other_afternoon(self):
         tasks_today_afternoon= []
@@ -129,11 +128,7 @@ class Randomizer:
             biggest = max(d, key=lambda k: d[k])
             if biggest not in tasks_today_afternoon:
                 tasks_today_afternoon.append(biggest)
-        return print(tasks_today_afternoon)
+        return tasks_today_afternoon
 
-test = Randomizer()
-test.randomize_tasks_other_morning()
-test.randomize_tasks_other_evening()
-test.randomize_tasks_other_afternoon()
 
 
