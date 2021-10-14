@@ -25,7 +25,7 @@ class Randomizer:
         return self.hof_must_be_done_today("must be done today", "Evening")
 
     def hof_randomize_tasks_other_today(self, task_list, pref):
-        print(len(task_list))
+        # print(len(task_list))
         while len(task_list) < 3:
             dict_priority_less = dict()
             for task in self.database:
@@ -42,6 +42,7 @@ class Randomizer:
                     already_chosen.append(task.name)
             list_random = random.choices(list(dict_priority_less.keys()), weights=dict_priority_less.values(),
                                                 k=5)
+            # print(list_random)
             d = dict()
             for task2 in list_random:
                 if task2 not in d:
