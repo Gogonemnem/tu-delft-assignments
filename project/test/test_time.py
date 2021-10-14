@@ -18,6 +18,15 @@ class TestTime(unittest.TestCase):
     def close(self):
         QApplication.quit()
 
+    def test_start(self):
+        app = QApplication(sys.argv)
+        time_randomizer = TimeRandomizer([], Agenda())
+        time_randomizer.start()
+        self.assertTrue(time_randomizer.timer.isActive())
+
+        QTimer.singleShot(2, self.close)
+        app.exec_()
+
     @mock.patch("numpy.random.geometric", return_value=1)
     def test_do_all_tasks(self, mock_random: mock.Mock):
         app = QApplication(sys.argv)
@@ -29,7 +38,7 @@ class TestTime(unittest.TestCase):
         time_randomizer.deterministic = False
         time_randomizer.start()
 
-        QTimer.singleShot(5 * length, self.close)
+        QTimer.singleShot(2 * length, self.close)
         app.exec_()
 
         self.assertEqual(0, len(lst))
@@ -70,6 +79,18 @@ class TestTime(unittest.TestCase):
                 for number2 in test_numbers:
                     self.assertEqual(number + number2, time_randomizer.generate_break_time(number, number2))
 
+    @mock.patch("numpy.random.geometric", return_value=1)
+    def test_activity_break_time(self, *args):
+        agenda0 = Agenda()
+        time_randomizer = TimeRandomizer([], agenda0)
+        time_randomizer.deterministic = True
+
+        for duration in range(20):
+            with mock.patch("project.agenda.agenda.Agenda.task_right_after", return_value=(True, duration)):
+                self.assertEqual(300000+duration, time_randomizer.activity_break_time())
+
+            with mock.patch("project.agenda.agenda.Agenda.task_right_after", return_value=(False, duration)):
+                self.assertEqual(time_randomizer.average_break_time, time_randomizer.activity_break_time())
 
 # @qtbot.fixture
 # def test_hello(qtbot):
