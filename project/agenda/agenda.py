@@ -2,13 +2,25 @@ from datetime import datetime, timedelta
 import bisect
 from PyQt5 import QtWidgets
 from project.agenda.agenda_widget import AgendaWidget
+import pandas as pd
+import os
+
+absolute_path = os.path.abspath(__file__)
+fileDirectory = os.path.dirname(absolute_path)
+parent = os.path.dirname(fileDirectory)
+path = os.path.join(parent, 'main', 'agenda_file')
 
 
 class Agenda:
-    def __init__(self):
+    def __init__(self, file=path):
         # this is list of activities that are planned
         # with activities occurring earlier appearing earlier on the list
         self.agenda: list[Activity] = []
+
+        self.file = file
+        column_names = ['activity', 'start time', 'end time', 'summary']
+        self.agenda_dataframe = pd.DataFrame(columns=column_names)
+        self.add_agenda_data()
 
     @property
     def now(self):
@@ -17,16 +29,19 @@ class Agenda:
     def add_activity(self, activity):
         """Inserts an activity to the agenda list while keeping the correct order"""
         bisect.insort(self.agenda, activity)
+        self._add_to_dataframe(activity)
 
     def modify_activity(
             self, identifier, activity=None, start_time=None,
             end_time=None, duration=None, summary=None):
         """Modifies the information of an activity in the agenda list"""
         self.agenda[identifier].modify_activity(activity, start_time, end_time, duration, summary)
+        self._edit_dataframe(identifier)
 
     def delete_activity(self, identifier):
         """Removes the activity from the agenda list"""
         del self.agenda[identifier]
+        self._delete_from_dataframe(identifier)
 
     def is_free(self):
         """Return T|F whether you are free (or have any activity right now)"""
@@ -70,6 +85,12 @@ class Agenda:
         """Removes activities in the agenda list that have happened"""
         self.agenda[:] = [x for x in self.agenda if not x.over]
 
+        # Updates the database after every activity.
+        # Might take a lot of time. So must be able to be more efficient.
+        self.agenda_dataframe = self.agenda_dataframe[0:0]
+        for i in range(len(self.agenda)):
+            self._add_to_dataframe(self.agenda[i])
+
     def get_day_part(self, time: datetime = None):
         """Return the daypart of the given time or right now"""
         hour = time.hour if time else self.now.hour
@@ -82,6 +103,57 @@ class Agenda:
             return 'Afternoon'
         else:
             return 'Evening'
+
+    def add_agenda_data(self):
+        """Adds all the activity from the external database to the agenda"""
+        agenda_dataframe = pd.read_csv(self.file, sep='$')
+
+        for i in range(len(agenda_dataframe)):
+            activity = Activity(
+                agenda_dataframe.iloc[i][0],
+                datetime.strptime(agenda_dataframe.iloc[i][1], '%Y-%m-%d %H:%M:%S.%f'),
+                end_time=datetime.strptime(agenda_dataframe.iloc[i][2], '%Y-%m-%d %H:%M:%S.%f'),
+                summary=agenda_dataframe.iloc[i][3]
+            )
+            self.add_activity(activity)
+
+    def _add_to_dataframe(self, new_activity):
+        """Adds the new activity to the dataframe and updates the external database"""
+        column_names = ['activity', 'start time', 'end time', 'summary']
+
+        input_activity = {
+                column_names[0]: new_activity.activity,
+                column_names[1]: new_activity.start_time,
+                column_names[2]: new_activity.end_time,
+                column_names[3]: new_activity.summary
+            }
+
+        self.agenda_dataframe = self.agenda_dataframe.append(input_activity, ignore_index=True)
+        self._write_to_file()
+
+    def _delete_from_dataframe(self, index):
+        """Deletes an activity from the dataframe and updates the external database"""
+        self.agenda_dataframe = self.agenda_dataframe.drop(index)
+        self.agenda_dataframe = self.agenda_dataframe.reset_index(drop=True)
+        self._write_to_file()
+
+    def _edit_dataframe(self, index):
+        """Edits an activity in the dataframe and updates the external database"""
+        input_activity = [
+            self.agenda[index].activity,
+            self.agenda[index].start_time,
+            self.agenda[index].end_time,
+            self.agenda[index].summary
+        ]
+
+        self.agenda_dataframe.iloc[index] = input_activity
+        self._write_to_file()
+
+    def _write_to_file(self):
+        """Replaces the external database with the current dataframe of activities"""
+        # First it sorts the data
+        self.agenda_dataframe = self.agenda_dataframe.sort_values('start time')
+        self.agenda_dataframe.to_csv(self.file, sep='$', index=False)
 
     def __str__(self):
         return f'{self.agenda}'
@@ -189,11 +261,21 @@ def main():
 
     # Create agenda and some activities
     agenda0 = Agenda()
-    agenda0.add_activity(Activity('No work', now, duration=durat_short))
+    # agenda0.add_activity(Activity('No work', now, duration=durat_short))
     # agenda0.add_activity(Activity('Work', now, duration=durat_short))
     # agenda0.add_activity(Activity('No work', now + 5 * durat_long, duration=durat_short))
     # agenda0.add_activity(Activity('Work', now - 2 * durat_short, duration=4 * durat_short))
     # agenda0.add_activity(Activity('No work', now - timedelta(days=1), end_time=now - durat_long))
+    # print(agenda0.agenda)
+    agenda0.add_activity(Activity('Planned break', now, duration=durat_short, summary='shopping'))
+    # print(agenda0.agenda)
+    # agenda0.delete_activity(2)
+    # print(agenda0.agenda)
+    # print(agenda0.today())
+
+
+
+
 
     # Visualization
     app = QtWidgets.QApplication([])
