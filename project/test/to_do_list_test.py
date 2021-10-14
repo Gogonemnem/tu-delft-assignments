@@ -1,7 +1,7 @@
 import unittest
 from PyQt5.QtWidgets import QApplication
 import sys
-from project.randomizer.randomizer_of_tasks import randomize_tasks
+from project.randomizer.randomizer_of_tasks import Randomizer
 from project.task_list.task_list_widget import TaskListWidget
 
 
@@ -10,9 +10,9 @@ class CallGroupBox:
         app = QApplication(sys.argv)
         self.window = TaskListWidget()
         self.text = self.window.task.text()
-        self.buttons_task = self.window.ButtonGroup_task.buttons()
-        self.buttons_done = self.window.ButtonGroup_done.buttons()
-        self.buttons_remove = self.window.ButtonGroup_remove.buttons()
+        self.buttons_task = self.window.group_task.buttons()
+        self.buttons_done = self.window.group_done.buttons()
+        self.buttons_remove = self.window.group_remove.buttons()
 
 
 class TesToDoList(unittest.TestCase):
@@ -35,7 +35,10 @@ class TesToDoList(unittest.TestCase):
         self.assertTrue(hasattr(self.to_do_list, 'layout'))
 
     def test_scenario(self):
-        rand_task = randomize_tasks()
+        rand_task = []
+        rand_task.extend(Randomizer().randomize_tasks_other_morning())
+        rand_task.extend(Randomizer().randomize_tasks_other_afternoon())
+        rand_task.extend(Randomizer().randomize_tasks_other_evening())
         text = CallGroupBox().text.replace(f'Task {len(rand_task)} for today is: ', "")
         self.assertEqual(rand_task[0][0], self.to_do_list.tasks[0])
         self.assertEqual(rand_task[-1][-1], text)
