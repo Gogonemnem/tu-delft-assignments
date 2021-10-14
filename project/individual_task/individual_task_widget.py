@@ -5,9 +5,9 @@ from project.task_list.task_list_tab import TaskListTab
 
 
 class TaskWidget(QtWidgets.QGroupBox):
-    def __init__(self, tasklisttab, *args, **kwargs):
+    def __init__(self, task_list_tab: TaskListTab, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.tasklisttab = tasklisttab
+        self.task_list_tab = task_list_tab
 
         self.setTitle('Individual tasks can be added here')
 
@@ -16,7 +16,7 @@ class TaskWidget(QtWidgets.QGroupBox):
 
         # Estimated time
         self.estimated = QComboBox(self)
-        durations = [f'{x} min' for x in range(5, 35, 5)]
+        durations = [f'{x} minutes' for x in range(5, 35, 5)]
         for duration in durations:
             self.estimated.addItem(duration)
 
@@ -50,66 +50,12 @@ class TaskWidget(QtWidgets.QGroupBox):
         layout.addWidget(self.button)
         self.setLayout(layout)
 
-    # self.estimated.currentIndexChanged.connect(self.estimatedchange)
-    # self.priority.currentIndexChanged.connect(self.prioritychange)
-    # self.checkbox.stateChanged.connect(self.periodicstate)
-    # self.preferred.currentIndexChanged.connect(self.preferredtime)
-
-    # All tests to see if the buttons and sliders are connected
-
-    # def prioritychange(self):
-    #    print('Current index is', self.priority.currentText())
-
-    # def estimatedchange(self):
-    #   print('Current index is', self.estimated.currentText())
-
-    # def periodicstate(self, state):
-    #    if state == QtCore.Qt.Checked:
-    #        print('Periodic')
-    #    else:
-    #        print('Not periodic')
-
-    # def preferredtime(self):
-    #    print('Current index is', self.preferred.currentText())
-
     def buttonclicked(self):
-        # print(self.textbox.text())
-        # print('Current index is', self.estimated.currentText())
-        # print('Current index is', self.priority.currentText())
-        # if self.checkbox.isChecked() == True:
-        #     print('Periodic')
-        # else:
-        #     print('Not periodic')
-        # print('Current index is', self.preferred.currentText())
-        # with open('task_list_file', 'a') as file:
-        #     if self.checkbox.isChecked() == True:
-        #         print(
-        #             self.textbox.text(),
-        #             self.estimated.currentText(),
-        #             self.priority.currentText(),
-        #             'True',
-        #             self.preferred.currentText(),
-        #             sep=';',
-        #             file=file
-        #         )
-        #     else:
-        #         print(
-        #             self.textbox.text(),
-        #             self.estimated.currentText(),
-        #             self.priority.currentText(),
-        #             'False',
-        #             self.preferred.currentText(),
-        #             sep=';',
-        #             file=file
-        #         )
-
         task = [self.textbox.text(),
-                int(self.estimated.currentText()[:-4]),
+                int(self.estimated.currentText().split()[0]),
                 self.priority.currentText(),
-                True,
+                self.checkbox.isChecked(),
                 self.preferred.currentText()]
-        if self.checkbox.isChecked() is False:
-            task[3] = False
 
         database = TaskList()
         database.add_task(task)
@@ -120,13 +66,8 @@ class TaskWidget(QtWidgets.QGroupBox):
         msg.setWindowTitle("Success!")
         msg.setWindowIcon(QtGui.QIcon('icon.png'))
         msg.setStandardButtons(QMessageBox.Ok)
-        # msg.buttonClicked.connect()
-        x = msg.exec()
+        msg.buttonClicked.connect(self.task_list_tab.refresh)
+        button_clicked = msg.exec()
 
-        if x == QMessageBox.Ok:
-            self.tasklisttab.refresh()
-
-
-
-
-
+        if button_clicked == 1024:
+            self.task_list_tab.refresh()
