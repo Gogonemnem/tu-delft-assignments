@@ -15,7 +15,7 @@ class TimeRandomizer:
 
         # 45 minutes = 2700000 milliseconds
         self.average_break_time = 1000
-        self.deterministic = True
+        self.deterministic = False
 
         self.timer = QTimer()
 
