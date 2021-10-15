@@ -2,6 +2,11 @@ import unittest
 from datetime import datetime, timedelta
 from project.agenda.agenda import Agenda, Activity
 from project.agenda import agenda as ag
+import os
+
+absolute_path = os.path.abspath(__file__)
+fileDirectory = os.path.dirname(absolute_path)
+path_empty = os.path.join(fileDirectory, 'agenda_empty_test_file')
 
 
 class TestAgenda(unittest.TestCase):
@@ -30,7 +35,7 @@ class TestAgenda(unittest.TestCase):
             self.assertEqual(activity.summary, summary)
 
     def test_repr_str(self):
-        agenda = Agenda()
+        agenda = Agenda(file=path_empty)
         now = datetime.now()
         duration = timedelta(hours=1)
         activity0 = Activity('Work', now, duration=duration)
@@ -50,8 +55,14 @@ class TestAgenda(unittest.TestCase):
         agenda.add_activity(activity0)
         self.assertEqual(str(agenda), "[" + wrapper0 + "]")
 
+        # Delete activity again to reset the file
+        agenda.delete_activity(0)
+
+        # Check if the file is really empty
+        self.test_empty_agenda()
+
     def test_empty_agenda(self):
-        agenda = Agenda()
+        agenda = Agenda(file=path_empty)
         self.assertTrue(agenda.is_free())
         self.assertEqual(agenda.task_right_after(), (False, -1))
         self.assertEqual(agenda.today(), [])
@@ -110,7 +121,7 @@ class TestAgenda(unittest.TestCase):
             Activity(activity_name, now, duration=duration, end_time=end_time + duration)
 
     def test_old_activity_removed(self):
-        agenda = Agenda()
+        agenda = Agenda(file=path_empty)
         now = datetime.now()
         duration = timedelta(hours=1)
         activity0 = Activity('Work', now - 1 / 2 * duration, duration=duration)
@@ -130,8 +141,15 @@ class TestAgenda(unittest.TestCase):
         agenda.remove_activity_over()
         self.assertCountEqual([activity0, activity1], agenda.agenda)
 
+        # Delete the activities to reset the file
+        for i in range(len(agenda.agenda)):
+            agenda.delete_activity(0)
+
+        # Check if the agenda is empty
+        self.test_empty_agenda()
+
     def test_today_activities(self):
-        agenda = Agenda()
+        agenda = Agenda(file=path_empty)
         now = datetime.now()
         day = timedelta(days=1)
         duration = timedelta(hours=1)
@@ -159,6 +177,13 @@ class TestAgenda(unittest.TestCase):
 
         self.assertCountEqual([activity0, activity1], agenda.today())
 
+        # Delete the activities to reset the file
+        for i in range(len(agenda.agenda)):
+            agenda.delete_activity(0)
+
+        # Check if the agenda is empty
+        self.test_empty_agenda()
+
     def test_activity_relations(self):
         now = datetime.now()
         duration = timedelta(hours=1)
@@ -174,11 +199,11 @@ class TestAgenda(unittest.TestCase):
         self.assertFalse(activity2 == activity0)
 
     def test_agenda_current_time(self):
-        agenda = Agenda()
+        agenda = Agenda(file=path_empty)
         self.assertTrue(agenda.now - datetime.now() < timedelta(seconds=1))
 
     def test_free_agenda(self):
-        agenda = Agenda()
+        agenda = Agenda(file=path_empty)
         now = datetime.now()
         duration = timedelta(hours=1)
 
@@ -193,8 +218,15 @@ class TestAgenda(unittest.TestCase):
         agenda.add_activity(Activity('Work', now, duration=duration))
         self.assertFalse(agenda.is_free())
 
+        # Delete the activities to reset the file
+        for i in range(len(agenda.agenda)):
+            agenda.delete_activity(0)
+
+        # Check if the agenda is empty
+        self.test_empty_agenda()
+
     def test_right_after(self):
-        agenda = Agenda()
+        agenda = Agenda(file=path_empty)
         self.assertEqual(agenda.task_right_after(), (False, -1))
 
         now = datetime.now()
@@ -212,8 +244,14 @@ class TestAgenda(unittest.TestCase):
         right_after, _ = agenda.task_right_after()
         self.assertTrue(right_after)
 
+        # Delete the activities to reset the file
+        agenda.delete_activity(0)
+
+        # Check if the agenda is empty
+        self.test_empty_agenda()
+
     def test_day_part(self):
-        agenda = Agenda()
+        agenda = Agenda(file=path_empty)
         nights = [datetime(2021, 1, 1, x) for x in range(6)]
         mornings = [datetime(2021, 1, 1, x) for x in range(6, 12)]
         afternoons = [datetime(2021, 1, 1, x) for x in range(12, 18)]
