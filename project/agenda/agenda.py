@@ -44,7 +44,7 @@ class Agenda:
 
         activity = self.agenda[0]
         duration_in_ms = int((activity.end_time - self.now).total_seconds() * 1000)
-        return activity.activity == 'Work', duration_in_ms
+        return activity.activity == 'Do not disturb me', duration_in_ms
 
     def today(self):
         """Returns a list of activities that (will) happen today"""
