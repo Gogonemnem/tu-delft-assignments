@@ -134,7 +134,6 @@ class TaskListTab(QtWidgets.QTableView):
 
         # Edits the database after selection of a priority
         if ok:
-            print(f'This is the new input: {text}')
             self.database.edit_task(
                 self.index.row(),
                 'Priority',
@@ -160,7 +159,6 @@ class TaskListTab(QtWidgets.QTableView):
 
         # Edits the database after selection of True or False
         if ok:
-            print(f'This is the new input: {text}')
             self.database.edit_task(
                 self.index.row(),
                 'Periodic',
@@ -186,7 +184,6 @@ class TaskListTab(QtWidgets.QTableView):
 
         # Edits the database after selection of a preferred time
         if ok:
-            print(f'This is the new input: {text}')
             self.database.edit_task(
                 self.index.row(),
                 'Preferred time',
