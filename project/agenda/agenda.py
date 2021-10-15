@@ -18,8 +18,7 @@ class Agenda:
         self.agenda: list[Activity] = []
 
         self.file = file
-        column_names = ['activity', 'start time', 'end time', 'summary']
-        self.agenda_dataframe = pd.DataFrame(columns=column_names)
+        self.agenda_dataframe = None
         self.add_agenda_data()
 
     @property
@@ -106,6 +105,12 @@ class Agenda:
 
     def add_agenda_data(self):
         """Adds all the activity from the external database to the agenda"""
+        # Resets the self.agenda_dataframe
+        # This is to prevent that tasks are added more than once if the function is called again
+        column_names = ['activity', 'start time', 'end time', 'summary']
+        self.agenda_dataframe = pd.DataFrame(columns=column_names)
+
+        # Creates a temporary dataframe from the file
         agenda_dataframe = pd.read_csv(self.file, sep='$')
 
         for i in range(len(agenda_dataframe)):
