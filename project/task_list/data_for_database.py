@@ -1,10 +1,8 @@
 import pandas as pd
 import numpy as np
 import os
-#  this is the path I need to take for MacOS,
-#  I will always change it to the original when committing
-#  path = '/Users/cristiancotovanu/Documents/GitHub/group-08/project/main/task_list_file'
-# path = 'task_list_file'
+
+# Creates an absolute path, that works on different computers
 absolute_path = os.path.abspath(__file__)
 fileDirectory = os.path.dirname(absolute_path)
 parent = os.path.dirname(fileDirectory)
@@ -60,7 +58,8 @@ class TaskList:
         return pd.read_csv(file, sep='$')
 
     def __write_to_file(self):
-        """Replaces the external database with the current dataframe."""
+        """Replaces the external database with the current dataframe. \
+        This function must be used after every addition of the dataframe"""
         self.data.to_csv(self.file, sep='$', index=False)
 
     def data_output(self):

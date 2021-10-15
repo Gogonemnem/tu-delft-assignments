@@ -3,19 +3,22 @@ import pandas as pd
 import numpy as np
 import os
 from project.task_list.data_for_database import TaskList, TaskObject
-# coverage report works only with the absolute path
-# path = r'C:\Users\janin\PycharmProjects\group-08\project\test\task_list_file'
+
 absolute_path = os.path.abspath(__file__)
 fileDirectory = os.path.dirname(absolute_path)
-path = os.path.join(fileDirectory, 'task_list_file')
-# path = 'task_list_file'
+path = os.path.join(fileDirectory, 'task_list_file_test')
 
 
 class TestDatabase(unittest.TestCase):
 
     def test_delete_task(self):
+        # Create a TaskList object
         task_list = TaskList(file=path)
+
+        # Delete the task with index 1
         task_list.delete_task(1)
+
+        # Create a dataframe for the remaining task
         remaining_task = pd.DataFrame({
                                     'Task': ['Take a walk'],
                                     'Estimated time (minutes)': [30],
@@ -24,16 +27,23 @@ class TestDatabase(unittest.TestCase):
                                     'Preferred time': ['Whole day'],
                                     'Delete task': [np.nan],
                                     'Edit task:': [np.nan]})
+
+        # Create the input for the deleted task, to restore the file
         task = ['Get some coffee', 10, 'low', True, 'Morning']
 
+        # Check if the task is really deleted, and if it was the right one
+        # try and finally is used, because if these tests fail,
+        # the database should still be restored to it's former version.
         try:
             self.assertEqual(task_list.data.iloc[0][0], remaining_task.iloc[0][0])
             self.assertEqual(task_list.data.iloc[0][3], remaining_task.iloc[0][3])
             self.assertEqual(len(task_list.data), len(remaining_task))
         finally:
+            # Add the deleted task again
             task_list.add_task(task)
 
             try:
+                # Check if the task is added
                 self.assertEqual(len(task_list.data), 2)
                 self.assertEqual(task_list.data.iloc[1][0], task[0])
                 self.assertEqual(task_list.data.iloc[1][4], task[4])
@@ -41,6 +51,7 @@ class TestDatabase(unittest.TestCase):
                 pass
 
     def test_data_output(self):
+        # Checks the output of the data output function
         task_list = TaskList(file=path)
         object_list = task_list.data_output()
 
@@ -54,6 +65,7 @@ class TestDatabase(unittest.TestCase):
         self.assertEqual(len(object_list), len(task_list.data))
 
     def test_task_object(self):
+        # Tests the attributes of the TaskObject class
         task_object = TaskObject('Water the plants', 5, 'high', False, 'Whole day')
         attributes = ['name', 'time', 'priority', 'periodic', 'preferred_time']
 
@@ -66,27 +78,28 @@ class TestDatabase(unittest.TestCase):
         original_values = ['Take a walk', 30, 'normal', True, 'Whole day']
         new_values = ['Take a very long walk', 5, 'high', False, 'Afternoon']
 
-        # test the original values
+        # Test the original values
         for i in range(len(original_values)):
             self.assertEqual(task_list.data.iloc[0][i], original_values[i])
 
-        # edit the task
+        # Edit the task
         for i in range(len(categories)):
             task_list.edit_task(0, categories[i], new_values[i])
 
-        # test if the tasks are changed
+        # Test if the tasks are changed
         for i in range(len(categories)):
             self.assertEqual(task_list.data.iloc[0][i], new_values[i])
 
-        # change it back
+        # Change it back
         for i in range(len(categories)):
             task_list.edit_task(0, categories[i], original_values[i])
 
-        # test if the change back worked
+        # Test if the change back worked
         for i in range(len(original_values)):
             self.assertEqual(task_list.data.iloc[0][i], original_values[i])
 
     def test_create_dataframe(self):
+        # Tests is the TaskList class creates panda DataFrames
         database = TaskList.add_file_data(path)
         task_list = TaskList(file=path)
 
