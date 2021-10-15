@@ -76,7 +76,7 @@ class CreateToDoList:
         tasks_list.extend(Randomizer().randomize_tasks_other_afternoon())
         tasks_list.extend(Randomizer().randomize_tasks_other_evening())
         with open("ToDoList.txt", 'w', encoding='utf-7') as file_todo:
-            for i in enumerate(tasks_list):
+            for i in range(len(tasks_list)):
                 file_todo.writelines(tasks_list[i] + '\n')
         with open("DoingList.txt", 'w', encoding='utf-7') as file_doing:
             file_doing.close()
