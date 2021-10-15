@@ -19,7 +19,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.tasklist = TaskListWidget()
         self.tasklisttab = TaskListTab()
         self.task = TaskWidget(self.tasklisttab)
-        #self.add_activity = IndividualAgendaWidget
+        self.add_activity = IndividualAgendaWidget()
         self.settings = SettingsTab()
         self.home = QtWidgets.QWidget()
         self.tabs = QtWidgets.QTabWidget()
@@ -37,12 +37,15 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def visual(self):
         layout = QtWidgets.QGridLayout()
-        layout.addWidget(self.agenda, 0, 1, 2, 1)
-        layout.addWidget(self.tasklist, 0, 0)
+        layout.addWidget(self.agenda, 0, 2, 2, 1)
+        layout.addWidget(self.tasklist, 0, 0, 1, 2)
         layout.addWidget(self.task, 1, 0)
-        #layout.addWidget(self.add_activity, 1, 0)
-        layout.setColumnStretch(0, 1)
-        layout.setColumnStretch(1, 1)
+        layout.addWidget(self.add_activity, 1, 1)
+
+        for cell in range(2):
+            layout.setColumnStretch(cell, 1)
+            layout.setRowStretch(cell, 1)
+        layout.setColumnStretch(2, 2)
         self.home.setLayout(layout)
 
         self.tabs.addTab(self.settings, "File")
