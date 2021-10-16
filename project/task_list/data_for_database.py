@@ -2,9 +2,8 @@ import pandas as pd
 import numpy as np
 #  this is the path I need to take for MacOS,
 #  I will always change it to the original when committing
+PATH = 'task_list_file'
 #  path = '/Users/cristiancotovanu/Documents/GitHub/group-08/project/main/task_list_file'
-path = 'task_list_file'
-
 
 class TaskList:
     """This class creates and manages the dataframe with the tasks"""
@@ -51,11 +50,11 @@ class TaskList:
     @staticmethod
     def add_file_data():
         """Returns a dataframe of the task list database."""
-        return pd.read_csv(path, sep='$')
+        return pd.read_csv(PATH, sep='$')
 
     def __write_to_file(self):
         """Replaces the external database with the current dataframe."""
-        self.data.to_csv(path, sep='$', index=False)
+        self.data.to_csv(PATH, sep='$', index=False)
 
     def data_output(self):
         """Returns a list of objects from the class TaskObject."""

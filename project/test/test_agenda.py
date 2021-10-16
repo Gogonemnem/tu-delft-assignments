@@ -22,9 +22,8 @@ class TestAgenda(unittest.TestCase):
         end_time = now + duration
         summary = 'Meeting with Alice & Bob, but not with Eve'
         activities = [
-            Activity(activity_name, now, duration=duration, summary=summary),
-            Activity(activity_name, now, end_time=end_time, summary=summary),
-            Activity(activity_name, now, duration=duration, end_time=end_time, summary=summary)
+            Activity(activity_name, now, duration, summary=summary),
+            Activity(activity_name, now, end_time, summary=summary),
         ]
 
         for activity in activities:
@@ -34,38 +33,25 @@ class TestAgenda(unittest.TestCase):
             self.assertEqual(activity.duration, duration)
             self.assertEqual(activity.summary, summary)
 
-    def test_repr_str(self):
-        # Empty the dataframe
-        self.test_dataframe_empty()
-
-        agenda = Agenda(file=path_empty)
+    def test_invalid_activity(self):
+        activity_name = 'Work'
         now = datetime.now()
-        duration = timedelta(hours=1)
-        activity0 = Activity('Work', now, duration=duration)
-        string0 = f"Doing: Work, starting from: {now.strftime('%D %H:%M')}, " \
-                  f"ending at: {(now + duration).strftime('%D %H:%M')}, " \
-                  f"doing it for: {timedelta(hours=1)}, " \
-                  f"active: True"
-        wrapper0 = f"Activity(activity=Work, " \
-                   f"start_time={now}, " \
-                   f"end_time={(now + duration)}, " \
-                   f"duration={duration}, " \
-                   f"summary=, " \
-                   f"active=True)"
-        self.assertEqual(str(activity0), string0)
-        self.assertEqual(repr(activity0), wrapper0)
 
-        agenda.add_activity(activity0)
-        self.assertEqual(str(agenda), "[" + wrapper0 + "]")
+        with self.assertRaises(TypeError):
+            Activity(activity_name, now, None)
 
-        # Empty the dataframe
-        self.test_dataframe_empty()
+        with self.assertRaises(TypeError):
+            Activity(activity_name, now, '17:31')
+
+        with self.assertRaises(TypeError):
+            Activity(activity_name, '17:31', now)
 
     def test_empty_agenda(self):
         agenda = Agenda(file=path_empty)
         self.assertTrue(agenda.is_free())
         self.assertEqual(agenda.task_right_after(), (False, -1))
         self.assertEqual(agenda.today(), [])
+        self.assertEqual('[]', str(agenda))
 
     def test_modify_activity_attributes(self):
         activity_name = 'Work'
@@ -73,52 +59,24 @@ class TestAgenda(unittest.TestCase):
         duration = timedelta(hours=1)
         end_time = now + duration
         summary = 'Meeting with Alice & Bob, but not with Eve'
-        activities = [
-            Activity(activity_name, now, duration=duration, summary=summary),
-            Activity(activity_name, now, end_time=end_time, summary=summary),
-            Activity(activity_name, now, duration=duration, end_time=end_time, summary=summary)
-        ]
 
-        activities[0].modify_activity(
-            activity='No Work', start_time=now + duration, duration=duration)
-        self.assertEqual(activities[0].activity, 'No Work')
-        self.assertEqual(activities[0].start_time, now + duration)
-        self.assertEqual(activities[0].end_time, end_time + duration)
-        self.assertEqual(activities[0].duration, duration)
-        self.assertEqual(activities[0].summary, summary)
+        activity_old = Activity(activity_name, end_time, duration, summary=summary)
+        activity_change = Activity(activity_name, now, duration, summary=summary)
+        activity_new = Activity('No Work', now + 2 * duration, duration, summary)
 
-        for activity in activities[1:]:
-            self.assertEqual(activity.activity, activity_name)
-            self.assertEqual(activity.start_time, now)
-            self.assertEqual(activity.end_time, end_time)
-            self.assertEqual(activity.duration, duration)
-            self.assertEqual(activity.summary, summary)
+        agenda = Agenda()
+        agenda.add_activity(activity_change)  # will get index 0
+        agenda.add_activity(activity_old)
 
-    def test_invalid_activity(self):
-        activity_name = 'Work'
-        now = datetime.now()
-        duration = timedelta(hours=1)
-        end_time = now + duration
-        # with self.assertRaises(TypeError):
-        #     Activity()
+        agenda.modify_activity(0)  # nothing changes
+        self.assertEqual(agenda.agenda[0], activity_change)
+        self.assertEqual(agenda.agenda[1], activity_old)
 
-        with self.assertRaises(ValueError):
-            Activity(activity_name, now)
+        # change so that index will be 1
+        agenda.modify_activity(0, activity='No Work', start_time=now+2*duration, end_or_dur=duration)
 
-        with self.assertRaises(ValueError):
-            Activity(activity_name, '17:31', duration=duration)
-
-        with self.assertRaises(ValueError):
-            Activity(activity_name, '17:31', end_time=end_time)
-
-        with self.assertRaises(ValueError):
-            Activity(activity_name, now, duration='17:31')
-
-        with self.assertRaises(ValueError):
-            Activity(activity_name, now, end_time='17:31')
-
-        with self.assertRaises(ValueError):
-            Activity(activity_name, now, duration=duration, end_time=end_time + duration)
+        self.assertEqual(agenda.agenda[1], activity_new)
+        self.assertEqual(agenda.agenda[0], activity_old)
 
     def test_old_activity_removed(self):
         # Empty the dataframe
@@ -127,15 +85,15 @@ class TestAgenda(unittest.TestCase):
         agenda = Agenda(file=path_empty)
         now = datetime.now()
         duration = timedelta(hours=1)
-        activity0 = Activity('Work', now - 1 / 2 * duration, duration=duration)
-        activity1 = Activity('Work', now, duration=duration)
+        activity0 = Activity('Work', now - 1/2 * duration, duration)
+        activity1 = Activity('Work', now, duration)
         activities = [
             # is needed to check whether elements of self.agenda are equal
             activity0,
             activity1,
             # these are gonna be deleted
-            Activity('Work', now - 2 * duration, duration=duration),
-            Activity('Work', now - 3 * duration, duration=duration)
+            Activity('Work', now-2*duration, duration),
+            Activity('Work', now-3*duration, duration)
         ]
 
         for activity in activities:
@@ -157,8 +115,8 @@ class TestAgenda(unittest.TestCase):
         duration = timedelta(hours=1)
 
         # today
-        activity0 = Activity('Work', now, duration=duration)
-        activity1 = Activity('Work', now - 1 / 2 * duration, duration=duration)
+        activity0 = Activity('Work', now, duration)
+        activity1 = Activity('Work', now - 1/2 * duration, duration)
 
         activities = [
             # is needed to check whether elements of self.agenda are equal
@@ -166,17 +124,21 @@ class TestAgenda(unittest.TestCase):
             activity1,
 
             # these are gonna be deleted
-            Activity('Work', now + day, duration=duration),
-            Activity('Work', now + 2 * day, duration=duration),
-            Activity('Work', now + 3 * day, duration=duration),
-            Activity('Work', now - day, duration=duration),
-            Activity('Work', now - 2 * day, duration=duration),
-            Activity('Work', now - 3 * day, duration=duration)
+            Activity('Work', now + day, duration),
+            Activity('Work', now + 2 * day, duration),
+            Activity('Work', now + 3 * day, duration),
+            Activity('Work', now - day, duration),
+            Activity('Work', now - 2 * day, duration),
+            Activity('Work', now - 3 * day, duration)
         ]
 
-        for activity in activities:
+        for activity in activities[:2]:
             agenda.add_activity(activity)
 
+        self.assertCountEqual([activity0, activity1], agenda.today())
+
+        for activity in activities[2:]:
+            agenda.add_activity(activity)
         self.assertCountEqual([activity0, activity1], agenda.today())
 
         # Empty the dataframe
@@ -185,16 +147,16 @@ class TestAgenda(unittest.TestCase):
     def test_activity_relations(self):
         now = datetime.now()
         duration = timedelta(hours=1)
-        activity0 = Activity('Work', now, duration=duration)
-        activity1 = Activity('Work', now - 1 / 2 * duration, duration=duration)
-        activity2 = Activity('Work', now, duration=duration)
+        activity0 = Activity('Work', now, duration)
+        activity1 = Activity('Work', now - 1 / 2 * duration, duration)
+        activity2 = Activity('Work', now, duration)
 
         self.assertTrue(activity1 < activity0)
         self.assertFalse(activity1 > activity0)
 
         self.assertTrue(activity2 <= activity0)
         self.assertTrue(activity2 >= activity0)
-        self.assertFalse(activity2 == activity0)
+        self.assertTrue(activity2 == activity0)
 
     def test_agenda_current_time(self):
         agenda = Agenda(file=path_empty)
@@ -210,13 +172,13 @@ class TestAgenda(unittest.TestCase):
 
         self.assertTrue(agenda.is_free())
 
-        agenda.add_activity(Activity('Work', now - 2 * duration, duration=duration))
+        agenda.add_activity(Activity('Work', now - 2 * duration, duration))
         self.assertTrue(agenda.is_free())
 
-        agenda.add_activity(Activity('Work', now + duration, duration=duration))
+        agenda.add_activity(Activity('Work', now + duration, duration))
         self.assertTrue(agenda.is_free())
 
-        agenda.add_activity(Activity('Work', now, duration=duration))
+        agenda.add_activity(Activity('Work', now, duration))
         self.assertFalse(agenda.is_free())
 
         # Empty the dataframe
@@ -232,15 +194,15 @@ class TestAgenda(unittest.TestCase):
         now = datetime.now()
         duration = timedelta(hours=1)
 
-        agenda.add_activity(Activity('Work', now - 2 * duration, duration=duration))
+        agenda.add_activity(Activity('Work', now - 2 * duration, duration))
         self.assertEqual(agenda.task_right_after(), (False, -1))
 
-        agenda.add_activity(Activity('No Work', now, duration=duration))
+        agenda.add_activity(Activity('No Work', now, duration))
         right_after, _ = agenda.task_right_after()
         self.assertFalse(right_after)
         agenda.delete_activity(0)
 
-        agenda.add_activity(Activity('Work', now, duration=duration))
+        agenda.add_activity(Activity('Do not disturb me', now, duration))
         right_after, _ = agenda.task_right_after()
         self.assertTrue(right_after)
 
@@ -274,8 +236,8 @@ class TestAgenda(unittest.TestCase):
 
         time = datetime.strptime('2021-10-20 16:30:15.123456', '%Y-%m-%d %H:%M:%S.%f')
         duration = timedelta(hours=1)
-        activity0 = Activity('Work', time, duration=duration, summary='Lots of work')
-        activity1 = Activity('Work', time - 1 / 2 * duration, duration=duration, summary='Much work indeed')
+        activity0 = Activity('Work', time, duration, summary='Lots of work')
+        activity1 = Activity('Work', time - 1 / 2 * duration, duration, summary='Much work indeed')
 
         # Add activities to dataframe
         agenda._add_to_dataframe(activity0)
@@ -306,7 +268,7 @@ class TestAgenda(unittest.TestCase):
         agenda = Agenda(file=path_empty)
         time = datetime.strptime('2021-10-20 16:30:15.123456', '%Y-%m-%d %H:%M:%S.%f')
         duration = timedelta(hours=1)
-        activity0 = Activity('Work', time, duration=duration, summary='Lots of work')
+        activity0 = Activity('Work', time, duration, summary='Lots of work')
 
         # Add activity to agenda and edit the activity
         # The edit dataframe function, doesn't work without using the modify activity
@@ -318,10 +280,10 @@ class TestAgenda(unittest.TestCase):
         agenda.modify_activity(0, summary='Doing a bit less work')
         self.assertEqual(agenda.agenda_dataframe.summary[0], 'Doing a bit less work')
 
-        agenda.modify_activity(0, duration=2 * duration)
+        agenda.modify_activity(0, 2 * duration)
         self.assertEqual(agenda.agenda_dataframe['end time'][0], time + 5 / 2 * duration)
 
-        agenda.modify_activity(0, activity='Planned break', end_time=time + 2 * duration)
+        agenda.modify_activity(0, activity='Planned break', end_or_dur=time + 2 * duration)
         self.assertEqual(agenda.agenda_dataframe['end time'][0], time + 2 * duration)
         self.assertEqual(agenda.agenda_dataframe.activity[0], 'Planned break')
 
@@ -335,7 +297,7 @@ class TestAgenda(unittest.TestCase):
         agenda1 = Agenda(file=path_empty)
         time = datetime.strptime('2021-10-20 16:30:15.123456', '%Y-%m-%d %H:%M:%S.%f')
         duration = timedelta(hours=1)
-        activity0 = Activity('Work', time, duration=duration, summary='Lots of work')
+        activity0 = Activity('Work', time, duration, summary='Lots of work')
         column_names = ['activity', 'start time', 'end time', 'summary']
 
         agenda1.add_activity(activity0)

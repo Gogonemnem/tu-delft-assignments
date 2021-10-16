@@ -14,8 +14,8 @@ class TimeRandomizer:
         self.agenda = agenda
 
         # 45 minutes = 2700000 milliseconds
-        self.average_break_time = 1000
-        self.deterministic = True
+        self.average_break_time = 2700000
+        self.deterministic = False
 
         self.timer = QTimer()
 
@@ -37,6 +37,7 @@ class TimeRandomizer:
         self.timer.start(break_time)
         self.timer.timeout.connect(self.next_task)
 
+    # Needs to be tested
     def next_task(self):
         # check if there are tasks left to be done
         if not self.to_do_list:
@@ -70,6 +71,7 @@ class TimeRandomizer:
             break_time = self.generate_break_time()
         return break_time
 
+    # Needs to be tested
     def task_action_break_time(self):
         """User can do a task right now -> Returns a new break time depending on the task"""
         # TO_DO: Link with task status
@@ -96,6 +98,7 @@ class TimeRandomizer:
 
         return break_time
 
+    # Needs to be tested
     def reschedule_popup(self, task):
         """Execute a pop-up for the rescheduled task at specified time"""
         # TO_DO: new time Needs to be implemented in to_do_list
