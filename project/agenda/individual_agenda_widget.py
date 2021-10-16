@@ -1,8 +1,9 @@
 import sys
 from PyQt5 import QtWidgets, QtGui
-from PyQt5.QtCore import QTime
+from PyQt5.QtCore import QTime, QDateTime
 from PyQt5.QtWidgets import QComboBox, QTimeEdit, QCalendarWidget, QApplication, QVBoxLayout, QFormLayout, QPushButton, \
-    QMessageBox
+    QMessageBox, QLineEdit, QDateTimeEdit
+from datetime import timedelta
 
 
 class IndividualAgendaWidget(QtWidgets.QGroupBox):
@@ -18,16 +19,23 @@ class IndividualAgendaWidget(QtWidgets.QGroupBox):
             self.activity.addItem(activity)
 
         # Start Time
-        self.start_time = QTimeEdit(self)
-        self.start_time.setTime(QTime.currentTime())
+        self.start_time = QDateTimeEdit(self)
+        self.start_time.setDateTime(QDateTime.currentDateTime())
 
         # End Time
-        self.end_time = QTimeEdit(self)
+        self.end_time = QDateTimeEdit(self)
+        self.end_time.setDateTime(QDateTime.currentDateTime())
+
+        # # Date
+        # self.date = QCalendarWidget(self)
+        # self.date.setGridVisible(True)
+
+        # Duration
+        self.duration = QTimeEdit(self)
         self.end_time.setTime(QTime.currentTime())
 
-        # Date
-        self.date = QCalendarWidget(self)
-        self.date.setGridVisible(True)
+        # Description
+        self.description = QLineEdit(self)
 
         # Add to the agenda button
         self.button = QPushButton('Add activity', self)
@@ -44,16 +52,21 @@ class IndividualAgendaWidget(QtWidgets.QGroupBox):
         layout.addRow("Activity", self.activity)
         layout.addRow("Start time", self.start_time)
         layout.addRow("End time", self.end_time)
-        layout.addRow("Date", self.date)
+        # layout.addRow("Date", self.date)
+        layout.addRow("Duration", self.duration)
+        layout.addRow("Description", self.description)
         layout.addWidget(self.button)
         self.setLayout(layout)
         self.show()
 
     def buttonclicked(self):
         activity = [self.activity.currentText(),
-                    self.start_time.time(),
-                    self.end_time.time(),
-                    self.date.selectedDate()]
+                    self.start_time.dateTime().toPyDateTime(),
+                    self.end_time.dateTime().toPyDateTime(),
+                    # self.date.selectedDate(),
+                    timedelta(milliseconds=self.duration.time().msecsSinceStartOfDay()),
+                    self.description.text()
+                    ]
         print(activity)
 
     def show_popup(self):
