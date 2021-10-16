@@ -19,7 +19,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.tasklist = TaskListWidget()
         self.tasklisttab = TaskListTab()
         self.task = TaskWidget(self.tasklisttab)
-        self.add_activity = IndividualAgendaWidget()
+        self.add_activity = IndividualAgendaWidget(self.agenda)
         self.settings = SettingsTab()
         self.home = QtWidgets.QWidget()
         self.tabs = QtWidgets.QTabWidget()

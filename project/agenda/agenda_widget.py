@@ -78,3 +78,7 @@ class AgendaWidget(QtWidgets.QGroupBox):
 
         # Turn the HTML plot into a widget and do not open it within a browser
         self.browser.setHtml(fig.to_html(include_plotlyjs='cdn'))
+
+    def add_activity(self, activity):
+        self.agenda.add_activity(activity)
+        self.start()

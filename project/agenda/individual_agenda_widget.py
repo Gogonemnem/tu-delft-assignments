@@ -1,15 +1,19 @@
 import sys
-from PyQt5 import QtWidgets, QtGui
-from PyQt5.QtCore import QTime, QDateTime
-from PyQt5.QtWidgets import QComboBox, QTimeEdit, QCalendarWidget, QApplication, QVBoxLayout, QFormLayout, QPushButton, \
-    QMessageBox, QLineEdit, QDateTimeEdit, QRadioButton, QHBoxLayout, QWidget
 from datetime import timedelta
+from PyQt5 import QtWidgets, QtGui
+from PyQt5.QtCore import QDateTime
+from PyQt5.QtWidgets import QComboBox, QTimeEdit, QApplication, QFormLayout, QPushButton, \
+    QMessageBox, QLineEdit, QDateTimeEdit, QRadioButton, QHBoxLayout, QWidget
+
+from project.agenda.agenda import Activity, Agenda
+from project.agenda.agenda_widget import AgendaWidget
 
 
 class IndividualAgendaWidget(QtWidgets.QGroupBox):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, agenda_widget: AgendaWidget, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+        self.agenda_widget = agenda_widget
         self.end = None
         self.dur = None
         self.activity = None
@@ -83,14 +87,27 @@ class IndividualAgendaWidget(QtWidgets.QGroupBox):
     def buttonclicked(self):
         if self.end_time:
             end_or_dur = self.end_time.dateTime().toPyDateTime()
+            activity = Activity(self.activity.currentText(),
+                                self.start_time.dateTime().toPyDateTime(),
+                                end_time=end_or_dur,
+                                summary=self.description.text()
+                                )
         else:
             end_or_dur = timedelta(milliseconds=self.duration.time().msecsSinceStartOfDay())
-        activity = [self.activity.currentText(),
-                    self.start_time.dateTime().toPyDateTime(),
-                    end_or_dur,
-                    self.description.text()
-                    ]
-        print(activity)
+            activity = Activity(self.activity.currentText(),
+                                self.start_time.dateTime().toPyDateTime(),
+                                duration=end_or_dur,
+                                summary=self.description.text()
+                                )
+
+        # # use this when 48-49 is merged
+        # activity = Activity(self.activity.currentText(),
+        #                     self.start_time.dateTime().toPyDateTime(),
+        #                     end_or_dur,
+        #                     self.description.text()
+        #                     )
+
+        self.agenda_widget.add_activity(activity)
 
     def show_popup(self):
         msg = QMessageBox()
@@ -103,5 +120,8 @@ class IndividualAgendaWidget(QtWidgets.QGroupBox):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    ex = IndividualAgendaWidget()
+
+    agenda = Agenda()
+    agenda_widget = AgendaWidget(agenda)  # is not shown
+    ex = IndividualAgendaWidget(agenda_widget)
     sys.exit(app.exec_())
