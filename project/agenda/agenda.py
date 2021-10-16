@@ -1,3 +1,4 @@
+import csv
 from dataclasses import dataclass, field, InitVar
 from datetime import datetime, timedelta
 import bisect
@@ -22,7 +23,7 @@ class Agenda:
 
         self.file = file
         self.agenda_dataframe = None
-        self.add_agenda_data()
+        self.read_csv()
 
     @property
     def now(self):
@@ -31,11 +32,10 @@ class Agenda:
     def add_activity(self, activity):
         """Inserts an activity to the agenda list while keeping the correct order"""
         bisect.insort(self.agenda, activity)
-        self._add_to_dataframe(activity)
+        self.update_dataframe()
 
     def modify_activity(
-            self, identifier, activity=None, start_time=None,
-            end_or_dur=None, summary=None):
+            self, identifier, activity=None, start_time=None, end_or_dur=None, summary=None):
         """Modifies the information of an activity in the agenda list"""
         activity_old = self.agenda[identifier]
 
@@ -52,12 +52,12 @@ class Agenda:
         activity_new = Activity(activity, start_time, end_or_dur, summary)
         self.add_activity(activity_new)
 
-        self._edit_dataframe(identifier)
+        self.update_dataframe()
 
     def delete_activity(self, identifier):
         """Removes the activity from the agenda list"""
         del self.agenda[identifier]
-        self._delete_from_dataframe(identifier)
+        self.update_dataframe()
 
     def is_free(self):
         """Return T|F whether you are free (or have any activity right now)"""
@@ -100,12 +100,7 @@ class Agenda:
     def remove_activity_over(self):
         """Removes activities in the agenda list that have happened"""
         self.agenda[:] = [x for x in self.agenda if not x.over]
-
-        # Updates the database after every activity.
-        # Might take a lot of time. So must be able to be more efficient.
-        self.agenda_dataframe = self.agenda_dataframe[0:0]
-        for i in range(len(self.agenda)):
-            self._add_to_dataframe(self.agenda[i])
+        self.update_dataframe()
 
     def get_day_part(self, time: datetime = None):
         """Return the daypart of the given time or right now"""
@@ -120,61 +115,25 @@ class Agenda:
         else:
             return 'Evening'
 
-    def add_agenda_data(self):
-        """Adds all the activity from the external database to the agenda"""
-        # Resets the self.agenda_dataframe
-        # This is to prevent that tasks are added more than once if the function is called again
-        column_names = ['activity', 'start time', 'end time', 'summary']
-        self.agenda_dataframe = pd.DataFrame(columns=column_names)
-
-        # Creates a temporary dataframe from the file
-        agenda_dataframe = pd.read_csv(self.file, sep='$')
-
-        for i in range(len(agenda_dataframe)):
-            activity = Activity(
-                agenda_dataframe.iloc[i][0],
-                datetime.strptime(agenda_dataframe.iloc[i][1], '%Y-%m-%d %H:%M:%S.%f'),
-                datetime.strptime(agenda_dataframe.iloc[i][2], '%Y-%m-%d %H:%M:%S.%f'),
-                summary=agenda_dataframe.iloc[i][3]
-            )
-            self.add_activity(activity)
-
-    def _add_to_dataframe(self, new_activity):
-        """Adds the new activity to the dataframe and updates the external database"""
-        column_names = ['activity', 'start time', 'end time', 'summary']
-
-        input_activity = {
-                column_names[0]: new_activity.activity,
-                column_names[1]: new_activity.start_time,
-                column_names[2]: new_activity.end_time,
-                column_names[3]: new_activity.summary
-            }
-
-        self.agenda_dataframe = self.agenda_dataframe.append(input_activity, ignore_index=True)
+    def update_dataframe(self):
+        self.agenda_dataframe = pd.DataFrame([activity.__dict__ for activity in self.agenda])
         self._write_to_file()
 
-    def _delete_from_dataframe(self, index):
-        """Deletes an activity from the dataframe and updates the external database"""
-        self.agenda_dataframe = self.agenda_dataframe.drop(index)
-        self.agenda_dataframe = self.agenda_dataframe.reset_index(drop=True)
-        self._write_to_file()
-
-    def _edit_dataframe(self, index):
-        """Edits an activity in the dataframe and updates the external database"""
-        input_activity = [
-            self.agenda[index].activity,
-            self.agenda[index].start_time,
-            self.agenda[index].end_time,
-            self.agenda[index].summary
-        ]
-
-        self.agenda_dataframe.iloc[index] = input_activity
-        self._write_to_file()
+    def read_csv(self):
+        self.agenda = []
+        with open(self.file, newline='') as f:
+            list_of_rows = list(csv.DictReader(f, delimiter='$'))
+            for row in list_of_rows:
+                activity = Activity(row['activity'],
+                                    datetime.strptime(row['start_time'], '%Y-%m-%d %H:%M:%S.%f'),
+                                    datetime.strptime(row['end_time'], '%Y-%m-%d %H:%M:%S.%f'),
+                                    row['summary']
+                                    )
+                self.add_activity(activity)
+        self.update_dataframe()
 
     def _write_to_file(self):
         """Replaces the external database with the current dataframe of activities"""
-        # First it sorts the data
-        self.agenda_dataframe = self.agenda_dataframe.sort_values('start time')
         self.agenda_dataframe.to_csv(self.file, sep='$', index=False)
 
     def __str__(self):
@@ -234,7 +193,7 @@ def main():
 
     # activities = ['No work', 'Work', 'Planned break', 'Do not disturb me', 'Doing task']
 
-    durat_short = timedelta(minutes=1)
+    durat_short = timedelta(minutes=20)
     # durat_long = timedelta(minutes=50)
     # stop_time = now + durat_long
 

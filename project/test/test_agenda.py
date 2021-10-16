@@ -2,6 +2,7 @@ import unittest
 from datetime import datetime, timedelta
 from project.agenda.agenda import Agenda, Activity
 from project.agenda import agenda as ag
+import pandas as pd
 import os
 
 absolute_path = os.path.abspath(__file__)
@@ -48,12 +49,17 @@ class TestAgenda(unittest.TestCase):
 
     def test_empty_agenda(self):
         agenda = Agenda(file=path_empty)
+        for i in range(len(agenda.agenda)):
+            agenda.delete_activity(0)
         self.assertTrue(agenda.is_free())
         self.assertEqual(agenda.task_right_after(), (False, -1))
         self.assertEqual(agenda.today(), [])
         self.assertEqual('[]', str(agenda))
 
     def test_modify_activity_attributes(self):
+        # Empty the dataframe
+        self.test_dataframe_empty()
+
         activity_name = 'Work'
         now = datetime.now()
         duration = timedelta(hours=1)
@@ -64,7 +70,7 @@ class TestAgenda(unittest.TestCase):
         activity_change = Activity(activity_name, now, duration, summary=summary)
         activity_new = Activity('No Work', now + 2 * duration, duration, summary)
 
-        agenda = Agenda()
+        agenda = Agenda(file=path_empty)
         agenda.add_activity(activity_change)  # will get index 0
         agenda.add_activity(activity_old)
 
@@ -77,6 +83,9 @@ class TestAgenda(unittest.TestCase):
 
         self.assertEqual(agenda.agenda[1], activity_new)
         self.assertEqual(agenda.agenda[0], activity_old)
+
+        # Empty the dataframe
+        self.test_dataframe_empty()
 
     def test_old_activity_removed(self):
         # Empty the dataframe
@@ -225,8 +234,8 @@ class TestAgenda(unittest.TestCase):
         for eve in evenings:
             self.assertEqual(agenda.get_day_part(eve), 'Evening')
 
-    def test_main(self):
-        ag.main()
+    # def test_main(self):
+    #     ag.main()
 
     def test_add_and_delete_agenda_dataframe(self):
         # Empty the dataframe
@@ -240,22 +249,22 @@ class TestAgenda(unittest.TestCase):
         activity1 = Activity('Work', time - 1 / 2 * duration, duration, summary='Much work indeed')
 
         # Add activities to dataframe
-        agenda._add_to_dataframe(activity0)
-        agenda._add_to_dataframe(activity1)
+        agenda.add_activity(activity0)
+        agenda.add_activity(activity1)
 
-        self.assertEqual(len(agenda.agenda_dataframe), 2)
-        self.assertEqual(agenda.agenda_dataframe.activity[0], 'Work')
-        self.assertEqual(agenda.agenda_dataframe['start time'][0], time)
-        self.assertEqual(agenda.agenda_dataframe['end time'][0], time + duration)
-        self.assertEqual(agenda.agenda_dataframe.summary[0], 'Lots of work')
-        self.assertEqual(agenda.agenda_dataframe['start time'][1], time - 1 / 2 * duration)
-        self.assertEqual(agenda.agenda_dataframe.summary[1], 'Much work indeed')
+        self.assertEqual(2, len(agenda.agenda_dataframe))
+        self.assertEqual('Work', agenda.agenda_dataframe.activity[1])
+        self.assertEqual(time, agenda.agenda_dataframe['start_time'][1])
+        self.assertEqual(time+duration, agenda.agenda_dataframe['end_time'][1])
+        self.assertEqual('Lots of work', agenda.agenda_dataframe.summary[1])
+        self.assertEqual(time - 1 / 2 * duration, agenda.agenda_dataframe['start_time'][0])
+        self.assertEqual('Much work indeed', agenda.agenda_dataframe.summary[0])
 
         # Delete activities from dataframe
         # This is to test the delete function and to reset the file
-        agenda._delete_from_dataframe(0)
+        agenda.delete_activity(1)
         self.assertEqual(len(agenda.agenda_dataframe), 1)
-        self.assertEqual(agenda.agenda_dataframe['start time'][0], time - 1 / 2 * duration)
+        self.assertEqual(agenda.agenda_dataframe['start_time'][0], time - 1 / 2 * duration)
         self.assertEqual(agenda.agenda_dataframe.summary[0], 'Much work indeed')
 
         # Empty the dataframe
@@ -275,16 +284,16 @@ class TestAgenda(unittest.TestCase):
         agenda.add_activity(activity0)
 
         agenda.modify_activity(0, start_time=time + 1 / 2 * duration)
-        self.assertEqual(agenda.agenda_dataframe['start time'][0], time + 1 / 2 * duration)
+        self.assertEqual(agenda.agenda_dataframe['start_time'][0], time + 1 / 2 * duration)
 
         agenda.modify_activity(0, summary='Doing a bit less work')
         self.assertEqual(agenda.agenda_dataframe.summary[0], 'Doing a bit less work')
 
-        agenda.modify_activity(0, 2 * duration)
-        self.assertEqual(agenda.agenda_dataframe['end time'][0], time + 5 / 2 * duration)
+        agenda.modify_activity(0, end_or_dur=2 * duration)
+        self.assertEqual(agenda.agenda_dataframe['end_time'][0], time + 5 / 2 * duration)
 
         agenda.modify_activity(0, activity='Planned break', end_or_dur=time + 2 * duration)
-        self.assertEqual(agenda.agenda_dataframe['end time'][0], time + 2 * duration)
+        self.assertEqual(agenda.agenda_dataframe['end_time'][0], time + 2 * duration)
         self.assertEqual(agenda.agenda_dataframe.activity[0], 'Planned break')
 
         # Empty the dataframe
@@ -298,7 +307,7 @@ class TestAgenda(unittest.TestCase):
         time = datetime.strptime('2021-10-20 16:30:15.123456', '%Y-%m-%d %H:%M:%S.%f')
         duration = timedelta(hours=1)
         activity0 = Activity('Work', time, duration, summary='Lots of work')
-        column_names = ['activity', 'start time', 'end time', 'summary']
+        column_names = ['activity', 'start_time', 'end_time', 'summary']
 
         agenda1.add_activity(activity0)
 
@@ -312,13 +321,13 @@ class TestAgenda(unittest.TestCase):
                              agenda2.agenda_dataframe[name][0])
 
         # Delete activity and test it, to reset the file
-        agenda1._delete_from_dataframe(0)
+        agenda1.delete_activity(0)
         self.assertEqual(len(agenda1.agenda_dataframe), 0)
 
         # Reset agenda2 to update the dataframe
         # This automatically tests add_agenda_data function
-        agenda2.add_agenda_data()
-        self.assertEqual(len(agenda2.agenda_dataframe), 0)
+        agenda2.read_csv()
+        self.assertEqual(len(agenda2.agenda), 0)
 
     def test_dataframe_empty(self):
         """This function empties the dataframe and is used at the beginning and end of a test \
