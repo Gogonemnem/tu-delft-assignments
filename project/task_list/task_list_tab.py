@@ -2,7 +2,7 @@ from PyQt5 import QtWidgets
 from PyQt5 import QtCore
 from project.task_list.database_task_list import TaskListDatabase
 from project.task_list.data_for_database import TaskList
-from project.individual_task.individual_task_widget import TaskWidget
+# from project.individual_task.individual_task_widget import TaskWidget
 
 
 class TaskListTab(QtWidgets.QTableView):
@@ -15,7 +15,7 @@ class TaskListTab(QtWidgets.QTableView):
         self.delete_button = None
         self.index = None
         self.edit_button = None  # those five self.statements aren't needed but pycharm is annoying
-        self.task = TaskWidget()
+        # self.task = TaskWidget()
         self.refresh()
 
         layout = QtWidgets.QVBoxLayout()
