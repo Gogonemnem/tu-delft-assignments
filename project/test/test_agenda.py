@@ -1,9 +1,8 @@
+import os
 import unittest
 from datetime import datetime, timedelta
+
 from project.agenda.agenda import Agenda, Activity
-from project.agenda import agenda as ag
-import pandas as pd
-import os
 
 absolute_path = os.path.abspath(__file__)
 fileDirectory = os.path.dirname(absolute_path)
@@ -49,7 +48,7 @@ class TestAgenda(unittest.TestCase):
 
     def test_empty_agenda(self):
         agenda = Agenda(file=path_empty)
-        for i in range(len(agenda.agenda)):
+        for _ in range(len(agenda.agenda)):
             agenda.delete_activity(0)
         self.assertTrue(agenda.is_free())
         self.assertEqual(agenda.task_right_after(), (False, -1))
@@ -79,7 +78,8 @@ class TestAgenda(unittest.TestCase):
         self.assertEqual(agenda.agenda[1], activity_old)
 
         # change so that index will be 1
-        agenda.modify_activity(0, activity='No Work', start_time=now+2*duration, end_or_dur=duration)
+        agenda.modify_activity(
+            0, activity='No Work', start_time=now+2*duration, end_or_dur=duration)
 
         self.assertEqual(agenda.agenda[1], activity_new)
         self.assertEqual(agenda.agenda[0], activity_old)
@@ -237,7 +237,7 @@ class TestAgenda(unittest.TestCase):
     # def test_main(self):
     #     ag.main()
 
-    def test_add_and_delete_agenda_dataframe(self):
+    def test_add_delete_agenda_df(self):
         # Empty the dataframe
         self.test_dataframe_empty()
 
@@ -334,7 +334,7 @@ class TestAgenda(unittest.TestCase):
         This is to make sure tests still work, even if others fail (so the file is always empty)"""
         agenda = Agenda(file=path_empty)
         # Delete the activities to reset the file
-        for i in range(len(agenda.agenda)):
+        for _ in range(len(agenda.agenda)):
             agenda.delete_activity(0)
 
         # Check if the agenda is empty

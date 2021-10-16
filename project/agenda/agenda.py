@@ -1,13 +1,14 @@
+import bisect
 import csv
+import os
 from dataclasses import dataclass, field, InitVar
 from datetime import datetime, timedelta
-import bisect
 from typing import Any
 
-from PyQt5 import QtWidgets
-from project.agenda.agenda_widget import AgendaWidget
 import pandas as pd
-import os
+from PyQt5 import QtWidgets
+
+from project.agenda.agenda_widget import AgendaWidget
 
 absolute_path = os.path.abspath(__file__)
 fileDirectory = os.path.dirname(absolute_path)
@@ -121,8 +122,8 @@ class Agenda:
 
     def read_csv(self):
         self.agenda = []
-        with open(self.file, newline='') as f:
-            list_of_rows = list(csv.DictReader(f, delimiter='$'))
+        with open(self.file, newline='', encoding='utf-8') as fin:
+            list_of_rows = list(csv.DictReader(fin, delimiter='$'))
             for row in list_of_rows:
                 activity = Activity(row['activity'],
                                     datetime.strptime(row['start_time'], '%Y-%m-%d %H:%M:%S.%f'),
@@ -189,11 +190,11 @@ class Activity:
 
 
 def main():
-    now = datetime.today()
+    # now = datetime.today()
 
     # activities = ['No work', 'Work', 'Planned break', 'Do not disturb me', 'Doing task']
 
-    durat_short = timedelta(minutes=20)
+    # durat_short = timedelta(minutes=20)
     # durat_long = timedelta(minutes=50)
     # stop_time = now + durat_long
 
