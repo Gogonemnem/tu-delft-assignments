@@ -1,4 +1,4 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, InitVar
 from datetime import datetime, timedelta
 import bisect
 from typing import Any
@@ -84,33 +84,33 @@ class Activity:
 
     activity: str = field(compare=False)
     start_time: datetime
-    end_or_dur: Any = field(compare=False, repr=False)
+    end_or_dur: InitVar[Any]
     end_time: datetime = field(default=None, init=False)
     duration: timedelta = field(default=None, init=False)
     summary: str = field(default='', compare=False)
     active: bool = field(init=False, default=active)
     over: bool = field(init=False, default=over)
 
-    def __post_init__(self):
+    def __post_init__(self, end_or_dur):
         if not isinstance(self.start_time, datetime):
             raise TypeError('Please tell us when this activity starts')
-        if not self.check_end_or_dur():
+        if not self.check_end_or_dur(end_or_dur):
             raise TypeError('Please tell us when this activity end or '
                             'how long you will be doing this activity.')
 
-    def check_end_or_dur(self):
+    def check_end_or_dur(self, end_or_dur):
         """Checks if the input from the user for end_time and duration are valid
         and sets the variables accordingly"""
-        if isinstance(self.end_or_dur, datetime):
-            duration = self.end_or_dur - self.start_time
+        if isinstance(end_or_dur, datetime):
+            duration = end_or_dur - self.start_time
             object.__setattr__(self, 'duration', duration)
-            object.__setattr__(self, 'end_time', self.end_or_dur)
+            object.__setattr__(self, 'end_time', end_or_dur)
             return True
 
-        elif isinstance(self.end_or_dur, timedelta):
-            end_time = self.start_time + self.end_or_dur
+        elif isinstance(end_or_dur, timedelta):
+            end_time = self.start_time + end_or_dur
             object.__setattr__(self, 'end_time', end_time)
-            object.__setattr__(self, 'duration', self.end_or_dur)
+            object.__setattr__(self, 'duration', end_or_dur)
             return True
 
         return False
