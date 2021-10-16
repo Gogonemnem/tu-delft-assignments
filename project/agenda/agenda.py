@@ -28,7 +28,7 @@ class Agenda:
         if not start_time:
             start_time = activity_old.start_time
         if not end_or_dur:
-            end_or_dur = activity_old.end_or_dur
+            end_or_dur = activity_old.duration
         if not summary:
             summary = activity_old.summary
 
