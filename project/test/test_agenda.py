@@ -38,11 +38,15 @@ class TestAgenda(unittest.TestCase):
         with self.assertRaises(TypeError):
             Activity(activity_name, now, '17:31')
 
+        with self.assertRaises(TypeError):
+            Activity(activity_name, '17:31', now)
+
     def test_empty_agenda(self):
         agenda = Agenda()
         self.assertTrue(agenda.is_free())
         self.assertEqual(agenda.task_right_after(), (False, -1))
         self.assertEqual(agenda.today(), [])
+        self.assertEqual('[]', str(agenda))
 
     def test_modify_activity_attributes(self):
         activity_name = 'Work'
@@ -58,6 +62,10 @@ class TestAgenda(unittest.TestCase):
         agenda = Agenda()
         agenda.add_activity(activity_change)  # will get index 0
         agenda.add_activity(activity_old)
+
+        agenda.modify_activity(0)  # nothing changes
+        self.assertEqual(agenda.agenda[0], activity_change)
+        self.assertEqual(agenda.agenda[1], activity_old)
 
         # change so that index will be 1
         agenda.modify_activity(0, activity='No Work', start_time=now+2*duration, end_or_dur=duration)
@@ -110,9 +118,13 @@ class TestAgenda(unittest.TestCase):
             Activity('Work', now - 3 * day, duration)
         ]
 
-        for activity in activities:
+        for activity in activities[:2]:
             agenda.add_activity(activity)
 
+        self.assertCountEqual([activity0, activity1], agenda.today())
+
+        for activity in activities[2:]:
+            agenda.add_activity(activity)
         self.assertCountEqual([activity0, activity1], agenda.today())
 
     def test_activity_relations(self):
@@ -127,7 +139,7 @@ class TestAgenda(unittest.TestCase):
 
         self.assertTrue(activity2 <= activity0)
         self.assertTrue(activity2 >= activity0)
-        self.assertFalse(activity2 == activity0)
+        self.assertTrue(activity2 == activity0)
 
     def test_agenda_current_time(self):
         agenda = Agenda()
@@ -164,7 +176,7 @@ class TestAgenda(unittest.TestCase):
         self.assertFalse(right_after)
         agenda.delete_activity(0)
 
-        agenda.add_activity(Activity('Work', now, duration))
+        agenda.add_activity(Activity('Do not disturb me', now, duration))
         right_after, _ = agenda.task_right_after()
         self.assertTrue(right_after)
 
