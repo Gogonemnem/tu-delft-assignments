@@ -1,9 +1,9 @@
 import sys
 from datetime import datetime, timedelta
-from PyQt5 import QtWidgets, QtGui
+from PyQt5 import QtWidgets, QtGui, sip
 from PyQt5.QtCore import QDateTime
 from PyQt5.QtWidgets import QComboBox, QTimeEdit, QApplication, QFormLayout, QPushButton, \
-    QMessageBox, QLineEdit, QDateTimeEdit, QRadioButton, QHBoxLayout, QWidget, QSpinBox
+    QMessageBox, QLineEdit, QDateTimeEdit, QRadioButton, QHBoxLayout, QWidget, QSpinBox, QButtonGroup
 
 from project.agenda.agenda import Activity, Agenda
 from project.agenda.agenda_widget import AgendaWidget
@@ -17,6 +17,7 @@ class IndividualAgendaWidget(QtWidgets.QGroupBox):
         self.agenda_widget = agenda_widget
         self.create = QRadioButton()
         self.modify = QRadioButton()
+        self.delete = QRadioButton()
         self.end = QRadioButton()
         self.dur = QRadioButton()
         self.id = QSpinBox()
@@ -32,95 +33,172 @@ class IndividualAgendaWidget(QtWidgets.QGroupBox):
         self.setLayout(self.layout)
         self.show()
 
-        self.create_or_modify()
-        self.end_or_dur()
+        self.crea_mod_del()
 
-    def create_or_modify(self):
+    def calculate_keep_widgets(self):
+        widgets = 2
+        if self.delete.isChecked():
+            widgets += 1
+        elif self.end.isChecked() or self.dur.isChecked():
+            if self.create.isChecked():
+                widgets += 1
+            elif self.modify.isChecked():
+                widgets += 3
+        return widgets
+
+    def keep_old_widgets(self, count):
+        # This ensures it remove the old forms, and will not create duplicates
+        if len(self.children()) > count:
+            for i, widget in enumerate(self.children()[:count-1:-1]):
+                self.layout.removeWidget(widget)
+                sip.delete(widget)
+                # del widget
+
+    def crea_mod_del(self):
         self.create = QRadioButton('Create an activity', self)
-        self.create.toggle()
-        self.create.toggled.connect(self.state)
         self.modify = QRadioButton('Modify an activity', self)
-        self.create.toggled.connect(self.state)
+        self.delete = QRadioButton('Delete an activity', self)
 
-        buttons = QWidget()
+        self.create.toggled.connect(self.first_stage)
+        self.modify.toggled.connect(self.first_stage)
+        self.delete.toggled.connect(self.first_stage)
+
         button_layout = QHBoxLayout()
         button_layout.addWidget(self.create)
         button_layout.addWidget(self.modify)
+        button_layout.addWidget(self.delete)
+
+        buttons = QWidget()
         buttons.setLayout(button_layout)
         self.layout.addRow(buttons)
+
+        self.create.toggle()
+
+    def first_stage(self):
+        self.keep_old_widgets(2)
+        if self.create.isChecked():
+            self.end_or_dur()
+        elif self.modify.isChecked():
+            self.end_or_dur()
+        else:
+            self.layout_id()
+            self.second_stage()
 
     def end_or_dur(self):
         self.end = QRadioButton('Set ending time', self)
-        self.end.toggled.connect(self.state)
         self.dur = QRadioButton('Set duration time', self)
-        self.dur.toggled.connect(self.state)
 
-        buttons = QWidget()
+        self.end.toggled.connect(self.second_stage)
+        self.dur.toggled.connect(self.second_stage)
+
         button_layout = QHBoxLayout()
         button_layout.addWidget(self.end)
         button_layout.addWidget(self.dur)
+
+        buttons = QWidget()
         buttons.setLayout(button_layout)
         self.layout.addRow(buttons)
+
+        if self.modify.isChecked():
+            self.layout_id()
+
         self.end.toggle()
 
-    def state(self):
-        crea_or_mod = self.create.isChecked()
-        end_or_dur = self.end.isChecked()
-        self.layout_update(crea_or_mod, end_or_dur)
+    def second_stage(self):
+        count = self.calculate_keep_widgets()
+        self.keep_old_widgets(count)
 
-    def layout_update(self, create, end):
-        # This ensures it remove the old forms, and will not create duplicates
-        if len(self.children()) > 4:
-            for widget in self.children()[3:]:
-                self.layout.removeWidget(widget)
+        if not self.delete.isChecked():
+            self.layout_activity()
+            self.layout_start_time()
+            if self.end.isChecked():
+                self.layout_end_time()
+            else:
+                self.layout_duration()
+            self.layout_description()
+        self.layout_button()
 
-        if not create:
-            self.id = QSpinBox(self)
-            self.id.setMinimum(0)
-            self.id.setMaximum(max(len(self.agenda_widget.agenda.agenda)-1, 0))
-            self.layout.addRow("Id", self.id)
+    def layout_id(self):
+        self.id = QSpinBox(self)
+        self.id.setMinimum(0)
+        self.id.setMaximum(max(len(self.agenda_widget.agenda.agenda) - 1, 0))
+        self.layout.addRow("Id", self.id)
 
-        # Type of activity
+    def layout_activity(self):
         self.activity = QComboBox(self)
         activities = ['No work', 'Work', 'Planned break', 'Do not disturb me', 'Doing task']
-        if not create:
+        if self.modify.isChecked():
             activities.insert(0, '')
         for activity in activities:
             self.activity.addItem(activity)
         self.layout.addRow("Activity", self.activity)
 
-        # Start Time
+    def layout_start_time(self):
         self.start_time = QDateTimeEdit(self)
-        if create:
+        if self.create.isChecked():
             self.start_time.setDateTime(QDateTime.currentDateTime())
         self.layout.addRow("Start time", self.start_time)
 
-        # End Time
-        if end:
-            self.duration = None
-            self.end_time = QDateTimeEdit(self)
-            if create:
-                self.end_time.setDateTime(QDateTime.currentDateTime())
-            self.layout.addRow("End time", self.end_time)
+    def layout_end_time(self):
+        self.duration = None
+        self.end_time = QDateTimeEdit(self)
+        if self.create.isChecked():
+            self.end_time.setDateTime(QDateTime.currentDateTime())
+        self.layout.addRow("End time", self.end_time)
 
-        # Duration
-        else:
-            self.end_time = None
-            self.duration = QTimeEdit(self)
-            self.layout.addRow("Duration", self.duration)
+    def layout_duration(self):
+        self.end_time = None
+        self.duration = QTimeEdit(self)
+        self.layout.addRow("Duration", self.duration)
 
-        # Description
+    def layout_description(self):
         self.description = QLineEdit(self)
         self.layout.addRow("Description", self.description)
 
-        # Add to the agenda button
-        label = 'Add activity' if create else 'Modify activity'
-        self.button = QPushButton(label, self)
-        self.button.clicked.connect(self.buttonclicked)
-        self.button.clicked.connect(self.show_popup)
+    def layout_button(self):
+        if self.create.isChecked():
+            label = 'Add activity'
+            self.button = QPushButton(label, self)
+            self.button.clicked.connect(self.click_create)
+        elif self.modify.isChecked():
+            label = 'Modify activity'
+            self.button = QPushButton(label, self)
+            self.button.clicked.connect(self.click_modify)
+        else:
+            label = 'Delete activity'
+            self.button = QPushButton(label, self)
+            self.button.clicked.connect(self.click_delete)
+
         self.layout.addWidget(self.button)
 
-    def buttonclicked(self):
+    def click_create(self):
+        activity = self.activity.currentText()
+        start_time = self.start_time.dateTime().toPyDateTime()
+        summary = self.description.text()
+
+        if self.end_time:
+            end_or_dur = self.end_time.dateTime().toPyDateTime()
+            start_time, end_or_dur = min(start_time, end_or_dur), max(start_time, end_or_dur)
+        else:
+            end_or_dur = timedelta(milliseconds=self.duration.time().msecsSinceStartOfDay())
+
+        if self.end_time:
+            activity1 = Activity(
+                activity, start_time, end_time=end_or_dur, summary=summary)
+        else:
+            activity1 = Activity(
+                activity, start_time, duration=end_or_dur, summary=summary)
+        # # use this when 48-49 is merged, do not need if statements
+        # activity = Activity(self.activity.currentText(),
+        #                     self.start_time.dateTime().toPyDateTime(),
+        #                     end_or_dur,
+        #                     self.description.text()
+        #                     )
+        self.agenda_widget.add_activity(activity1)
+        text = "Activity is added to the agenda"
+        self.show_popup(text)
+
+    def click_modify(self):
         activity = self.activity.currentText()
         start_time = self.start_time.dateTime().toPyDateTime()
         summary = self.description.text()
@@ -137,35 +215,33 @@ class IndividualAgendaWidget(QtWidgets.QGroupBox):
         if end_or_dur == empty_mod or end_or_dur == timedelta():
             end_or_dur = None
 
-        if self.create.isChecked():
-            if self.end_time:
-                activity1 = Activity(
-                    activity, start_time, end_time=end_or_dur, summary=summary)
-            else:
-                activity1 = Activity(
-                    activity, start_time, duration=end_or_dur, summary=summary)
-            # # use this when 48-49 is merged, do not need if statements
-            # activity = Activity(self.activity.currentText(),
-            #                     self.start_time.dateTime().toPyDateTime(),
-            #                     end_or_dur,
-            #                     self.description.text()
-            #                     )
-            self.agenda_widget.add_activity(activity1)
-
-        if self.modify.isChecked() and len(self.agenda_widget.agenda.agenda):
-
+        if len(self.agenda_widget.agenda.agenda):
             identifier = self.id.value()
             self.agenda_widget.modify_activity(
                 identifier, activity, start_time, end_or_dur, summary)
+        text = "Activity is modified"
+        self.show_popup(text)
 
-    def show_popup(self):
+    def click_delete(self):
+        if len(self.agenda_widget.agenda.agenda):
+            identifier = self.id.value()
+            self.agenda_widget.delete_activity(identifier)
+        text = "Activity is deleted from the agenda"
+        self.show_popup(text)
+
+    def show_popup(self, text):
         msg = QMessageBox()
-        msg.setText("Activity is added to the agenda")
+        msg.setText(text)
         msg.setWindowTitle("Success!")
         msg.setWindowIcon(QtGui.QIcon('icon.png'))
         msg.setStandardButtons(QMessageBox.Ok)
         button_clicked = msg.exec()
 
+
+
+    def create_new_widget(self):
+        self.layout = QFormLayout()
+        self.crea_mod_del()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

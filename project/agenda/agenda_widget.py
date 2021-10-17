@@ -95,3 +95,8 @@ class AgendaWidget(QtWidgets.QGroupBox):
                 identifier, activity, start_time, summary=summary)
 
         self.start()
+
+    def delete_activity(self, identifier):
+        self.agenda.delete_activity(identifier)
+        self.start()
+
