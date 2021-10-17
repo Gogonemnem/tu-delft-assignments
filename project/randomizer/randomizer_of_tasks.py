@@ -1,4 +1,5 @@
 import random
+import csv
 from project.task_list.data_for_database import TaskList
 
 already_chosen = []
@@ -65,7 +66,36 @@ class Randomizer:
         return self.hof_randomize_tasks_other_today(self.must_be_done_tasks_morning(), "Morning")
 
     def randomize_tasks_other_afternoon(self):
-        return self.hof_randomize_tasks_other_today(self.must_be_done_tasks_afternoon(),"Afternoon")
+        return self.hof_randomize_tasks_other_today(self.must_be_done_tasks_afternoon(), "Afternoon")
 
     def randomize_tasks_other_evening(self):
         return self.hof_randomize_tasks_other_today(self.must_be_done_tasks_evening(), "Evening")
+
+    def write_lists_to_file(self):
+        # with open('file.csv', 'w', newline='') as f:
+        #     header = ['Morning', 'Afternoon', 'Evening']
+        #     writer = csv.DictWriter(f, fieldnames=header)
+        #     writer.writeheader()
+        #     writer.writerow({'Morning': self.randomize_tasks_other_morning(),
+        #                      'Afternoon': self.randomize_tasks_other_afternoon(),
+        #                      'Evening': self.randomize_tasks_other_evening()})
+
+        # data = self.randomize_tasks_other_morning(),
+        # file = open('test.csv', 'a+', newline='')
+        # with file:
+        #     write = csv.writer(file)
+        #     write.writerows(data)
+
+        file = open('test.csv', 'a', newline='')
+        with file:
+            header = ['Morning', 'Afternoon', 'Evening']
+            writer = csv.DictWriter(file, fieldnames=header)
+            writer.writeheader()
+            writer.writerow({'Morning': self.randomize_tasks_other_evening(),
+                             'Afternoon': 'b',
+                             'Evening': 'c'})
+
+
+test = Randomizer()
+# print(test.randomize_tasks_other_afternoon())
+test.write_lists_to_file()
