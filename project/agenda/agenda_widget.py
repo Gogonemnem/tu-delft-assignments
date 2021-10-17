@@ -60,7 +60,7 @@ class AgendaWidget(QtWidgets.QGroupBox):
                              for key in ['activity', 'start_time', 'end_time', 'id']})
             x_start = activities[0].start_time
         else:
-            x_start = now-timedelta(minutes=30)
+            x_start = now - timedelta(minutes=30)
             data = {
                 'Activity': ['Nothing is planned'],
                 'Start time': [x_start],
@@ -81,4 +81,17 @@ class AgendaWidget(QtWidgets.QGroupBox):
 
     def add_activity(self, activity):
         self.agenda.add_activity(activity)
+        self.start()
+
+    def modify_activity(self, identifier, activity, start_time, end_or_dur, summary):
+        if isinstance(end_or_dur, timedelta):
+            self.agenda.modify_activity(
+                identifier, activity, start_time, duration=end_or_dur, summary=summary)
+        elif isinstance(end_or_dur, datetime):
+            self.agenda.modify_activity(
+                identifier, activity, start_time, end_time=end_or_dur, summary=summary)
+        else:
+            self.agenda.modify_activity(
+                identifier, activity, start_time, summary=summary)
+
         self.start()
