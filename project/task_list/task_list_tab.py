@@ -199,7 +199,10 @@ class TaskListTab(QtWidgets.QTableView):
         self.model = TaskListDatabase(self.database.data)
         self.setModel(self.model)
         self.resizeColumnsToContents()
-        self.horizontalHeader().setMinimumSectionSize(250)
+        # self.horizontalHeader().setMinimumSectionSize(250)
+
+        header = self.horizontalHeader()
+        header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
 
         # Creates the delete and edit buttons on every row
         for index in range(len(self.database.data.index)):
