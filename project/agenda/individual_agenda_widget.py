@@ -49,7 +49,7 @@ class IndividualAgendaWidget(QtWidgets.QGroupBox):
     def keep_old_widgets(self, count):
         # This ensures it remove the old forms, and will not create duplicates
         if len(self.children()) > count:
-            for i, widget in enumerate(self.children()[:count-1:-1]):
+            for i, widget in enumerate(self.children()[:count - 1:-1]):
                 self.layout.removeWidget(widget)
                 sip.delete(widget)
                 # del widget
@@ -172,15 +172,7 @@ class IndividualAgendaWidget(QtWidgets.QGroupBox):
         self.layout.addWidget(self.button)
 
     def click_create(self):
-        activity = self.activity.currentText()
-        start_time = self.start_time.dateTime().toPyDateTime()
-        summary = self.description.text()
-
-        if self.end_time:
-            end_or_dur = self.end_time.dateTime().toPyDateTime()
-            start_time, end_or_dur = min(start_time, end_or_dur), max(start_time, end_or_dur)
-        else:
-            end_or_dur = timedelta(milliseconds=self.duration.time().msecsSinceStartOfDay())
+        activity, start_time, end_or_dur, summary = self.read_data()
 
         if self.end_time:
             activity1 = Activity(
@@ -199,21 +191,7 @@ class IndividualAgendaWidget(QtWidgets.QGroupBox):
         self.show_popup(text)
 
     def click_modify(self):
-        activity = self.activity.currentText()
-        start_time = self.start_time.dateTime().toPyDateTime()
-        summary = self.description.text()
-
-        if self.end_time:
-            end_or_dur = self.end_time.dateTime().toPyDateTime()
-            start_time, end_or_dur = min(start_time, end_or_dur), max(start_time, end_or_dur)
-        else:
-            end_or_dur = timedelta(milliseconds=self.duration.time().msecsSinceStartOfDay())
-
-        empty_mod = datetime.strptime('2000-01-01 00:00:00', "%Y-%m-%d %H:%M:%S")
-        if self.start_time.dateTime().toPyDateTime() == empty_mod:
-            start_time = None
-        if end_or_dur == empty_mod or end_or_dur == timedelta():
-            end_or_dur = None
+        activity, start_time, end_or_dur, summary = self.read_data()
 
         if len(self.agenda_widget.agenda.agenda):
             identifier = self.id.value()
@@ -237,11 +215,25 @@ class IndividualAgendaWidget(QtWidgets.QGroupBox):
         msg.setStandardButtons(QMessageBox.Ok)
         button_clicked = msg.exec()
 
+    def read_data(self):
+        activity = self.activity.currentText()
+        start_time = self.start_time.dateTime().toPyDateTime()
+        summary = self.description.text()
 
+        if self.end_time:
+            end_or_dur = self.end_time.dateTime().toPyDateTime()
+            start_time, end_or_dur = min(start_time, end_or_dur), max(start_time, end_or_dur)
+        else:
+            end_or_dur = timedelta(milliseconds=self.duration.time().msecsSinceStartOfDay())
 
-    def create_new_widget(self):
-        self.layout = QFormLayout()
-        self.crea_mod_del()
+        empty_mod = datetime.strptime('2000-01-01 00:00:00', "%Y-%m-%d %H:%M:%S")
+        if self.start_time.dateTime().toPyDateTime() == empty_mod:
+            start_time = None
+        if end_or_dur == empty_mod or end_or_dur == timedelta():
+            end_or_dur = None
+
+        return activity, start_time, end_or_dur, summary
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
