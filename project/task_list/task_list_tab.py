@@ -77,13 +77,13 @@ class TaskListTab(QtWidgets.QTableView):
         self.database = TaskList()
 
         # Creates the pop-up dialog with input line
-        text, ok = QtWidgets.QInputDialog.getText(
+        text, okay = QtWidgets.QInputDialog.getText(
             self,
             f'Edit task {self.index.row()}',
             f'Current title: {self.database.data.Task[self.index.row()]}')
 
         # Edits the database after the user finishes the input
-        if ok:
+        if okay:
             self.database.edit_task(
                 self.index.row(),
                 'Task',
@@ -100,7 +100,7 @@ class TaskListTab(QtWidgets.QTableView):
         sol = QtWidgets.QInputDialog()
         sol.setComboBoxItems(lst)
         output = sol.comboBoxItems()
-        text, ok = sol.getItem(
+        text, okay = sol.getItem(
             self,
             f'Edit estimated time taken for "{self.database.data.Task[self.index.row()]}"',
             f'Current time: {self.database.data.iloc[self.index.row()][1]} min',
@@ -108,7 +108,7 @@ class TaskListTab(QtWidgets.QTableView):
             editable=False)
 
         # Edits the database after selection of a time
-        if ok:
+        if okay:
             self.database.edit_task(
                 self.index.row(),
                 'Estimated time (minutes)',
@@ -125,7 +125,7 @@ class TaskListTab(QtWidgets.QTableView):
         sol = QtWidgets.QInputDialog()
         sol.setComboBoxItems(lst)
         output = sol.comboBoxItems()
-        text, ok = sol.getItem(
+        text, okay = sol.getItem(
             self,
             f'Edit the priority of: "{self.database.data.Task[self.index.row()]}"',
             f'Current priority: {self.database.data.iloc[self.index.row()][2]}',
@@ -133,7 +133,7 @@ class TaskListTab(QtWidgets.QTableView):
             editable=False)
 
         # Edits the database after selection of a priority
-        if ok:
+        if okay:
             self.database.edit_task(
                 self.index.row(),
                 'Priority',
@@ -150,7 +150,7 @@ class TaskListTab(QtWidgets.QTableView):
         sol = QtWidgets.QInputDialog()
         sol.setComboBoxItems(lst)
         output = sol.comboBoxItems()
-        text, ok = sol.getItem(
+        text, okay = sol.getItem(
             self,
             f'Edit the periodicity of: "{self.database.data.Task[self.index.row()]}"',
             f'Is the current task periodic?: {self.database.data.iloc[self.index.row()][3]}',
@@ -158,7 +158,7 @@ class TaskListTab(QtWidgets.QTableView):
             editable=False)
 
         # Edits the database after selection of True or False
-        if ok:
+        if okay:
             self.database.edit_task(
                 self.index.row(),
                 'Periodic',
@@ -175,7 +175,7 @@ class TaskListTab(QtWidgets.QTableView):
         sol = QtWidgets.QInputDialog()
         sol.setComboBoxItems(lst)
         output = sol.comboBoxItems()
-        text, ok = sol.getItem(
+        text, okay = sol.getItem(
             self,
             f'Edit the preferred time of: "{self.database.data.Task[self.index.row()]}"',
             f'Current preferred time: {self.database.data.iloc[self.index.row()][4]}',
@@ -183,7 +183,7 @@ class TaskListTab(QtWidgets.QTableView):
             editable=False)
 
         # Edits the database after selection of a preferred time
-        if ok:
+        if okay:
             self.database.edit_task(
                 self.index.row(),
                 'Preferred time',

@@ -1,7 +1,8 @@
+import os
 import unittest
 import pandas as pd
 import numpy as np
-import os
+
 from project.task_list.data_for_database import TaskList, TaskObject
 
 absolute_path = os.path.abspath(__file__)
@@ -79,24 +80,18 @@ class TestDatabase(unittest.TestCase):
         new_values = ['Take a very long walk', 5, 'high', False, 'Afternoon']
 
         # Test the original values
-        for i in range(len(original_values)):
-            self.assertEqual(task_list.data.iloc[0][i], original_values[i])
+        for i, value in enumerate(original_values):
+            self.assertEqual(task_list.data.iloc[0][i], value)
 
-        # Edit the task
-        for i in range(len(categories)):
-            task_list.edit_task(0, categories[i], new_values[i])
-
-        # Test if the tasks are changed
-        for i in range(len(categories)):
+        # Edit the task, test if changed, revert back
+        for i, category in enumerate(categories):
+            task_list.edit_task(0, category, new_values[i])
             self.assertEqual(task_list.data.iloc[0][i], new_values[i])
-
-        # Change it back
-        for i in range(len(categories)):
-            task_list.edit_task(0, categories[i], original_values[i])
+            task_list.edit_task(0, category, original_values[i])
 
         # Test if the change back worked
-        for i in range(len(original_values)):
-            self.assertEqual(task_list.data.iloc[0][i], original_values[i])
+        for i, value in enumerate(original_values):
+            self.assertEqual(task_list.data.iloc[0][i], value)
 
     def test_create_dataframe(self):
         # Tests is the TaskList class creates panda DataFrames

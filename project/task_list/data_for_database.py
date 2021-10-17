@@ -1,6 +1,7 @@
+import os
 import pandas as pd
 import numpy as np
-import os
+
 
 # Creates an absolute path, that works on different computers
 absolute_path = os.path.abspath(__file__)
