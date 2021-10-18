@@ -173,19 +173,8 @@ class IndividualAgendaWidget(QtWidgets.QGroupBox):
 
     def click_create(self):
         activity, start_time, end_or_dur, summary = self.read_data()
+        activity1 = Activity(activity, start_time, end_or_dur, summary)
 
-        if self.end_time:
-            activity1 = Activity(
-                activity, start_time, end_time=end_or_dur, summary=summary)
-        else:
-            activity1 = Activity(
-                activity, start_time, duration=end_or_dur, summary=summary)
-        # # use this when 48-49 is merged, do not need if statements
-        # activity = Activity(self.activity.currentText(),
-        #                     self.start_time.dateTime().toPyDateTime(),
-        #                     end_or_dur,
-        #                     self.description.text()
-        #                     )
         self.agenda_widget.add_activity(activity1)
         text = "Activity is added to the agenda"
         self.show_popup(text)
@@ -227,7 +216,7 @@ class IndividualAgendaWidget(QtWidgets.QGroupBox):
             end_or_dur = timedelta(milliseconds=self.duration.time().msecsSinceStartOfDay())
 
         empty_mod = datetime.strptime('2000-01-01 00:00:00', "%Y-%m-%d %H:%M:%S")
-        if self.start_time.dateTime().toPyDateTime() == empty_mod:
+        if start_time == empty_mod:
             start_time = None
         if end_or_dur == empty_mod or end_or_dur == timedelta():
             end_or_dur = None
