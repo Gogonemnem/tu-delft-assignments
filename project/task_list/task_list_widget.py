@@ -88,9 +88,7 @@ class TaskListWidget(QGroupBox):
 
     def create_task_select(self, index, item):
         """Visualize the selection radio button"""
-        task = QRadioButton()
-
-        task.setText(f'Task {index + 1} for today is: {item}')
+        task = QRadioButton(f'Task {index + 1} for today is: {item}')
         task.setMinimumWidth(450)
 
         task.toggled.connect(lambda: self.color_buttons(index))
@@ -102,9 +100,7 @@ class TaskListWidget(QGroupBox):
 
     def create_remove_button(self, index):
         """Visualize the selection remove button"""
-        remove = QPushButton()
-
-        remove.setText('Remove task')
+        remove = QPushButton('Remove task')
         remove.setCheckable(True)
         remove.setMaximumWidth(100)
 
@@ -117,9 +113,7 @@ class TaskListWidget(QGroupBox):
 
     def create_doing_button(self, index):
         """Visualize the selection doing button"""
-        doing = QPushButton()
-
-        doing.setText('Do task')
+        doing = QPushButton('Do task')
         doing.setCheckable(True)
         doing.setMaximumWidth(100)
 
@@ -132,9 +126,7 @@ class TaskListWidget(QGroupBox):
 
     def create_done_button(self, index):
         """Visualize the selection done button"""
-        done = QPushButton()
-
-        done.setText('Task completed')
+        done = QPushButton('Task completed')
         done.setCheckable(True)
         done.setVisible(False)
         done.setMaximumWidth(100)
