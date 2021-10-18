@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QPushButton, QRadioButton, QGridLayout, QButtonGroup, QGroupBox, QWidget, QHBoxLayout
+from PyQt5.QtWidgets import QPushButton, QRadioButton, QGridLayout, QButtonGroup, QGroupBox
 from project.task_list.to_do_list import ToDoList, CreateToDoList
 
 
@@ -18,12 +18,14 @@ class TaskListWidget(QGroupBox):
         self.setLayout(self.layout)
 
         for i, item in enumerate(self.tasks):
+            self.task = self.create_task_select(i, item)
             self.remove = self.create_remove_button(i)
             self.doing = self.create_doing_button(i)
             self.done = self.create_done_button(i)
-            self.task = self.create_task_select(i, item)  # different order bc of function call
 
-        self.length_list = len(self.group_task.buttons())
+            self.color_buttons(i)
+
+        # self.length_list = len(self.group_task.buttons())
 
     def removed(self, index):
         """Remove task from to-do list."""
@@ -96,7 +98,6 @@ class TaskListWidget(QGroupBox):
         self.group_task.addButton(task, index)
         self.layout.addWidget(task, index, 0)
 
-        self.color_buttons(index)
         return task
 
     def create_remove_button(self, index):
