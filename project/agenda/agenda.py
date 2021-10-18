@@ -28,6 +28,7 @@ class Agenda:
 
     @property
     def now(self):
+        """Return the current time in datetime"""
         return datetime.now()
 
     def add_activity(self, activity):
@@ -117,10 +118,12 @@ class Agenda:
             return 'Evening'
 
     def update_dataframe(self):
+        """Update the dataframe using the list and update the file"""
         self.agenda_dataframe = pd.DataFrame([activity.__dict__ for activity in self.agenda])
         self._write_to_file()
 
     def read_csv(self):
+        """Add all activities in the file to the agenda"""
         self.agenda = []
         with open(self.file, newline='', encoding='utf-8') as fin:
             list_of_rows = list(csv.DictReader(fin, delimiter='$'))
