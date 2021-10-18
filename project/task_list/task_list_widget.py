@@ -61,6 +61,10 @@ class TaskListWidget(QGroupBox):
             selected_doing.setVisible(False)
             selected_done.setVisible(False)
 
+            # ## Do we want this?????
+            # ## If so, selected_task may not be disabled!
+            # selected_remove.setVisible(True)
+
             selected_task.setStyleSheet("color:  rgb(100, 175, 100)")
             selected_task.setText(
                 selected_task.text().replace(old_text, '\u2713' + 'Completed: '))
