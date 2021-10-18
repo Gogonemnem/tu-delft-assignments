@@ -8,10 +8,11 @@ class Randomizer:
         self.database = TaskList().data_output()
         self.already_chosen = []
 
-    #Takes the priority and the preferred time of a certain task as input
-    #and returns a list with tasks with that same priority and preferred time.
-    #Tasks with preferred time "Whole day" can be added too.
+    """Takes the priority and the preferred time of a certain task as input
+    and returns a list with tasks with that same priority and preferred time.
+    Tasks with preferred time "Whole day" can be added too."""
     def hof_must_be_done_today(self, prior, pref):
+
         lst = [task.name for task in self.database
                if task.priority == prior and task.preferred_time == pref]
         for task in self.database:
@@ -20,7 +21,7 @@ class Randomizer:
                 lst.append(task.name)
         return lst
 
-    #Returns a randomized list of tasks to be done during the preferred time.
+    """Returns a randomized list of tasks to be done during the preferred time."""
     def hof_randomize_tasks_other_today(self, task_list, pref):
         dict_priority_less = {}
         while len(task_list) < 3:
@@ -37,6 +38,9 @@ class Randomizer:
                     else:
                         weight = 0
                     dict_priority_less[task.name] = weight
+            print(dict_priority_less)
+            if not dict_priority_less:
+                break
             list_random = random.choices(list(dict_priority_less.keys()),
                                             weights=dict_priority_less.values(), k=5)
 
@@ -50,6 +54,9 @@ class Randomizer:
             if biggest not in task_list and biggest not in self.already_chosen:
                 task_list.append(biggest)
                 self.already_chosen.append(biggest)
+            dict_priority_less.clear()
+            list_random.clear()
+            dict_counter.clear()
         return task_list
 
     def randomize_tasks_other_morning(self):
@@ -64,15 +71,17 @@ class Randomizer:
         return self.hof_randomize_tasks_other_today(
             self.hof_must_be_done_today("must be done today", "Evening"), "Evening")
 
-    def write_lists_to_file(self):
-        with open('file.csv', 'a', newline='') as file:
-            header = ['Morning', 'Afternoon', 'Evening']
-            writer = csv.DictWriter(file, fieldnames=header)
-            writer.writeheader()
-            writer.writerow({'Morning': self.randomize_tasks_other_morning(),
-                             'Afternoon': self.randomize_tasks_other_afternoon(),
-                             'Evening': self.randomize_tasks_other_evening()})
+    # def write_lists_to_file(self):
+    #     with open('file.csv', 'a', newline='') as file:
+    #         header = ['Morning', 'Afternoon', 'Evening']
+    #         writer = csv.DictWriter(file, fieldnames=header)
+    #         writer.writeheader()
+    #         writer.writerow({'Morning': self.randomize_tasks_other_morning(),
+    #                          'Afternoon': self.randomize_tasks_other_afternoon(),
+    #                          'Evening': self.randomize_tasks_other_evening()})
 
 
 test = Randomizer()
-test.write_lists_to_file()
+# test.write_lists_to_file()
+print("Aft", test.randomize_tasks_other_afternoon())
+print("Eve", test.randomize_tasks_other_evening())
