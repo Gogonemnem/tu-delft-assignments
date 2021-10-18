@@ -12,6 +12,8 @@ class ToDoList:
         self.status()
 
     def status(self):
+        """Check status of all tasks in To-Do list file."""
+
         with open(folder / "ToDoList.txt", 'r', encoding='utf-7') as file_to_do:
             for lines in file_to_do:
                 if lines.split("&")[1] == "To-Do" or lines.split("&")[1] == "Snooze":
@@ -23,35 +25,43 @@ class ToDoList:
 
     @staticmethod
     def execute(task, num):
+        """Change status of task [task] with id [num] from "To-Do" to "Doing"."""
+
         with open(folder / "ToDoList.txt", "r+", encoding='utf-7') as file_to_do:
             lines = file_to_do.readlines()
             file_to_do.seek(0)
             for i in range(len(lines)):
-                if i == num:
-                    file_to_do.write(task.replace("\n", "") + "&Doing" + "\n")
+                if lines[i].split("&")[1] == str(num):
+                    file_to_do.write(task.replace("\n", "") + "&" + str(num) + "&Doing" + "\n")
                 else:
                     file_to_do.write(lines[i])
             file_to_do.truncate()
 
     @staticmethod
     def complete(task, num):
+        """Change status of task [task] with id [num] from "Doing" to "Done"."""
+
         with open(folder / "ToDoList.txt", "r+", encoding='utf-7') as file_to_do:
             lines = file_to_do.readlines()
             file_to_do.seek(0)
             for i in range(len(lines)):
-                if i == num:
-                    file_to_do.write(task.replace("\n", "") + "&Done" + "\n")
+                if lines[i].split("&")[1] == str(num):
+                    file_to_do.write(task.replace("\n", "") + "&" + str(num) + "&Done" + "\n")
                 else:
                     file_to_do.write(lines[i])
             file_to_do.truncate()
 
     @staticmethod
-    def remove(num):
+    def remove(task, num):
+        """Remove task [task] with id [num] from to-do list."""
+
         with open(folder / "ToDoList.txt", "r+", encoding='utf-7') as file_to_do:
             lines = file_to_do.readlines()
             file_to_do.seek(0)
             for i in range(len(lines)):
-                if not i  == num:
+                if lines[i].split("&")[1] == str(num):
+                    file_to_do.write(task.replace("\n", "") + "&" + str(num) + "&Removed" + "\n")
+                else:
                     file_to_do.write(lines[i])
             file_to_do.truncate()
 
@@ -62,6 +72,9 @@ class CreateToDoList:
 
     @staticmethod
     def list(new: bool = True):
+        """Create to-do list from the randomizer if new is true and \n
+         and based on the status of all tasks when the new is false. """
+
         tasks_list = []
         if new:
             tasks_list.extend(Randomizer().randomize_tasks_other_morning())
@@ -69,10 +82,20 @@ class CreateToDoList:
             tasks_list.extend(Randomizer().randomize_tasks_other_evening())
             with open(folder / "ToDoList.txt", 'w', encoding='utf-7') as file_todo:
                 for i in range(len(tasks_list)):
-                    file_todo.writelines(tasks_list[i] + "&" + "To-Do" + '\n')
+                    file_todo.writelines(tasks_list[i] + "&" + str(i) + "&" + "To-Do" + '\n')
         else:
-            with open(folder / "ToDoList.txt", 'r', encoding='utf-7') as file_todo:
-                for line in file_todo.readlines():
-                    tasks_list.append(line.split("&")[0])
-
+            with open(folder / "ToDoList.txt", 'r+', encoding='utf-7') as file_todo:
+                lines = file_todo.readlines()
+                file_todo.seek(0)
+                i = 0
+                file_todo.truncate()
+                for line in lines:
+                    if "Removed" not in line and "Done" not in line:
+                        tasks_list.append(line.split("&")[0])
+                        file_todo.write(line.split("&")[0] + "&" + str(i) + "&" + line.split("&")[2])
+                        i += 1
+                    else:
+                        file_todo.write(line.split("&")[0] + "&" +
+                                        str(int(line.split("&")[1]) + 100) +
+                                        "&" + line.split("&")[2])
         return tasks_list

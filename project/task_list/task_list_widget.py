@@ -13,7 +13,7 @@ class TaskListWidget(QGroupBox):
         self.group_remove = QButtonGroup()
         self.group_done = QButtonGroup()
         self.group_doing = QButtonGroup()
-        self.tasks = CreateToDoList().list()
+        self.tasks = CreateToDoList().list(new=False)
 
         for item in self.tasks:
             self.task = QRadioButton(f'Button {i + 1}', self)
@@ -51,10 +51,11 @@ class TaskListWidget(QGroupBox):
         self.select()
 
     def select(self):
+        """Visualise selected task and accompanying buttons."""
+
         for i in range(self.length_list):
             if not self.group_task.button(i) is None and\
                     i == self.group_task.id(self.group_task.checkedButton()):
-                # if i == self.button_group_task.id(self.button_group_task.checkedButton()):
                 selected_remove = self.group_remove.button(i)
                 selected_remove.setDisabled(False)
                 selected_remove.setStyleSheet("background-color:  rgb(225, 75, 75)")
@@ -77,15 +78,20 @@ class TaskListWidget(QGroupBox):
                 selected_doing.setStyleSheet("background-color:  rgb(50, 200, 255)")
 
     def removed(self):
+        """Remove task from to-do list."""
+
         for i in range(self.length_list):
             if i == self.group_task.id(self.group_task.checkedButton()):
-                ToDoList.remove(self.group_task.id(self.group_task.checkedButton()))
+                ToDoList.remove(self.group_task.checkedButton().text().replace(
+                    f'Task {i + 1} for today is: ', ''), self.group_task.id(self.group_task.checkedButton()))
                 self.group_task.button(i).setVisible(False)
                 self.group_done.button(i).setVisible(False)
                 self.group_remove.button(i).setVisible(False)
                 self.group_doing.button(i).setVisible(False)
 
     def ongoing(self):
+        """Set status of task to "Doing"."""
+
         for i in range(self.length_list):
             if i == self.group_doing.id(self.group_doing.checkedButton()):
                 ToDoList.execute(self.group_task.checkedButton().text().replace(
@@ -94,6 +100,8 @@ class TaskListWidget(QGroupBox):
                 self.group_done.button(i).setVisible(True)
 
     def completed(self):
+        """Set status of task to "Done"."""
+
         for i in range(self.length_list):
             if i == self.group_task.id(self.group_task.checkedButton()):
                 ToDoList.complete(self.group_task.checkedButton().text().replace(
