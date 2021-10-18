@@ -1,127 +1,165 @@
-from PyQt5.QtWidgets import QPushButton, QRadioButton, QGridLayout, QButtonGroup, QGroupBox
+from PyQt5.QtWidgets import QPushButton, QRadioButton, QGridLayout, QButtonGroup, QGroupBox, QWidget, QHBoxLayout
 from project.task_list.to_do_list import ToDoList, CreateToDoList
 
 
 class TaskListWidget(QGroupBox):
-    def __init__(self,  *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setTitle("Daily to-do list")
-        i = 0
         self.complete = 0
-        self.layout = QGridLayout()
+
         self.group_task = QButtonGroup()
         self.group_remove = QButtonGroup()
         self.group_done = QButtonGroup()
         self.group_doing = QButtonGroup()
-        self.tasks = CreateToDoList.list(new=False)
+        self.tasks = CreateToDoList.list(new=True)
 
-        for item in self.tasks:
-            self.task = QRadioButton(f'Button {i + 1}', self)
-            self.task.setText(f'Task {i + 1} for today is: {item}')
-            self.task.setMinimumWidth(450)
-            self.group_task.addButton(self.task, i)
-            self.remove = QPushButton(f'Button {i + 1}', self)
-            self.remove.setText('Remove task')
-            self.remove.setCheckable(True)
-            self.remove.setMaximumWidth(100)
-            self.group_remove.addButton(self.remove, i)
-            self.doing = QPushButton(f'Button {i + 1}', self)
-            self.doing.setText('Do task')
-            self.doing.setCheckable(True)
-            self.doing.setMaximumWidth(100)
-            self.group_doing.addButton(self.doing, i)
-            self.done = QPushButton(f'Button {i + 1}', self)
-            self.done.setText('Task completed')
-            self.done.setCheckable(True)
-            self.done.setVisible(False)
-            self.done.setMaximumWidth(100)
-            self.group_done.addButton(self.done, i)
-            self.layout.addWidget(self.task, i, 0)
-            self.layout.addWidget(self.doing, i, 1)
-            self.layout.addWidget(self.remove, i, 2)
-            self.layout.addWidget(self.done, i, 2)
-            self.setLayout(self.layout)
-            i += 1
+        self.layout = QGridLayout()
+        self.setLayout(self.layout)
+
+        for i, item in enumerate(self.tasks):
+            self.remove = self.create_remove_button(i)
+            self.doing = self.create_doing_button(i)
+            self.done = self.create_done_button(i)
+            self.task = self.create_task_select(i, item)  # different order bc of function call
 
         self.length_list = len(self.group_task.buttons())
-        self.group_task.buttonClicked.connect(self.select)
-        self.group_remove.buttonClicked.connect(self.removed)
-        self.group_done.buttonClicked.connect(self.completed)
-        self.group_doing.buttonClicked.connect(self.ongoing)
-        self.select()
 
-    def select(self):
-        """Visualise selected task and accompanying buttons."""
-
-        for i in range(self.length_list):
-            if not self.group_task.button(i) is None and\
-                    i == self.group_task.id(self.group_task.checkedButton()):
-                selected_remove = self.group_remove.button(i)
-                selected_remove.setDisabled(False)
-                selected_remove.setStyleSheet("background-color:  rgb(225, 75, 75)")
-                selected_done = self.group_done.button(i)
-                selected_done.setDisabled(False)
-                selected_done.setStyleSheet("background-color:  rgb(100, 175, 100)")
-                selected_doing = self.group_doing.button(i)
-                selected_doing.setDisabled(False)
-                selected_doing.setStyleSheet("background-color:  rgb(40, 125, 175)")
-
-            elif not self.group_task.button(i) is None:
-                selected_remove = self.group_remove.button(i)
-                selected_remove.setDisabled(True)
-                selected_remove.setStyleSheet("background-color:  rgb(225, 175, 175)")
-                selected_done = self.group_done.button(i)
-                selected_done.setDisabled(True)
-                selected_done.setStyleSheet("background-color:  rgb(200, 225, 200)")
-                selected_doing = self.group_doing.button(i)
-                selected_doing.setDisabled(True)
-                selected_doing.setStyleSheet("background-color:  rgb(50, 200, 255)")
-
-    def removed(self):
+    def removed(self, index):
         """Remove task from to-do list."""
+        task_button = self.group_task.button(index)
+        if task_button.isChecked():
+            ToDoList.remove(task_button.text().replace(
+                f'Task {index + 1} for today is: ', ''), self.group_task.id(self.group_task.checkedButton()))
+            self.group_task.button(index).setVisible(False)
+            self.group_done.button(index).setVisible(False)
+            self.group_remove.button(index).setVisible(False)
+            self.group_doing.button(index).setVisible(False)
 
-        for i in range(self.length_list):
-            if i == self.group_task.id(self.group_task.checkedButton()):
-                ToDoList.remove(self.group_task.checkedButton().text().replace(
-                    f'Task {i + 1} for today is: ', ''), self.group_task.id(self.group_task.checkedButton()))
-                self.group_task.button(i).setVisible(False)
-                self.group_done.button(i).setVisible(False)
-                self.group_remove.button(i).setVisible(False)
-                self.group_doing.button(i).setVisible(False)
-
-    def ongoing(self):
+    def ongoing(self, index):
         """Set status of task to "Doing"."""
+        task_button = self.group_task.button(index)
+        if task_button.isChecked():
+            new_text = task_button.text().replace(f'Task {index + 1} for today is: ', '')
+            ToDoList.execute(new_text, index)
+            self.group_remove.button(index).setVisible(False)
+            self.group_done.button(index).setVisible(True)
 
-        for i in range(self.length_list):
-            if i == self.group_doing.id(self.group_doing.checkedButton()):
-                ToDoList.execute(self.group_task.checkedButton().text().replace(
-                    f'Task {i + 1} for today is: ', ''), self.group_task.id(self.group_task.checkedButton()))
-                self.group_remove.button(i).setVisible(False)
-                self.group_done.button(i).setVisible(True)
-
-    def completed(self):
+    def completed(self, index):
         """Set status of task to "Done"."""
+        task_button = self.group_task.button(index)
+        if task_button.isChecked():
+            old_text = f'Task {index + 1} for today is: '
+            ToDoList.complete(task_button.text().replace(old_text, ''), index)
 
-        for i in range(self.length_list):
-            if i == self.group_task.id(self.group_task.checkedButton()):
-                ToDoList.complete(self.group_task.checkedButton().text().replace(
-                    f'Task {i + 1} for today is: ', ''), self.group_task.id(self.group_task.checkedButton()))
-                selected_task = self.group_task.button(i)
-                selected_task.setDisabled(True)
-                selected_task.setStyleSheet("color:  rgb(100, 175, 100)")
-                selected_task.setText('\u2713' + 'Completed:' + selected_task.text().replace(
-                    f'Task {i + 1} for today is: ', ''))
-                selected_doing = self.group_doing.button(i)
-                selected_doing.setVisible(False)
-                selected_done = self.group_done.button(i)
-                selected_done.setStyleSheet("background-color:  rgb(175, 175, 175)")
-                selected_done.setVisible(False)
-                self.group_remove.removeButton(self.group_remove.button(i))
-                self.group_task.removeButton(self.group_task.button(i))
-                self.group_done.removeButton(self.group_done.button(i))
-                self.group_doing.removeButton(self.group_doing.button(i))
-                self.layout.addWidget(selected_task, self.length_list + self.complete, 0)
-                self.layout.addWidget(selected_doing, self.length_list + self.complete, 1)
-                self.layout.addWidget(selected_done, self.length_list + self.complete, 2)
-                self.setLayout(self.layout)
-                self.complete += 1
+            selected_task = self.group_task.button(index)
+            selected_doing = self.group_doing.button(index)
+            selected_done = self.group_done.button(index)
+            # selected_remove = self.group_remove.button(index)
+
+            selected_task.setDisabled(True)
+            selected_doing.setVisible(False)
+            selected_done.setVisible(False)
+
+            selected_task.setStyleSheet("color:  rgb(100, 175, 100)")
+            selected_task.setText(
+                selected_task.text().replace(old_text, '\u2713' + 'Completed: '))
+            # selected_done.setStyleSheet("background-color:  rgb(175, 175, 175)")
+
+            # ## Personal taste Question: Do we want to reorder the tasks?
+            # ## I actually like it staying in order like this
+            # ## This will also make our code a bit shorter
+            #
+            # self.group_task.removeButton(selected_task)
+            # self.group_doing.removeButton(selected_doing)
+            # self.group_done.removeButton(selected_done)
+            # self.group_remove.removeButton(selected_remove)
+            #
+            # self.layout.addWidget(selected_task, self.length_list + self.complete, 0)
+            # self.layout.addWidget(selected_doing, self.length_list + self.complete, 1)
+            # self.layout.addWidget(selected_done, self.length_list + self.complete, 2)
+            self.complete += 1
+
+    def create_task_select(self, index, item):
+        """Visualize the selection radio button"""
+        task = QRadioButton()
+
+        task.setText(f'Task {index + 1} for today is: {item}')
+        task.setMinimumWidth(450)
+
+        task.toggled.connect(lambda: self.color_buttons(index))
+
+        self.group_task.addButton(task, index)
+        self.layout.addWidget(task, index, 0)
+
+        self.color_buttons(index)
+        return task
+
+    def create_remove_button(self, index):
+        """Visualize the selection remove button"""
+        remove = QPushButton()
+
+        remove.setText('Remove task')
+        remove.setCheckable(True)
+        remove.setMaximumWidth(100)
+
+        remove.clicked.connect(lambda: self.removed(index))
+
+        self.group_remove.addButton(remove, index)
+        self.layout.addWidget(remove, index, 2)
+
+        return remove
+
+    def create_doing_button(self, index):
+        """Visualize the selection doing button"""
+        doing = QPushButton()
+
+        doing.setText('Do task')
+        doing.setCheckable(True)
+        doing.setMaximumWidth(100)
+
+        doing.clicked.connect(lambda: self.ongoing(index))
+
+        self.group_doing.addButton(doing, index)
+        self.layout.addWidget(doing, index, 1)
+
+        return doing
+
+    def create_done_button(self, index):
+        """Visualize the selection done button"""
+        done = QPushButton()
+
+        done.setText('Task completed')
+        done.setCheckable(True)
+        done.setVisible(False)
+        done.setMaximumWidth(100)
+
+        done.clicked.connect(lambda: self.completed(index))
+
+        self.group_done.addButton(done, index)
+        self.layout.addWidget(done, index, 2)
+
+        return done
+
+    def color_buttons(self, index):
+        """Color selected task and accompanying buttons."""
+
+        selected_remove = self.group_remove.button(index)
+        selected_done = self.group_done.button(index)
+        selected_doing = self.group_doing.button(index)
+
+        is_checked = self.group_task.button(index).isChecked()
+
+        selected_remove.setEnabled(is_checked)
+        selected_done.setEnabled(is_checked)
+        selected_doing.setEnabled(is_checked)
+
+        if is_checked:
+            selected_remove.setStyleSheet("background-color:  rgb(225, 75, 75)")
+            selected_done.setStyleSheet("background-color:  rgb(100, 175, 100)")
+            selected_doing.setStyleSheet("background-color:  rgb(40, 125, 175)")
+
+        else:
+            selected_remove.setStyleSheet("background-color:  rgb(225, 175, 175)")
+            selected_done.setStyleSheet("background-color:  rgb(200, 225, 200)")
+            selected_doing.setStyleSheet("background-color:  rgb(50, 200, 255)")
