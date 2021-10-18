@@ -1,6 +1,6 @@
+import os
 from project.randomizer.randomizer_of_tasks import Randomizer
 from pathlib import Path
-import os
 folder = Path(os.getcwd())
 
 
@@ -32,7 +32,8 @@ class ToDoList:
             lines = file_to_do.readlines()
             file_to_do.seek(0)
             for i in lines:
-                if not i.replace("\n", "") == task:
+                if not i.replace("\n", "") == task.replace("\n", ""):
+
                     file_to_do.write(i)
             file_to_do.truncate()
 
@@ -44,7 +45,8 @@ class ToDoList:
             lines = file_doing.readlines()
             file_doing.seek(0)
             for i in lines:
-                if not i.replace("\n", "") == task:
+                if not i.replace("\n", "") == task.replace("\n", ""):
+
                     file_doing.write(i)
             file_doing.truncate()
 
@@ -54,7 +56,7 @@ class ToDoList:
             lines = file_to_do.readlines()
             file_to_do.seek(0)
             for i in lines:
-                if not i == task:
+                if not i.replace("\n", "") == task.replace("\n", ""):
                     file_to_do.write(i)
             file_to_do.truncate()
 
@@ -64,16 +66,24 @@ class CreateToDoList:
         self.todo_list = self.list()
 
     @staticmethod
-    def list():
+    def list(new: bool = True):
         tasks_list = []
-        tasks_list.extend(Randomizer().randomize_tasks_other_morning())
-        tasks_list.extend(Randomizer().randomize_tasks_other_afternoon())
-        tasks_list.extend(Randomizer().randomize_tasks_other_evening())
-        with open(folder / "ToDoList.txt", 'w', encoding='utf-7') as file_todo:
-            for i in range(len(tasks_list)):
-                file_todo.writelines(tasks_list[i] + '\n')
-        with open(folder / "DoingList.txt", 'w', encoding='utf-7') as file_doing:
-            file_doing.close()
-        with open(folder / "DoneList.txt", 'w', encoding='utf-7') as file_done:
-            file_done.close()
+        if new:
+            tasks_list.extend(Randomizer().randomize_tasks_other_morning())
+            tasks_list.extend(Randomizer().randomize_tasks_other_afternoon())
+            tasks_list.extend(Randomizer().randomize_tasks_other_evening())
+            with open(folder / "ToDoList.txt", 'w', encoding='utf-7') as file_todo:
+                for i in range(len(tasks_list)):
+                    file_todo.writelines(tasks_list[i] + '\n')
+            with open(folder / "DoingList.txt", 'w', encoding='utf-7') as file_doing:
+                file_doing.close()
+            with open(folder / "DoneList.txt", 'w', encoding='utf-7') as file_done:
+                file_done.close()
+        else:
+            print("Geen nieuwe lijst")
+            with open(folder / "ToDoList.txt", 'r', encoding='utf-7') as file_todo:
+                for line in file_todo.readlines():
+                    print(line)
+                    tasks_list.append(line)
+
         return tasks_list

@@ -13,7 +13,7 @@ class TaskListWidget(QGroupBox):
         self.group_remove = QButtonGroup()
         self.group_done = QButtonGroup()
         self.group_doing = QButtonGroup()
-        self.tasks = CreateToDoList().list()
+        self.tasks = CreateToDoList().list(new=False)
 
         for item in self.tasks:
             self.task = QRadioButton(f'Button {i + 1}', self)
