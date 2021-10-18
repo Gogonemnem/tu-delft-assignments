@@ -1,9 +1,9 @@
-Clean room
-Help Betsie with programming
-Take a walk
-Vacuum the room
-Do some stretching
-Call grandma
-Call dokter
-Do some stretching
-Take a walk
+Clean room&To-Do
+Help Betsie with programming&To-Do
+Do some stretching&To-Do
+Vacuum the room&Done
+Call grandma&Done
+Take a walk&To-Do
+Take a walk&Done
+Do some stretching&Done
+Walk dog&Done

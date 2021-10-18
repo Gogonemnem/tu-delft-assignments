@@ -13,7 +13,7 @@ class TaskListWidget(QGroupBox):
         self.group_remove = QButtonGroup()
         self.group_done = QButtonGroup()
         self.group_doing = QButtonGroup()
-        self.tasks = CreateToDoList().list(new=False)
+        self.tasks = CreateToDoList().list()
 
         for item in self.tasks:
             self.task = QRadioButton(f'Button {i + 1}', self)
@@ -79,8 +79,7 @@ class TaskListWidget(QGroupBox):
     def removed(self):
         for i in range(self.length_list):
             if i == self.group_task.id(self.group_task.checkedButton()):
-                ToDoList.remove(self.group_task.checkedButton().text().replace(
-                    f'Task {i + 1} for today is: ', ''))
+                ToDoList.remove(self.group_task.id(self.group_task.checkedButton()))
                 self.group_task.button(i).setVisible(False)
                 self.group_done.button(i).setVisible(False)
                 self.group_remove.button(i).setVisible(False)
@@ -90,7 +89,7 @@ class TaskListWidget(QGroupBox):
         for i in range(self.length_list):
             if i == self.group_doing.id(self.group_doing.checkedButton()):
                 ToDoList.execute(self.group_task.checkedButton().text().replace(
-                    f'Task {i + 1} for today is: ', ''))
+                    f'Task {i + 1} for today is: ', ''), self.group_task.id(self.group_task.checkedButton()))
                 self.group_remove.button(i).setVisible(False)
                 self.group_done.button(i).setVisible(True)
 
@@ -98,25 +97,23 @@ class TaskListWidget(QGroupBox):
         for i in range(self.length_list):
             if i == self.group_task.id(self.group_task.checkedButton()):
                 ToDoList.complete(self.group_task.checkedButton().text().replace(
-                    f'Task {i + 1} for today is: ', ''))
+                    f'Task {i + 1} for today is: ', ''), self.group_task.id(self.group_task.checkedButton()))
                 selected_task = self.group_task.button(i)
+                selected_task.setDisabled(True)
                 selected_task.setStyleSheet("color:  rgb(100, 175, 100)")
                 selected_task.setText('\u2713' + 'Completed:' + selected_task.text().replace(
                     f'Task {i + 1} for today is: ', ''))
-                selected_remove = self.group_remove.button(i)
-                selected_remove.setDisabled(True)
-                selected_remove.setStyleSheet("background-color:  rgb(175, 175, 175)")
                 selected_doing = self.group_doing.button(i)
-                selected_doing.setStyleSheet("background-color:  rgb(175, 175, 175)")
+                selected_doing.setVisible(False)
                 selected_done = self.group_done.button(i)
                 selected_done.setStyleSheet("background-color:  rgb(175, 175, 175)")
+                selected_done.setVisible(False)
                 self.group_remove.removeButton(self.group_remove.button(i))
                 self.group_task.removeButton(self.group_task.button(i))
                 self.group_done.removeButton(self.group_done.button(i))
                 self.group_doing.removeButton(self.group_doing.button(i))
                 self.layout.addWidget(selected_task, self.length_list + self.complete, 0)
                 self.layout.addWidget(selected_doing, self.length_list + self.complete, 1)
-                self.layout.addWidget(selected_remove, self.length_list + self.complete, 2)
                 self.layout.addWidget(selected_done, self.length_list + self.complete, 2)
                 self.setLayout(self.layout)
                 self.complete += 1
