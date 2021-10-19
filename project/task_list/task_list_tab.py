@@ -146,14 +146,14 @@ class TaskListTab(QtWidgets.QTableView):
         self.database = TaskList()
 
         # Creates a pop-up with a combobox to edit if the task is periodic
-        lst = ['True', 'False']
+        lst = ['max once a day', 'several times a day', 'not periodic']
         sol = QtWidgets.QInputDialog()
         sol.setComboBoxItems(lst)
         output = sol.comboBoxItems()
         text, okay = sol.getItem(
             self,
             f'Edit the periodicity of: "{self.database.data.Task[self.index.row()]}"',
-            f'Is the current task periodic?: {self.database.data.iloc[self.index.row()][3]}',
+            f'The current periodicity: {self.database.data.iloc[self.index.row()][3]}',
             output,
             editable=False)
 

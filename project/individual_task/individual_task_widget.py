@@ -27,7 +27,10 @@ class TaskWidget(QtWidgets.QGroupBox):
             self.priority.addItem(priority)
 
         # Checkbox, is it periodic or not
-        self.checkbox = QCheckBox('', self)
+        self.periodic = QComboBox(self)
+        periodic = ['max once a day', 'several times a day', 'not periodic']
+        for period in periodic:
+            self.periodic.addItem(period)
 
         # Preferred time
         self.preferred = QComboBox(self)
@@ -45,7 +48,7 @@ class TaskWidget(QtWidgets.QGroupBox):
         layout.addRow("Name", self.textbox)
         layout.addRow("Estimated time", self.estimated)
         layout.addRow("Priority", self.priority)
-        layout.addRow("Periodic", self.checkbox)
+        layout.addRow("Periodic", self.periodic)
         layout.addRow("Preferred time", self.preferred)
         layout.addWidget(self.button)
         self.setLayout(layout)
@@ -54,7 +57,7 @@ class TaskWidget(QtWidgets.QGroupBox):
         task = [self.textbox.text(),
                 int(self.estimated.currentText().split()[0]),
                 self.priority.currentText(),
-                self.checkbox.isChecked(),
+                self.periodic.currentText(),
                 self.preferred.currentText()]
 
         database = TaskList()
