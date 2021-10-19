@@ -1,16 +1,21 @@
+import os
 import pandas as pd
 import numpy as np
-#  this is the path I need to take for MacOS,
-#  I will always change it to the original when committing
-#  path = '/Users/cristiancotovanu/Documents/GitHub/group-08/project/main/task_list_file'
-path = 'task_list_file'
+
+
+# Creates an absolute path, that works on different computers
+absolute_path = os.path.abspath(__file__)
+fileDirectory = os.path.dirname(absolute_path)
+parent = os.path.dirname(fileDirectory)
+path = os.path.join(parent, 'main', 'task_list_file')
 
 
 class TaskList:
     """This class creates and manages the dataframe with the tasks"""
 
-    def __init__(self):
-        self.data = self.add_file_data()
+    def __init__(self, file=path):
+        self.file = file
+        self.data = self.add_file_data(file)
 
     def add_task(self, task):
         """Appends the new task to the dataframe and updates the external database. \
@@ -49,13 +54,14 @@ class TaskList:
         self.__write_to_file()
 
     @staticmethod
-    def add_file_data():
+    def add_file_data(file):
         """Returns a dataframe of the task list database."""
-        return pd.read_csv(path, sep='$')
+        return pd.read_csv(file, sep='$')
 
     def __write_to_file(self):
-        """Replaces the external database with the current dataframe."""
-        self.data.to_csv(path, sep='$', index=False)
+        """Replaces the external database with the current dataframe. \
+        This function must be used after every addition of the dataframe"""
+        self.data.to_csv(self.file, sep='$', index=False)
 
     def data_output(self):
         """Returns a list of objects from the class TaskObject."""
