@@ -1,5 +1,4 @@
 import random
-import csv
 from project.task_list.data_for_database import TaskList
 
 
@@ -28,7 +27,7 @@ class Randomizer:
             for task in self.database:
                 if len(task_list) < 3 \
                     and (task.preferred_time == pref or task.preferred_time == "Whole day") \
-                        and (task.name not in task_list or task.name not in self.already_chosen):
+                        and (task.name not in task_list and task.name not in self.already_chosen):
                     if task.priority == "high":
                         weight = 4
                     elif task.priority == "normal":
@@ -38,7 +37,6 @@ class Randomizer:
                     else:
                         weight = 0
                     dict_priority_less[task.name] = weight
-            print(dict_priority_less)
             if not dict_priority_less:
                 break
             list_random = random.choices(list(dict_priority_less.keys()),
@@ -71,17 +69,3 @@ class Randomizer:
         return self.hof_randomize_tasks_other_today(
             self.hof_must_be_done_today("must be done today", "Evening"), "Evening")
 
-    # def write_lists_to_file(self):
-    #     with open('file.csv', 'a', newline='') as file:
-    #         header = ['Morning', 'Afternoon', 'Evening']
-    #         writer = csv.DictWriter(file, fieldnames=header)
-    #         writer.writeheader()
-    #         writer.writerow({'Morning': self.randomize_tasks_other_morning(),
-    #                          'Afternoon': self.randomize_tasks_other_afternoon(),
-    #                          'Evening': self.randomize_tasks_other_evening()})
-
-
-test = Randomizer()
-# test.write_lists_to_file()
-print("Aft", test.randomize_tasks_other_afternoon())
-print("Eve", test.randomize_tasks_other_evening())
