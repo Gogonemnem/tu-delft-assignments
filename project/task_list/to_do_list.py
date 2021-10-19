@@ -16,7 +16,8 @@ class ToDoList:
 
         with open(folder / "ToDoList.txt", 'r', encoding='utf-7') as file_to_do:
             for lines in file_to_do:
-                if lines.split("&")[1] == "To-Do" or lines.split("&")[1] == "Snooze":
+                if lines.split("&")[1] == "To-Do" or lines.split("&")[1] == "Snooze" or\
+                        lines.split("&")[1] == "Reschedule":
                     self.task_todo.append(lines.split("&")[0])
                 elif lines.split("&")[1] == "Doing":
                     self.task_doing.append(lines.split("&")[0])
@@ -24,43 +25,15 @@ class ToDoList:
                     self.task_done.append(lines.split("&")[0])
 
     @staticmethod
-    def execute(task, num):
-        """Change status of task [task] with id [num] from "To-Do" to "Doing"."""
+    def change(task, num, status):
+        """Change status of task [task] with id [num] from to-do list to status [status]."""
 
         with open(folder / "ToDoList.txt", "r+", encoding='utf-7') as file_to_do:
             lines = file_to_do.readlines()
             file_to_do.seek(0)
             for i in range(len(lines)):
                 if lines[i].split("&")[1] == str(num):
-                    file_to_do.write(task.replace("\n", "") + "&" + str(num) + "&Doing" + "\n")
-                else:
-                    file_to_do.write(lines[i])
-            file_to_do.truncate()
-
-    @staticmethod
-    def complete(task, num):
-        """Change status of task [task] with id [num] from "Doing" to "Done"."""
-
-        with open(folder / "ToDoList.txt", "r+", encoding='utf-7') as file_to_do:
-            lines = file_to_do.readlines()
-            file_to_do.seek(0)
-            for i in range(len(lines)):
-                if lines[i].split("&")[1] == str(num):
-                    file_to_do.write(task.replace("\n", "") + "&" + str(num) + "&Done" + "\n")
-                else:
-                    file_to_do.write(lines[i])
-            file_to_do.truncate()
-
-    @staticmethod
-    def remove(task, num):
-        """Remove task [task] with id [num] from to-do list."""
-
-        with open(folder / "ToDoList.txt", "r+", encoding='utf-7') as file_to_do:
-            lines = file_to_do.readlines()
-            file_to_do.seek(0)
-            for i in range(len(lines)):
-                if lines[i].split("&")[1] == str(num):
-                    file_to_do.write(task.replace("\n", "") + "&" + str(num) + "&Removed" + "\n")
+                    file_to_do.write(task.replace("\n", "") + "&" + str(num) + "&" + status + "\n")
                 else:
                     file_to_do.write(lines[i])
             file_to_do.truncate()

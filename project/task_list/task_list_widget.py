@@ -82,8 +82,8 @@ class TaskListWidget(QGroupBox):
 
         for i in range(self.length_list):
             if i == self.group_task.id(self.group_task.checkedButton()):
-                ToDoList.remove(self.group_task.checkedButton().text().replace(
-                    f'Task {i + 1} for today is: ', ''), self.group_task.id(self.group_task.checkedButton()))
+                ToDoList.change(self.group_task.checkedButton().text().replace(
+                    f'Task {i + 1} for today is: ', ''), self.group_task.id(self.group_task.checkedButton()), "Removed")
                 self.group_task.button(i).setVisible(False)
                 self.group_done.button(i).setVisible(False)
                 self.group_remove.button(i).setVisible(False)
@@ -94,8 +94,8 @@ class TaskListWidget(QGroupBox):
 
         for i in range(self.length_list):
             if i == self.group_doing.id(self.group_doing.checkedButton()):
-                ToDoList.execute(self.group_task.checkedButton().text().replace(
-                    f'Task {i + 1} for today is: ', ''), self.group_task.id(self.group_task.checkedButton()))
+                ToDoList.change(self.group_task.checkedButton().text().replace(
+                    f'Task {i + 1} for today is: ', ''), self.group_task.id(self.group_task.checkedButton()), "Doing")
                 self.group_remove.button(i).setVisible(False)
                 self.group_done.button(i).setVisible(True)
 
@@ -104,8 +104,8 @@ class TaskListWidget(QGroupBox):
 
         for i in range(self.length_list):
             if i == self.group_task.id(self.group_task.checkedButton()):
-                ToDoList.complete(self.group_task.checkedButton().text().replace(
-                    f'Task {i + 1} for today is: ', ''), self.group_task.id(self.group_task.checkedButton()))
+                ToDoList.change(self.group_task.checkedButton().text().replace(
+                    f'Task {i + 1} for today is: ', ''), self.group_task.id(self.group_task.checkedButton()), "Done")
                 selected_task = self.group_task.button(i)
                 selected_task.setDisabled(True)
                 selected_task.setStyleSheet("color:  rgb(100, 175, 100)")
