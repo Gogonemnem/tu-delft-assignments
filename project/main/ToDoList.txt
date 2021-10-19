@@ -1,9 +1,9 @@
-Clean room&0&Done
-Do some stretching&101&Done
+Clean room&0&To-Do
 Help Betsie with programming&1&Done
-Vacuum the room&2&To-Do
-Do some stretching&104&Done
-Help friend with moving&105&Done
-Call dokter&3&Done
-Walk dog&107&Done
-Do some stretching&4&To-Do
+Drink water&2&To-Do
+Vacuum the room&3&To-Do
+Call grandma&4&Doing
+Do some stretching&5&To-Do
+Walk dog&6&Done
+Do some stretching&7&To-Do
+Call dokter&8&To-Do

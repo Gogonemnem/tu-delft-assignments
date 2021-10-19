@@ -31,8 +31,8 @@ class TaskListWidget(QGroupBox):
         """Remove task from to-do list."""
         task_button = self.group_task.button(index)
         if task_button.isChecked():
-            ToDoList.remove(task_button.text().replace(
-                f'Task {index + 1} for today is: ', ''), self.group_task.id(self.group_task.checkedButton()))
+            ToDoList.change(task_button.text().replace(
+                f'Task {index + 1} for today is: ', ''), self.group_task.id(self.group_task.checkedButton()), "Removed")
             self.group_task.button(index).setVisible(False)
             self.group_done.button(index).setVisible(False)
             self.group_remove.button(index).setVisible(False)
@@ -43,7 +43,7 @@ class TaskListWidget(QGroupBox):
         task_button = self.group_task.button(index)
         if task_button.isChecked():
             new_text = task_button.text().replace(f'Task {index + 1} for today is: ', '')
-            ToDoList.execute(new_text, index)
+            ToDoList.change(new_text, index, "Doing")
             self.group_remove.button(index).setVisible(False)
             self.group_done.button(index).setVisible(True)
 
@@ -52,7 +52,7 @@ class TaskListWidget(QGroupBox):
         task_button = self.group_task.button(index)
         if task_button.isChecked():
             old_text = f'Task {index + 1} for today is: '
-            ToDoList.complete(task_button.text().replace(old_text, ''), index)
+            ToDoList.change(task_button.text().replace(old_text, ''), index, "Done")
 
             selected_task = self.group_task.button(index)
             selected_doing = self.group_doing.button(index)
