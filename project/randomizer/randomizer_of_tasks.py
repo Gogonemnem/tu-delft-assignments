@@ -11,7 +11,6 @@ class Randomizer:
     and returns a list with tasks with that same priority and preferred time.
     Tasks with preferred time "Whole day" can be added too."""
     def hof_must_be_done_today(self, prior, pref):
-
         lst = [task.name for task in self.database
                if task.priority == prior and task.preferred_time == pref]
         for task in self.database:
