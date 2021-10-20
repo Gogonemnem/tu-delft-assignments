@@ -11,7 +11,7 @@ path_empty = os.path.join(fileDirectory, 'agenda_empty_test_file')
 
 class TestAgenda(unittest.TestCase):
     def test_agenda_attribute(self):
-        agenda = Agenda()
+        agenda = Agenda(path_empty)
         self.assertTrue(hasattr(agenda, 'agenda'))
         self.assertTrue(hasattr(agenda, 'now'))
 
