@@ -5,6 +5,8 @@ from project.task_list.to_do_list import ToDoList
 
 
 class TaskListWidget(QGroupBox):
+    """Visualise Task that need to be done today"""
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -14,6 +16,7 @@ class TaskListWidget(QGroupBox):
         self.setTitle("Daily to-do list")
         self.complete = 0
 
+        # Create groups for all button types
         self.group_task = QButtonGroup()
         self.group_remove = QButtonGroup()
         self.group_done = QButtonGroup()
@@ -52,6 +55,21 @@ class TaskListWidget(QGroupBox):
         self.layout.removeWidget(self.group_done.button(identifier))
         self.layout.removeWidget(self.group_remove.button(identifier))
         self.layout.removeWidget(self.group_doing.button(identifier))
+
+        task_button = self.group_task.button(index)
+        if task_button.isChecked():
+
+            # Change status of task in to-do list
+            ToDoList.change(task_button.text().replace(
+                f'Task {index + 1} for today is: ', ''),
+                self.group_task.id(self.group_task.checkedButton()), "Removed"
+            )
+
+            # clear task from widget
+            self.group_task.button(index).setVisible(False)
+            self.group_done.button(index).setVisible(False)
+            self.group_remove.button(index).setVisible(False)
+            self.group_doing.button(index).setVisible(False)
 
     def ongoing(self, identifier):
         """Set status of task to "Doing"."""

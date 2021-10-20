@@ -45,11 +45,6 @@ class TaskList:
         """Edits one part of the task and updates the external database \
         Needs as input: the index of the row (int), the category (str) and the new value"""
 
-        if new_value == 'True':
-            new_value = True
-        elif new_value == 'False':
-            new_value = False
-
         self.data.at[index, category] = new_value
         self.__write_to_file()
 
