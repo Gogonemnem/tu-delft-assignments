@@ -1,9 +1,9 @@
 Clean room&0&To-Do
-Help Betsie with programming&1&Done
-Drink water&2&To-Do
+Take a walk&1&To-Do
+Help Betsie with programming&2&To-Do
 Vacuum the room&3&To-Do
-Call grandma&4&Doing
-Do some stretching&5&To-Do
-Walk dog&6&Done
-Do some stretching&7&To-Do
-Call dokter&8&To-Do
+Call grandma&4&Done
+Help friend with moving&5&Done
+read a chapter from you book&6&To-Do
+Call dokter&7&To-Do
+Brush your teeth&8&To-Do
