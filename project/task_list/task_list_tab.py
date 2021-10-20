@@ -96,7 +96,7 @@ class TaskListTab(QtWidgets.QTableView):
         self.database = TaskList()
 
         # Creates a pop-up with a combobox to edit the time
-        lst = ['5 min', '10 min', '15 min', '30 min']
+        lst = ['5 min', '10 min', '15 min', '20 min', '25 min', '30 min']
         sol = QtWidgets.QInputDialog()
         sol.setComboBoxItems(lst)
         output = sol.comboBoxItems()
