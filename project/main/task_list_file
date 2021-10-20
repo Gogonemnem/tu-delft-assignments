@@ -1,13 +1,8 @@
 Task$Estimated time (minutes)$Priority$Periodic$Preferred time$Delete task$Edit task
 Take a walk$30$normal$max once a day$Whole day$$
-Get some coffee$10$low$several times a day$Morning$$
-Vacuum the room$15$must be done today$max once a day$Afternoon$$
-Do some stretching$5$high$several times a day$Whole day$$
-Call grandma$30$high$not periodic$Afternoon$$
-Call dokter$5$high$not periodic$Evening$$
-Help friend with moving$5$low$not periodic$Afternoon$$
-Walk dog$10$normal$several times a day$Whole day$$
-Help Betsie with programming$30$high$not periodic$Morning$$
-Drink water$5$normal$several times a day$Morning$$
-Clean room$10$must be done today$max once a day$Morning$$
-Walk$30$normal$several times a day$Whole day$$
+Get some coffee$10$normal$several times a day$Whole day$$
+Vacuum the room$15$normal$max once a day$Whole day
+Eat$15$normal$max once a day$Whole day
+Drink water$15$normal$max once a day$Whole day
+
+

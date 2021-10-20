@@ -7,8 +7,8 @@ class Randomizer:
         self.database = TaskList().data_output()
         self.already_chosen = []
         self.dict_counter = {}
-        self.lst_random = []
-        self.biggest = "key"
+        # self.lst_random = []
+        # self.biggest = "key"
 
     def hof_must_be_done_today(self, pref):
         """Takes the priority and the preferred time of a certain task as input
@@ -43,45 +43,44 @@ class Randomizer:
         if not dict_priority_less:
             return None
 
-        self.lst_random = random.choices(list(dict_priority_less.keys()), weights=dict_priority_less.values(), k=5)
+        return random.choices(list(dict_priority_less.keys()), weights=dict_priority_less.values(), k=5)
 
-    def most_freq(self):
-        if not self.lst_random:
+    def most_freq(self, random_lst):
+        self.dict_counter.clear()
+        if not random_lst:
             return
 
-        for task_name in self.lst_random:
+        for task_name in random_lst:
             if task_name not in self.dict_counter:
                 self.dict_counter[task_name] = 1
             else:
                 self.dict_counter[task_name] += 1
 
-        self.biggest = max(self.dict_counter, key=lambda k: self.dict_counter[k])
-        self.dict_counter.clear()
+        return max(self.dict_counter, key=lambda k: self.dict_counter[k])
 
-    def adds_most_freq_to_task_list(self, task_list):
-        if self.biggest not in task_list \
-                and self.biggest not in self.already_chosen:
-            task_list.append(self.biggest)
-            self.already_chosen.append(self.biggest)
+    def adds_most_freq_to_task_list(self, task_list, biggest):
+        if biggest not in task_list \
+                and biggest not in self.already_chosen:
+            task_list.append(biggest)
+            self.already_chosen.append(biggest)
 
-    def hof_randomize_tasks_other_today(self, task_list):
+    def hof_randomize_tasks_other_today(self, task_list, pref):
         while task_list and len(task_list) < 3:
-            self.adds_most_freq_to_task_list(task_list)
+            self.adds_most_freq_to_task_list(task_list, self.most_freq(self.returns_list_random(self.hof_must_be_done_today(pref))))
         return task_list
 
     def randomize_tasks_other_morning(self):
-        return self.hof_randomize_tasks_other_today(self.hof_must_be_done_today("Morning"))
+        return self.hof_randomize_tasks_other_today(self.hof_must_be_done_today("Morning"), "Morning")
 
     def randomize_tasks_other_afternoon(self):
-        return self.hof_randomize_tasks_other_today(self.hof_must_be_done_today("Afternoon"))
+        return self.hof_randomize_tasks_other_today(self.hof_must_be_done_today("Afternoon"), "Afternoon")
 
     def randomize_tasks_other_evening(self):
-        return self.hof_randomize_tasks_other_today(self.hof_must_be_done_today("Evening"))
+        return self.hof_randomize_tasks_other_today(self.hof_must_be_done_today("Evening"), "Evening")
 
 
-# test = Randomizer()
-# test.returns_list_random(test.hof_must_be_done_today("Morning"), "Morning")
-# test.most_freq()
+test = Randomizer()
+print(test.randomize_tasks_other_morning())
 
 # def hof_randomize_tasks_other_today(self, task_list, pref):
     #     """Returns a randomized list of tasks to be done during the preferred time."""
