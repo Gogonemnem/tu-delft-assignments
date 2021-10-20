@@ -193,28 +193,24 @@ class Activity:
 
 
 def main():
-    # now = datetime.today()
+    now = datetime.today()
 
-    # activities = ['No work', 'Work', 'Planned break', 'Do not disturb me', 'Doing task']
+    activities = ['No work', 'Work', 'Planned break', 'Do not disturb me', 'Doing task']
 
-    # durat_short = timedelta(minutes=20)
-    # durat_long = timedelta(minutes=50)
-    # stop_time = now + durat_long
+    durat_short = timedelta(minutes=20)
+    durat_long = timedelta(minutes=50)
+    stop_time = now + durat_long
 
     # Create agenda and some activities
     agenda0 = Agenda()
-    # agenda0.add_activity(Activity('No work', now, durat_short))
-    # agenda0.add_activity(Activity('Work', now, durat_short))
-    # agenda0.add_activity(Activity('No work', now + 5 * durat_long, durat_short))
-    # agenda0.add_activity(Activity('Work', now - 2 * durat_short, 4 * durat_short))
-    # agenda0.add_activity(Activity('No work', now - timedelta(days=1), now - durat_long))
-    # print(agenda0.agenda)
-    # agenda0.add_activity(Activity('Planned break', now, duration=durat_short, summary='shopping'))
-    # print(agenda0.agenda)
-    # agenda0.delete_activity(2)
-    # agenda0.modify_activity(4, summary='long meeting')
-    # print(agenda0.agenda)
-    # print(agenda0.today())
+    agenda0.add_activity(Activity('No work', now, durat_short))
+    agenda0.add_activity(Activity('Work', now, durat_short))
+    agenda0.add_activity(Activity('No work', now + 5 * durat_long, durat_short))
+    agenda0.add_activity(Activity('Work', now - 2 * durat_short, 4 * durat_short))
+    agenda0.add_activity(Activity('No work', now - timedelta(days=1), now - durat_long))
+    agenda0.add_activity(Activity('Planned break', now, durat_short, summary='shopping'))
+    agenda0.delete_activity(2)
+    agenda0.modify_activity(4, summary='long meeting')
 
     # Visualization
     app = QtWidgets.QApplication([])
