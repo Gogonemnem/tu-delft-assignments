@@ -58,7 +58,7 @@ class AgendaWidget(QtWidgets.QGroupBox):
                 ac_dic['id'] = str(identifier)
                 data.append({key.capitalize().replace('_', ' '): ac_dic[key]
                              for key in ['activity', 'start_time', 'end_time', 'id']})
-            x_start = activities[0].start_time
+            x_start = min(activities[0].start_time, now-timedelta(minutes=30))
         else:
             x_start = now-timedelta(minutes=30)
             data = {
