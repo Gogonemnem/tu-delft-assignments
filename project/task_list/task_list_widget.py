@@ -1,5 +1,7 @@
-from PyQt5.QtWidgets import QPushButton, QRadioButton, QGridLayout, QButtonGroup, QGroupBox
+from PyQt5.QtCore import QTimer
+from PyQt5.QtWidgets import QPushButton, QRadioButton, QGridLayout, QButtonGroup, QGroupBox, QMessageBox
 
+from project.agenda.agenda_widget import AgendaWidget
 from project.randomizer.optimal_time import TimeRandomizer
 from project.task_list.to_do_list import ToDoList
 
@@ -7,12 +9,14 @@ from project.task_list.to_do_list import ToDoList
 class TaskListWidget(QGroupBox):
     """Visualise Task that need to be done today"""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, agenda: AgendaWidget, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         self.todolist = ToDoList()
-        # self.time_randomizer = TimeRandomizer(self.todolist.todolist)
+        self.time_randomizer = TimeRandomizer(self.todolist, agenda)
         # self.pop_up = PopUp()
+        self.timers = [QTimer(), self.time_randomizer.timer]
+        self.initialize_timer()
 
         self.setTitle("Daily to-do list")
 
@@ -138,3 +142,38 @@ class TaskListWidget(QGroupBox):
     def clear_widget(self):
         for item in reversed(self.todolist.todolist):
             self.change_status(item, 'Removed')
+
+    def initialize_timer(self):
+        timer = self.timers[0]
+        timer.start(5_000)
+        timer.timeout.connect(self.check_randomizer_timer)
+
+    def check_randomizer_timer(self):
+        if self.timers[1].isActive():
+            return
+
+        if self.todolist.available:
+            choice = imitate_popup()  # may be static?
+            self.check_pop_up(choice)
+        else:  # No tasks are to be done -> stop pop_ups
+            self.timers[0].stop()
+
+
+    def check_pop_up(self, choice):
+        print(choice)
+        task = self.todolist.available[0]
+        if choice == 'Rescheduled':
+            timer = self.time_randomizer.reschedule_popup(task)
+            timer.timeout.connect(self.imitate_popup)
+
+        if choice == 1024:  # for now OK is the 'Done'
+            self.change_status(task, 'Done')
+
+
+def imitate_popup():
+    msg = QMessageBox()
+    msg.setStandardButtons(QMessageBox.Ok)
+    button_clicked = msg.exec()
+
+    return button_clicked
+
