@@ -96,4 +96,3 @@ class AgendaWidget(QtWidgets.QGroupBox):
         """Delete the activity from the agenda and refresh the page"""
         self.agenda.delete_activity(identifier)
         self.start()
-

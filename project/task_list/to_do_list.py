@@ -1,6 +1,7 @@
 import os
-from project.randomizer.randomizer_of_tasks import Randomizer
 from pathlib import Path
+from project.randomizer.randomizer_of_tasks import Randomizer
+
 folder = Path(os.getcwd())
 
 
@@ -65,7 +66,8 @@ class CreateToDoList:
                 for line in lines:
                     if "Removed" not in line and "Done" not in line:
                         tasks_list.append(line.split("&")[0])
-                        file_todo.write(line.split("&")[0] + "&" + str(i) + "&" + line.split("&")[2])
+                        file_todo.write(
+                            line.split("&")[0] + "&" + str(i) + "&" + line.split("&")[2])
                         i += 1
                     else:
                         file_todo.write(line.split("&")[0] + "&" +

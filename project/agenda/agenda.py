@@ -195,11 +195,11 @@ class Activity:
 def main():
     now = datetime.today()
 
-    activities = ['No work', 'Work', 'Planned break', 'Do not disturb me', 'Doing task']
+    # activities = ['No work', 'Work', 'Planned break', 'Do not disturb me', 'Doing task']
 
     durat_short = timedelta(minutes=20)
     durat_long = timedelta(minutes=50)
-    stop_time = now + durat_long
+    # stop_time = now + durat_long
 
     # Create agenda and some activities
     agenda0 = Agenda()

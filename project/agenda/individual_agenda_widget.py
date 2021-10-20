@@ -37,7 +37,7 @@ class IndividualAgendaWidget(QtWidgets.QGroupBox):
     def keep_old_widgets(self, count):
         """Remove widgets which will be recreated when selecting an option on the screen"""
         if len(self.children()) > count:
-            for i, widget in enumerate(self.children()[:count - 1:-1]):
+            for widget in self.children()[:count - 1:-1]:
                 self.layout.removeWidget(widget)
                 sip.delete(widget)
                 # del widget
@@ -224,7 +224,6 @@ class IndividualAgendaWidget(QtWidgets.QGroupBox):
         msg.exec()
         self.first_stage()
         self.create.click()
-
 
     def read_data(self):
         """Turn the data of the form into correct types for the Activity class"""
