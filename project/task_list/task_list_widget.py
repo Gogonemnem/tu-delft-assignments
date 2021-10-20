@@ -12,6 +12,7 @@ class TaskListWidget(QGroupBox):
 
         self.todolist = ToDoList()
         # self.time_randomizer = TimeRandomizer(self.todolist.todolist)
+        # self.pop_up = PopUp()
 
         self.setTitle("Daily to-do list")
 
@@ -33,7 +34,6 @@ class TaskListWidget(QGroupBox):
     def create_to_do_list_visual(self):
         self.todolist.status()
         for task in self.todolist.todolist:
-            # identifier = int(task['ID'])
 
             self.create_remove_button(task)
             self.create_doing_button(task)
@@ -44,42 +44,35 @@ class TaskListWidget(QGroupBox):
 
     def removed(self, task: dict):
         """Remove task from to-do list."""
-        identifier = int(task['ID'])
         self.todolist.change(task, 'Removed')
-        self.layout.removeWidget(self.group_task.button(identifier))
-        self.layout.removeWidget(self.group_done.button(identifier))
-        self.layout.removeWidget(self.group_remove.button(identifier))
-        self.layout.removeWidget(self.group_doing.button(identifier))
+
+        identifier = int(task['ID'])
+        self.remove_widget_row(identifier)
 
     def ongoing(self, task: dict):
         """Set status of task to "Doing"."""
-        identifier = int(task['ID'])
-        task_button = self.group_task.button(identifier)
-
-        task_button.setText(f'Doing task {identifier} for today: ' + task['Task'])
 
         self.todolist.change(task, "Doing")
+
+        identifier = int(task['ID'])
+
+        self.group_task.button(identifier).setText(f'Doing task {identifier} for today: ' + task['Task'])
         self.group_doing.button(identifier).setText('Doing task')
         self.group_remove.button(identifier).setVisible(False)
         self.group_done.button(identifier).setVisible(True)
 
     def completed(self, task: dict):
         """Set status of task to "Done"."""
-        identifier = int(task['ID'])
-        task_button = self.group_task.button(identifier)
-        task_button.setText('\u2713' + 'Completed: ' + task['Task'])
+
         self.todolist.change(task, "Done")
 
-        selected_task = self.group_task.button(identifier)
-        selected_doing = self.group_doing.button(identifier)
-        selected_done = self.group_done.button(identifier)
-        selected_remove = self.group_remove.button(identifier)
+        identifier = int(task['ID'])
 
-        selected_doing.setVisible(False)
-        selected_done.setVisible(False)
-        selected_remove.setVisible(True)
-
-        selected_task.setStyleSheet("color:  rgb(100, 175, 100)")
+        self.group_task.button(identifier).setText('\u2713' + 'Completed: ' + task['Task'])
+        self.group_task.button(identifier).setStyleSheet("color:  rgb(100, 175, 100)")
+        self.group_doing.button(identifier).setVisible(False)
+        self.group_done.button(identifier).setVisible(False)
+        self.group_remove.button(identifier).setVisible(True)
 
     def create_task_select(self, task: dict):
         """Visualize the selection radio button"""
@@ -177,3 +170,9 @@ class TaskListWidget(QGroupBox):
     def clear_widget(self):
         for item in reversed(self.todolist.todolist):
             self.removed(item)
+
+    def remove_widget_row(self, identifier):
+        self.layout.removeWidget(self.group_task.button(identifier))
+        self.layout.removeWidget(self.group_done.button(identifier))
+        self.layout.removeWidget(self.group_remove.button(identifier))
+        self.layout.removeWidget(self.group_doing.button(identifier))

@@ -9,19 +9,24 @@ path = os.path.join(parent, 'main', 'todolist')
 
 
 class ToDoList:
+
     def __init__(self):
         self.todolist: list[dict] = []
-        self.available: list[int] = []
         self.status()
+
+    @property
+    def available(self) -> list[int]:
+        """Return list of task id's that are able to be scheduled"""
+
+        return [task['ID'] for task in self.todolist if task['Task Status'] not in ('Done', 'Rescheduled')]
 
     def status(self):
         """Check status of all tasks in To-Do list file."""
+
         self.read_file()
 
         if not self.available:
             self.create_todolist()
-
-        self.available = [task['ID'] for task in self.todolist if task['Task Status'] not in ('Done', 'Rescheduled')]
 
         self.write_to_file()
 
@@ -34,6 +39,7 @@ class ToDoList:
             *randomizer.randomize_tasks_other_afternoon(),
             *randomizer.randomize_tasks_other_evening()
         ]
+
         for i, task in enumerate(lst):
             self.todolist.append({'Task': task, 'ID': i + 1, 'Task Status': 'To-Do'})
 
