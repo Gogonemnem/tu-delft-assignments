@@ -31,7 +31,6 @@ class IndividualAgendaWidget(QtWidgets.QGroupBox):
         self.setTitle('Agenda activities can be added here')
         self.layout = QFormLayout()
         self.setLayout(self.layout)
-        self.show()
 
         self.crea_mod_del()
 
