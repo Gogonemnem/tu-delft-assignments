@@ -15,10 +15,10 @@ class ToDoList:
         self.status()
 
     @property
-    def available(self) -> list[int]:
+    def available(self) -> list[dict]:
         """Return list of task id's that are able to be scheduled"""
 
-        return [task['ID'] for task in self.todolist if task['Task Status'] not in ('Done', 'Rescheduled')]
+        return [task for task in self.todolist if task['Task Status'] not in ('Done', 'Rescheduled')]
 
     def status(self):
         """Check status of all tasks in To-Do list file."""
@@ -31,6 +31,7 @@ class ToDoList:
         self.write_to_file()
 
     def create_todolist(self):
+        """Generates a new to-do list"""
         self.todolist = []
 
         randomizer = Randomizer()
@@ -55,12 +56,14 @@ class ToDoList:
         if status == 'Removed':
             self.todolist.pop(index)
 
-            if task['ID'] in self.available:
-                self.available.remove(task['ID'])
+            if task in self.available:
+                self.available.remove(task)
 
         self.write_to_file()
 
     def read_file(self):
+        """Reads the file contents transforming it to a list of tasks"""
+
         with open(path, encoding='utf-8') as file_to_do:
             if file_to_do.readline() == 'Task&ID&Task Status':
                 fieldnames = None
@@ -70,6 +73,8 @@ class ToDoList:
             self.todolist = list(csv_reader)
 
     def write_to_file(self):
+        """Writes the list of tasks to the file"""
+
         with open(path, 'w', encoding='utf-8') as file_to_do:
             csv_writer = csv.DictWriter(file_to_do, ['Task', 'ID', 'Task Status'], delimiter='&')
             csv_writer.writeheader()

@@ -21,38 +21,71 @@ class TaskListWidget(QGroupBox):
         self.group_remove = QButtonGroup()
         self.group_done = QButtonGroup()
         self.group_doing = QButtonGroup()
+        self.tuple_of_groups = self.group_task, self.group_doing, self.group_remove, self.group_done
+
+        self.generate_button = QPushButton()
 
         self.layout = QGridLayout()
+        self.layout.setColumnStretch(0, 1)
         self.setLayout(self.layout)
 
         self.create_to_do_list_visual()
-
-        self.generate_new = QPushButton('Generate new to do list', self)
-        self.layout.addWidget(self.generate_new, 99, 0, 1, 3)
-        self.generate_new.clicked.connect(self.refresh)
+        self.create_generator_button()
 
     def create_to_do_list_visual(self):
         self.todolist.status()
         for task in self.todolist.todolist:
 
-            self.create_remove_button(task)
-            self.create_doing_button(task)
-            self.create_done_button(task)
-            self.create_task_select(task)
+            for i, button_group in enumerate(self.tuple_of_groups[1:]):
+                self.create_checkable_button(task, i+1)
 
+            self.create_task_select(task)
             self.color_buttons(task)
 
-    def removed(self, task: dict):
-        """Remove task from to-do list."""
-        self.todolist.change(task, 'Removed')
+    def create_task_select(self, task: dict):
+        """Visualize the selection radio button"""
+        identifier = int(task['ID'])
+        task_button = QRadioButton(f"Task {identifier} for today is: {task['Task']}")
+
+        task_button.toggled.connect(lambda: self.color_buttons(task))
+
+        self.group_task.addButton(task_button, identifier)
+        self.layout.addWidget(task_button, identifier, 0)
+
+        self.change_status_layout(task, task['Task Status'])
+
+    def create_checkable_button(self, task: dict, group_index: int):
+        labels = None, 'Do task', 'Remove task', 'Task completed'
+        statuses = None, 'Doing', 'Removed', 'Done'
 
         identifier = int(task['ID'])
-        self.remove_widget_row(identifier)
+        label = labels[group_index]
+        status = statuses[group_index]
 
-    def ongoing(self, task: dict):
+        button = QPushButton(label)
+        button.setCheckable(True)
+        button.setMinimumWidth(100)
+        button.clicked.connect(lambda: self.change_status(task, status))
+
+        self.tuple_of_groups[group_index].addButton(button, identifier)
+        self.layout.addWidget(button, identifier, min(group_index, 2))
+
+    def change_status(self, task: dict, status: str):
+        self.todolist.change(task, status)
+        self.change_status_layout(task, status)
+
+    def change_status_layout(self, task: dict, status: str):
+        if status == 'Doing':
+            self.doing_task_layout(task)
+
+        elif status == 'Removed':
+            self.remove_task_layout(task)
+
+        elif status == 'Done':
+            self.complete_task_layout(task)
+
+    def doing_task_layout(self, task: dict):
         """Set status of task to "Doing"."""
-
-        self.todolist.change(task, "Doing")
 
         identifier = int(task['ID'])
 
@@ -61,107 +94,42 @@ class TaskListWidget(QGroupBox):
         self.group_remove.button(identifier).setVisible(False)
         self.group_done.button(identifier).setVisible(True)
 
-    def completed(self, task: dict):
-        """Set status of task to "Done"."""
+    def remove_task_layout(self, task: dict):
 
-        self.todolist.change(task, "Done")
+        identifier = int(task['ID'])
+
+        for button_group in self.tuple_of_groups:
+            self.layout.removeWidget(button_group.button(identifier))
+
+    def complete_task_layout(self, task: dict):
+        """Set status of task to "Done"."""
 
         identifier = int(task['ID'])
 
         self.group_task.button(identifier).setText('\u2713' + 'Completed: ' + task['Task'])
         self.group_task.button(identifier).setStyleSheet("color:  rgb(100, 175, 100)")
         self.group_doing.button(identifier).setVisible(False)
-        self.group_done.button(identifier).setVisible(False)
         self.group_remove.button(identifier).setVisible(True)
-
-    def create_task_select(self, task: dict):
-        """Visualize the selection radio button"""
-        identifier = int(task['ID'])
-        text = f"Task {identifier} for today is: {task['Task']}"
-        task_button = QRadioButton(text, self)
-        task_button.setMinimumWidth(450)
-
-        task_button.toggled.connect(lambda: self.color_buttons(task))
-
-        self.group_task.addButton(task_button, identifier)
-        self.layout.addWidget(task_button, identifier, 0)
-
-        if task['Task Status'] == 'Done':
-            self.completed(task)
-        elif task['Task Status'] == 'Doing':
-            self.ongoing(task)
-
-        return task
-
-    def create_remove_button(self, task: dict):
-        """Visualize the selection remove button"""
-
-        remove = QPushButton('Remove task', self)
-        remove.setCheckable(True)
-        remove.setMaximumWidth(100)
-
-        remove.clicked.connect(lambda: self.removed(task))
-
-        identifier = int(task['ID'])
-        self.group_remove.addButton(remove, identifier)
-        self.layout.addWidget(remove, identifier, 2)
-
-        return remove
-
-    def create_doing_button(self, task: dict):
-        """Visualize the selection doing button"""
-
-        doing = QPushButton('Do task', self)
-        doing.setCheckable(True)
-        doing.setMaximumWidth(100)
-
-        doing.clicked.connect(lambda: self.ongoing(task))
-
-        identifier = int(task['ID'])
-        self.group_doing.addButton(doing, identifier)
-        self.layout.addWidget(doing, identifier, 1)
-
-        return doing
-
-    def create_done_button(self, task: dict):
-        """Visualize the selection done button"""
-
-        done = QPushButton('Task completed', self)
-        done.setCheckable(True)
-        done.setVisible(False)
-        done.setMaximumWidth(100)
-
-        done.clicked.connect(lambda: self.completed(task))
-
-        identifier = int(task['ID'])
-        self.group_done.addButton(done, identifier)
-        self.layout.addWidget(done, identifier, 2)
-
-        return done
+        self.group_done.button(identifier).setVisible(False)
 
     def color_buttons(self, task: dict):
         """Color selected task and accompanying buttons."""
+        colors = (((50, 200, 255), (225, 175, 175), (200, 225, 200)),  # when not selected
+                  ((40, 125, 175), (225, 75, 75), (100, 175, 100)))    # selected
+
         identifier = int(task['ID'])
-
-        selected_remove = self.group_remove.button(identifier)
-        selected_done = self.group_done.button(identifier)
-        selected_doing = self.group_doing.button(identifier)
-
         is_checked = self.group_task.button(identifier).isChecked()
 
-        selected_remove.setEnabled(is_checked)
-        selected_done.setEnabled(is_checked)
-        selected_doing.setEnabled(is_checked)
+        for i, button_group in enumerate(self.tuple_of_groups[1:]):
+            button_group.button(identifier).setEnabled(is_checked)
 
-        if is_checked:
-            selected_remove.setStyleSheet("background-color:  rgb(225, 75, 75)")
-            selected_done.setStyleSheet("background-color:  rgb(100, 175, 100)")
-            selected_doing.setStyleSheet("background-color:  rgb(40, 125, 175)")
+            color = colors[is_checked][i]
+            button_group.button(identifier).setStyleSheet("background-color:  rgb" + str(color))
 
-        else:
-            selected_remove.setStyleSheet("background-color:  rgb(225, 175, 175)")
-            selected_done.setStyleSheet("background-color:  rgb(200, 225, 200)")
-            selected_doing.setStyleSheet("background-color:  rgb(50, 200, 255)")
+    def create_generator_button(self):
+        self.generate_button = QPushButton('Generate new to do list', self)
+        self.layout.addWidget(self.generate_button, 99, 0, 1, 3)
+        self.generate_button.clicked.connect(self.refresh)
 
     def refresh(self):
         self.clear_widget()
@@ -169,10 +137,4 @@ class TaskListWidget(QGroupBox):
 
     def clear_widget(self):
         for item in reversed(self.todolist.todolist):
-            self.removed(item)
-
-    def remove_widget_row(self, identifier):
-        self.layout.removeWidget(self.group_task.button(identifier))
-        self.layout.removeWidget(self.group_done.button(identifier))
-        self.layout.removeWidget(self.group_remove.button(identifier))
-        self.layout.removeWidget(self.group_doing.button(identifier))
+            self.change_status(item, 'Removed')
