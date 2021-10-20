@@ -222,7 +222,9 @@ class IndividualAgendaWidget(QtWidgets.QGroupBox):
         msg.setWindowIcon(QtGui.QIcon('icon.png'))
         msg.setStandardButtons(QMessageBox.Ok)
         msg.exec()
+        self.first_stage()
         self.create.click()
+
 
     def read_data(self):
         """Turn the data of the form into correct types for the Activity class"""
