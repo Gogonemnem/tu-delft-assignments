@@ -24,13 +24,13 @@ class TestDatabase(unittest.TestCase):
                                     'Task': ['Take a walk'],
                                     'Estimated time (minutes)': [30],
                                     'Priority': ['normal'],
-                                    'Periodic': [True],
+                                    'Periodic': ['max once a day'],
                                     'Preferred time': ['Whole day'],
                                     'Delete task': [np.nan],
                                     'Edit task:': [np.nan]})
 
         # Create the input for the deleted task, to restore the file
-        task = ['Get some coffee', 10, 'low', True, 'Morning']
+        task = ['Get some coffee', 10, 'low', 'several times a day', 'Morning']
 
         # Check if the task is really deleted, and if it was the right one
         # try and finally is used, because if these tests fail,
@@ -61,13 +61,13 @@ class TestDatabase(unittest.TestCase):
         self.assertEqual(object_list[0].name, 'Take a walk')
         self.assertEqual(object_list[1].time, 10)
         self.assertEqual(object_list[1].priority, 'low')
-        self.assertTrue(object_list[0].periodic)
+        self.assertEqual(object_list[0].periodic, 'max once a day')
         self.assertEqual(object_list[0].preferred_time, 'Whole day')
         self.assertEqual(len(object_list), len(task_list.data))
 
     def test_task_object(self):
         # Tests the attributes of the TaskObject class
-        task_object = TaskObject('Water the plants', 5, 'high', False, 'Whole day')
+        task_object = TaskObject('Water the plants', 5, 'high', 'not periodic', 'Whole day')
         attributes = ['name', 'time', 'priority', 'periodic', 'preferred_time']
 
         for attribute in attributes:
@@ -76,8 +76,8 @@ class TestDatabase(unittest.TestCase):
     def test_edit_task(self):
         task_list = TaskList(file=path)
         categories = ['Task', 'Estimated time (minutes)', 'Priority', 'Periodic', 'Preferred time']
-        original_values = ['Take a walk', 30, 'normal', True, 'Whole day']
-        new_values = ['Take a very long walk', 5, 'high', False, 'Afternoon']
+        original_values = ['Take a walk', 30, 'normal', 'max once a day', 'Whole day']
+        new_values = ['Take a very long walk', 5, 'high', 'not periodic', 'Afternoon']
 
         # Test the original values
         for i, value in enumerate(original_values):
