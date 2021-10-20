@@ -11,7 +11,7 @@ class TaskListWidget(QGroupBox):
         super().__init__(*args, **kwargs)
 
         self.todolist = ToDoList()
-        self.time_randomizer = TimeRandomizer(self.todolist.todolist)
+        # self.time_randomizer = TimeRandomizer(self.todolist.todolist)
 
         self.setTitle("Daily to-do list")
         self.complete = 0
@@ -56,21 +56,6 @@ class TaskListWidget(QGroupBox):
         self.layout.removeWidget(self.group_remove.button(identifier))
         self.layout.removeWidget(self.group_doing.button(identifier))
 
-        task_button = self.group_task.button(index)
-        if task_button.isChecked():
-
-            # Change status of task in to-do list
-            ToDoList.change(task_button.text().replace(
-                f'Task {index + 1} for today is: ', ''),
-                self.group_task.id(self.group_task.checkedButton()), "Removed"
-            )
-
-            # clear task from widget
-            self.group_task.button(index).setVisible(False)
-            self.group_done.button(index).setVisible(False)
-            self.group_remove.button(index).setVisible(False)
-            self.group_doing.button(index).setVisible(False)
-
     def ongoing(self, identifier):
         """Set status of task to "Doing"."""
         task_button = self.group_task.button(identifier)
@@ -79,6 +64,7 @@ class TaskListWidget(QGroupBox):
         task_button.setText(f'Doing task {identifier} for today: ' + task['Task'])
 
         self.todolist.change(identifier, "Doing")
+        self.group_doing.button(identifier).setText('Doing task')
         self.group_remove.button(identifier).setVisible(False)
         self.group_done.button(identifier).setVisible(True)
 
