@@ -74,6 +74,8 @@ To run all tests, right-click on the `project/test` folder and select `Run 'pyte
 You can also do the same through the terminal (open it in PyCharm by clicking on `Terminal` in the lower toolbar - you may have to click on the icon in the bottom-left corner to reveal it):
 ```
 pytest project
+
+pytest --cov-report term-missing --cov=project project
 ```
 
 ### Coverage
