@@ -11,19 +11,22 @@ path = os.path.join(parent, 'main', 'todolist')
 class ToDoList:
     def __init__(self):
         self.todolist: list[dict] = []
+        self.available: list[int] = []
         self.status()
 
     def status(self):
         """Check status of all tasks in To-Do list file."""
         self.read_file()
 
-        not_completed = [task for task in self.todolist if task['Task Status'] != 'Done']
-
-        if not not_completed:
+        if not self.available:
             self.create_todolist()
 
+        self.available = [task['ID'] for task in self.todolist if task['Task Status'] not in ('Done', 'Rescheduled')]
+
+        self.write_to_file()
+
     def create_todolist(self):
-        self.empty_lists()
+        self.todolist = []
 
         randomizer = Randomizer()
         lst = [
@@ -34,8 +37,22 @@ class ToDoList:
         for i, task in enumerate(lst):
             self.todolist.append({'Task': task, 'ID': i + 1, 'Task Status': 'To-Do'})
 
-    def empty_lists(self):
-        self.todolist = []
+    def change(self, task: dict, status: str):
+        """Change status of task [task] from to-do list to status [status]."""
+
+        if task not in self.todolist:
+            return
+
+        index = self.todolist.index(task)
+        self.todolist[index]['Task Status'] = status
+
+        if status == 'Removed':
+            self.todolist.pop(index)
+
+            if task['ID'] in self.available:
+                self.available.remove(task['ID'])
+
+        self.write_to_file()
 
     def read_file(self):
         with open(path, encoding='utf-8') as file_to_do:
@@ -45,17 +62,6 @@ class ToDoList:
                 fieldnames = ['Task', 'ID', 'Task Status']
             csv_reader = csv.DictReader(file_to_do, fieldnames=fieldnames, delimiter='&')
             self.todolist = list(csv_reader)
-
-    def change(self, identifier, status):
-        """Change status of task [task] with id [indentifier] from to-do list to status [status]."""
-        pos = next((i for i, item in enumerate(self.todolist) if int(item["ID"]) == identifier), None)
-        self.todolist[pos]['Task Status'] = status
-        self.write_to_file()
-
-    def remove_task(self, identifier):
-        pos = next((i for i, item in enumerate(self.todolist) if int(item["ID"]) == identifier), None)
-        self.todolist.pop(pos)
-        self.write_to_file()
 
     def write_to_file(self):
         with open(path, 'w', encoding='utf-8') as file_to_do:
@@ -67,7 +73,7 @@ class ToDoList:
 def main():
     todolist = ToDoList()
     print(todolist.todolist)
-    todolist.remove_task(0)
+    # todolist.change()
 
 
 if __name__ == '__main__':
