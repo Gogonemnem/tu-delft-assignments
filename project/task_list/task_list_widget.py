@@ -37,7 +37,9 @@ class TaskListWidget(QGroupBox):
 
             # Change status of task in to-do list
             ToDoList.change(task_button.text().replace(
-                f'Task {index + 1} for today is: ', ''), self.group_task.id(self.group_task.checkedButton()), "Removed")
+                f'Task {index + 1} for today is: ', ''),
+                self.group_task.id(self.group_task.checkedButton()), "Removed"
+            )
 
             # clear task from widget
             self.group_task.button(index).setVisible(False)
