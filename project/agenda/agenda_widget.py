@@ -47,7 +47,7 @@ class AgendaWidget(QtWidgets.QGroupBox):
     def show_graph(self):
         self.agenda.remove_activity_over()
         activities = self.agenda.agenda
-        now = datetime.now()
+        now = self.agenda.now
 
         # It is important to make the distinction between empty agenda and filled agenda
         if activities:

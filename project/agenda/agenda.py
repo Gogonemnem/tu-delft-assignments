@@ -11,7 +11,11 @@ class Agenda:
     def __init__(self):
         # this is list of activities that are planned
         # with activities occurring earlier appearing earlier on the list
-        self.agenda = []
+        self.agenda: list[Activity] = []
+
+    @property
+    def now(self):
+        return datetime.now()
 
     def add_activity(self, activity):
         """Inserts an activity to the agenda list while keeping the correct order"""
@@ -40,6 +44,24 @@ class Agenda:
         """Removes the activity from the agenda list"""
         del self.agenda[identifier]
 
+    def is_free(self):
+        """Return T|F whether you are free (or have any activity right now)"""
+        self.remove_activity_over()
+        if not self.agenda:
+            return True
+
+        return not self.agenda[0].active
+
+    def task_right_after(self):
+        """Return T|F whether a task should be right after activity"""
+        self.remove_activity_over()
+        if not self.agenda:
+            return False, -1
+
+        activity = self.agenda[0]
+        duration_in_ms = int((activity.end_time - self.now).total_seconds() * 1000)
+        return activity.activity == 'Do not disturb me', duration_in_ms
+
     def today(self):
         """Returns a list of activities that (will) happen today"""
         # Check whether anything is planned
@@ -63,6 +85,19 @@ class Agenda:
     def remove_activity_over(self):
         """Removes activities in the agenda list that have happened"""
         self.agenda[:] = [x for x in self.agenda if not x.over]
+
+    def get_day_part(self, time: datetime = None):
+        """Return the daypart of the given time or right now"""
+        hour = time.hour if time else self.now.hour
+
+        if 0 <= hour < 6:
+            return 'Night'
+        elif 6 <= hour < 12:
+            return 'Morning'
+        elif 12 <= hour < 18:
+            return 'Afternoon'
+        else:
+            return 'Evening'
 
     def __str__(self):
         return f'{self.agenda}'
@@ -116,25 +151,29 @@ class Activity:
         return False
 
 
-if __name__ == '__main__':
+def main():
     now = datetime.today()
 
     # activities = ['No work', 'Work', 'Planned break', 'Do not disturb me', 'Doing task']
 
-    durat_short = timedelta(minutes=30)
-    durat_long = timedelta(minutes=50)
-    stop_time = now + durat_long
+    durat_short = timedelta(minutes=1)
+    # durat_long = timedelta(minutes=50)
+    # stop_time = now + durat_long
 
     # Create agenda and some activities
     agenda0 = Agenda()
-    agenda0.add_activity(Activity('No work', stop_time, durat_long))
-    agenda0.add_activity(Activity('Work', now, durat_short))
-    agenda0.add_activity(Activity('No work', now + 5 * durat_long, durat_short))
-    agenda0.add_activity(Activity('Work', now - 2 * durat_short, 4 * durat_short))
-    agenda0.add_activity(Activity('No work', now - timedelta(days=1), now - durat_long))
+    agenda0.add_activity(Activity('No work', now, durat_short))
+    # agenda0.add_activity(Activity('Work', now, durat_short))
+    # agenda0.add_activity(Activity('No work', now + 5 * durat_long, durat_short))
+    # agenda0.add_activity(Activity('Work', now - 2 * durat_short, 4 * durat_short))
+    # agenda0.add_activity(Activity('No work', now - timedelta(days=1), now - durat_long))
 
     # Visualization
     app = QtWidgets.QApplication([])
     widget = AgendaWidget(agenda0)
     widget.show()
     app.exec()
+
+
+if __name__ == '__main__':
+    main()

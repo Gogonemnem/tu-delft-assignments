@@ -1,12 +1,14 @@
 import unittest
 from datetime import datetime, timedelta
 from project.agenda.agenda import Agenda, Activity
+from project.agenda import agenda as ag
 
 
 class TestAgenda(unittest.TestCase):
     def test_agenda_attribute(self):
         agenda = Agenda()
         self.assertTrue(hasattr(agenda, 'agenda'))
+        self.assertTrue(hasattr(agenda, 'now'))
 
     def test_activity_attributes(self):
         activity_name = 'Work'
@@ -36,6 +38,16 @@ class TestAgenda(unittest.TestCase):
         with self.assertRaises(TypeError):
             Activity(activity_name, now, '17:31')
 
+        with self.assertRaises(TypeError):
+            Activity(activity_name, '17:31', now)
+
+    def test_empty_agenda(self):
+        agenda = Agenda()
+        self.assertTrue(agenda.is_free())
+        self.assertEqual(agenda.task_right_after(), (False, -1))
+        self.assertEqual(agenda.today(), [])
+        self.assertEqual('[]', str(agenda))
+
     def test_modify_activity_attributes(self):
         activity_name = 'Work'
         now = datetime.now()
@@ -50,6 +62,10 @@ class TestAgenda(unittest.TestCase):
         agenda = Agenda()
         agenda.add_activity(activity_change)  # will get index 0
         agenda.add_activity(activity_old)
+
+        agenda.modify_activity(0)  # nothing changes
+        self.assertEqual(agenda.agenda[0], activity_change)
+        self.assertEqual(agenda.agenda[1], activity_old)
 
         # change so that index will be 1
         agenda.modify_activity(0, activity='No Work', start_time=now+2*duration, end_or_dur=duration)
@@ -102,7 +118,83 @@ class TestAgenda(unittest.TestCase):
             Activity('Work', now - 3 * day, duration)
         ]
 
-        for activity in activities:
+        for activity in activities[:2]:
             agenda.add_activity(activity)
 
         self.assertCountEqual([activity0, activity1], agenda.today())
+
+        for activity in activities[2:]:
+            agenda.add_activity(activity)
+        self.assertCountEqual([activity0, activity1], agenda.today())
+
+    def test_activity_relations(self):
+        now = datetime.now()
+        duration = timedelta(hours=1)
+        activity0 = Activity('Work', now, duration)
+        activity1 = Activity('Work', now - 1 / 2 * duration, duration)
+        activity2 = Activity('Work', now, duration)
+
+        self.assertTrue(activity1 < activity0)
+        self.assertFalse(activity1 > activity0)
+
+        self.assertTrue(activity2 <= activity0)
+        self.assertTrue(activity2 >= activity0)
+        self.assertTrue(activity2 == activity0)
+
+    def test_agenda_current_time(self):
+        agenda = Agenda()
+        self.assertTrue(agenda.now - datetime.now() < timedelta(seconds=1))
+
+    def test_free_agenda(self):
+        agenda = Agenda()
+        now = datetime.now()
+        duration = timedelta(hours=1)
+
+        self.assertTrue(agenda.is_free())
+
+        agenda.add_activity(Activity('Work', now - 2 * duration, duration))
+        self.assertTrue(agenda.is_free())
+
+        agenda.add_activity(Activity('Work', now + duration, duration))
+        self.assertTrue(agenda.is_free())
+
+        agenda.add_activity(Activity('Work', now, duration))
+        self.assertFalse(agenda.is_free())
+
+    def test_right_after(self):
+        agenda = Agenda()
+        self.assertEqual(agenda.task_right_after(), (False, -1))
+
+        now = datetime.now()
+        duration = timedelta(hours=1)
+
+        agenda.add_activity(Activity('Work', now - 2 * duration, duration))
+        self.assertEqual(agenda.task_right_after(), (False, -1))
+
+        agenda.add_activity(Activity('No Work', now, duration))
+        right_after, _ = agenda.task_right_after()
+        self.assertFalse(right_after)
+        agenda.delete_activity(0)
+
+        agenda.add_activity(Activity('Do not disturb me', now, duration))
+        right_after, _ = agenda.task_right_after()
+        self.assertTrue(right_after)
+
+    def test_day_part(self):
+        agenda = Agenda()
+        nights = [datetime(2021, 1, 1, x) for x in range(6)]
+        mornings = [datetime(2021, 1, 1, x) for x in range(6, 12)]
+        afternoons = [datetime(2021, 1, 1, x) for x in range(12, 18)]
+        evenings = [datetime(2021, 1, 1, x) for x in range(18, 24)]
+
+        for night in nights:
+            self.assertEqual(agenda.get_day_part(night), 'Night')
+        for morn in mornings:
+            self.assertEqual(agenda.get_day_part(morn), 'Morning')
+        for aft in afternoons:
+            self.assertEqual(agenda.get_day_part(aft), 'Afternoon')
+        for eve in evenings:
+            self.assertEqual(agenda.get_day_part(eve), 'Evening')
+
+    def test_main(self):
+        ag.main()
