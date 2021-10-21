@@ -53,13 +53,13 @@ class TaskWidget(QtWidgets.QGroupBox):
 
         # Layout
         layout = QFormLayout()
-        layout.addWidget(self.help.button)
         layout.addRow("Name", self.textbox)
         layout.addRow("Estimated time", self.estimated)
         layout.addRow("Priority", self.priority)
         layout.addRow("Periodic", self.periodic)
         layout.addRow("Preferred time", self.preferred)
         layout.addWidget(self.button)
+        layout.addWidget(self.help.button)
         self.setLayout(layout)
 
     def buttonclicked(self):
