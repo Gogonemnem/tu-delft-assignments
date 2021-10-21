@@ -38,6 +38,10 @@ class Settings(QtWidgets.QGroupBox):
         self.time = QtWidgets.QSpinBox(self)
         self.set_time_breaks()
 
+        # Change the time for a snooze
+        self.snooze = QtWidgets.QSpinBox(self)
+        self.set_snooze_time()
+
         # Add done button after changing settings
         self.change = QtWidgets.QPushButton('Change settings')
         self.change.clicked.connect(self.change_settings)
@@ -49,6 +53,7 @@ class Settings(QtWidgets.QGroupBox):
     def change_settings(self):
         """Changes the settings and saves them externally"""
         self.settings[0] = self.time.value()
+        self.settings[1] = self.snooze.value()
         self.save_settings()
 
     def set_time_breaks(self):
@@ -57,6 +62,13 @@ class Settings(QtWidgets.QGroupBox):
         self.time.setMaximum(120)
         self.time.setValue(int(self.settings[0]))
         self.layout.addRow('The average time between breaks in minutes', self.time)
+
+    def set_snooze_time(self):
+        """Lets the user set the time of the snooze"""
+        self.snooze.setMinimum(1)
+        self.snooze.setMaximum(20)
+        self.snooze.setValue(int(self.settings[1]))
+        self.layout.addRow('The time of the a snooze', self.snooze)
 
     def read_settings(self):
         """Reads the settings from the file and saves them in a list"""
