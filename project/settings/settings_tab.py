@@ -68,7 +68,7 @@ class Settings(QtWidgets.QGroupBox):
         self.snooze.setMinimum(1)
         self.snooze.setMaximum(20)
         self.snooze.setValue(int(self.settings[1]))
-        self.layout.addRow('The time of a snooze', self.snooze)
+        self.layout.addRow('The time the notification is snoozed in minutes', self.snooze)
 
     def read_settings(self):
         """Reads the settings from the file and saves them in a list"""
