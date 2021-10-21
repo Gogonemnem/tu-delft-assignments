@@ -2,6 +2,7 @@ from PyQt5 import QtWidgets, QtGui
 from PyQt5.QtWidgets import QLineEdit, QComboBox, QPushButton, QMessageBox, QFormLayout
 from project.task_list.data_for_database import TaskList
 from project.task_list.task_list_tab import TaskListTab
+from project.settings.help_button import HelpButton
 
 
 class TaskWidget(QtWidgets.QGroupBox):
@@ -43,8 +44,16 @@ class TaskWidget(QtWidgets.QGroupBox):
         self.button.clicked.connect(self.buttonclicked)
         self.button.clicked.connect(self.show_popup)
 
+        # Help button
+        self.help = HelpButton()
+        self.help.msg.setText('You can add a new task to the database here.\n'
+                              'Fill in a name for the task and select your preferences.\n'
+                              'When done, you click: "Add task"\n'
+                              'and go to the Task list tab to see the result.\n')
+
         # Layout
         layout = QFormLayout()
+        layout.addWidget(self.help.button)
         layout.addRow("Name", self.textbox)
         layout.addRow("Estimated time", self.estimated)
         layout.addRow("Priority", self.priority)
