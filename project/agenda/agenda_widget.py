@@ -26,6 +26,7 @@ class AgendaWidget(QtWidgets.QGroupBox):
         self.buttons_layout.addWidget(self.stop_button)
         self.buttons_widget.setFixedHeight(40)
 
+        # Creates a help button, which explains what the agenda does.
         self.help = HelpButton()
         self.help.msg.setText('This widget shows your personal agenda. '
                               'To show and update the agenda, press the top left button '
