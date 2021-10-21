@@ -1,5 +1,5 @@
 import os
-from PyQt5 import QtWidgets, QtGui, QtCore
+from PyQt5 import QtWidgets, QtGui
 
 absolute_path = os.path.abspath(__file__)
 fileDirectory = os.path.dirname(absolute_path)
