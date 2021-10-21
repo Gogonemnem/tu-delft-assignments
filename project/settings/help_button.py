@@ -14,18 +14,10 @@ class HelpButton(QtWidgets.QGroupBox):
         self.msg = QtWidgets.QMessageBox()
         self.button = QtWidgets.QPushButton('Help')
         self.button.setIcon(QtGui.QIcon('question_mark.png'))
-        # self.button.setMaximumSize(200, 20)
-        self.button.setStyleSheet('border-radius : 30')
-        # self.layout = QtWidgets.QVBoxLayout()
-        # self.layout.addWidget(self.button, alignment=QtCore.Qt.AlignBottom)
+        self.button.setStyleSheet('border-radius : 50')
         self.button.clicked.connect(self.message_box)
 
     def message_box(self):
         self.msg.setWindowTitle("Help!")
         self.msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
         self.msg.exec()
-
-    # def layout(self):
-        # self.layout = QtWidgets.QVBoxLayout()
-        # self.layout.addWidget(self.button, alignment=QtCore.Qt.AlignBottom)
-        # self.setLayout(self.layout)
