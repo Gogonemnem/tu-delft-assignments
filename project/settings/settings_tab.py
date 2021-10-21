@@ -5,6 +5,7 @@ absolute_path = os.path.abspath(__file__)
 fileDirectory = os.path.dirname(absolute_path)
 parent = os.path.dirname(fileDirectory)
 path = os.path.join(parent, 'main', 'saved_settings')
+path_description = os.path.join(parent, 'main', 'description_file')
 
 
 class SettingsTab(QtWidgets.QWidget):
@@ -71,13 +72,19 @@ class Settings(QtWidgets.QGroupBox):
 
 
 class Description(QtWidgets.QGroupBox):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, file=path_description, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        # self.setTitle('Description')
-        # self.layout = QtWidgets.QGridLayout
-        # text = QtWidgets.QPlainTextEdit(self)
-        # text.insertPlainText('This is a lot of text')
-        # self.layout.addWidget(text)
+        self.setTitle('Description')
+        self.layout = QtWidgets.QVBoxLayout(self)
+        text = QtWidgets.QTextBrowser(self)
 
-        # self.setLayout(self.layout)
+        # Read the text file and insert it as html in the QTextBrowser
+        with open(file) as fin:
+            lines = fin.readlines()
+            print(''.join(lines))
+            text.insertHtml(''.join(lines))
+
+        self.layout.addWidget(text)
+
+        self.setLayout(self.layout)
