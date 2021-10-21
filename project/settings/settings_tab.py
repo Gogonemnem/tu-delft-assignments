@@ -94,7 +94,6 @@ class Description(QtWidgets.QGroupBox):
         # Read the text file and insert it as html in the QTextBrowser
         with open(file) as fin:
             lines = fin.readlines()
-            print(''.join(lines))
             text.insertHtml(''.join(lines))
 
         self.layout.addWidget(text)
