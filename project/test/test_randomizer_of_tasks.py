@@ -43,6 +43,5 @@ class TestRandomizerOfTasks(unittest.TestCase):
     #     test.hof_randomize_tasks_other_today(task_list)
     #     self.assertLessEqual(len(), 3)
 
-    def test_
 
 
