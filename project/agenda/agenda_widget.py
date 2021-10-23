@@ -51,6 +51,7 @@ class AgendaWidget(QtWidgets.QGroupBox):
         self.agenda.remove_activity_over()
         activities = self.agenda.agenda
         now = self.agenda.now
+        x_start = now - timedelta(minutes=30)
 
         # It is important to make the distinction between empty agenda and filled agenda
         if activities:
@@ -60,22 +61,24 @@ class AgendaWidget(QtWidgets.QGroupBox):
                 ac_dic = activity.__dict__
                 ac_dic['id'] = str(identifier)
                 data.append({key.capitalize().replace('_', ' '): ac_dic[key]
-                             for key in ['activity', 'start_time', 'end_time', 'id']})
-            x_start = min(activities[0].start_time, now-timedelta(minutes=30))
+                             for key in ['activity', 'start_time', 'end_time', 'id', 'summary']})
+            x_start = min(x_start, activities[0].start_time)
         else:
-            x_start = now - timedelta(minutes=30)
             data = {
                 'Activity': ['Nothing is planned'],
                 'Start time': [x_start],
                 'End time': [x_start],
-                'Id': ['']
+                'Id': [''],
+                'Summary': ['']
             }
-        x_range = [x_start, now + timedelta(days=1)]  # x-axis scaled to (about usually) one day
+        x_range = [x_start, now + timedelta(hours=8)]  # x-axis scaled to (about usually) 8 hours
         df = pd.DataFrame(data)
 
         # Plot the figure
         fig = px.timeline(
-            df, x_start="Start time", x_end="End time", y="Activity", color="Id", range_x=x_range)
+            df, x_start="Start time", x_end="End time", y="Activity", color="Id", range_x=x_range,
+            hover_data=['Activity', 'Start time', 'End time', 'Id', 'Summary']
+        )
         fig.update_yaxes(autorange="reversed")  # otherwise tasks are listed from the bottom up
         fig.add_vline(x=datetime.now(), line_width=1, line_color="red")  # current time indication
 
