@@ -1,4 +1,6 @@
 import sys
+from datetime import timedelta
+
 from PyQt5.QtWidgets import QApplication, QWidget
 from PyQt5.QtCore import QTimer, QDateTime, QTime
 import numpy as np
@@ -58,6 +60,12 @@ class TimeRandomizer:
             break_time = self.activity_break_time()
             self.timer.start(break_time)
 
+        # task is too close to the next activity
+        # implement so it can read from database?
+        if self.agenda.next_activity_within(timedelta(minutes=10)):
+            break_time = self.activity_break_time()
+            self.timer.start(break_time)
+
         # task can be done right now & timer is off
         # this is a signal to create a pop-up
 
@@ -68,7 +76,7 @@ class TimeRandomizer:
         right_after, duration = self.agenda.task_right_after()
 
         if right_after:
-            break_time = self.generate_break_time(300_000, duration)
+            break_time = self.generate_break_time(20_000, duration)
         else:
             break_time = self.generate_break_time()
         return break_time

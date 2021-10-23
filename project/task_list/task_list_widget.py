@@ -1,3 +1,5 @@
+import datetime
+
 from PyQt5.QtCore import QTimer
 from PyQt5.QtWidgets import QPushButton, QRadioButton, QGridLayout, QButtonGroup, QGroupBox, QMessageBox
 
@@ -146,7 +148,7 @@ class TaskListWidget(QGroupBox):
 
     def initialize_timers(self):
         self.time_randomizer.start()
-        self.timers[0].start(5_000)
+        self.timers[0].start(1_000)
 
     def check_randomizer_timer(self):
         if self.timers[1].isActive():
@@ -173,9 +175,13 @@ class TaskListWidget(QGroupBox):
         self.timers[0].start(5_000)
 
         if status == 'Rescheduled':
-            self.todolist.change(task, status, time='14:55')
+            time = (datetime.datetime.now() + datetime.timedelta(minutes=1)).time().isoformat()
+            self.todolist.change(task, status, time=time)
             timer = self.time_randomizer.reschedule_popup(task)
             timer.timeout.connect(imitate_reschedule)
+            timer.timeout.connect(lambda: self.timers.remove(timer))
+            self.timers.append(timer)
+
             # self.agenda.add_activity(Activity())
 
         elif status == 'Another':
@@ -192,7 +198,7 @@ def imitate_popup() -> int:
     return button_clicked
 
 
-def imitate_reschedule(timer):
+def imitate_reschedule():
     msg = QMessageBox()
     msg.setText('Rescheduled task')
     msg.setStandardButtons(QMessageBox.Ok)
