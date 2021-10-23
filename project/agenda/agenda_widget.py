@@ -55,31 +55,25 @@ class AgendaWidget(QtWidgets.QGroupBox):
 
         # It is important to make the distinction between empty agenda and filled agenda
         if activities:
-            # Turn every activity object attributes into a dataframe values for the graph
-            data = []
-            for identifier, activity in enumerate(activities):
-                ac_dic = activity.__dict__
-                ac_dic['id'] = str(identifier)
-                data.append({key.capitalize().replace('_', ' '): ac_dic[key]
-                             for key in ['activity', 'start_time', 'end_time', 'id', 'summary']})
+            df = self.agenda.agenda_dataframe
+            df['ID'] = [str(i) for i in range(0, len(df) + 0)]
             x_start = min(x_start, activities[0].start_time)
         else:
             data = {
-                'Activity': ['Nothing is planned'],
-                'Start time': [x_start],
-                'End time': [x_start],
-                'Id': [''],
-                'Summary': ['']
+                'activity': ['Nothing is planned'],
+                'start_time': [x_start],
+                'end_time': [x_start],
+                'ID': [''],
+                'summary': ['']
             }
+            df = pd.DataFrame(data)
         x_range = [x_start, now + timedelta(hours=8)]  # x-axis scaled to (about usually) 8 hours
-        df = pd.DataFrame(data)
 
         # Plot the figure
         fig = px.timeline(
-            df, x_start="Start time", x_end="End time", y="Activity", color="Id", range_x=x_range,
-            hover_data=['Activity', 'Start time', 'End time', 'Id', 'Summary']
+            df, x_start="start_time", x_end="end_time", y="activity", color="ID", range_x=x_range,
+            hover_data=['activity', 'start_time', 'end_time', 'ID', 'summary']
         )
-        fig.update_yaxes(autorange="reversed")  # otherwise tasks are listed from the bottom up
         fig.add_vline(x=datetime.now(), line_width=1, line_color="red")  # current time indication
 
         # Turn the HTML plot into a widget and do not open it within a browser
