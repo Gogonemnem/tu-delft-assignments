@@ -34,20 +34,23 @@ class AgendaWidget(QtWidgets.QGroupBox):
         self.resize(1000, 800)
 
     def start(self):
+        """Initiate refreshing the agenda each minute with corresponding button settings"""
         self.timer.start(60000)
         self.show_graph()
         self.update_button.setEnabled(False)
         self.stop_button.setEnabled(True)
 
     def stop(self):
+        """Stop refreshing the agenda with corresponding button settings"""
         self.timer.stop()
         self.update_button.setEnabled(True)
         self.stop_button.setEnabled(False)
 
     def show_graph(self):
+        """Draw the graph with agenda activities using plotly express"""
         self.agenda.remove_activity_over()
         activities = self.agenda.agenda
-        now = datetime.now()
+        now = self.agenda.now
 
         # It is important to make the distinction between empty agenda and filled agenda
         if activities:
@@ -58,9 +61,9 @@ class AgendaWidget(QtWidgets.QGroupBox):
                 ac_dic['id'] = str(identifier)
                 data.append({key.capitalize().replace('_', ' '): ac_dic[key]
                              for key in ['activity', 'start_time', 'end_time', 'id']})
-            x_start = activities[0].start_time
+            x_start = min(activities[0].start_time, now-timedelta(minutes=30))
         else:
-            x_start = now-timedelta(minutes=30)
+            x_start = now - timedelta(minutes=30)
             data = {
                 'Activity': ['Nothing is planned'],
                 'Start time': [x_start],
@@ -78,3 +81,18 @@ class AgendaWidget(QtWidgets.QGroupBox):
 
         # Turn the HTML plot into a widget and do not open it within a browser
         self.browser.setHtml(fig.to_html(include_plotlyjs='cdn'))
+
+    def add_activity(self, activity):
+        """Add the activity to the agenda and refresh the page"""
+        self.agenda.add_activity(activity)
+        self.start()
+
+    def modify_activity(self, identifier, activity, start_time, end_or_dur, summary):
+        """Modify the activity in the agenda and refresh the page"""
+        self.agenda.modify_activity(identifier, activity, start_time, end_or_dur, summary)
+        self.start()
+
+    def delete_activity(self, identifier):
+        """Delete the activity from the agenda and refresh the page"""
+        self.agenda.delete_activity(identifier)
+        self.start()

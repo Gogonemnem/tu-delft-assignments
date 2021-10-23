@@ -7,6 +7,7 @@ class Randomizer:
         self.database = TaskList().data_output()
         self.lst = []
         self.already_chosen = []
+        self.extra_database = []
         self.dict_priority_less = {}
         self.lst_random = []
         self.dict_counter = {}
@@ -19,7 +20,7 @@ class Randomizer:
         self.lst = [task.name for task in self.database if task.priority == "must be done today"
                     and task.preferred_time == pref]
 
-        #Add task to task list and to a list which records which
+        #Add task to task list and to a list that records which
         #tasks have already been chosen if the conditions hold.
         for task in self.database:
             if len(self.lst) < 3 and task.priority == "must be done today" \
@@ -27,6 +28,10 @@ class Randomizer:
                     and task.name not in self.lst and task.name not in self.already_chosen:
                 self.lst.append(task.name)
                 self.already_chosen.append(task.name)
+
+        # for task in self.lst:
+        #     if task.periodic == "several times a day":
+        #         self.extra_database.append(task.name)
 
     def returns_list_random(self, pref):
         """"Returns a randomized list of tasks for the given preferred part of the day.
@@ -80,7 +85,12 @@ class Randomizer:
         if self.biggest not in self.lst \
                 and self.biggest not in self.already_chosen:
             self.lst.append(self.biggest)
-            self.already_chosen.append(self.biggest)
+
+            #Add task to already chosen list if the periodicity isn't several times a day.
+            #This way the task will appear at the most once a day in the to-do list.
+            for task in self.database:
+                if task.name == self.biggest and task.periodic != "several times a day":
+                    self.already_chosen.append(self.biggest)
 
     def hof_randomize_tasks_other_today(self, pref):
         """"Returns the task list for the given part of the day."""
@@ -108,3 +118,6 @@ class Randomizer:
         """Returns a randomized list of tasks for the evening."""
         return self.hof_randomize_tasks_other_today("Evening")
 
+
+test = Randomizer()
+print(test.randomize_tasks_other_morning(), test.randomize_tasks_other_afternoon(), test.randomize_tasks_other_evening())
