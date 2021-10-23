@@ -10,6 +10,9 @@ path = os.path.join(parent, 'main', 'todolist')
 
 class ToDoList:
 
+    column_names = ['Task', 'ID', 'Task Status', 'Rescheduled Time']
+    delimiter = '&'
+
     def __init__(self):
         self.todolist: list[dict] = []
         self.status()
@@ -20,15 +23,19 @@ class ToDoList:
 
         return [task for task in self.todolist if task['Task Status'] not in ('Done', 'Rescheduled')]
 
+    def is_completed(self) -> bool:
+
+        next_task = next((task for task in self.todolist if task['Task Status'] != 'Done'), None)
+        return not next_task
+
     def status(self):
         """Check status of all tasks in To-Do list file."""
 
         self.read_file()
 
-        if not self.available:
+        if self.is_completed():
             self.create_todolist()
-
-        self.write_to_file()
+            self.write_to_file()
 
     def create_todolist(self):
         """Generates a new to-do list"""
@@ -42,7 +49,8 @@ class ToDoList:
         ]
 
         for i, task in enumerate(lst):
-            self.todolist.append({'Task': task, 'ID': i + 1, 'Task Status': 'To-Do'})
+            self.todolist.append(
+                {'Task': task, 'ID': i + 1, 'Task Status': 'To-Do', 'Rescheduled Time': None})
 
     def change(self, task: dict, status: str, time=None):
         """Change status of task [task] from to-do list to status [status]."""
@@ -55,7 +63,6 @@ class ToDoList:
 
         if status == 'Removed':
             self.todolist.pop(index)
-            self.available.remove(task)
 
         elif status == 'Rescheduled':
             task['Rescheduled Time'] = time
@@ -66,19 +73,19 @@ class ToDoList:
         """Reads the file contents transforming it to a list of tasks"""
 
         with open(path, encoding='utf-8') as file_to_do:
-            if file_to_do.readline() == 'Task&ID&Task Status&Rescheduled Time':
+            if file_to_do.readline() == ToDoList.delimiter.join(ToDoList.column_names):
                 fieldnames = None
             else:
-                fieldnames = ['Task', 'ID', 'Task Status', 'Rescheduled Time']
-            csv_reader = csv.DictReader(file_to_do, fieldnames=fieldnames, delimiter='&')
+                fieldnames = ToDoList.column_names
+
+            csv_reader = csv.DictReader(file_to_do, fieldnames, delimiter=ToDoList.delimiter)
             self.todolist = list(csv_reader)
 
     def write_to_file(self):
         """Writes the list of tasks to the file"""
 
         with open(path, 'w', encoding='utf-8') as file_to_do:
-            csv_writer = csv.DictWriter(
-                file_to_do, ['Task', 'ID', 'Task Status', 'Rescheduled Time'], delimiter='&')
+            csv_writer = csv.DictWriter(file_to_do, ToDoList.column_names, delimiter=ToDoList.delimiter)
             csv_writer.writeheader()
             csv_writer.writerows(self.todolist)
 

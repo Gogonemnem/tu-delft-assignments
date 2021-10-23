@@ -1,5 +1,5 @@
 import sys
-from datetime import timedelta
+from datetime import timedelta, datetime
 
 from PyQt5.QtWidgets import QApplication, QWidget
 from PyQt5.QtCore import QTimer, QDateTime, QTime
@@ -104,12 +104,10 @@ class TimeRandomizer:
 
     # Needs to be tested
     @staticmethod
-    def reschedule_popup(task: dict) -> QTimer:
+    def reschedule_popup(time: datetime) -> QTimer:
         """Execute a pop-up for the rescheduled task at specified time"""
-        now = QDateTime().currentDateTime()
-        new_time = QDateTime().currentDateTime()
-        new_time.setTime(QTime.fromString(task['Rescheduled Time']))
-        duration = now.msecsTo(new_time)
+        now = datetime.now()
+        duration = int((time-now).total_seconds()*1000)
 
         timer = QTimer()
         timer.setSingleShot(True)

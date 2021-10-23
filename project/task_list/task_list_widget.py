@@ -20,8 +20,7 @@ class TaskListWidget(QGroupBox):
         # self.pop_up = PopUp()
 
         timer = QTimer()
-        timer.timeout.connect(self.check_randomizer_timer)
-        self.timers = [timer, self.time_randomizer.timer]
+        self.timers = {-1: timer, 0: self.time_randomizer.timer}
 
         self.setTitle("Daily to-do list")
 
@@ -46,7 +45,7 @@ class TaskListWidget(QGroupBox):
         self.todolist.status()
         for task in self.todolist.todolist:
 
-            for i, button_group in enumerate(self.tuple_of_groups[1:]):
+            for i, _ in enumerate(self.tuple_of_groups[1:]):
                 self.create_checkable_button(task, i + 1)
 
             self.create_task_select(task)
@@ -73,6 +72,9 @@ class TaskListWidget(QGroupBox):
         button = QPushButton(label)
         button.setCheckable(True)
         button.setMinimumWidth(100)
+
+        if group_index == 3:  # completed button is not yet visible
+            button.setVisible(False)
 
         button.clicked.connect(lambda: self.check_pop_up(group_index, task))
 
@@ -139,7 +141,7 @@ class TaskListWidget(QGroupBox):
     def refresh(self):
         self.clear_widget()
         self.create_to_do_list_visual()
-        self.timers[0].stop()
+        self.timers = {-1: self.timers[-1], 0: self.timers[0]}
         self.initialize_timers()
 
     def clear_widget(self):
@@ -148,60 +150,65 @@ class TaskListWidget(QGroupBox):
 
     def initialize_timers(self):
         self.time_randomizer.start()
-        self.timers[0].start(1_000)
+        self.timers[-1].timeout.connect(self.check_randomizer_timer)
+        self.timers[-1].start(5_000)
 
     def check_randomizer_timer(self):
-        if self.timers[1].isActive():
+        if self.timers[0].isActive():
             return
 
-        self.timers[0].stop()  # stop checking for now
+        self.timers[-1].stop()  # stop checking for now
         self.time_randomizer.stop()
 
         if self.todolist.available:
-            choice = imitate_popup()  # may be static?
+            choice = self.imitate_popup()  # may be static?
             self.check_pop_up(choice)
 
     def check_pop_up(self, choice, task=None):
         statuses = 'To Do', 'Doing', 'Removed', 'Done', 'Rescheduled', 'Another', 'Snoozed', 'Skipped', 'Redo'
-        status = statuses[choice] if choice < len(statuses) else 'Rescheduled'
+        status = statuses[choice] if choice < len(statuses) else 'Skipped'
 
         if not task:
             task = self.todolist.available[0]
+        time = None
+        self.timers.pop(int(task['ID']), None)
 
-        # self.todolist.change(task, status, time='14:55')
-        self.change_status_layout(task, status)
-        self.time_randomizer.set_timer(task)
-
-        self.timers[0].start(5_000)
-
+        # TODO: correctly set time (incorporate popup)
         if status == 'Rescheduled':
-            time = (datetime.datetime.now() + datetime.timedelta(minutes=1)).time().isoformat()
-            self.todolist.change(task, status, time=time)
-            timer = self.time_randomizer.reschedule_popup(task)
-            timer.timeout.connect(imitate_reschedule)
-            timer.timeout.connect(lambda: self.timers.remove(timer))
-            self.timers.append(timer)
+            time = datetime.datetime.now() + datetime.timedelta(minutes=1)
+            self.setup_rescheduler(task, time)
 
             # self.agenda.add_activity(Activity())
 
-        elif status == 'Another':
+        self.todolist.change(task, status, time=time)
+        self.change_status_layout(task, status)
+        self.time_randomizer.set_timer(task)
+
+        self.timers[-1].start(5_000)
+
+        if status == 'Another':
             task = self.todolist.available[1]
             self.check_pop_up(1, task=task)
             # self.check_pop_up(imitate_popup(), task=task)
 
+    def setup_rescheduler(self, task: dict, time: datetime.datetime):
+        timer = self.time_randomizer.reschedule_popup(time)
+        timer.timeout.connect(lambda: self.imitate_reschedule(task))
+        self.timers[int(task['ID'])] = timer
 
-def imitate_popup() -> int:
-    msg = QMessageBox()
-    msg.setStandardButtons(QMessageBox.Ok)
-    button_clicked = msg.exec()
+    @staticmethod
+    def imitate_popup() -> int:
+        msg = QMessageBox()
+        msg.setStandardButtons(QMessageBox.Ok)
+        button_clicked = msg.exec()
 
-    return button_clicked
+        return button_clicked
 
+    def imitate_reschedule(self, task):
+        msg = QMessageBox()
+        msg.setText('Rescheduled task')
+        msg.setStandardButtons(QMessageBox.Ok)
+        choice = msg.exec()
+        self.check_pop_up(3, task)
 
-def imitate_reschedule():
-    msg = QMessageBox()
-    msg.setText('Rescheduled task')
-    msg.setStandardButtons(QMessageBox.Ok)
-    button_clicked = msg.exec()
-
-    # return button_clicked
+        # return button_clicked
