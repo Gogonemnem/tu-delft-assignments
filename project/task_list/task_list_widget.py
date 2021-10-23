@@ -193,22 +193,15 @@ class TaskListWidget(QGroupBox):
 
     def setup_rescheduler(self, task: dict, time: datetime.datetime):
         timer = self.time_randomizer.reschedule_popup(time)
-        timer.timeout.connect(lambda: self.imitate_reschedule(task))
+        timer.timeout.connect(lambda: self.imitate_popup(task))
         self.timers[int(task['ID'])] = timer
 
-    @staticmethod
-    def imitate_popup() -> int:
+    def imitate_popup(self, task=None):
         msg = QMessageBox()
         msg.setStandardButtons(QMessageBox.Ok)
         button_clicked = msg.exec()
 
-        return button_clicked
-
-    def imitate_reschedule(self, task):
-        msg = QMessageBox()
-        msg.setText('Rescheduled task')
-        msg.setStandardButtons(QMessageBox.Ok)
-        choice = msg.exec()
-        self.check_pop_up(3, task)
-
-        # return button_clicked
+        if task:  # rescheduled and complete it
+            self.check_pop_up(3, task)
+        else:  # return the choice
+            return button_clicked
