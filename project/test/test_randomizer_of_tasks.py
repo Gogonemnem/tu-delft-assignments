@@ -22,7 +22,7 @@ class TestRandomizerOfTasks(unittest.TestCase):
         all_values = test.dict_counter.values()
         max_value = max(all_values)
         list_of_keys = list()
-        #Iterate over all the items in dictionary to find keys with max value
+
         for key, value in test.dict_counter.items():
             if value == max_value:
                 list_of_keys.append(key)

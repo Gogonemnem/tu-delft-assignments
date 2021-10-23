@@ -7,7 +7,6 @@ class Randomizer:
         self.database = TaskList().data_output()
         self.lst = []
         self.already_chosen = []
-        self.extra_database = []
         self.dict_priority_less = {}
         self.lst_random = []
         self.dict_counter = {}
@@ -28,10 +27,6 @@ class Randomizer:
                     and task.name not in self.lst and task.name not in self.already_chosen:
                 self.lst.append(task.name)
                 self.already_chosen.append(task.name)
-
-        # for task in self.lst:
-        #     if task.periodic == "several times a day":
-        #         self.extra_database.append(task.name)
 
     def returns_list_random(self, pref):
         """"Returns a randomized list of tasks for the given preferred part of the day.
@@ -117,7 +112,3 @@ class Randomizer:
     def randomize_tasks_other_evening(self):
         """Returns a randomized list of tasks for the evening."""
         return self.hof_randomize_tasks_other_today("Evening")
-
-
-test = Randomizer()
-print(test.randomize_tasks_other_morning(), test.randomize_tasks_other_afternoon(), test.randomize_tasks_other_evening())
