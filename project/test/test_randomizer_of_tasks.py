@@ -4,11 +4,10 @@ from project.randomizer.randomizer_of_tasks import Randomizer
 
 class TestRandomizerOfTasks(unittest.TestCase):
 
-    # def test_gets_added_to_list(self):
-    #     """"Tests if name of task actually gets added to the lists 'lst' and 'already_chosen'."""
-    #     test = Randomizer()
-    #     test.hof_must_be_done_today("Morning")
-    #     self.assertNotEqual(test.lst[-1], )
+    def test_gets_added_to_list(self):
+        test = Randomizer()
+        test.hof_must_be_done_today("Morning")
+        self.assertLessEqual(test.already_chosen, test.lst)
 
     def test_returns_None_list_random(self):
         """"Tests if the function 'returns_list_random' actually returns None
@@ -57,7 +56,7 @@ class TestRandomizerOfTasks(unittest.TestCase):
 
     def test_add_biggest_to_already_chosen_list(self):
         """"Tests if task name is added to the list 'already_chosen'
-        if task has biggest amount of occurrrences is lst_random and
+        if task has biggest amount of occurrences is lst_random and
         if the periodicity is not several times a day."""
         test = Randomizer()
         test.hof_must_be_done_today("Morning")
