@@ -186,23 +186,20 @@ class TaskListWidget(QGroupBox):
 
         self.timers[-1].stop()  # stop checking for now
         self.time_randomizer.stop()
+        task = self.todolist.available[0]
 
         if self.todolist.available:
-            choice = Popup.pop_up()
-            self.check_pop_up(choice)
+            choice = Popup.pop_up(task)
+            self.check_pop_up(choice, task)
 
-    def check_pop_up(self, choice, task=None):
+    def check_pop_up(self, choice, task):
         statuses = 'To Do', 'Doing', 'Removed', 'Done', 'Rescheduled', 'Another', 'Snoozed', 'Skipped', 'Redo'
         status = statuses[choice]
 
-        if not task:
-            task = self.todolist.available[0]
-        time = None
         self.timers.pop(int(task['ID']), None)
 
-        # TODO: correctly set time (incorporate popup)
+        time = None
         if status == 'Rescheduled':
-
             time, okay = TimeDialog.get_time()
             if not okay:
                 time = None
@@ -223,7 +220,7 @@ class TaskListWidget(QGroupBox):
 
     def setup_rescheduler(self, task: dict, time: datetime.datetime):
         timer = self.time_randomizer.reschedule_popup(time)
-        timer.timeout.connect(lambda: self.check_pop_up(Popup.pop_up(), task))
+        timer.timeout.connect(lambda: self.check_pop_up(Popup.pop_up(task), task))
         self.timers[int(task['ID'])] = timer
 
     # def imitate_popup(self, task=None):

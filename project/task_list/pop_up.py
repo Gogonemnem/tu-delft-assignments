@@ -9,10 +9,11 @@ from PyQt5.QtWidgets import QMessageBox, QTimeEdit, QDialog, QInputDialog, QWidg
 
 class Popup:
     @staticmethod
-    def pop_up():
+    def pop_up(task: dict):
         statuses = 'Do', 'Remove', 'Complete', 'Reschedule', 'Do another', 'Snooze', 'Skip', 'Redo'
         buttons = [None]
         pop_up = QMessageBox()
+        pop_up.setText(task['Task'])
 
         # Creates buttons on the pop-up
         for status in statuses:

@@ -52,6 +52,11 @@ class TimeRandomizer:
         if time:
             self.timer.start(time)
 
+    def set_average_break_time(self, msecs):
+        self.average_break_time = msecs
+        if self.timer.isActive():
+            self.start()
+
     # Needs to be tested
     def next_task(self):
 
