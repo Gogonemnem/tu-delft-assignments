@@ -35,7 +35,6 @@ class IndividualAgendaWidget(QtWidgets.QGroupBox):
         self.setLayout(self.layout)
 
         self.crea_mod_del()
-        self.help_button()
 
     def keep_old_widgets(self, count):
         """Remove widgets which will be recreated when selecting an option on the screen"""
@@ -126,6 +125,7 @@ class IndividualAgendaWidget(QtWidgets.QGroupBox):
                 self.layout_duration()
             self.layout_description()
         self.layout_button()
+        self.help_button()
 
     def layout_id(self):
         """Show the option to choose the id"""
@@ -249,6 +249,7 @@ class IndividualAgendaWidget(QtWidgets.QGroupBox):
         return activity, start_time, end_or_dur, summary
 
     def help_button(self):
+        self.help = HelpButton()
         self.help.msg.setText('You can modify your agenda here and create your own schedule.\n\n'
                               'First, select if you want to create an activity, modify one or delete one. '
                               'When deleting an activity, simply enter the corresponding id and click "Delete" '
