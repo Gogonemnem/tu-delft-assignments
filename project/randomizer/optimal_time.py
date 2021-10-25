@@ -111,7 +111,8 @@ class TimeRandomizer:
         now = datetime.now()
 
         duration = int((date_time-now).total_seconds()*1000)
-
+        if duration < 1000:
+            duration = 1000
         timer = QTimer()
         timer.setSingleShot(True)
         timer.start(duration)
