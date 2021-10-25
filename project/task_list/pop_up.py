@@ -1,25 +1,63 @@
-from PyQt5.QtWidgets import QMessageBox
+import datetime
+import sys
 
-class Popup():
-    def popup_when_time_is_up(self):
+from PyQt5 import QtWidgets, Qt
+from PyQt5.QtCore import QTime
+from PyQt5.QtWidgets import QMessageBox, QTimeEdit, QDialog, QInputDialog, QWidget, QLayout, QVBoxLayout, \
+    QDialogButtonBox
+
+
+class Popup:
+    @staticmethod
+    def pop_up():
+        statuses = 'Do', 'Remove', 'Complete', 'Reschedule', 'Do another', 'Snooze', 'Skip', 'Redo'
+        buttons = [None]
         pop_up = QMessageBox()
 
         # Creates buttons on the pop-up
-        pop_up.addButton(pop_up.Ok)
-        do = pop_up.addButton('Do Task', pop_up.ActionRole)
-        completed = pop_up.addButton('Task Completed', pop_up.ActionRole)
-        snooze = pop_up.addButton('Snooze Task', pop_up.ActionRole)
-        skip = pop_up.addButton('Skip Task', pop_up.ActionRole)
-        reschedule = pop_up.addButton('Reschedule Task', pop_up.ActionRole)
-        another = pop_up.addButton('Another Task', pop_up.ActionRole)
-        redo = pop_up.addButton('Redo Task', pop_up.ActionRole)
+        for status in statuses:
+            button = pop_up.addButton(status + ' Task', QMessageBox.YesRole)
+            buttons.append(button)
 
-        do.clicked.connect()
-        completed.clicked.connect()
-        snooze.clicked.connect()
-        skip.clicked.connect()
-        reschedule.clicked.connect()
-        another.clicked.connect()
-        redo.clicked.connect()
+        pop_up.exec()
+
+        for i, button in enumerate(buttons):
+            if pop_up.clickedButton() == button:
+                return i
+        return -1
 
 
+class TimeDialog(QDialog):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        # nice widget for editing the date
+        self.time = QTimeEdit(self)
+        self.time.setTime(QTime.currentTime())
+        layout = QVBoxLayout(self)
+        layout.addWidget(self.time)
+
+        # OK and Cancel buttons
+        buttons = QDialogButtonBox(
+            QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
+        buttons.accepted.connect(self.accept)
+        buttons.rejected.connect(self.reject)
+        layout.addWidget(buttons)
+
+    # static method to create the dialog and return (time, accepted)
+    @staticmethod
+    def get_time(parent=None):
+        dialog = TimeDialog(parent)
+        result = dialog.exec_()
+        time = dialog.time.time().toPyTime()
+        today = datetime.date.today()
+        date_time = datetime.datetime.combine(today, time)
+        return date_time, result == QDialog.Accepted
+
+
+if __name__ == '__main__':
+    app = QtWidgets.QApplication(sys.argv)
+    window = TimeDialog()
+    window.show()
+    app.exec_()
+# self.time.setCalendarPopup(True)
