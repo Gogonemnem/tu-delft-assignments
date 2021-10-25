@@ -1,0 +1,28 @@
+<body>
+<font size="5">
+<header>
+    <h1>Breaksum</h1>
+</header><br>
+    Welcome, user, at <b>Breaksum</b>!<br>
+    This application will help you to take enough breaks during the work day.<br>
+    It's very easy to use.<br>
+    You can add all the tasks you want to do, with the help of the add a task-widget<br>
+    and you can plan your day with the help of the agenda widget.<br>
+    There are many ways to customize your tasks, so it will be to your liking.<br>
+    <b>Breaksum</b> will look for suitable times in your schedule<br>
+    and will give you a pop-up if it's time to take a break.<br>
+    Don't worry, you won't get annoying notifications during your meetings or planned breaks.<br>
+    Editing or deleting a task is very easy in the task list tab.<br>
+    And if you want to do a task earlier than your notification,<br>
+    you can do that in your daily to-do-list.<br>
+    If you don't want to do a task when you get your notification,<br>
+    you can snooze the task or skip it.<br>
+    <br>
+    Working from home has never been so easy or productive!<br>
+    We hope you have fun using <b>Breaksum</b>.<br>
+    <br>
+    <em>The developers</em><br>
+
+</font>
+</body>
+
