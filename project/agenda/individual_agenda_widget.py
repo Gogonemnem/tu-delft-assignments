@@ -7,6 +7,7 @@ from PyQt5.QtWidgets import QComboBox, QTimeEdit, QApplication, QFormLayout, QPu
 
 from project.agenda.agenda import Activity, Agenda
 from project.agenda.agenda_widget import AgendaWidget
+from project.settings.help_button import HelpButton
 
 
 class IndividualAgendaWidget(QtWidgets.QGroupBox):
@@ -27,12 +28,14 @@ class IndividualAgendaWidget(QtWidgets.QGroupBox):
         self.duration = QTimeEdit()
         self.description = QLineEdit()
         self.button = QPushButton()
+        self.help = HelpButton()
 
         self.setTitle('Agenda activities can be added here')
         self.layout = QFormLayout()
         self.setLayout(self.layout)
 
         self.crea_mod_del()
+        self.help_button()
 
     def keep_old_widgets(self, count):
         """Remove widgets which will be recreated when selecting an option on the screen"""
@@ -244,6 +247,17 @@ class IndividualAgendaWidget(QtWidgets.QGroupBox):
             end_or_dur = None
 
         return activity, start_time, end_or_dur, summary
+
+    def help_button(self):
+        self.help.msg.setText('You can modify your agenda here and create your own schedule.\n\n'
+                              'First, select if you want to create an activity, modify one or delete one. '
+                              'When deleting an activity, simply enter the corresponding id and click "Delete" '
+                              'When creating or modifying an activity add the details of your activity ' 
+                              'and click on Add "activity" or "Modify activity". '
+                              'When modifying an activity, only edit the preferred options.\n'
+                              'If everything went right, you can now see your activity in the agenda.')
+
+        self.layout.addWidget(self.help.button)
 
 
 def main():

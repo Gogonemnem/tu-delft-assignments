@@ -21,6 +21,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.task = TaskWidget(self.tasklisttab)
         self.add_activity = IndividualAgendaWidget(self.agenda)
         self.settings = SettingsTab()
+        # self.tasklist.time_randomizer.average_break_time = int(self.settings.settings.settings[0]) * 60000
         self.home = QtWidgets.QWidget()
         self.tabs = QtWidgets.QTabWidget()
         self.file = QtWidgets.QWidget()
