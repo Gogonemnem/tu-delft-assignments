@@ -38,7 +38,7 @@ class TestTime(unittest.TestCase):
         time_randomizer.deterministic = False
         time_randomizer.start()
 
-        QTimer.singleShot(2 * length, self.close)
+        QTimer.singleShot(100 * length, self.close)
         app.exec_()
 
         self.assertEqual(0, len(lst))

@@ -7,6 +7,9 @@ from project.agenda.agenda import Activity
 from project.agenda.agenda_widget import AgendaWidget
 from project.randomizer.optimal_time import TimeRandomizer
 from project.task_list.to_do_list import ToDoList
+from PyQt5.QtWidgets import QPushButton, QRadioButton, QGridLayout, QButtonGroup, QGroupBox
+from project.task_list.to_do_list import ToDoList
+from project.settings.help_button import HelpButton
 
 
 class TaskListWidget(QGroupBox):
@@ -40,6 +43,18 @@ class TaskListWidget(QGroupBox):
         self.create_to_do_list_visual()
         self.create_generator_button()
         self.initialize_timers()
+
+        # Create a help button, to explain the daily to-do list
+        self.help = HelpButton()
+        self.help.msg.setText('Your daily to-do list shows all the tasks you will get today.\n'
+                              'If you want to do a task earlier than planned '
+                              "or don't want to do it at all, you can select the task here "
+                              'and push the corresponding button.\n'
+                              "Don't forget to mark a task as finished when you're done.\n"
+                              "You don't need to use the daily to-do list, "
+                              'because of the build-in notifications, '
+                              'but it will give you a nice overview of your tasks anyway.')
+        self.layout.addWidget(self.help.button)
 
     def create_to_do_list_visual(self):
         self.todolist.status()
