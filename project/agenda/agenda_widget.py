@@ -4,6 +4,7 @@ import plotly.express as px
 from PyQt5 import QtWidgets, QtWebEngineWidgets
 from PyQt5.QtCore import QTimer
 from PyQt5.QtWidgets import QWidget, QHBoxLayout
+from project.settings.help_button import HelpButton
 
 
 class AgendaWidget(QtWidgets.QGroupBox):
@@ -25,9 +26,23 @@ class AgendaWidget(QtWidgets.QGroupBox):
         self.buttons_layout.addWidget(self.stop_button)
         self.buttons_widget.setFixedHeight(40)
 
+        # Creates a help button, which explains what the agenda does.
+        self.help = HelpButton()
+        self.help.msg.setText('This widget shows your personal agenda. '
+                              'To show and update the agenda, press the top left button '
+                              'and to stop updating it again, press the button next to it.\n'
+                              'You can add new activities to the agenda, with the widget at '
+                              'the bottom left side of the agenda.\n'
+                              'You can use the agenda, for example, to let Breaksum know when you have time '
+                              'to get a new task or when you do not want to be disturbed.\n'
+                              'The agenda will delete the activities when they are done '
+                              'and you can not import your external agenda. '
+                              'You have to add activities manually.')
+
         layout = QtWidgets.QVBoxLayout(self)
         layout.addWidget(self.buttons_widget)
         layout.addWidget(self.browser)
+        layout.addWidget(self.help.button)
 
         self.update_button.clicked.connect(self.start)
         self.stop_button.clicked.connect(self.stop)
@@ -51,32 +66,29 @@ class AgendaWidget(QtWidgets.QGroupBox):
         self.agenda.remove_activity_over()
         activities = self.agenda.agenda
         now = self.agenda.now
+        x_start = now - timedelta(minutes=30)
 
         # It is important to make the distinction between empty agenda and filled agenda
         if activities:
-            # Turn every activity object attributes into a dataframe values for the graph
-            data = []
-            for identifier, activity in enumerate(activities):
-                ac_dic = activity.__dict__
-                ac_dic['id'] = str(identifier)
-                data.append({key.capitalize().replace('_', ' '): ac_dic[key]
-                             for key in ['activity', 'start_time', 'end_time', 'id']})
-            x_start = min(activities[0].start_time, now-timedelta(minutes=30))
+            df = self.agenda.agenda_dataframe
+            df['ID'] = [str(i) for i in range(0, len(df) + 0)]
+            x_start = min(x_start, activities[0].start_time)
         else:
-            x_start = now - timedelta(minutes=30)
             data = {
-                'Activity': ['Nothing is planned'],
-                'Start time': [x_start],
-                'End time': [x_start],
-                'Id': ['']
+                'activity': ['Nothing is planned'],
+                'start_time': [x_start],
+                'end_time': [x_start],
+                'ID': [''],
+                'summary': ['']
             }
-        x_range = [x_start, now + timedelta(days=1)]  # x-axis scaled to (about usually) one day
-        df = pd.DataFrame(data)
+            df = pd.DataFrame(data)
+        x_range = [x_start, now + timedelta(hours=8)]  # x-axis scaled to (about usually) 8 hours
 
         # Plot the figure
         fig = px.timeline(
-            df, x_start="Start time", x_end="End time", y="Activity", color="Id", range_x=x_range)
-        fig.update_yaxes(autorange="reversed")  # otherwise tasks are listed from the bottom up
+            df, x_start="start_time", x_end="end_time", y="activity", color="ID", range_x=x_range,
+            hover_data=['activity', 'start_time', 'end_time', 'ID', 'summary']
+        )
         fig.add_vline(x=datetime.now(), line_width=1, line_color="red")  # current time indication
 
         # Turn the HTML plot into a widget and do not open it within a browser
