@@ -1,11 +1,12 @@
 # Retrospective 04-10-21
 
 Created: October 4, 2021 9:55 AM
-Last Edited Time: October 5, 2021 5:43 PM
-Minutes Secretary: Anonymous
+Last Edited Time: October 25, 2021 9:36 PM
+Minutes Secretary: Janine
 Next Meeting: October 6, 2021 5:05 PM
 Participants: Anonymous, Anonymous, Anonymous, Anonymous, Anonymous
-Scrum Master: Anonymous
+Product Owner: Janine
+Scrum Master: Gonem
 Type: Retrospective
 
 # Points of Improvement from Last Week
@@ -17,10 +18,9 @@ Type: Retrospective
 # **What went well?**
 
 - We used the milestones a bit and our progression can be seen on it
-- We had a plan for the whole week and more things were accomplished than before
 - A lot of code was produced
     - The add a task widget is almost finished
-    - The delete button works in the task list
+    - The delete button works in the task list.
     - An external database is added
     - There is a template for the agenda
     - There is a beginning of the daily task list

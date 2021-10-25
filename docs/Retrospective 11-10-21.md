@@ -1,10 +1,12 @@
 # Retrospective 11-10-21
 
 Created: October 11, 2021 10:33 AM
-Last Edited Time: October 12, 2021 5:20 PM
-Minutes Secretary: Anonymous
+Last Edited Time: October 25, 2021 9:36 PM
+Minutes Secretary: Betsie
+Next Meeting: October 13, 2021
 Participants: Anonymous, Anonymous, Anonymous, Anonymous, Anonymous
-Scrum Master: Anonymous
+Product Owner: Betsie
+Scrum Master: Janine
 Type: Retrospective
 
 # Points of improvement from last Week
