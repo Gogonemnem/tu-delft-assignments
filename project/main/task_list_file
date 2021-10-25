@@ -1,12 +1,15 @@
 Task$Estimated time (minutes)$Priority$Periodic$Preferred time$Delete task$Edit task
-Take a walk$30$normal$True$Whole day$$
-Get some coffee$10$low$True$Morning$$
-Vacuum the room$15$must be done today$False$Afternoon$$
-Do some stretching$5$high$True$Whole day$$
-Call grandma$30$high$False$Afternoon$$
-Call dokter$5$high$False$Evening$$
-Help friend with moving$5$low$False$Afternoon$$
-Walk dog$10$normal$True$Whole day$$
-Help Betsie with programming$30$high$False$Morning$$
-Drink water$5$normal$True$Morning$$
-Clean room$10$must be done today$True$Morning$$
+Take a walk$30$normal$max once a day$Whole day$$
+Get some coffee$10$low$several times a day$Morning$$
+Vacuum the room$15$must be done today$max once a day$Afternoon$$
+Do some stretching$5$high$several times a day$Whole day$$
+Call grandma$30$high$not periodic$Afternoon$$
+Call dokter$5$high$not periodic$Evening$$
+Help friend with moving$5$low$not periodic$Afternoon$$
+Walk dog$10$normal$several times a day$Whole day$$
+Help Betsie with programming$30$high$not periodic$Morning$$
+Drink water$5$normal$several times a day$Morning$$
+Clean room$10$must be done today$max once a day$Morning$$
+Brush your teeth$5$low$max once a day$Evening$$
+Take a shower$20$low$max once a day$Evening$$
+read a chapter from you book$15$high$several times a day$Evening$$
