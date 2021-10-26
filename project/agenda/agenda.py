@@ -69,6 +69,13 @@ class Agenda:
 
         return not self.agenda[0].active
 
+    def next_activity_within(self, timespan: timedelta, time: datetime = datetime.now()):
+
+        next_activity = next((activity for activity in self.agenda if activity.start_time > time), None)
+        if not next_activity:
+            return False
+        return next_activity.start_time <= time + timespan
+
     def task_right_after(self):
         """Return T|F whether a task should be right after activity"""
         self.remove_activity_over()

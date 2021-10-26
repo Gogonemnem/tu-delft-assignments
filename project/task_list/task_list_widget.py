@@ -1,5 +1,10 @@
-from PyQt5.QtWidgets import QPushButton, QRadioButton, QGridLayout, QButtonGroup, QGroupBox
+import datetime
 
+from PyQt5.QtCore import QTimer
+from PyQt5.QtWidgets import QPushButton, QRadioButton, QGridLayout, QButtonGroup, QGroupBox, QMessageBox
+
+from project.agenda.agenda import Activity
+from project.agenda.agenda_widget import AgendaWidget
 from project.randomizer.optimal_time import TimeRandomizer
 from project.task_list.to_do_list import ToDoList
 from project.settings.help_button import HelpButton
@@ -8,12 +13,15 @@ from project.settings.help_button import HelpButton
 class TaskListWidget(QGroupBox):
     """Visualise Task that need to be done today"""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, agenda: AgendaWidget, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
+        self.agenda = agenda
         self.todolist = ToDoList()
-        # self.time_randomizer = TimeRandomizer(self.todolist.todolist)
+        self.time_randomizer = TimeRandomizer(self.todolist, agenda)
         # self.pop_up = PopUp()
+
+        timer = QTimer()
+        self.timers = {-1: timer, 0: self.time_randomizer.timer}
 
         self.setTitle("Daily to-do list")
 
@@ -32,6 +40,7 @@ class TaskListWidget(QGroupBox):
 
         self.create_to_do_list_visual()
         self.create_generator_button()
+        self.initialize_timers()
 
         # Create a help button, to explain the daily to-do list
         self.help = HelpButton()
@@ -49,8 +58,8 @@ class TaskListWidget(QGroupBox):
         self.todolist.status()
         for task in self.todolist.todolist:
 
-            for i, button_group in enumerate(self.tuple_of_groups[1:]):
-                self.create_checkable_button(task, i+1)
+            for i, _ in enumerate(self.tuple_of_groups[1:]):
+                self.create_checkable_button(task, i + 1)
 
             self.create_task_select(task)
             self.color_buttons(task)
@@ -69,23 +78,21 @@ class TaskListWidget(QGroupBox):
 
     def create_checkable_button(self, task: dict, group_index: int):
         labels = None, 'Do task', 'Remove task', 'Task completed'
-        statuses = None, 'Doing', 'Removed', 'Done'
 
         identifier = int(task['ID'])
         label = labels[group_index]
-        status = statuses[group_index]
 
         button = QPushButton(label)
         button.setCheckable(True)
         button.setMinimumWidth(100)
-        button.clicked.connect(lambda: self.change_status(task, status))
+
+        if group_index == 3:  # completed button is not yet visible
+            button.setVisible(False)
+
+        button.clicked.connect(lambda: self.check_pop_up(group_index, task))
 
         self.tuple_of_groups[group_index].addButton(button, identifier)
         self.layout.addWidget(button, identifier, min(group_index, 2))
-
-    def change_status(self, task: dict, status: str):
-        self.todolist.change(task, status)
-        self.change_status_layout(task, status)
 
     def change_status_layout(self, task: dict, status: str):
         if status == 'Doing':
@@ -128,7 +135,7 @@ class TaskListWidget(QGroupBox):
     def color_buttons(self, task: dict):
         """Color selected task and accompanying buttons."""
         colors = (((50, 200, 255), (225, 175, 175), (200, 225, 200)),  # when not selected
-                  ((40, 125, 175), (225, 75, 75), (100, 175, 100)))    # selected
+                  ((40, 125, 175), (225, 75, 75), (100, 175, 100)))  # selected
 
         identifier = int(task['ID'])
         is_checked = self.group_task.button(identifier).isChecked()
@@ -147,7 +154,67 @@ class TaskListWidget(QGroupBox):
     def refresh(self):
         self.clear_widget()
         self.create_to_do_list_visual()
+        self.timers = {-1: self.timers[-1], 0: self.timers[0]}
+        self.initialize_timers()
 
     def clear_widget(self):
-        for item in reversed(self.todolist.todolist):
-            self.change_status(item, 'Removed')
+        for task in reversed(self.todolist.todolist):
+            self.check_pop_up(2, task)
+
+    def initialize_timers(self):
+        self.time_randomizer.start()
+        self.timers[-1].timeout.connect(self.check_randomizer_timer)
+        self.timers[-1].start(5_000)
+
+    def check_randomizer_timer(self):
+        if self.timers[0].isActive():
+            return
+
+        self.timers[-1].stop()  # stop checking for now
+        self.time_randomizer.stop()
+
+        if self.todolist.available:
+            choice = self.imitate_popup()  # may be static?
+            self.check_pop_up(choice)
+
+    def check_pop_up(self, choice, task=None):
+        statuses = 'To Do', 'Doing', 'Removed', 'Done', 'Rescheduled', 'Another', 'Snoozed', 'Skipped', 'Redo'
+        status = statuses[choice] if choice < len(statuses) else 'Skipped'
+
+        if not task:
+            task = self.todolist.available[0]
+        time = None
+        self.timers.pop(int(task['ID']), None)
+
+        # TODO: correctly set time (incorporate popup)
+        if status == 'Rescheduled':
+            time = datetime.datetime.now() + datetime.timedelta(minutes=1)
+            self.setup_rescheduler(task, time)
+
+            # self.agenda.add_activity(Activity())
+
+        self.todolist.change(task, status, time=time)
+        self.change_status_layout(task, status)
+        self.time_randomizer.set_timer(task)
+
+        self.timers[-1].start(5_000)
+
+        if status == 'Another':
+            task = self.todolist.available[1]
+            self.check_pop_up(1, task=task)
+            # self.check_pop_up(imitate_popup(), task=task)
+
+    def setup_rescheduler(self, task: dict, time: datetime.datetime):
+        timer = self.time_randomizer.reschedule_popup(time)
+        timer.timeout.connect(lambda: self.imitate_popup(task))
+        self.timers[int(task['ID'])] = timer
+
+    def imitate_popup(self, task=None):
+        msg = QMessageBox()
+        msg.setStandardButtons(QMessageBox.Ok)
+        button_clicked = msg.exec()
+
+        if task:  # rescheduled and complete it
+            self.check_pop_up(3, task)
+        else:  # return the choice
+            return button_clicked
