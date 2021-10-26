@@ -31,8 +31,7 @@ class Settings(QtWidgets.QGroupBox):
 
         # Read the saved settings and save them in self.settings
         self.file = file
-        self.settings = []
-        self.read_settings()
+        self.settings = self.read_settings(self.file)
 
         # Change the time between tasks
         self.time = QtWidgets.QSpinBox(self)
@@ -54,7 +53,7 @@ class Settings(QtWidgets.QGroupBox):
         """Changes the settings and saves them externally"""
         self.settings[0] = self.time.value()
         self.settings[1] = self.snooze.value()
-        self.save_settings()
+        self.save_settings(self.file, self.settings)
 
     def set_time_breaks(self):
         """Lets the user set the average time between breaks"""
@@ -70,16 +69,21 @@ class Settings(QtWidgets.QGroupBox):
         self.snooze.setValue(int(self.settings[1]))
         self.layout.addRow('The time the notification is snoozed in minutes', self.snooze)
 
-    def read_settings(self):
-        """Reads the settings from the file and saves them in a list"""
-        with open(self.file) as fin:
+    @staticmethod
+    def read_settings(file):
+        """Reads the settings from the file and returns them as a list"""
+        settings = []
+        with open(file) as fin:
             for line in fin:
-                self.settings.append(line.strip())
+                settings.append(line.strip())
 
-    def save_settings(self):
+        return settings
+
+    @staticmethod
+    def save_settings(file, settings):
         """Saves the settings from the list in the file"""
-        with open(self.file, 'w') as fin:
-            for setting in self.settings:
+        with open(file, 'w') as fin:
+            for setting in settings:
                 fin.write(f'{setting}\n')
 
 
@@ -96,6 +100,6 @@ class Description(QtWidgets.QGroupBox):
             lines = fin.readlines()
             text.insertHtml(''.join(lines))
 
+        # Add the text as a widget to the layout and use setLayout
         self.layout.addWidget(text)
-
         self.setLayout(self.layout)
