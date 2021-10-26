@@ -2,7 +2,6 @@ from PyQt5 import QtWidgets
 from PyQt5 import QtCore
 from project.task_list.database_task_list import TaskListDatabase
 from project.task_list.data_for_database import TaskList
-from project.settings.help_button import HelpButton
 
 
 class TaskListTab(QtWidgets.QTableView):
@@ -22,19 +21,16 @@ class TaskListTab(QtWidgets.QTableView):
         # Creates a help button, which explains the database
         layout = QtWidgets.QVBoxLayout()
         self.setLayout(layout)
-        self.help = HelpButton()
-        self.help.msg.setText('This tab shows the whole database. '
-                              'This means it shows all the possible tasks '
-                              'that might appear on your daily to do list. '
-                              'Except the tasks you have marked as: "must be done today" '
-                              'Those are certain to appear.\n'
-                              'You can also edit or delete your tasks here.\n'
-                              'To delete a task, simply click the delete button, '
-                              'but be beware! The task will be permanently deleted once you click.\n'
-                              'To edit a task, click the edit button. '
-                              'You will then get the option to edit a specific part of a task.')
-
-        layout.addWidget(self.help.button, alignment=QtCore.Qt.AlignBottom)
+        self.setWhatsThis('This tab shows the whole database. '
+                          'This means it shows all the possible tasks '
+                          'that might appear on your daily to do list. '
+                          'Except the tasks you have marked as: "must be done today" '
+                          'Those are certain to appear.\n'
+                          'You can also edit or delete your tasks here.\n'
+                          'To delete a task, simply click the delete button, '
+                          'but be beware! The task will be permanently deleted once you click.\n'
+                          'To edit a task, click the edit button. '
+                          'You will then get the option to edit a specific part of a task.')
 
     def delete_button_clicked(self):
         """Deletes a row from the database and refreshes the screen"""

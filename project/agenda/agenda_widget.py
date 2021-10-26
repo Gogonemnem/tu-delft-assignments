@@ -4,7 +4,6 @@ import plotly.express as px
 from PyQt5 import QtWidgets, QtWebEngineWidgets
 from PyQt5.QtCore import QTimer
 from PyQt5.QtWidgets import QWidget, QHBoxLayout
-from project.settings.help_button import HelpButton
 
 
 class AgendaWidget(QtWidgets.QGroupBox):
@@ -27,22 +26,20 @@ class AgendaWidget(QtWidgets.QGroupBox):
         self.buttons_widget.setFixedHeight(40)
 
         # Creates a help button, which explains what the agenda does.
-        self.help = HelpButton()
-        self.help.msg.setText('This widget shows your personal agenda. '
-                              'To show and update the agenda, press the top left button '
-                              'and to stop updating it again, press the button next to it.\n'
-                              'You can add new activities to the agenda, with the widget at '
-                              'the bottom left side of the agenda.\n'
-                              'You can use the agenda, for example, to let Breaksum know when you have time '
-                              'to get a new task or when you do not want to be disturbed.\n'
-                              'The agenda will delete the activities when they are done '
-                              'and you can not import your external agenda. '
-                              'You have to add activities manually.')
+        self.setWhatsThis('This widget shows your personal agenda. '
+                          'To show and update the agenda, press the top left button '
+                          'and to stop updating it again, press the button next to it.\n'
+                          'You can add new activities to the agenda, with the widget at '
+                          'the bottom left side of the agenda.\n'
+                          'You can use the agenda, for example, to let Breaksum know when you have time '
+                          'to get a new task or when you do not want to be disturbed.\n'
+                          'The agenda will delete the activities when they are done '
+                          'and you can not import your external agenda. '
+                          'You have to add activities manually.')
 
         layout = QtWidgets.QVBoxLayout(self)
         layout.addWidget(self.buttons_widget)
         layout.addWidget(self.browser)
-        layout.addWidget(self.help.button)
 
         self.update_button.clicked.connect(self.start)
         self.stop_button.clicked.connect(self.stop)

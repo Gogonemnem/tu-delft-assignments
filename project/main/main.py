@@ -1,6 +1,8 @@
 import traceback
 import sys
 from PyQt5 import QtWidgets
+from PyQt5.QtCore import Qt
+
 from project.agenda.agenda_widget import AgendaWidget
 from project.task_list.task_list_widget import TaskListWidget
 from project.task_list.task_list_tab import TaskListTab
@@ -15,6 +17,7 @@ class MainWindow(QtWidgets.QMainWindow):
         super().__init__(*args, **kwargs)
 
         self.setWindowTitle("Breaksum")
+        self.setWindowFlags(Qt.WindowCloseButtonHint | Qt.WindowContextHelpButtonHint)
         self.agenda = AgendaWidget(agenda)
         self.tasklist = TaskListWidget()
         self.tasklisttab = TaskListTab()
@@ -27,6 +30,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.file = QtWidgets.QWidget()
         self.task_list = QtWidgets.QWidget()
         self.visual()
+
 
     @staticmethod
     def catch_exceptions(failure_type, val, trace_back):
