@@ -7,6 +7,9 @@ from project.agenda.agenda import Activity
 from project.agenda.agenda_widget import AgendaWidget
 from project.randomizer.optimal_time import TimeRandomizer
 from project.task_list.to_do_list import ToDoList
+from project.task_list.pop_up import Popup, TimeDialog
+from PyQt5.QtWidgets import QPushButton, QRadioButton, QGridLayout, QButtonGroup, QGroupBox
+from project.task_list.to_do_list import ToDoList
 from project.settings.help_button import HelpButton
 
 
@@ -26,11 +29,10 @@ class TaskListWidget(QGroupBox):
         self.setTitle("Daily to-do list")
 
         # Create groups for all button types
-        self.group_task = QButtonGroup()
-        self.group_remove = QButtonGroup()
-        self.group_done = QButtonGroup()
-        self.group_doing = QButtonGroup()
-        self.tuple_of_groups = self.group_task, self.group_doing, self.group_remove, self.group_done
+        group_names = 'group_task', 'group_doing', 'group_remove', 'group_done'
+        for group_name in group_names:
+            setattr(self, group_name, QButtonGroup())
+        self.tuple_of_groups = tuple(getattr(self, group) for group in group_names)
 
         self.generate_button = QPushButton()
 
@@ -104,6 +106,9 @@ class TaskListWidget(QGroupBox):
         elif status == 'Done':
             self.complete_task_layout(task)
 
+        elif status == 'Rescheduled':
+            self.reschedule_task_layout(task)
+
     def doing_task_layout(self, task: dict):
         """Set status of task to "Doing"."""
 
@@ -121,6 +126,10 @@ class TaskListWidget(QGroupBox):
         for button_group in self.tuple_of_groups:
             self.layout.removeWidget(button_group.button(identifier))
 
+        agenda_id = self.agenda.agenda.find_activity(task['Task'])
+        if agenda_id != -1:
+            self.agenda.delete_activity(agenda_id)
+
     def complete_task_layout(self, task: dict):
         """Set status of task to "Done"."""
 
@@ -131,6 +140,11 @@ class TaskListWidget(QGroupBox):
         self.group_doing.button(identifier).setVisible(False)
         self.group_remove.button(identifier).setVisible(True)
         self.group_done.button(identifier).setVisible(False)
+
+    def reschedule_task_layout(self, task: dict):
+        time = datetime.datetime.fromisoformat(task['Rescheduled Time'])
+        self.setup_rescheduler(task, time)
+
 
     def color_buttons(self, task: dict):
         """Color selected task and accompanying buttons."""
@@ -172,26 +186,26 @@ class TaskListWidget(QGroupBox):
 
         self.timers[-1].stop()  # stop checking for now
         self.time_randomizer.stop()
+        task = self.todolist.available[0]
 
         if self.todolist.available:
-            choice = self.imitate_popup()  # may be static?
-            self.check_pop_up(choice)
+            choice = Popup.pop_up(task)
+            self.check_pop_up(choice, task)
 
-    def check_pop_up(self, choice, task=None):
+    def check_pop_up(self, choice, task):
         statuses = 'To Do', 'Doing', 'Removed', 'Done', 'Rescheduled', 'Another', 'Snoozed', 'Skipped', 'Redo'
-        status = statuses[choice] if choice < len(statuses) else 'Skipped'
+        status = statuses[choice]
 
-        if not task:
-            task = self.todolist.available[0]
-        time = None
         self.timers.pop(int(task['ID']), None)
 
-        # TODO: correctly set time (incorporate popup)
+        time = None
         if status == 'Rescheduled':
-            time = datetime.datetime.now() + datetime.timedelta(minutes=1)
-            self.setup_rescheduler(task, time)
-
-            # self.agenda.add_activity(Activity())
+            time, okay = TimeDialog.get_time()
+            if not okay:
+                time = None
+                status = 'To Do'
+            else:
+                self.agenda.add_activity(Activity('Doing Task', time, datetime.timedelta(minutes=20), task['Task']))
 
         self.todolist.change(task, status, time=time)
         self.change_status_layout(task, status)
@@ -206,15 +220,15 @@ class TaskListWidget(QGroupBox):
 
     def setup_rescheduler(self, task: dict, time: datetime.datetime):
         timer = self.time_randomizer.reschedule_popup(time)
-        timer.timeout.connect(lambda: self.imitate_popup(task))
+        timer.timeout.connect(lambda: self.check_pop_up(Popup.pop_up(task), task))
         self.timers[int(task['ID'])] = timer
 
-    def imitate_popup(self, task=None):
-        msg = QMessageBox()
-        msg.setStandardButtons(QMessageBox.Ok)
-        button_clicked = msg.exec()
-
-        if task:  # rescheduled and complete it
-            self.check_pop_up(3, task)
-        else:  # return the choice
-            return button_clicked
+    # def imitate_popup(self, task=None):
+    #     msg = QMessageBox()
+    #     msg.setStandardButtons(QMessageBox.Ok)
+    #     button_clicked = msg.exec()
+    #
+    #     if task:  # rescheduled and complete it
+    #         self.check_pop_up(3, task)
+    #     else:  # return the choice
+    #         return button_clicked

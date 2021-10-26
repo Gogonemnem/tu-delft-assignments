@@ -61,6 +61,10 @@ class Agenda:
         del self.agenda[identifier]
         self.update_dataframe()
 
+    def find_activity(self, summary):
+        activity = next((activity for activity in self.agenda if activity.summary == summary), None)
+        return self.agenda.index(activity) if activity else -1
+
     def is_free(self):
         """Return T|F whether you are free (or have any activity right now)"""
         self.remove_activity_over()

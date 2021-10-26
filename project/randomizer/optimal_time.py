@@ -1,5 +1,5 @@
 import sys
-from datetime import timedelta, datetime
+from datetime import timedelta, datetime, time
 
 from PyQt5.QtWidgets import QApplication, QWidget
 from PyQt5.QtCore import QTimer, QDateTime, QTime
@@ -19,7 +19,9 @@ class TimeRandomizer:
         self.agenda = agenda.agenda
 
         # 45 minutes = 2_700_000 milliseconds
+        # 5 minutes = 300_000
         self.average_break_time = 1_000
+        self.snooze_time = 20_000
         self.deterministic = False
 
         self.timer = QTimer()
@@ -49,6 +51,11 @@ class TimeRandomizer:
         time = self.task_action_break_time(task)
         if time:
             self.timer.start(time)
+
+    def set_average_break_time(self, msecs):
+        self.average_break_time = msecs
+        if self.timer.isActive():
+            self.start()
 
     # Needs to be tested
     def next_task(self):
@@ -91,7 +98,7 @@ class TimeRandomizer:
             break_time = self.generate_break_time()
 
         elif status == 'Snoozed':  # Standard of 5 minutes = 300_000 milliseconds
-            break_time = self.generate_break_time(minimum=10_000)
+            break_time = self.generate_break_time(minimum=self.snooze_time)
 
         elif status in 'Doing':
             break_time = -1
@@ -104,11 +111,13 @@ class TimeRandomizer:
 
     # Needs to be tested
     @staticmethod
-    def reschedule_popup(time: datetime) -> QTimer:
+    def reschedule_popup(date_time: datetime) -> QTimer:
         """Execute a pop-up for the rescheduled task at specified time"""
         now = datetime.now()
-        duration = int((time-now).total_seconds()*1000)
 
+        duration = int((date_time-now).total_seconds()*1000)
+        if duration < 1000:
+            duration = 1000
         timer = QTimer()
         timer.setSingleShot(True)
         timer.start(duration)
