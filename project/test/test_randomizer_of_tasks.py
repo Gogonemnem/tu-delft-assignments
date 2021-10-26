@@ -4,19 +4,26 @@ from project.randomizer.randomizer_of_tasks import Randomizer
 
 class TestRandomizerOfTasks(unittest.TestCase):
 
-    def test_gets_added_to_list(self):
-        test = Randomizer()
-        test.hof_must_be_done_today("Morning")
-        self.assertLessEqual(test.already_chosen, test.lst)
+    # def test_:
+    #     test = Randomizer()
+    #     test.hof_must_be_done_today("Morning")
+
+
+    # def test_returns_None_list_random(self):
+    #     """"Tests if the function 'returns_list_random' actually returns None
+    #      if self.dict_priority_less is empty."""
+    #     test = Randomizer()
+    #     test.hof_must_be_done_today("Morning")
+    #     test.returns_list_random("Morning")
+    #     if not test.dict_priority_less:
+    #         self.assertEqual(None, test.dict_priority_less)
 
     def test_returns_None_list_random(self):
-        """"Tests if the function 'returns_list_random' actually returns None
-         if self.dict_priority_less is empty."""
         test = Randomizer()
         test.hof_must_be_done_today("Morning")
         test.returns_list_random("Morning")
-        if not test.dict_priority_less:
-            self.assertEqual(None, test.dict_priority_less)
+        if len(test.lst) >= 3:
+            self.assertEqual(test.dict_priority_less, None)
 
     def test_most_freq(self):
         """Tests that when multiple tasks have the same amount of occurrences in list_random,
