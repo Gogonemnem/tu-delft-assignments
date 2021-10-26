@@ -77,9 +77,10 @@ class TesToDoList(unittest.TestCase):
 
     def test_empty_list(self):
         """Set status of all tasks to "Done" and check if new is created"""
-        self.random, self.to_do_list = ToDoList().create_todolist(output=True)
         self.assertEqual(self.todo.is_completed(), False)
-        for i in range(len(self.to_do_list)):
-            self.todo.change(self.to_do_list[i], "Done")
+        for i in range(len(self.todo.todolist)):
             self.assertEqual(self.todo.is_completed(), False)
+            self.todo.change(self.todo.todolist[i], "Done")
         self.assertEqual(self.todo.is_completed(), True)
+
+
