@@ -4,26 +4,18 @@ from project.randomizer.randomizer_of_tasks import Randomizer
 
 class TestRandomizerOfTasks(unittest.TestCase):
 
-    # def test_:
-    #     test = Randomizer()
-    #     test.hof_must_be_done_today("Morning")
-
-
-    # def test_returns_None_list_random(self):
-    #     """"Tests if the function 'returns_list_random' actually returns None
-    #      if self.dict_priority_less is empty."""
-    #     test = Randomizer()
-    #     test.hof_must_be_done_today("Morning")
-    #     test.returns_list_random("Morning")
-    #     if not test.dict_priority_less:
-    #         self.assertEqual(None, test.dict_priority_less)
+    def test_hof_must_be_done_today(self):
+        test = Randomizer()
+        test.hof_must_be_done_today("Morning")
+        if len(test.lst) > 0 and len(test.already_chosen) > 0:
+            self.assertEqual(test.lst[-1], test.already_chosen[-1])
 
     def test_returns_None_list_random(self):
         test = Randomizer()
         test.hof_must_be_done_today("Morning")
         test.returns_list_random("Morning")
         if len(test.lst) >= 3:
-            self.assertEqual(test.dict_priority_less, None)
+            self.assertIsNone(test.dict_priority_less)
 
     def test_most_freq(self):
         """Tests that when multiple tasks have the same amount of occurrences in list_random,
@@ -80,6 +72,17 @@ class TestRandomizerOfTasks(unittest.TestCase):
     #     test.hof_randomize_tasks_other_today("Morning")
     #     if len(test.lst) >= 3:
 
+    def test_afternoon(self):
+        """"Tests if the function randomize_tasks_other_afternoon actually returns
+        the list that is return by the function hof_randomize_tasks_other_today."""
+        test = Randomizer()
+        self.assertEqual(test.randomize_tasks_other_afternoon(), test.lst)
+
+    def test_evening(self):
+        """"Tests if the function randomize_tasks_other_evening actually returns
+        the list that is return by the function hof_randomize_tasks_other_today."""
+        test = Randomizer()
+        self.assertEqual(test.randomize_tasks_other_evening(), test.lst)
 
 
 
