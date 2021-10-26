@@ -16,7 +16,8 @@ class Randomizer:
         """Takes the priority and the preferred time of a certain task as input
             and creates a list with tasks with that same priority and preferred time.
             Tasks with preferred time "Whole day" can be added too."""
-        self.lst = [task.name for task in self.database if task.priority == "must be done today"
+        self.lst = [task.name for task in self.database
+                    if task.priority == "must be done today"
                     and task.preferred_time == pref]
 
         # Add task to task list and to a list that records which
@@ -24,13 +25,15 @@ class Randomizer:
         for task in self.database:
             if len(self.lst) < 3 and task.priority == "must be done today" \
                     and task.preferred_time == "Whole day" \
-                    and task.name not in self.lst and task.name not in self.already_chosen:
+                    and task.name not in self.lst \
+                    and task.name not in self.already_chosen:
                 self.lst.append(task.name)
                 self.already_chosen.append(task.name)
 
     def creates_list_random(self, pref):
         """"Creates a randomized list of tasks for the given preferred part of the day.
-        The tasks with a higher priority are more likely to appear in the list and may appear multiple times."""
+        The tasks with a higher priority are more likely to appear in the list and may
+        appear multiple times."""
         self.dict_priority_less.clear()
         weight = 0
 
@@ -40,7 +43,8 @@ class Randomizer:
         if len(self.lst) < 3:
             for task in self.database:
                 if (task.preferred_time == pref or task.preferred_time == "Whole day") \
-                        and task.name not in self.lst and task.name not in self.already_chosen:
+                        and task.name not in self.lst \
+                        and task.name not in self.already_chosen:
                     if task.priority == "high":
                         weight = 4
                     elif task.priority == "normal":
@@ -54,8 +58,8 @@ class Randomizer:
 
         # Create a list with random tasks for the given part of the day.
         # The tasks in this list are not necessary unique (yet).
-        self.lst_random = random.choices(list(self.dict_priority_less.keys()), weights=self.dict_priority_less.values(),
-                                         k=5)
+        self.lst_random = random.choices(list(self.dict_priority_less.keys()),
+                                         weights=self.dict_priority_less.values(), k=5)
 
     def most_freq(self):
         """"Detects the task that appears most often in the randomized list.
@@ -87,7 +91,8 @@ class Randomizer:
             # Add task to already chosen list if the periodicity isn't several times a day.
             # This way the task will appear at the most once a day in the to-do list.
             for task in self.database:
-                if task.name == self.biggest and task.periodic != "several times a day":
+                if task.name == self.biggest \
+                        and task.periodic != "several times a day":
                     self.already_chosen.append(self.biggest)
 
     def hof_randomize_tasks_other_today(self, pref):
