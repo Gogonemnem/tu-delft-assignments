@@ -14,7 +14,7 @@ class Randomizer:
 
     def hof_must_be_done_today(self, pref):
         """Takes the priority and the preferred time of a certain task as input
-            and returns a list with tasks with that same priority and preferred time.
+            and creates a list with tasks with that same priority and preferred time.
             Tasks with preferred time "Whole day" can be added too."""
         self.lst = [task.name for task in self.database if task.priority == "must be done today"
                     and task.preferred_time == pref]
@@ -28,8 +28,8 @@ class Randomizer:
                 self.lst.append(task.name)
                 self.already_chosen.append(task.name)
 
-    def returns_list_random(self, pref):
-        """"Returns a randomized list of tasks for the given preferred part of the day.
+    def creates_list_random(self, pref):
+        """"Creates a randomized list of tasks for the given preferred part of the day.
         The tasks with a higher priority are more likely to appear in the list and may appear multiple times."""
         self.dict_priority_less.clear()
         weight = 0
@@ -58,8 +58,9 @@ class Randomizer:
                                          k=5)
 
     def most_freq(self):
-        """"Returns the task that appears most often in the randomized list.
-        When there are multiple tasks that appear the most often, the first task that appears will be returned."""
+        """"Detects the task that appears most often in the randomized list.
+        When there are multiple tasks that appear the most often,
+        the first task that appears will be detected as the biggest."""
         self.dict_counter.clear()
         if not self.lst_random:
             return
@@ -77,7 +78,8 @@ class Randomizer:
         self.biggest = max(self.dict_counter, key=lambda k: self.dict_counter[k])
 
     def adds_most_freq_to_task_list(self):
-        """"Adds the task that appears most often to the task list for the given part of the day."""
+        """"Adds the task that appears most often to the
+        task list for the given part of the day."""
         if self.biggest not in self.lst \
                 and self.biggest not in self.already_chosen:
             self.lst.append(self.biggest)
@@ -95,7 +97,7 @@ class Randomizer:
         # Keep adding tasks to task list while the list contains fewer
         # than three tasks and there are still tasks available to add.
         while len(self.lst) < 3:
-            self.returns_list_random(pref)
+            self.creates_list_random(pref)
             if not self.dict_priority_less:
                 break
             self.most_freq()
