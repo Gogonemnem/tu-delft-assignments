@@ -15,7 +15,7 @@ class ToDoList:
         self.status()
 
     @property
-    def available(self) -> list[dict]:
+    def available(self):
         """Return list of task id's that are able to be scheduled"""
 
         return [task for task in self.todolist if task['Task Status'] not in ('Done', 'Rescheduled')]
