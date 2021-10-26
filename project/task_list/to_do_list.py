@@ -50,14 +50,14 @@ class ToDoList:
 
         for i, task in enumerate(lst):
             self.todolist.append(
-                {'Task': task, 'ID': str(i + 1), 'Task Status': 'To-Do', 'Rescheduled Time': None})
+                {'Task': task, 'ID': str(i + 1), 'Task Status': 'To-Do', 'Rescheduled Time': ''})
 
         self.write_to_file()
 
         if output:
             return lst, self.todolist
 
-        return
+        return None
 
     def change(self, task: dict, status: str, time=None):
         """Change status of task [task] from to-do list to status [status]."""
@@ -91,7 +91,7 @@ class ToDoList:
         if output:
             return self.todolist
 
-        return
+        return None
 
     def write_to_file(self):
         """Writes the list of tasks to the file"""
