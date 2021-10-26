@@ -41,7 +41,9 @@ class TesToDoList(unittest.TestCase):
         self.to_do_list[5]["Task Status"] = "Done"
         self.to_do_list[6]["Task Status"] = "Doing"
         self.to_do_list[2]["Task Status"] = "Rescheduled"
+        self.to_do_list[2]["Rescheduled Time"] = ""
         self.to_do_list[8]["Task Status"] = "Rescheduled"
+        self.to_do_list[8]["Rescheduled Time"] = ""
         self.to_do_list[3]["Task Status"] = "Doing"
         self.to_do_list[0]["Task Status"] = "Done"
 
