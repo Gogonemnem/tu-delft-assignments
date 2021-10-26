@@ -30,7 +30,7 @@ class ToDoList:
 
         self.write_to_file()
 
-    def create_todolist(self):
+    def create_todolist(self, output=False):
         """Generates a new to-do list"""
         self.todolist = []
 
@@ -42,7 +42,14 @@ class ToDoList:
         ]
 
         for i, task in enumerate(lst):
-            self.todolist.append({'Task': task, 'ID': i + 1, 'Task Status': 'To-Do'})
+            self.todolist.append({'Task': task, 'ID': str(i + 1), 'Task Status': 'To-Do'})
+
+        self.write_to_file()
+
+        if output:
+            return lst, self.todolist
+
+        return
 
     def change(self, task: dict, status: str):
         """Change status of task [task] from to-do list to status [status]."""
@@ -61,7 +68,7 @@ class ToDoList:
 
         self.write_to_file()
 
-    def read_file(self):
+    def read_file(self, output=False):
         """Reads the file contents transforming it to a list of tasks"""
 
         with open(path, encoding='utf-8') as file_to_do:
@@ -71,6 +78,11 @@ class ToDoList:
                 fieldnames = ['Task', 'ID', 'Task Status']
             csv_reader = csv.DictReader(file_to_do, fieldnames=fieldnames, delimiter='&')
             self.todolist = list(csv_reader)
+
+        if output:
+            return self.todolist
+
+        return
 
     def write_to_file(self):
         """Writes the list of tasks to the file"""
