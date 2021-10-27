@@ -148,7 +148,10 @@ class TaskListWidget(QGroupBox):
         else:
             time = task['Rescheduled Time']
 
-        self.agenda.add_activity(Activity('Doing Task', time, datetime.timedelta(minutes=20), task['Task']))
+        activity = Activity('Doing Task', time, datetime.timedelta(minutes=20), task['Task'])
+        if activity not in self.agenda.agenda.agenda:
+            self.agenda.add_activity(activity)
+
         self.setup_rescheduler(task, time)
 
     def color_buttons(self, task: dict):
@@ -191,9 +194,9 @@ class TaskListWidget(QGroupBox):
 
         self.timers[-1].stop()  # stop checking for now
         self.time_randomizer.stop()
-        task = self.todolist.available[0]
 
         if self.todolist.available:
+            task = self.todolist.available[0]
             choice = Popup.pop_up(task)
             self.check_pop_up(choice, task)
 
