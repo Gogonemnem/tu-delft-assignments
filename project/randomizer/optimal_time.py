@@ -83,7 +83,7 @@ class TimeRandomizer:
         right_after, duration = self.agenda.task_right_after()
 
         if right_after:
-            break_time = self.generate_break_time(20_000, duration)
+            break_time = self.generate_break_time(self.snooze_time, duration)
         else:
             break_time = self.generate_break_time()
         return break_time
