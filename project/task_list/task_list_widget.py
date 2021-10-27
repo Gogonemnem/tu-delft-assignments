@@ -143,7 +143,12 @@ class TaskListWidget(QGroupBox):
         self.group_done.button(identifier).setVisible(False)
 
     def reschedule_task_layout(self, task: dict):
-        time = datetime.datetime.fromisoformat(task['Rescheduled Time'])
+        if isinstance(task['Rescheduled Time'], str):
+            time = datetime.datetime.fromisoformat(task['Rescheduled Time'])
+        else:
+            time = task['Rescheduled Time']
+
+        self.agenda.add_activity(Activity('Doing Task', time, datetime.timedelta(minutes=20), task['Task']))
         self.setup_rescheduler(task, time)
 
     def color_buttons(self, task: dict):
@@ -204,8 +209,6 @@ class TaskListWidget(QGroupBox):
             if not okay:
                 time = None
                 status = 'To Do'
-            else:
-                self.agenda.add_activity(Activity('Doing Task', time, datetime.timedelta(minutes=20), task['Task']))
 
         if status == 'Redo':
             copy = task.copy()
