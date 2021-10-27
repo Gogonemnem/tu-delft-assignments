@@ -1,6 +1,8 @@
 import os
 from PyQt5 import QtWidgets
 
+from project.randomizer.optimal_time import TimeRandomizer
+
 absolute_path = os.path.abspath(__file__)
 fileDirectory = os.path.dirname(absolute_path)
 parent = os.path.dirname(fileDirectory)
@@ -10,9 +12,9 @@ path_description = os.path.join(parent, 'main', 'description_file')
 
 class SettingsTab(QtWidgets.QWidget):
     """Visualizes the settings"""
-    def __init__(self, *args, **kwargs):
+    def __init__(self, time_randomizer: TimeRandomizer, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.settings = Settings()
+        self.settings = Settings(time_randomizer)
         self.description = Description()
 
         layout = QtWidgets.QGridLayout()
@@ -24,10 +26,11 @@ class SettingsTab(QtWidgets.QWidget):
 class Settings(QtWidgets.QGroupBox):
     """Ables the user to change some of the settings for the application"""
 
-    def __init__(self, file=path, *args, **kwargs):
+    def __init__(self, time_randomizer: TimeRandomizer, file=path, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setTitle('Settings')
         self.layout = QtWidgets.QFormLayout()
+        self.time_randomizer = time_randomizer
 
         # Read the saved settings and save them in self.settings
         self.file = file
@@ -54,6 +57,9 @@ class Settings(QtWidgets.QGroupBox):
         self.settings[0] = self.time.value()
         self.settings[1] = self.snooze.value()
         self.save_settings(self.file, self.settings)
+
+        self.time_randomizer.set_average_break_time(int(self.settings[0]) * 60000)
+        self.time_randomizer.snooze_time = int(self.settings[1]) * 60000
 
     def set_time_breaks(self):
         """Lets the user set the average time between breaks"""

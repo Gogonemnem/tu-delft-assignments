@@ -61,6 +61,10 @@ class Agenda:
         del self.agenda[identifier]
         self.update_dataframe()
 
+    def find_activity(self, summary):
+        activity = next((activity for activity in self.agenda if activity.summary == summary), None)
+        return self.agenda.index(activity) if activity else -1
+
     def is_free(self):
         """Return T|F whether you are free (or have any activity right now)"""
         self.remove_activity_over()
@@ -68,6 +72,13 @@ class Agenda:
             return True
 
         return not self.agenda[0].active
+
+    def next_activity_within(self, timespan: timedelta, time: datetime = datetime.now()):
+
+        next_activity = next((activity for activity in self.agenda if activity.start_time > time), None)
+        if not next_activity:
+            return False
+        return next_activity.start_time <= time + timespan
 
     def task_right_after(self):
         """Return T|F whether a task should be right after activity"""
