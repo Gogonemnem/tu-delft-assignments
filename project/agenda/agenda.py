@@ -14,8 +14,8 @@ path = os.path.join(parent, 'main', 'agenda_file')
 
 
 class Agenda:
+    """This class represents a agenda which is a list of activities ordered by starting time."""
     def __init__(self, file=path):
-        # activities occurring earlier appearing earlier on the list
         self.agenda: list[Activity] = []
 
         self.file = file
@@ -24,17 +24,20 @@ class Agenda:
 
     @property
     def now(self):
-        """Return the current time in datetime"""
+        """Return the current time in datetime."""
         return datetime.now()
 
     def add_activity(self, activity):
-        """Inserts an activity to the agenda list while keeping the correct order"""
+        """Insert an activity to the agenda while keeping the correct order."""
         bisect.insort(self.agenda, activity)
         self.update_dataframe()
 
     def modify_activity(
             self, identifier, activity=None, start_time=None, end_or_dur=None, summary=None):
-        """Modifies the information of an activity in the agenda list"""
+        """Modify the information of an activity in the agenda list.
+
+        The activity is removed and added back in to keep the order in the agenda list.
+        """
         activity_old = self.agenda[identifier]
 
         if not activity:
@@ -46,23 +49,23 @@ class Agenda:
         if not summary:
             summary = activity_old.summary
 
-        self.delete_activity(identifier)
+        self.pop_activity(identifier)
         activity_new = Activity(activity, start_time, end_or_dur, summary)
         self.add_activity(activity_new)
 
+    def pop_activity(self, identifier):
+        """Remove the activity from the agenda list."""
+        activity = self.agenda.pop(identifier)
         self.update_dataframe()
-
-    def delete_activity(self, identifier):
-        """Removes the activity from the agenda list"""
-        del self.agenda[identifier]
-        self.update_dataframe()
+        return activity
 
     def find_activity(self, summary):
+        """Find the index of the activity."""
         activity = next((activity for activity in self.agenda if activity.summary == summary), None)
         return self.agenda.index(activity) if activity else -1
 
     def is_free(self):
-        """Return T|F whether you are free (or have any activity right now)"""
+        """Return T|F whether you are free (or have any activity right now)."""
         self.remove_activity_over()
         if not self.agenda:
             return True
@@ -70,15 +73,14 @@ class Agenda:
         return not self.agenda[0].active
 
     def next_activity_within(self, timespan: timedelta, time: datetime = datetime.now()):
-
-        next_activity = \
-            next((activity for activity in self.agenda if activity.start_time > time), None)
+        """Return T|F whether an activity will occur within the given timespan."""
+        next_activity = next((act for act in self.agenda if act.start_time > time), None)
         if not next_activity:
             return False
         return next_activity.start_time <= time + timespan
 
     def task_right_after(self):
-        """Return T|F whether a task should be right after activity"""
+        """Return T|F whether a task should be right after activity."""
         self.remove_activity_over()
         if not self.agenda:
             return False, -1
@@ -88,32 +90,28 @@ class Agenda:
         return activity.activity == 'Do not disturb me', duration_in_ms
 
     def today(self):
-        """Returns a list of activities that (will) happen today"""
+        """Return list of activities that (will) happen today."""
         # Check whether anything is planned
+        self.remove_activity_over()
         if not self.agenda:
             return []
 
-        today = datetime.today().date()
-
-        # Remove activities that are over to conserve space
-        self.remove_activity_over()
-
         # Find the first activity that is starting later than today
         # It only needs to find the first as the list is sorted on starting times
+        today = datetime.today().date()
         for i, activity in enumerate(self.agenda):
             if activity.start_time.date() > today:
                 return self.agenda[:i]
 
-        # Return the whole agenda list if nothing is starting later than today
         return self.agenda
 
     def remove_activity_over(self):
-        """Removes activities in the agenda list that have happened"""
+        """Remove activities in the agenda list that have happened."""
         self.agenda[:] = [x for x in self.agenda if not x.over]
         self.update_dataframe()
 
     def get_day_part(self, time: datetime = None):
-        """Return the daypart of the given time or right now"""
+        """Return the daypart of the given time or right now."""
         hour = time.hour if time else self.now.hour
 
         if 0 <= hour < 6:
@@ -126,12 +124,12 @@ class Agenda:
             return 'Evening'
 
     def update_dataframe(self):
-        """Update the dataframe using the list and update the file"""
+        """Update the dataframe using the list and update the file."""
         self.agenda_dataframe = pd.DataFrame([activity.__dict__ for activity in self.agenda])
         self._write_to_file()
 
     def read_csv(self):
-        """Add all activities in the file to the agenda"""
+        """Add all activities in the file to the agenda."""
         self.agenda = []
         with open(self.file, newline='', encoding='utf-8') as fin:
             list_of_rows = list(csv.DictReader(fin, delimiter='$'))
@@ -142,10 +140,9 @@ class Agenda:
                                     row['summary']
                                     )
                 self.add_activity(activity)
-        self.update_dataframe()
 
     def _write_to_file(self):
-        """Replaces the external database with the current dataframe of activities"""
+        """Replace external database with the current dataframe of activities."""
         self.agenda_dataframe.to_csv(self.file, sep='$', index=False)
 
     def __str__(self):
@@ -154,15 +151,16 @@ class Agenda:
 
 @dataclass(frozen=True, order=True)
 class Activity:
+    """This class represents an activity with necessary time and descriptions."""
     @property
     def active(self):
-        """Returns T|F when an activity is happening right now"""
+        """Return T|F when an activity is happening right now."""
         moment = datetime.now()
         return self.start_time <= moment <= self.end_time
 
     @property
     def over(self):
-        """Returns T|F when an activity is over"""
+        """Return T|F when an activity is over."""
         moment = datetime.now()
         return moment > self.end_time
 
@@ -176,6 +174,7 @@ class Activity:
     over: bool = field(init=False, default=over)
 
     def __post_init__(self, end_or_dur):
+        """Check start time and end time or duration types."""
         if not isinstance(self.start_time, datetime):
             raise TypeError('Please tell us when this activity starts')
         if not self.check_end_or_dur(end_or_dur):
@@ -183,8 +182,7 @@ class Activity:
                             'how long you will be doing this activity.')
 
     def check_end_or_dur(self, end_or_dur):
-        """Checks if the input from the user for end_time and duration are valid
-        and sets the variables accordingly"""
+        """Check and set input for end_time and duration are valid."""
         if isinstance(end_or_dur, datetime):
             duration = end_or_dur - self.start_time
             object.__setattr__(self, 'duration', duration)

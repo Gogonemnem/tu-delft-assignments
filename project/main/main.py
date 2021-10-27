@@ -19,11 +19,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.setWindowTitle("Breaksum")
         self.setWindowFlags(Qt.WindowCloseButtonHint | Qt.WindowContextHelpButtonHint)
         self.agenda = AgendaWidget()
-        self.tasklisttab = TaskListTab()
-        self.tasklist = ToDoListWidget(self.agenda, self.tasklisttab)
-        self.task = TaskWidget(self.tasklisttab)
+        self.task_list_tab = TaskListTab()
+        self.to_do_list = ToDoListWidget(self.agenda, self.task_list_tab)
+        self.task = TaskWidget(self.task_list_tab)
         self.add_activity = IndividualAgendaWidget(self.agenda)
-        self.settings = SettingsTab(self.tasklist.time_randomizer)
+        self.settings = SettingsTab(self.to_do_list.time_randomizer)
         self.home = QtWidgets.QWidget()
         self.tabs = QtWidgets.QTabWidget()
         self.file = QtWidgets.QWidget()
@@ -41,7 +41,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def visual(self):
         layout = QtWidgets.QGridLayout()
         layout.addWidget(self.agenda, 0, 2, 2, 1)
-        layout.addWidget(self.tasklist, 0, 0, 1, 2)
+        layout.addWidget(self.to_do_list, 0, 0, 1, 2)
         layout.addWidget(self.task, 1, 0)
         layout.addWidget(self.add_activity, 1, 1)
 
@@ -53,7 +53,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.tabs.addTab(self.settings, "File")
         self.tabs.addTab(self.home, "Home")
-        self.tabs.addTab(self.tasklisttab, "Task list")
+        self.tabs.addTab(self.task_list_tab, "Task list")
         self.tabs.setCurrentIndex(1)
         self.setCentralWidget(self.tabs)
         self.showMaximized()
