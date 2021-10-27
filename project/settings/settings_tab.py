@@ -75,7 +75,7 @@ class Settings(QtWidgets.QGroupBox):
         settings = []
         with open(file) as fin:
             for line in fin:
-                settings.append(line.strip())
+                settings.append(int(line.strip()))
 
         return settings
 

@@ -13,7 +13,7 @@ class TestSettings(unittest.TestCase):
     def test_read_settings(self):
         # Read the current settings in the list
         settings_list = Settings.read_settings(path)
-        self.assertEqual(settings_list, ['40', '8'])
+        self.assertEqual(settings_list, [40, 8])
 
     def test_save_settings(self):
         # First read the current settings, by reusing test_read_settings
@@ -29,7 +29,7 @@ class TestSettings(unittest.TestCase):
 
         # Test if the settings are changed by using read_settings
         settings_list = Settings.read_settings(path)
-        self.assertEqual(settings_list, ['56', '9', '14'])
+        self.assertEqual(settings_list, [56, 9, 14])
 
         # Reset the file by saving the original settings and check if it succeeded
         Settings.save_settings(path, [40, 8])
