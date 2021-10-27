@@ -88,7 +88,6 @@ class TimeRandomizer:
             break_time = self.generate_break_time()
         return break_time
 
-    # Needs to be tested
     def task_action_break_time(self, task: dict):
         """User can do a task right now -> Returns a new break time depending on the task"""
         # 'To Do', 'Doing', 'Removed', 'Done', 'Rescheduled', 'Another', 'Snoozed', 'Skipped', 'Redo'
@@ -109,15 +108,12 @@ class TimeRandomizer:
 
         return break_time
 
-    # Needs to be tested
     @staticmethod
     def reschedule_popup(date_time: datetime) -> QTimer:
         """Execute a pop-up for the rescheduled task at specified time"""
         now = datetime.now()
 
         duration = int((date_time-now).total_seconds()*1000)
-        if duration < 1000:
-            duration = 1000
         timer = QTimer()
         timer.setSingleShot(True)
         timer.start(duration)
