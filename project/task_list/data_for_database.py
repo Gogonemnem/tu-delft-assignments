@@ -45,9 +45,6 @@ class TaskList:
         """Deletes a task from the database and updates the external database, \
         but only if the task is not periodic. \
         Needs the name (str) of the task as input."""
-        # print('hello')
-        # # periodic = (self.data[self.data.Task == title].Periodic == 'not periodic')
-        # print('periodic:', (self.data[self.data.Task == title].Periodic == 'not periodic').bool() is True)
 
         if (self.data[self.data.Task == title].Periodic == 'not periodic').bool() is True:
             index = self.data.index[self.data.Task == title][0]
