@@ -16,8 +16,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.setWindowTitle("Breaksum")
         self.agenda = AgendaWidget(agenda)
+        self.tasklist = TaskListWidget(self.agenda)
         self.tasklisttab = TaskListTab()
-        self.tasklist = TaskListWidget(self.agenda, self.tasklisttab)
         self.task = TaskWidget(self.tasklisttab)
         self.add_activity = IndividualAgendaWidget(self.agenda)
         self.settings = SettingsTab(self.tasklist.time_randomizer)

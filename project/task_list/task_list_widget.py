@@ -5,11 +5,8 @@ from PyQt5.QtCore import QTimer
 from project.agenda.agenda import Activity
 from project.agenda.agenda_widget import AgendaWidget
 from project.randomizer.optimal_time import TimeRandomizer
-from project.task_list.data_for_database import TaskList
 from project.task_list.pop_up import Popup, TimeDialog
 from PyQt5.QtWidgets import QPushButton, QRadioButton, QGridLayout, QButtonGroup, QGroupBox
-
-from project.task_list.task_list_tab import TaskListTab
 from project.task_list.to_do_list import ToDoList
 from project.settings.help_button import HelpButton
 
@@ -17,11 +14,10 @@ from project.settings.help_button import HelpButton
 class TaskListWidget(QGroupBox):
     """Visualise Task that need to be done today"""
 
-    def __init__(self, agenda: AgendaWidget, tasklisttab: TaskListTab, *args, **kwargs):
+    def __init__(self, agenda: AgendaWidget, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.agenda = agenda
         self.todolist = ToDoList()
-        self.tasklisttab = tasklisttab
         self.time_randomizer = TimeRandomizer(self.todolist, agenda)
         # self.pop_up = PopUp()
 
@@ -143,11 +139,6 @@ class TaskListWidget(QGroupBox):
         agenda_id = self.agenda.agenda.find_activity(task['Task'])
         if agenda_id != -1:
             self.agenda.delete_activity(agenda_id)
-
-        database = TaskList()
-        database.delete_task_periodic(task['Task'])
-        self.tasklisttab.refresh()
-
 
         self.group_task.button(identifier).setText('\u2713' + 'Completed: ' + task['Task'])
         self.group_task.button(identifier).setStyleSheet("color:  rgb(100, 175, 100)")
