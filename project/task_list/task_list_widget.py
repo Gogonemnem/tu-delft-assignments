@@ -136,6 +136,10 @@ class TaskListWidget(QGroupBox):
 
         identifier = int(task['ID'])
 
+        agenda_id = self.agenda.agenda.find_activity(task['Task'])
+        if agenda_id != -1:
+            self.agenda.delete_activity(agenda_id)
+
         self.group_task.button(identifier).setText('\u2713' + 'Completed: ' + task['Task'])
         self.group_task.button(identifier).setStyleSheet("color:  rgb(100, 175, 100)")
         self.group_doing.button(identifier).setVisible(False)
