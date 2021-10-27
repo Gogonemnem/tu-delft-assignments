@@ -1,33 +1,49 @@
+import datetime
+
+from PyQt5.QtCore import QTimer
+
+from project.agenda.agenda import Activity
+from project.agenda.agenda_widget import AgendaWidget
+from project.randomizer.optimal_time import TimeRandomizer
+from project.task_list.data_for_database import TaskList
+from project.task_list.pop_up import Popup, TimeDialog
 from PyQt5.QtWidgets import QPushButton, QRadioButton, QGridLayout, QButtonGroup, QGroupBox
-from project.task_list.to_do_list import ToDoList, CreateToDoList
+
+from project.task_list.task_list_tab import TaskListTab
+from project.task_list.to_do_list import ToDoList
 
 
 class TaskListWidget(QGroupBox):
     """Visualise Task that need to be done today"""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, agenda: AgendaWidget, tasklisttab: TaskListTab, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.agenda = agenda
+        self.todolist = ToDoList()
+        self.tasklisttab = tasklisttab
+        self.time_randomizer = TimeRandomizer(self.todolist, agenda)
+        # self.pop_up = PopUp()
+
+        timer = QTimer()
+        self.timers = {-1: timer, 0: self.time_randomizer.timer}
+
         self.setTitle("Daily to-do list")
-        self.complete = 0
 
         # Create groups for all button types
-        self.group_task = QButtonGroup()
-        self.group_remove = QButtonGroup()
-        self.group_done = QButtonGroup()
-        self.group_doing = QButtonGroup()
-        self.tasks = CreateToDoList.list(new=True)
+        group_names = 'group_task', 'group_doing', 'group_remove', 'group_done'
+        for group_name in group_names:
+            setattr(self, group_name, QButtonGroup())
+        self.tuple_of_groups = tuple(getattr(self, group) for group in group_names)
+
+        self.generate_button = QPushButton()
 
         self.layout = QGridLayout()
+        self.layout.setColumnStretch(0, 1)
         self.setLayout(self.layout)
 
-        # Add all buttons for length of to do list
-        for i, item in enumerate(self.tasks):
-            self.task = self.create_task_select(i, item)
-            self.remove = self.create_remove_button(i)
-            self.doing = self.create_doing_button(i)
-            self.done = self.create_done_button(i)
-
-            self.color_buttons(i)
+        self.create_to_do_list_visual()
+        self.create_generator_button()
+        self.initialize_timers()
 
         # Create a help button, to explain the daily to-do list
         self.setWhatsThis('Your daily to-do list shows all the tasks you will get today.\n'
@@ -39,134 +55,210 @@ class TaskListWidget(QGroupBox):
                           'because of the build-in notifications, '
                           'but it will give you a nice overview of your tasks anyway.')
 
-    def removed(self, index):
-        """Remove task from to-do list."""
+    def create_to_do_list_visual(self):
+        self.todolist.status()
+        for task in self.todolist.todolist:
 
-        task_button = self.group_task.button(index)
-        if task_button.isChecked():
-            # Change status of task in to-do list
-            ToDoList.change(task_button.text().replace(
-                f'Task {index + 1} for today is: ', ''),
-                self.group_task.id(self.group_task.checkedButton()), "Removed"
-            )
+            self.create_row(task)
 
-            # clear task from widget
-            self.group_task.button(index).setVisible(False)
-            self.group_done.button(index).setVisible(False)
-            self.group_remove.button(index).setVisible(False)
-            self.group_doing.button(index).setVisible(False)
+    def create_row(self, task: dict):
+        for i, _ in enumerate(self.tuple_of_groups[1:]):
+            self.create_checkable_button(task, i + 1)
 
-    def ongoing(self, index):
+        self.create_task_select(task)
+        self.color_buttons(task)
+
+    def create_task_select(self, task: dict):
+        """Visualize the selection radio button"""
+        identifier = int(task['ID'])
+        task_button = QRadioButton(f"Task {identifier} for today is: {task['Task']}")
+
+        task_button.toggled.connect(lambda: self.color_buttons(task))
+
+        self.group_task.addButton(task_button, identifier)
+        self.layout.addWidget(task_button, identifier, 0)
+
+        self.change_status_layout(task, task['Task Status'])
+
+    def create_checkable_button(self, task: dict, group_index: int):
+        labels = None, 'Do task', 'Remove task', 'Task completed'
+
+        identifier = int(task['ID'])
+        label = labels[group_index]
+
+        button = QPushButton(label)
+        button.setCheckable(True)
+        button.setMinimumWidth(100)
+
+        if group_index == 3:  # completed button is not yet visible
+            button.setVisible(False)
+
+        button.clicked.connect(lambda: self.check_pop_up(group_index, task))
+
+        self.tuple_of_groups[group_index].addButton(button, identifier)
+        self.layout.addWidget(button, identifier, min(group_index, 2))
+
+    def change_status_layout(self, task: dict, status: str):
+        if status == 'Doing':
+            self.doing_task_layout(task)
+
+        elif status == 'Removed':
+            self.remove_task_layout(task)
+
+        elif status == 'Done':
+            self.complete_task_layout(task)
+
+        elif status == 'Rescheduled':
+            self.reschedule_task_layout(task)
+
+    def doing_task_layout(self, task: dict):
         """Set status of task to "Doing"."""
 
-        task_button = self.group_task.button(index)
-        if task_button.isChecked():
-            # Change status of task in to-do list
-            new_text = task_button.text().replace(f'Task {index + 1} for today is: ', '')
-            ToDoList.change(new_text, index, "Doing")
+        identifier = int(task['ID'])
 
-            # Change visual of task in widget
-            self.group_remove.button(index).setVisible(False)
-            self.group_done.button(index).setVisible(True)
+        self.group_task.button(identifier).setText(f'Doing task {identifier} for today: ' + task['Task'])
+        self.group_doing.button(identifier).setText('Doing task')
+        self.group_remove.button(identifier).setVisible(False)
+        self.group_done.button(identifier).setVisible(True)
 
-    def completed(self, index):
+    def remove_task_layout(self, task: dict):
+
+        identifier = int(task['ID'])
+
+        for button_group in self.tuple_of_groups:
+            self.layout.removeWidget(button_group.button(identifier))
+
+        agenda_id = self.agenda.agenda.find_activity(task['Task'])
+        if agenda_id != -1:
+            self.agenda.delete_activity(agenda_id)
+
+    def complete_task_layout(self, task: dict):
         """Set status of task to "Done"."""
 
-        task_button = self.group_task.button(index)
-        if task_button.isChecked():
-            # Change status of task in to-do list
-            old_text = f'Task {index + 1} for today is: '
-            ToDoList.change(task_button.text().replace(old_text, ''), index, "Done")
+        identifier = int(task['ID'])
 
-            # Change visual of task in widget
-            selected_task = self.group_task.button(index)
-            selected_doing = self.group_doing.button(index)
-            selected_done = self.group_done.button(index)
+        agenda_id = self.agenda.agenda.find_activity(task['Task'])
+        if agenda_id != -1:
+            self.agenda.delete_activity(agenda_id)
 
-            selected_task.setDisabled(True)
-            selected_doing.setVisible(False)
-            selected_done.setVisible(False)
+        database = TaskList()
+        database.delete_task_periodic(task['Task'])
+        self.tasklisttab.refresh()
 
-            selected_task.setStyleSheet("color:  rgb(100, 175, 100)")
-            selected_task.setText(
-                selected_task.text().replace(old_text, '\u2713' + 'Completed: '))
-            self.complete += 1
 
-    def create_task_select(self, index, item):
-        """Visualize the selection radio button"""
+        self.group_task.button(identifier).setText('\u2713' + 'Completed: ' + task['Task'])
+        self.group_task.button(identifier).setStyleSheet("color:  rgb(100, 175, 100)")
+        self.group_doing.button(identifier).setVisible(False)
+        self.group_remove.button(identifier).setVisible(True)
+        self.group_done.button(identifier).setVisible(False)
 
-        task = QRadioButton(f'Task {index + 1} for today is: {item}')
-        task.setMinimumWidth(450)
-
-        task.toggled.connect(lambda: self.color_buttons(index))
-
-        self.group_task.addButton(task, index)
-        self.layout.addWidget(task, index, 0)
-
-        return task
-
-    def create_remove_button(self, index):
-        """Visualize the selection remove button"""
-
-        remove = QPushButton('Remove task')
-        remove.setCheckable(True)
-        remove.setMaximumWidth(100)
-
-        remove.clicked.connect(lambda: self.removed(index))
-
-        self.group_remove.addButton(remove, index)
-        self.layout.addWidget(remove, index, 2)
-
-        return remove
-
-    def create_doing_button(self, index):
-        """Visualize the selection doing button"""
-
-        doing = QPushButton('Do task')
-        doing.setCheckable(True)
-        doing.setMaximumWidth(100)
-
-        doing.clicked.connect(lambda: self.ongoing(index))
-
-        self.group_doing.addButton(doing, index)
-        self.layout.addWidget(doing, index, 1)
-
-        return doing
-
-    def create_done_button(self, index):
-        """Visualize the selection done button"""
-
-        done = QPushButton('Task completed')
-        done.setCheckable(True)
-        done.setVisible(False)
-        done.setMaximumWidth(100)
-
-        done.clicked.connect(lambda: self.completed(index))
-
-        self.group_done.addButton(done, index)
-        self.layout.addWidget(done, index, 2)
-
-        return done
-
-    def color_buttons(self, index):
-        """Color selected task and accompanying buttons."""
-
-        selected_remove = self.group_remove.button(index)
-        selected_done = self.group_done.button(index)
-        selected_doing = self.group_doing.button(index)
-
-        is_checked = self.group_task.button(index).isChecked()
-
-        selected_remove.setEnabled(is_checked)
-        selected_done.setEnabled(is_checked)
-        selected_doing.setEnabled(is_checked)
-
-        if is_checked:
-            selected_remove.setStyleSheet("background-color:  rgb(225, 75, 75)")
-            selected_done.setStyleSheet("background-color:  rgb(100, 175, 100)")
-            selected_doing.setStyleSheet("background-color:  rgb(40, 125, 175)")
-
+    def reschedule_task_layout(self, task: dict):
+        if isinstance(task['Rescheduled Time'], str):
+            time = datetime.datetime.fromisoformat(task['Rescheduled Time'])
         else:
-            selected_remove.setStyleSheet("background-color:  rgb(225, 175, 175)")
-            selected_done.setStyleSheet("background-color:  rgb(200, 225, 200)")
-            selected_doing.setStyleSheet("background-color:  rgb(50, 200, 255)")
+            time = task['Rescheduled Time']
+
+        activity = Activity('Doing Task', time, datetime.timedelta(minutes=20), task['Task'])
+        if activity not in self.agenda.agenda.agenda:
+            self.agenda.add_activity(activity)
+
+        self.setup_rescheduler(task, time)
+
+    def color_buttons(self, task: dict):
+        """Color selected task and accompanying buttons."""
+        colors = (((50, 200, 255), (225, 175, 175), (200, 225, 200)),  # when not selected
+                  ((40, 125, 175), (225, 75, 75), (100, 175, 100)))  # selected
+
+        identifier = int(task['ID'])
+        is_checked = self.group_task.button(identifier).isChecked()
+
+        for i, button_group in enumerate(self.tuple_of_groups[1:]):
+            button_group.button(identifier).setEnabled(is_checked)
+
+            color = colors[is_checked][i]
+            button_group.button(identifier).setStyleSheet("background-color:  rgb" + str(color))
+
+    def create_generator_button(self):
+        self.generate_button = QPushButton('Generate new to do list', self)
+        self.layout.addWidget(self.generate_button, 99, 0, 1, 3)
+        self.generate_button.clicked.connect(self.refresh)
+
+    def refresh(self):
+        self.clear_widget()
+        self.create_to_do_list_visual()
+        self.timers = {-1: self.timers[-1], 0: self.timers[0]}
+        self.initialize_timers()
+
+    def clear_widget(self):
+        for task in reversed(self.todolist.todolist):
+            self.check_pop_up(2, task)
+
+    def initialize_timers(self):
+        self.time_randomizer.start()
+        self.timers[-1].timeout.connect(self.check_randomizer_timer)
+        self.timers[-1].start(5_000)
+
+    def check_randomizer_timer(self):
+        if self.timers[0].isActive():
+            return
+
+        self.timers[-1].stop()  # stop checking for now
+        self.time_randomizer.stop()
+
+        if self.todolist.available:
+            task = self.todolist.available[0]
+            choice = Popup.pop_up(task)
+            self.check_pop_up(choice, task)
+
+    def check_pop_up(self, choice, task):
+        statuses = 'To Do', 'Doing', 'Removed', 'Done', 'Rescheduled', 'Another', 'Snoozed', 'Skipped', 'Redo'
+        status = statuses[choice]
+
+        self.timers.pop(int(task['ID']), None)
+
+        time = None
+        if status == 'Rescheduled':
+            time, okay = TimeDialog.get_time()
+            if not okay:
+                time = None
+                status = 'To Do'
+
+        if status == 'Redo':
+            copy = task.copy()
+            copy['ID'] = max(int(task['ID']) for task in self.todolist.todolist) + 1
+
+            self.todolist.todolist.append(copy)
+            self.create_row(copy)
+            status = 'Done'
+
+        self.todolist.change(task, status, time=time)
+        self.change_status_layout(task, status)
+        self.time_randomizer.set_timer(task)
+
+        self.timers[-1].start(5_000)
+
+        if status == 'Another':
+            self.timers[-1].stop()
+
+            tasks = self.todolist.available
+            current_index = tasks.index(task)
+            if (index := current_index + 1) >= len(tasks):
+                index = 0
+
+            task = self.todolist.available[index]
+            self.check_pop_up(Popup.pop_up(task), task)
+
+    def setup_rescheduler(self, task: dict, time: datetime.datetime):
+        timer = self.time_randomizer.reschedule_popup(time)
+        timer.timeout.connect(lambda: self.check_pop_up(Popup.pop_up(task), task))
+        self.timers[int(task['ID'])] = timer
+
+    # def imitate_popup(self, task=None):
+    #     msg = QMessageBox()
+    #     msg.setStandardButtons(QMessageBox.Ok)
+    #     button_clicked = msg.exec()
+    #
+    #     if task:  # rescheduled and complete it
+    #         self.check_pop_up(3, task)
+    #     else:  # return the choice
+    #         return button_clicked

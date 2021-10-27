@@ -1,5 +1,4 @@
 Task$Estimated time (minutes)$Priority$Periodic$Preferred time$Delete task$Edit task
-Take a walk$30$normal$max once a day$Whole day$$
 Get some coffee$10$low$several times a day$Morning$$
 Vacuum the room$15$must be done today$max once a day$Afternoon$$
 Do some stretching$5$high$several times a day$Whole day$$
@@ -13,3 +12,4 @@ Clean room$10$must be done today$max once a day$Morning$$
 Brush your teeth$5$low$max once a day$Evening$$
 Take a shower$20$low$max once a day$Evening$$
 read a chapter from you book$15$high$several times a day$Evening$$
+Cook$30$must be done today$max once a day$Evening$$

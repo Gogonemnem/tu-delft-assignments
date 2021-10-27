@@ -1,23 +1,31 @@
 import sys
+from datetime import timedelta, datetime, time
+
 from PyQt5.QtWidgets import QApplication, QWidget
 from PyQt5.QtCore import QTimer, QDateTime, QTime
 import numpy as np
+
 from project.agenda.agenda import Agenda
+from project.agenda.agenda_widget import AgendaWidget
+from project.task_list.to_do_list import ToDoList
 
 
 # TESTING IS VIRTUALLY IMPOSSIBLE FOR THIS CLASS
 # WEIRDLY, IT NEEDS THE GUI FOR IT TO WORK
 # Therefore, only manual testing is possible
 class TimeRandomizer:
-    def __init__(self, to_do_list: list, agenda: Agenda):
+    def __init__(self, to_do_list: ToDoList, agenda: AgendaWidget):
         self.to_do_list = to_do_list
-        self.agenda = agenda
+        self.agenda = agenda.agenda
 
-        # 45 minutes = 2700000 milliseconds
-        self.average_break_time = 2700000
+        # 45 minutes = 2_700_000 milliseconds
+        # 5 minutes = 300_000
+        self.average_break_time = 1_000
+        self.snooze_time = 20_000
         self.deterministic = False
 
         self.timer = QTimer()
+        self.timer.timeout.connect(self.next_task)
 
     def generate_break_time(self, mean=None, minimum=None):
         """Returns how much time will be in between now and the following task"""
@@ -35,29 +43,38 @@ class TimeRandomizer:
         """Start the timer, once over it summons the next task"""
         break_time = self.generate_break_time()
         self.timer.start(break_time)
-        self.timer.timeout.connect(self.next_task)
+
+    def stop(self):
+        self.timer.stop()
+
+    def set_timer(self, task: dict):
+        time = self.task_action_break_time(task)
+        if time:
+            self.timer.start(time)
+
+    def set_average_break_time(self, msecs):
+        self.average_break_time = msecs
+        if self.timer.isActive():
+            self.start()
 
     # Needs to be tested
     def next_task(self):
-        # check if there are tasks left to be done
-        if not self.to_do_list:
-            self.timer.stop()
 
-        # task cannot be done right now
-        elif not self.agenda.is_free():
+        self.timer.stop()
+
+        # task cannot be done right now & determine next time
+        if not self.agenda.is_free():
             break_time = self.activity_break_time()
             self.timer.start(break_time)
 
-        # task can be done right now
-        else:
-            # TO_DO: Call pop-up function to do first task in list
-            # TO_DO: In to_do_list, after pop-up: Stop the timer and reset the timer
-            # & call task_action_break_time()
-
-            # Temporary: For now debugging
-            break_time = self.task_action_break_time()
+        # task is too close to the next activity
+        # implement so it can read from database?
+        if self.agenda.next_activity_within(timedelta(minutes=10)):
+            break_time = self.activity_break_time()
             self.timer.start(break_time)
-            # self.task_action()
+
+        # task can be done right now & timer is off
+        # this is a signal to create a pop-up
 
     def activity_break_time(self):
         """User is busy -> Returns a new break time depending on the activity.
@@ -66,75 +83,57 @@ class TimeRandomizer:
         right_after, duration = self.agenda.task_right_after()
 
         if right_after:
-            break_time = self.generate_break_time(300000, duration)
+            break_time = self.generate_break_time(self.snooze_time, duration)
         else:
             break_time = self.generate_break_time()
         return break_time
 
-    # Needs to be tested
-    def task_action_break_time(self):
+    def task_action_break_time(self, task: dict):
         """User can do a task right now -> Returns a new break time depending on the task"""
-        # TO_DO: Link with task status
-        task_status = 'Done'
+        # 'To Do', 'Doing', 'Removed', 'Done', 'Rescheduled', 'Another', 'Snoozed', 'Skipped', 'Redo'
+        status = task['Task Status']
 
-        if task_status in ('Done', 'Skipped'):
-            # this print is for debugging for now
-            print(self.to_do_list.pop(0))
+        if status in ('To Do', 'Done', 'Rescheduled', 'Skipped'):
             break_time = self.generate_break_time()
 
-        elif task_status == 'Snooze':
-            # Standard snooze time of 5 minutes = 300000 milliseconds
-            break_time = self.generate_break_time(minimum=300000)
+        elif status == 'Snoozed':  # Standard of 5 minutes = 300_000 milliseconds
+            break_time = self.generate_break_time(minimum=self.snooze_time)
 
-        elif task_status == 'Reschedule':
-            task = self.to_do_list.pop(0)
-            self.reschedule_popup(task)
-
-            break_time = self.generate_break_time(0)  # Do another task right now
-
-        # other statuses: another, ignored, doing & redo are not important here
-        else:  # task status is not known or not treated
+        elif status in 'Doing':
             break_time = -1
+
+        # ('Ignored', 'Removed', 'Another', 'Redo') are not important here
+        else:  # task status is not known or not treated
+            break_time = None
 
         return break_time
 
-    # Needs to be tested
-    def reschedule_popup(self, task):
+    @staticmethod
+    def reschedule_popup(date_time: datetime) -> QTimer:
         """Execute a pop-up for the rescheduled task at specified time"""
-        # TO_DO: new time Needs to be implemented in to_do_list
-        now = QDateTime().currentDateTime()
-        new_time = QDateTime().currentDateTime()
-        new_time.setTime(QTime.fromString('21:19:30'))
-        duration = now.msecsTo(new_time)
+        now = datetime.now()
 
-        # TO_DO: Call pop-up function to do task
-        # TO_DO: In to_do_list, after pop-up: Stop the timer and reset the timer
-        # & call task_action_break_time()
+        duration = int((date_time-now).total_seconds()*1000)
+        timer = QTimer()
+        timer.setSingleShot(True)
+        timer.start(duration)
 
-        # QTimer.singleShot(duration, lambda: self.to_do_list.pop_up(task))
+        return timer
 
-        # Temporary: For debugging & testing stuff
-        QTimer.singleShot(duration, lambda: self.imitate_popup(task))
-
-    def imitate_popup(self, task):
-        print(task, QTime.currentTime().toString())
-
-
-def main():
-    app = QApplication(sys.argv)
-
-    agenda0 = Agenda()
-    time_randomizer = TimeRandomizer([1, 2, 3, 4], agenda0)
-    time_randomizer.start()
-
-    wdgt = QWidget()
-    wdgt.setWindowTitle('Useless window, for debugging purposes only')
-    wdgt.show()
-
-    sys.exit(app.exec_())
-
-
-# EXAMPLE FUNCTION TO SEE HOW QTIMER WORKS
-# https://pythonpyqt.com/qtimer/
-if __name__ == '__main__':
-    main()
+# def main():
+#     app = QApplication(sys.argv)
+#
+#     agenda0 = AgendaWidget(Agenda())
+#     time_randomizer = TimeRandomizer([1, 2, 3, 4], agenda0)
+#     time_randomizer.start()
+#
+#     wdgt = QWidget()
+#     wdgt.setWindowTitle('Useless window, for debugging purposes only')
+#
+#     sys.exit(app.exec_())
+#
+#
+# # EXAMPLE FUNCTION TO SEE HOW QTIMER WORKS
+# # https://pythonpyqt.com/qtimer/
+# if __name__ == '__main__':
+#     main()

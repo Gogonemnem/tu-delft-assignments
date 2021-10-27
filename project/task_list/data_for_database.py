@@ -41,6 +41,15 @@ class TaskList:
         self.data = self.data.reset_index(drop=True)
         self.__write_to_file()
 
+    def delete_task_periodic(self, title):
+        """Deletes a task from the database and updates the external database, \
+        but only if the task is not periodic. \
+        Needs the name (str) of the task as input."""
+
+        if (self.data[self.data.Task == title].Periodic == 'not periodic').bool() is True:
+            index = self.data.index[self.data.Task == title][0]
+            self.delete_task(index)
+
     def edit_task(self, index, category, new_value):
         """Edits one part of the task and updates the external database \
         Needs as input: the index of the row (int), the category (str) and the new value"""
