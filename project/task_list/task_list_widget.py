@@ -1,12 +1,10 @@
 import datetime
 
 from PyQt5.QtCore import QTimer
-from PyQt5.QtWidgets import QPushButton, QRadioButton, QGridLayout, QButtonGroup, QGroupBox, QMessageBox
 
 from project.agenda.agenda import Activity
 from project.agenda.agenda_widget import AgendaWidget
 from project.randomizer.optimal_time import TimeRandomizer
-from project.task_list.to_do_list import ToDoList
 from project.task_list.pop_up import Popup, TimeDialog
 from PyQt5.QtWidgets import QPushButton, QRadioButton, QGridLayout, QButtonGroup, QGroupBox
 from project.task_list.to_do_list import ToDoList
@@ -60,11 +58,14 @@ class TaskListWidget(QGroupBox):
         self.todolist.status()
         for task in self.todolist.todolist:
 
-            for i, _ in enumerate(self.tuple_of_groups[1:]):
-                self.create_checkable_button(task, i + 1)
+            self.create_row(task)
 
-            self.create_task_select(task)
-            self.color_buttons(task)
+    def create_row(self, task: dict):
+        for i, _ in enumerate(self.tuple_of_groups[1:]):
+            self.create_checkable_button(task, i + 1)
+
+        self.create_task_select(task)
+        self.color_buttons(task)
 
     def create_task_select(self, task: dict):
         """Visualize the selection radio button"""
@@ -135,6 +136,10 @@ class TaskListWidget(QGroupBox):
 
         identifier = int(task['ID'])
 
+        agenda_id = self.agenda.agenda.find_activity(task['Task'])
+        if agenda_id != -1:
+            self.agenda.delete_activity(agenda_id)
+
         self.group_task.button(identifier).setText('\u2713' + 'Completed: ' + task['Task'])
         self.group_task.button(identifier).setStyleSheet("color:  rgb(100, 175, 100)")
         self.group_doing.button(identifier).setVisible(False)
@@ -142,9 +147,16 @@ class TaskListWidget(QGroupBox):
         self.group_done.button(identifier).setVisible(False)
 
     def reschedule_task_layout(self, task: dict):
-        time = datetime.datetime.fromisoformat(task['Rescheduled Time'])
-        self.setup_rescheduler(task, time)
+        if isinstance(task['Rescheduled Time'], str):
+            time = datetime.datetime.fromisoformat(task['Rescheduled Time'])
+        else:
+            time = task['Rescheduled Time']
 
+        activity = Activity('Doing Task', time, datetime.timedelta(minutes=20), task['Task'])
+        if activity not in self.agenda.agenda.agenda:
+            self.agenda.add_activity(activity)
+
+        self.setup_rescheduler(task, time)
 
     def color_buttons(self, task: dict):
         """Color selected task and accompanying buttons."""
@@ -186,9 +198,9 @@ class TaskListWidget(QGroupBox):
 
         self.timers[-1].stop()  # stop checking for now
         self.time_randomizer.stop()
-        task = self.todolist.available[0]
 
         if self.todolist.available:
+            task = self.todolist.available[0]
             choice = Popup.pop_up(task)
             self.check_pop_up(choice, task)
 
@@ -204,8 +216,14 @@ class TaskListWidget(QGroupBox):
             if not okay:
                 time = None
                 status = 'To Do'
-            else:
-                self.agenda.add_activity(Activity('Doing Task', time, datetime.timedelta(minutes=20), task['Task']))
+
+        if status == 'Redo':
+            copy = task.copy()
+            copy['ID'] = max(int(task['ID']) for task in self.todolist.todolist) + 1
+
+            self.todolist.todolist.append(copy)
+            self.create_row(copy)
+            status = 'Done'
 
         self.todolist.change(task, status, time=time)
         self.change_status_layout(task, status)
@@ -214,9 +232,15 @@ class TaskListWidget(QGroupBox):
         self.timers[-1].start(5_000)
 
         if status == 'Another':
-            task = self.todolist.available[1]
-            self.check_pop_up(1, task=task)
-            # self.check_pop_up(imitate_popup(), task=task)
+            self.timers[-1].stop()
+
+            tasks = self.todolist.available
+            current_index = tasks.index(task)
+            if (index := current_index + 1) >= len(tasks):
+                index = 0
+
+            task = self.todolist.available[index]
+            self.check_pop_up(Popup.pop_up(task), task)
 
     def setup_rescheduler(self, task: dict, time: datetime.datetime):
         timer = self.time_randomizer.reschedule_popup(time)

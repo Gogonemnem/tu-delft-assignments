@@ -35,6 +35,7 @@ class TimeDialog(QDialog):
         # nice widget for editing the date
         self.time = QTimeEdit(self)
         self.time.setTime(QTime.currentTime())
+        self.time.setMinimumTime(QTime.currentTime())
         layout = QVBoxLayout(self)
         layout.addWidget(self.time)
 
