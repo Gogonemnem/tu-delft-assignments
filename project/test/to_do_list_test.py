@@ -82,5 +82,3 @@ class TesToDoList(unittest.TestCase):
             self.assertEqual(self.todo.is_completed(), False)
             self.todo.change(self.todo.todolist[i], "Done")
         self.assertEqual(self.todo.is_completed(), True)
-
-
