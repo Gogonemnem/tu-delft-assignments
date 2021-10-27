@@ -59,7 +59,7 @@ class Randomizer:
         # Create a list with random tasks for the given part of the day.
         # The tasks in this list are not necessary unique (yet).
         self.lst_random = random.choices(list(self.dict_priority_less.keys()),
-                                         weights=self.dict_priority_less.values(), k=5)
+                                         weights=list(self.dict_priority_less.values()), k=5)
 
     def most_freq(self):
         """"Detects the task that appears most often in the randomized list.

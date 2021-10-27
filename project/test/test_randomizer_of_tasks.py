@@ -73,6 +73,3 @@ class TestRandomizerOfTasks(unittest.TestCase):
         the list that is return by the function hof_randomize_tasks_other_today."""
         test = Randomizer()
         self.assertEqual(test.randomize_tasks_other_evening(), test.lst)
-
-
-
