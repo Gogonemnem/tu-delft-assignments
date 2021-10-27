@@ -1,12 +1,12 @@
-import sys
 from datetime import datetime, timedelta
+
 from PyQt5 import QtWidgets, QtGui, sip
 from PyQt5.QtCore import QDateTime
-from PyQt5.QtWidgets import QComboBox, QTimeEdit, QApplication, QFormLayout, QPushButton, \
+from PyQt5.QtWidgets import QComboBox, QTimeEdit, QFormLayout, QPushButton, \
     QMessageBox, QLineEdit, QDateTimeEdit, QRadioButton, QHBoxLayout, QWidget, QSpinBox
 
-from project.agenda.agenda import Activity, Agenda
-from project.agenda.agenda_widget import AgendaWidget
+from project.agenda.agenda import Activity
+from project.gui.agenda_widget import AgendaWidget
 
 
 class IndividualAgendaWidget(QtWidgets.QGroupBox):
@@ -31,13 +31,14 @@ class IndividualAgendaWidget(QtWidgets.QGroupBox):
         self.setTitle('Agenda activities can be added here')
         self.layout = QFormLayout()
         self.setLayout(self.layout)
-        self.setWhatsThis('You can modify your agenda here and create your own schedule.\n\n'
-                          'First, select if you want to create an activity, modify one or delete one. '
-                          'When deleting an activity, simply enter the corresponding id and click "Delete" '
-                          'When creating or modifying an activity add the details of your activity '
-                          'and click on Add "activity" or "Modify activity". '
-                          'When modifying an activity, only edit the preferred options.\n'
-                          'If everything went right, you can now see your activity in the agenda.')
+        self.setWhatsThis(
+            'You can modify your agenda here and create your own schedule.\n\n'
+            'First, select if you want to create an activity, modify one or delete one. '
+            'When deleting an activity, simply enter the corresponding id and click "Delete" '
+            'When creating or modifying an activity add the details of your activity '
+            'and click on Add "activity" or "Modify activity". '
+            'When modifying an activity, only edit the preferred options.\n'
+            'If everything went right, you can now see your activity in the agenda.')
 
         self.crea_mod_del()
 
@@ -251,17 +252,3 @@ class IndividualAgendaWidget(QtWidgets.QGroupBox):
             end_or_dur = None
 
         return activity, start_time, end_or_dur, summary
-
-
-def main():
-    app = QApplication(sys.argv)
-
-    agenda = Agenda()
-    agenda_widget1 = AgendaWidget(agenda)  # is not shown
-    widget = IndividualAgendaWidget(agenda_widget1)
-    widget.show()
-    sys.exit(app.exec_())
-
-
-if __name__ == '__main__':
-    main()

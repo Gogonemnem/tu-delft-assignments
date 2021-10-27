@@ -1,7 +1,8 @@
 from PyQt5 import QtWidgets, QtGui
 from PyQt5.QtWidgets import QLineEdit, QComboBox, QPushButton, QMessageBox, QFormLayout
+
+from project.gui.task_list_tab import TaskListTab
 from project.task_list.data_for_database import TaskList
-from project.task_list.task_list_tab import TaskListTab
 
 
 class TaskWidget(QtWidgets.QGroupBox):

@@ -1,6 +1,8 @@
-import os
 import csv
-from project.randomizer.randomizer_of_tasks import Randomizer
+import os
+
+from project.randomizer.queue_randomizer import QueueRandomizer
+from project.task_list.data_for_database import TaskList
 
 absolute_path = os.path.abspath(__file__)
 fileDirectory = os.path.dirname(absolute_path)
@@ -9,11 +11,11 @@ path = os.path.join(parent, 'main', 'todolist')
 
 
 class ToDoList:
-
     column_names = ['Task', 'ID', 'Task Status', 'Rescheduled Time']
     delimiter = '&'
 
-    def __init__(self):
+    def __init__(self, tasklist: TaskList):
+        self.tasklist = tasklist
         self.todolist: list[dict] = []
         self.status()
 
@@ -21,7 +23,8 @@ class ToDoList:
     def available(self):
         """Return list of task id's that are able to be scheduled"""
 
-        return [task for task in self.todolist if task['Task Status'] not in ('Done', 'Rescheduled', 'Skipped')]
+        return [task for task in self.todolist
+                if task['Task Status'] not in ('Done', 'Rescheduled', 'Skipped')]
 
     def is_completed(self) -> bool:
 
@@ -41,7 +44,7 @@ class ToDoList:
         """Generates a new to-do list"""
         self.todolist = []
 
-        randomizer = Randomizer()
+        randomizer = QueueRandomizer(self.tasklist)
         lst = [
             *randomizer.randomize_tasks_other_morning(),
             *randomizer.randomize_tasks_other_afternoon(),
@@ -74,6 +77,10 @@ class ToDoList:
         elif status == 'Rescheduled':
             task['Rescheduled Time'] = time
 
+        elif status == 'Done':
+            database = self.tasklist
+            database.delete_task_periodic(task['Task'])
+
         self.write_to_file()
 
     def read_file(self, output=False):
@@ -97,16 +104,7 @@ class ToDoList:
         """Writes the list of tasks to the file"""
 
         with open(path, 'w', encoding='utf-8') as file_to_do:
-            csv_writer = csv.DictWriter(file_to_do, ToDoList.column_names, delimiter=ToDoList.delimiter)
+            csv_writer = csv.DictWriter(
+                file_to_do, ToDoList.column_names, delimiter=ToDoList.delimiter)
             csv_writer.writeheader()
             csv_writer.writerows(self.todolist)
-
-
-def main():
-    todolist = ToDoList()
-    print(todolist.todolist)
-    # todolist.change()
-
-
-if __name__ == '__main__':
-    main()

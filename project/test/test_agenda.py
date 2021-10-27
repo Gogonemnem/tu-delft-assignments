@@ -79,7 +79,7 @@ class TestAgenda(unittest.TestCase):
 
         # change so that index will be 1
         agenda.modify_activity(
-            0, activity='No Work', start_time=now+2*duration, end_or_dur=duration)
+            0, activity='No Work', start_time=now + 2 * duration, end_or_dur=duration)
 
         self.assertEqual(agenda.agenda[1], activity_new)
         self.assertEqual(agenda.agenda[0], activity_old)
@@ -94,15 +94,15 @@ class TestAgenda(unittest.TestCase):
         agenda = Agenda(file=path_empty)
         now = datetime.now()
         duration = timedelta(hours=1)
-        activity0 = Activity('Work', now - 1/2 * duration, duration)
+        activity0 = Activity('Work', now - 1 / 2 * duration, duration)
         activity1 = Activity('Work', now, duration)
         activities = [
             # is needed to check whether elements of self.agenda are equal
             activity0,
             activity1,
             # these are gonna be deleted
-            Activity('Work', now-2*duration, duration),
-            Activity('Work', now-3*duration, duration)
+            Activity('Work', now - 2 * duration, duration),
+            Activity('Work', now - 3 * duration, duration)
         ]
 
         for activity in activities:
@@ -125,7 +125,7 @@ class TestAgenda(unittest.TestCase):
 
         # today
         activity0 = Activity('Work', now, duration)
-        activity1 = Activity('Work', now - 1/2 * duration, duration)
+        activity1 = Activity('Work', now - 1 / 2 * duration, duration)
 
         activities = [
             # is needed to check whether elements of self.agenda are equal
@@ -255,7 +255,7 @@ class TestAgenda(unittest.TestCase):
         self.assertEqual(2, len(agenda.agenda_dataframe))
         self.assertEqual('Work', agenda.agenda_dataframe.activity[1])
         self.assertEqual(time, agenda.agenda_dataframe['start_time'][1])
-        self.assertEqual(time+duration, agenda.agenda_dataframe['end_time'][1])
+        self.assertEqual(time + duration, agenda.agenda_dataframe['end_time'][1])
         self.assertEqual('Lots of work', agenda.agenda_dataframe.summary[1])
         self.assertEqual(time - 1 / 2 * duration, agenda.agenda_dataframe['start_time'][0])
         self.assertEqual('Much work indeed', agenda.agenda_dataframe.summary[0])

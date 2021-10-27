@@ -1,12 +1,9 @@
-import sys
-from datetime import timedelta, datetime, time
+from datetime import timedelta, datetime
 
-from PyQt5.QtWidgets import QApplication, QWidget
-from PyQt5.QtCore import QTimer, QDateTime, QTime
 import numpy as np
+from PyQt5.QtCore import QTimer
 
-from project.agenda.agenda import Agenda
-from project.agenda.agenda_widget import AgendaWidget
+from project.gui.agenda_widget import AgendaWidget
 from project.task_list.to_do_list import ToDoList
 
 
@@ -90,7 +87,8 @@ class TimeRandomizer:
 
     def task_action_break_time(self, task: dict):
         """User can do a task right now -> Returns a new break time depending on the task"""
-        # 'To Do', 'Doing', 'Removed', 'Done', 'Rescheduled', 'Another', 'Snoozed', 'Skipped', 'Redo'
+        # 'To Do', 'Doing', 'Removed', 'Done', 'Rescheduled', 'Another', 'Snoozed',
+        # 'Skipped', 'Redo'
         status = task['Task Status']
 
         if status in ('To Do', 'Done', 'Rescheduled', 'Skipped'):
@@ -113,27 +111,9 @@ class TimeRandomizer:
         """Execute a pop-up for the rescheduled task at specified time"""
         now = datetime.now()
 
-        duration = int((date_time-now).total_seconds()*1000)
+        duration = int((date_time - now).total_seconds() * 1000)
         timer = QTimer()
         timer.setSingleShot(True)
         timer.start(duration)
 
         return timer
-
-# def main():
-#     app = QApplication(sys.argv)
-#
-#     agenda0 = AgendaWidget(Agenda())
-#     time_randomizer = TimeRandomizer([1, 2, 3, 4], agenda0)
-#     time_randomizer.start()
-#
-#     wdgt = QWidget()
-#     wdgt.setWindowTitle('Useless window, for debugging purposes only')
-#
-#     sys.exit(app.exec_())
-#
-#
-# # EXAMPLE FUNCTION TO SEE HOW QTIMER WORKS
-# # https://pythonpyqt.com/qtimer/
-# if __name__ == '__main__':
-#     main()

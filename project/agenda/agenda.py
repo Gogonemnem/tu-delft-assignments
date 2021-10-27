@@ -6,9 +6,6 @@ from datetime import datetime, timedelta
 from typing import Any
 
 import pandas as pd
-from PyQt5 import QtWidgets
-
-from project.agenda.agenda_widget import AgendaWidget
 
 absolute_path = os.path.abspath(__file__)
 fileDirectory = os.path.dirname(absolute_path)
@@ -18,8 +15,7 @@ path = os.path.join(parent, 'main', 'agenda_file')
 
 class Agenda:
     def __init__(self, file=path):
-        # this is list of activities that are planned
-        # with activities occurring earlier appearing earlier on the list
+        # activities occurring earlier appearing earlier on the list
         self.agenda: list[Activity] = []
 
         self.file = file
@@ -75,7 +71,8 @@ class Agenda:
 
     def next_activity_within(self, timespan: timedelta, time: datetime = datetime.now()):
 
-        next_activity = next((activity for activity in self.agenda if activity.start_time > time), None)
+        next_activity = \
+            next((activity for activity in self.agenda if activity.start_time > time), None)
         if not next_activity:
             return False
         return next_activity.start_time <= time + timespan
@@ -201,34 +198,3 @@ class Activity:
             return True
 
         return False
-
-
-def main():
-    now = datetime.today()
-
-    # activities = ['No work', 'Work', 'Planned break', 'Do not disturb me', 'Doing task']
-
-    durat_short = timedelta(minutes=20)
-    durat_long = timedelta(minutes=50)
-    # stop_time = now + durat_long
-
-    # Create agenda and some activities
-    agenda0 = Agenda()
-    agenda0.add_activity(Activity('No work', now, durat_short))
-    agenda0.add_activity(Activity('Work', now, durat_short))
-    agenda0.add_activity(Activity('No work', now + 5 * durat_long, durat_short))
-    agenda0.add_activity(Activity('Work', now - 2 * durat_short, 4 * durat_short))
-    agenda0.add_activity(Activity('No work', now - timedelta(days=1), now - durat_long))
-    agenda0.add_activity(Activity('Planned break', now, durat_short, summary='shopping'))
-    agenda0.delete_activity(2)
-    agenda0.modify_activity(4, summary='long meeting')
-
-    # Visualization
-    app = QtWidgets.QApplication([])
-    widget = AgendaWidget(agenda0)
-    widget.show()
-    app.exec()
-
-
-if __name__ == '__main__':
-    main()

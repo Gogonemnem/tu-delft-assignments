@@ -1,10 +1,11 @@
 import random
+
 from project.task_list.data_for_database import TaskList
 
 
-class Randomizer:
-    def __init__(self):
-        self.database = TaskList().data_output()
+class QueueRandomizer:
+    def __init__(self, tasklist: TaskList):
+        self.database = tasklist.data_output()
         self.lst = []
         self.already_chosen = []
         self.dict_priority_less = {}
@@ -54,7 +55,7 @@ class Randomizer:
                     self.dict_priority_less[task.name] = weight
 
         if not self.dict_priority_less:
-            return None
+            return
 
         # Create a list with random tasks for the given part of the day.
         # The tasks in this list are not necessary unique (yet).

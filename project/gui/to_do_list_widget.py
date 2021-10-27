@@ -1,28 +1,25 @@
 import datetime
 
 from PyQt5.QtCore import QTimer
-
-from project.agenda.agenda import Activity
-from project.agenda.agenda_widget import AgendaWidget
-from project.randomizer.optimal_time import TimeRandomizer
-from project.task_list.data_for_database import TaskList
-from project.task_list.pop_up import Popup, TimeDialog
 from PyQt5.QtWidgets import QPushButton, QRadioButton, QGridLayout, QButtonGroup, QGroupBox
 
-from project.task_list.task_list_tab import TaskListTab
+from project.agenda.agenda import Activity
+from project.gui.agenda_widget import AgendaWidget
+from project.gui.pop_up_widget import Popup, TimeDialog
+from project.gui.task_list_tab import TaskListTab
+from project.randomizer.time_randomizer import TimeRandomizer
 from project.task_list.to_do_list import ToDoList
 
 
-class TaskListWidget(QGroupBox):
+class ToDoListWidget(QGroupBox):
     """Visualise Task that need to be done today"""
 
     def __init__(self, agenda: AgendaWidget, tasklisttab: TaskListTab, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.agenda = agenda
-        self.todolist = ToDoList()
         self.tasklisttab = tasklisttab
+        self.todolist = ToDoList(self.tasklisttab.database)
         self.time_randomizer = TimeRandomizer(self.todolist, agenda)
-        # self.pop_up = PopUp()
 
         timer = QTimer()
         self.timers = {-1: timer, 0: self.time_randomizer.timer}
@@ -58,7 +55,6 @@ class TaskListWidget(QGroupBox):
     def create_to_do_list_visual(self):
         self.todolist.status()
         for task in self.todolist.todolist:
-
             self.create_row(task)
 
     def create_row(self, task: dict):
@@ -107,6 +103,7 @@ class TaskListWidget(QGroupBox):
 
         elif status == 'Done':
             self.complete_task_layout(task)
+            self.tasklisttab.refresh()
 
         elif status == 'Rescheduled':
             self.reschedule_task_layout(task)
@@ -116,7 +113,8 @@ class TaskListWidget(QGroupBox):
 
         identifier = int(task['ID'])
 
-        self.group_task.button(identifier).setText(f'Doing task {identifier} for today: ' + task['Task'])
+        self.group_task.button(identifier).setText(
+            f'Doing task {identifier} for today: ' + task['Task'])
         self.group_doing.button(identifier).setText('Doing task')
         self.group_remove.button(identifier).setVisible(False)
         self.group_done.button(identifier).setVisible(True)
@@ -140,11 +138,6 @@ class TaskListWidget(QGroupBox):
         agenda_id = self.agenda.agenda.find_activity(task['Task'])
         if agenda_id != -1:
             self.agenda.delete_activity(agenda_id)
-
-        database = TaskList()
-        database.delete_task_periodic(task['Task'])
-        self.tasklisttab.refresh()
-
 
         self.group_task.button(identifier).setText('\u2713' + 'Completed: ' + task['Task'])
         self.group_task.button(identifier).setStyleSheet("color:  rgb(100, 175, 100)")
@@ -211,7 +204,8 @@ class TaskListWidget(QGroupBox):
             self.check_pop_up(choice, task)
 
     def check_pop_up(self, choice, task):
-        statuses = 'To Do', 'Doing', 'Removed', 'Done', 'Rescheduled', 'Another', 'Snoozed', 'Skipped', 'Redo'
+        statuses = 'To Do', 'Doing', 'Removed', 'Done', 'Rescheduled', 'Another', 'Snoozed', \
+                   'Skipped', 'Redo'
         status = statuses[choice]
 
         self.timers.pop(int(task['ID']), None)
@@ -252,13 +246,3 @@ class TaskListWidget(QGroupBox):
         timer = self.time_randomizer.reschedule_popup(time)
         timer.timeout.connect(lambda: self.check_pop_up(Popup.pop_up(task), task))
         self.timers[int(task['ID'])] = timer
-
-    # def imitate_popup(self, task=None):
-    #     msg = QMessageBox()
-    #     msg.setStandardButtons(QMessageBox.Ok)
-    #     button_clicked = msg.exec()
-    #
-    #     if task:  # rescheduled and complete it
-    #         self.check_pop_up(3, task)
-    #     else:  # return the choice
-    #         return button_clicked

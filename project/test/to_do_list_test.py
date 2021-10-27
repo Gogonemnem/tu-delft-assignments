@@ -1,12 +1,14 @@
 import unittest
-from project.task_list.task_list_widget import ToDoList
+
+from project.gui.to_do_list_widget import ToDoList
+from project.task_list.data_for_database import TaskList
 
 
 class TesToDoList(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.random, self.to_do_list = ToDoList().create_todolist(output=True)
-        self.todo = ToDoList()
+        self.random, self.to_do_list = ToDoList(TaskList()).create_todolist(output=True)
+        self.todo = ToDoList(TaskList())
 
     def test_attribute(self):
         """Check all attributes of class To do list"""
@@ -31,7 +33,7 @@ class TesToDoList(unittest.TestCase):
 
         # Check if all task from randomizer are in to do list in the right order
         for i, task in enumerate(self.to_do_list):
-            self.assertEqual(self.to_do_list[i]["Task"], self.random[i])
+            self.assertEqual(task["Task"], self.random[i])
             self.assertEqual(self.todo.is_completed(), False)
 
     def test_change_status(self):
@@ -78,7 +80,7 @@ class TesToDoList(unittest.TestCase):
     def test_empty_list(self):
         """Set status of all tasks to "Done" and check if new is created"""
         self.assertEqual(self.todo.is_completed(), False)
-        for i in range(len(self.todo.todolist)):
+        for task in self.todo.todolist:
             self.assertEqual(self.todo.is_completed(), False)
-            self.todo.change(self.todo.todolist[i], "Done")
+            self.todo.change(task, "Done")
         self.assertEqual(self.todo.is_completed(), True)

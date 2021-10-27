@@ -1,9 +1,7 @@
 import datetime
-import sys
 
-from PyQt5 import QtWidgets, Qt
 from PyQt5.QtCore import QTime
-from PyQt5.QtWidgets import QMessageBox, QTimeEdit, QDialog, QInputDialog, QWidget, QLayout, QVBoxLayout, \
+from PyQt5.QtWidgets import QMessageBox, QTimeEdit, QDialog, QVBoxLayout, \
     QDialogButtonBox
 
 
@@ -55,11 +53,3 @@ class TimeDialog(QDialog):
         today = datetime.date.today()
         date_time = datetime.datetime.combine(today, time)
         return date_time, result == QDialog.Accepted
-
-
-if __name__ == '__main__':
-    app = QtWidgets.QApplication(sys.argv)
-    window = TimeDialog()
-    window.show()
-    app.exec_()
-# self.time.setCalendarPopup(True)

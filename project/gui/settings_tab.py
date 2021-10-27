@@ -1,7 +1,8 @@
 import os
+
 from PyQt5 import QtWidgets
 
-from project.randomizer.optimal_time import TimeRandomizer
+from project.randomizer.time_randomizer import TimeRandomizer
 
 absolute_path = os.path.abspath(__file__)
 fileDirectory = os.path.dirname(absolute_path)
@@ -12,6 +13,7 @@ path_description = os.path.join(parent, 'main', 'description_file')
 
 class SettingsTab(QtWidgets.QWidget):
     """Visualizes the settings"""
+
     def __init__(self, time_randomizer: TimeRandomizer, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.settings = Settings(time_randomizer)
@@ -26,7 +28,7 @@ class SettingsTab(QtWidgets.QWidget):
 class Settings(QtWidgets.QGroupBox):
     """Ables the user to change some of the settings for the application"""
 
-    def __init__(self, time_randomizer: TimeRandomizer, file=path, *args, **kwargs):
+    def __init__(self, time_randomizer: TimeRandomizer, *args, file=path, **kwargs):
         super().__init__(*args, **kwargs)
         self.setTitle('Settings')
         self.layout = QtWidgets.QFormLayout()
@@ -79,7 +81,7 @@ class Settings(QtWidgets.QGroupBox):
     def read_settings(file):
         """Reads the settings from the file and returns them as a list"""
         settings = []
-        with open(file) as fin:
+        with open(file, encoding='utf-8') as fin:
             for line in fin:
                 settings.append(int(line.strip()))
 
@@ -88,13 +90,13 @@ class Settings(QtWidgets.QGroupBox):
     @staticmethod
     def save_settings(file, settings):
         """Saves the settings from the list in the file"""
-        with open(file, 'w') as fin:
+        with open(file, 'w', encoding='utf-8') as fin:
             for setting in settings:
                 fin.write(f'{setting}\n')
 
 
 class Description(QtWidgets.QGroupBox):
-    def __init__(self, file=path_description, *args, **kwargs):
+    def __init__(self, *args, file=path_description, **kwargs):
         super().__init__(*args, **kwargs)
 
         self.setTitle('Description')
@@ -102,7 +104,7 @@ class Description(QtWidgets.QGroupBox):
         text = QtWidgets.QTextBrowser(self)
 
         # Read the text file and insert it as html in the QTextBrowser
-        with open(file) as fin:
+        with open(file, encoding='utf-8') as fin:
             lines = fin.readlines()
             text.insertHtml(''.join(lines))
 

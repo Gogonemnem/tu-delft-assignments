@@ -1,6 +1,6 @@
 from PyQt5 import QtWidgets
-from PyQt5 import QtCore
-from project.task_list.database_task_list import TaskListDatabase
+from PyQt5.QtCore import QAbstractTableModel, Qt
+
 from project.task_list.data_for_database import TaskList
 
 
@@ -9,7 +9,7 @@ class TaskListTab(QtWidgets.QTableView):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.database = None
+        self.database = TaskList()
         self.model = None
         self.delete_button = None
         self.index = None
@@ -34,8 +34,6 @@ class TaskListTab(QtWidgets.QTableView):
 
     def delete_button_clicked(self):
         """Deletes a row from the database and refreshes the screen"""
-        # Updates self.database to make sure it deletes from the most recent version
-        self.database = TaskList()
 
         # Gets the index of the deleted row
         button = self.sender()
@@ -49,8 +47,6 @@ class TaskListTab(QtWidgets.QTableView):
 
     def edit_button_clicked(self):
         """Gives the user the option to edit a task from the database"""
-        # Updates self.database to make sure it edits the most recent version
-        self.database = TaskList()
 
         # Gets the index of the to be edited row
         button = self.sender()
@@ -80,8 +76,6 @@ class TaskListTab(QtWidgets.QTableView):
 
     def edit_title(self):
         """Gives a pop-up dialog to edit the title"""
-        # Refreshes the self.database
-        self.database = TaskList()
 
         # Creates the pop-up dialog with input line
         text, okay = QtWidgets.QInputDialog.getText(
@@ -99,8 +93,6 @@ class TaskListTab(QtWidgets.QTableView):
 
     def edit_time_taken(self):
         """Gives a pop-up dialog to edit the estimated time"""
-        # Refreshes the self.database
-        self.database = TaskList()
 
         # Creates a pop-up with a combobox to edit the time
         lst = ['5 min', '10 min', '15 min', '20 min', '25 min', '30 min']
@@ -124,8 +116,6 @@ class TaskListTab(QtWidgets.QTableView):
 
     def edit_priority(self):
         """Gives a pop-up dialog to edit the priority"""
-        # Refreshes the self.database
-        self.database = TaskList()
 
         # Creates a pop-up with a combobox to edit the priority
         lst = ['low', 'normal', 'high', 'must be done today']
@@ -149,8 +139,6 @@ class TaskListTab(QtWidgets.QTableView):
 
     def edit_periodic(self):
         """Gives a pop-up dialog to edit the periodicity"""
-        # Refreshes the self.database
-        self.database = TaskList()
 
         # Creates a pop-up with a combobox to edit if the task is periodic
         lst = ['max once a day', 'several times a day', 'not periodic']
@@ -174,8 +162,6 @@ class TaskListTab(QtWidgets.QTableView):
 
     def edit_preferred_time(self):
         """Gives a pop-up dialog to edit the preferred time frame"""
-        # Refreshes the self.database
-        self.database = TaskList()
 
         # Creates a pop-up with a combobox to edit the preferred time
         lst = ['Whole day', 'Morning', 'Afternoon', 'Evening']
@@ -199,8 +185,6 @@ class TaskListTab(QtWidgets.QTableView):
 
     def refresh(self):
         """Refreshes the screen, by creating it again"""
-        # Refreshes the self.database
-        self.database = TaskList()
 
         # Creates the table for the database
         self.model = TaskListDatabase(self.database.data)
@@ -218,3 +202,37 @@ class TaskListTab(QtWidgets.QTableView):
             self.edit_button = QtWidgets.QPushButton('Edit')
             self.setIndexWidget(self.model.index(index, 6), self.edit_button)
             self.edit_button.clicked.connect(self.edit_button_clicked)
+
+
+class TaskListDatabase(QAbstractTableModel):
+    """This class creates the visualisation of the database in the PyQT5 application"""
+
+    def __init__(self, database):
+        QAbstractTableModel.__init__(self)
+        self._database = database
+
+    def rowCount(self, _parent=None):
+        """Returns the amount of rows"""
+        return len(self._database.index)
+
+    def columnCount(self, _parent=None):
+        """Returns the amount of columns"""
+        return len(self._database.columns)
+
+    def data(self, index, role=Qt.DisplayRole):
+        """Fills the empty table with values"""
+        if index.isValid():
+            if role == Qt.DisplayRole:
+                return str(self._database.iloc[index.row(), index.column()])
+        return None
+
+    def headerData(self, col, orientation, role=Qt.DisplayRole):
+        """Sets the column names"""
+        if orientation == Qt.Horizontal and role == Qt.DisplayRole:
+            return self._database.columns[col]
+        return None
+
+    @property
+    def database(self):
+        """Returns the database"""
+        return self._database
