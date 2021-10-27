@@ -51,6 +51,30 @@ class TestDatabase(unittest.TestCase):
             finally:
                 pass
 
+    def test_delete_periodic_task(self):
+        # Create a new database
+        task_list = TaskList(file=path)
+
+        # Add a new task that is not periodic
+        task = ['Water the plants', 5, 'high', 'not periodic', 'Whole day']
+        task_list.add_task(task)
+
+        # Check if the task is really added
+        categories = ['Task', 'Estimated time (minutes)', 'Priority', 'Periodic', 'Preferred time']
+        self.assertEqual(3, len(task_list.data))
+        for i in range(len(task)):
+            self.assertEqual(task[i], task_list.data.iloc[2][categories[i]])
+
+        # Try the delete if not periodic function on all the tasks
+        title = ['Take a walk', 'Get some coffee', 'Water the plants']
+        for tsk in title:
+            task_list.delete_task_periodic(tsk)
+
+        # Check if only the last task is deleted
+        self.assertEqual(2, len(task_list.data))
+        self.assertEqual(task_list.data.iloc[0][0], 'Take a walk')
+        self.assertEqual(task_list.data.iloc[1][0], 'Get some coffee')
+
     def test_data_output(self):
         # Checks the output of the data output function
         task_list = TaskList(file=path)
