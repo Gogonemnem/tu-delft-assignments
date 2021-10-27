@@ -1,76 +1,112 @@
 import os
-from pathlib import Path
+import csv
 from project.randomizer.randomizer_of_tasks import Randomizer
 
-folder = Path(os.getcwd())
+absolute_path = os.path.abspath(__file__)
+fileDirectory = os.path.dirname(absolute_path)
+parent = os.path.dirname(fileDirectory)
+path = os.path.join(parent, 'main', 'todolist')
 
 
 class ToDoList:
+
+    column_names = ['Task', 'ID', 'Task Status', 'Rescheduled Time']
+    delimiter = '&'
+
     def __init__(self):
-        self.task_todo = []
-        self.task_doing = []
-        self.task_done = []
+        self.todolist: list[dict] = []
         self.status()
+
+    @property
+    def available(self):
+        """Return list of task id's that are able to be scheduled"""
+
+        return [task for task in self.todolist if task['Task Status'] not in ('Done', 'Rescheduled', 'Skipped')]
+
+    def is_completed(self) -> bool:
+
+        next_task = next((task for task in self.todolist if task['Task Status'] != 'Done'), None)
+        return not next_task
 
     def status(self):
         """Check status of all tasks in To-Do list file."""
 
-        with open(folder / "ToDoList.txt", 'r', encoding='utf-7') as file_to_do:
-            for lines in file_to_do:
-                if lines.split("&")[1] == "To-Do" or lines.split("&")[1] == "Snooze" or\
-                        lines.split("&")[1] == "Reschedule":
-                    self.task_todo.append(lines.split("&")[0])
-                elif lines.split("&")[1] == "Doing":
-                    self.task_doing.append(lines.split("&")[0])
-                else:
-                    self.task_done.append(lines.split("&")[0])
+        self.read_file()
 
-    @staticmethod
-    def change(task, num, status):
-        """Change status of task [task] with id [num] from to-do list to status [status]."""
+        if self.is_completed():
+            self.create_todolist()
+            self.write_to_file()
 
-        with open(folder / "ToDoList.txt", "r+", encoding='utf-7') as file_to_do:
-            lines = file_to_do.readlines()
-            file_to_do.seek(0)
-            for i in range(len(lines)):
-                if lines[i].split("&")[1] == str(num):
-                    file_to_do.write(task.replace("\n", "") + "&" + str(num) + "&" + status + "\n")
-                else:
-                    file_to_do.write(lines[i])
-            file_to_do.truncate()
+    def create_todolist(self, output=False):
+        """Generates a new to-do list"""
+        self.todolist = []
+
+        randomizer = Randomizer()
+        lst = [
+            *randomizer.randomize_tasks_other_morning(),
+            *randomizer.randomize_tasks_other_afternoon(),
+            *randomizer.randomize_tasks_other_evening()
+        ]
+
+        for i, task in enumerate(lst):
+            self.todolist.append(
+                {'Task': task, 'ID': str(i + 1), 'Task Status': 'To-Do', 'Rescheduled Time': ''})
+
+        self.write_to_file()
+
+        if output:
+            return lst, self.todolist
+
+        return None
+
+    def change(self, task: dict, status: str, time=None):
+        """Change status of task [task] from to-do list to status [status]."""
+
+        if task not in self.todolist:
+            return
+
+        index = self.todolist.index(task)
+        self.todolist[index]['Task Status'] = status
+
+        if status == 'Removed':
+            self.todolist.pop(index)
+
+        elif status == 'Rescheduled':
+            task['Rescheduled Time'] = time
+
+        self.write_to_file()
+
+    def read_file(self, output=False):
+        """Reads the file contents transforming it to a list of tasks"""
+
+        with open(path, encoding='utf-8') as file_to_do:
+            if file_to_do.readline() == ToDoList.delimiter.join(ToDoList.column_names):
+                fieldnames = None
+            else:
+                fieldnames = ToDoList.column_names
+
+            csv_reader = csv.DictReader(file_to_do, fieldnames, delimiter=ToDoList.delimiter)
+            self.todolist = list(csv_reader)
+
+        if output:
+            return self.todolist
+
+        return None
+
+    def write_to_file(self):
+        """Writes the list of tasks to the file"""
+
+        with open(path, 'w', encoding='utf-8') as file_to_do:
+            csv_writer = csv.DictWriter(file_to_do, ToDoList.column_names, delimiter=ToDoList.delimiter)
+            csv_writer.writeheader()
+            csv_writer.writerows(self.todolist)
 
 
-class CreateToDoList:
-    def __init__(self):
-        self.todo_list = self.list
+def main():
+    todolist = ToDoList()
+    print(todolist.todolist)
+    # todolist.change()
 
-    @staticmethod
-    def list(new: bool = True):
-        """Create to-do list from the randomizer if new is true and \n
-         and based on the status of all tasks when the new is false. """
 
-        tasks_list = []
-        if new:
-            tasks_list.extend(Randomizer().randomize_tasks_other_morning())
-            tasks_list.extend(Randomizer().randomize_tasks_other_afternoon())
-            tasks_list.extend(Randomizer().randomize_tasks_other_evening())
-            with open(folder / "ToDoList.txt", 'w', encoding='utf-7') as file_todo:
-                for i in range(len(tasks_list)):
-                    file_todo.writelines(tasks_list[i] + "&" + str(i) + "&" + "To-Do" + '\n')
-        else:
-            with open(folder / "ToDoList.txt", 'r+', encoding='utf-7') as file_todo:
-                lines = file_todo.readlines()
-                file_todo.seek(0)
-                i = 0
-                file_todo.truncate()
-                for line in lines:
-                    if "Removed" not in line and "Done" not in line:
-                        tasks_list.append(line.split("&")[0])
-                        file_todo.write(
-                            line.split("&")[0] + "&" + str(i) + "&" + line.split("&")[2])
-                        i += 1
-                    else:
-                        file_todo.write(line.split("&")[0] + "&" +
-                                        str(int(line.split("&")[1]) + 100) +
-                                        "&" + line.split("&")[2])
-        return tasks_list
+if __name__ == '__main__':
+    main()
