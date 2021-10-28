@@ -21,7 +21,7 @@ class ToDoList:
 
     @property
     def available(self):
-        """Return list of task id's that are able to be scheduled"""
+        """Return list of task id's that are able to be scheduled."""
 
         return [task for task in self.todolist
                 if task['Task Status'] not in ('Done', 'Rescheduled', 'Skipped')]
@@ -41,7 +41,7 @@ class ToDoList:
             self.write_to_file()
 
     def create_todolist(self, output=False):
-        """Generates a new to-do list"""
+        """Generate a new to-do list."""
         self.todolist = []
 
         randomizer = QueueRandomizer(self.tasklist)
@@ -84,7 +84,7 @@ class ToDoList:
         self.write_to_file()
 
     def read_file(self, output=False):
-        """Reads the file contents transforming it to a list of tasks"""
+        """Read the file contents transforming it to a list of tasks."""
 
         with open(path, encoding='utf-8') as file_to_do:
             if file_to_do.readline() == ToDoList.delimiter.join(ToDoList.column_names):
@@ -101,7 +101,7 @@ class ToDoList:
         return None
 
     def write_to_file(self):
-        """Writes the list of tasks to the file"""
+        """Write the list of tasks to the file."""
 
         with open(path, 'w', encoding='utf-8') as file_to_do:
             csv_writer = csv.DictWriter(
