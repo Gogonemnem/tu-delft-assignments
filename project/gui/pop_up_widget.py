@@ -8,7 +8,7 @@ from PyQt5.QtWidgets import QMessageBox, QTimeEdit, QDialog, QVBoxLayout, \
 class Popup:
     @staticmethod
     def pop_up(task: dict):
-        """Create a pop-up with the task and available actions"""
+        """Create a pop-up with the task and available actions."""
         statuses = 'Do', 'Remove', 'Complete', 'Reschedule', 'Do another', 'Snooze', 'Skip', 'Redo'
         buttons = [None]
         pop_up = QMessageBox()
@@ -48,7 +48,7 @@ class TimeDialog(QDialog):
 
     @staticmethod
     def get_time(parent=None):
-        """Static method to create the dialog and return (time, accepted)"""
+        """Static method to create the dialog and return (time, accepted)."""
         dialog = TimeDialog(parent)
         result = dialog.exec_()
         time = dialog.time.time().toPyTime()
