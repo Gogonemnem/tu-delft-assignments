@@ -176,6 +176,10 @@ class TaskListTab(QtWidgets.QTableView):
             self.setIndexWidget(self.model.index(index, 6), edit_button)
             edit_button.clicked.connect(self.edit_button_clicked)
 
+    def add_task(self, task):
+        self.database.add_task(task)
+        self.refresh()
+
 
 class TaskListDatabase(QAbstractTableModel):
     """This class creates the visualisation of the database in the PyQT5 application"""
