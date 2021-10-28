@@ -22,9 +22,9 @@ class TesToDoList(unittest.TestCase):
 
     def test_new_list(self):
         """Check if input from randomizer is correctly interpreted"""
-        for atribute in [self.random, self.to_do_list, self.todo.available]:
-            self.assertTrue(len(atribute) == 9)
-            self.assertIsInstance(atribute, list)
+        for attribute in [self.random, self.to_do_list, self.todo.available]:
+            self.assertTrue(len(attribute) == 9)
+            self.assertIsInstance(attribute, list)
 
     def test_task_in_new_list(self):
         """Check if all task from randomizer are in to do list in the right order"""
@@ -34,13 +34,7 @@ class TesToDoList(unittest.TestCase):
     def test_change_status(self):
         """Check if changes made to the to do list are correctly adjusted"""
         # Change status in to do list
-        self.todo.change(self.to_do_list[5], "Done")
-        self.todo.change(self.to_do_list[6], "Doing")
-        self.todo.change(self.to_do_list[2], "Rescheduled")
-        self.todo.change(self.to_do_list[8], "Rescheduled")
-        self.todo.change(self.to_do_list[3], "Doing")
-        self.todo.change(self.to_do_list[0], "Done")
-        self.todo.change(self.to_do_list[1], "Done")
+        self.change_status()
 
         self.assertTrue(len(self.todo.available) == 4)
 
@@ -58,13 +52,7 @@ class TesToDoList(unittest.TestCase):
         """Make local changes in test to compare to to do list"""
         self.random, self.to_do_list = ToDoList().create_todolist(output=True)
         self.todo = ToDoList()
-        self.todo.change(self.to_do_list[5], "Done")
-        self.todo.change(self.to_do_list[6], "Doing")
-        self.todo.change(self.to_do_list[2], "Rescheduled")
-        self.todo.change(self.to_do_list[8], "Rescheduled")
-        self.todo.change(self.to_do_list[3], "Doing")
-        self.todo.change(self.to_do_list[0], "Done")
-        self.todo.change(self.to_do_list[1], "Done")
+        self.change_status()
 
         self.to_do_list[5]["Task Status"] = "Done"
         self.to_do_list[6]["Task Status"] = "Doing"
@@ -89,3 +77,12 @@ class TesToDoList(unittest.TestCase):
             self.assertEqual(self.todo.is_completed(), False)
             self.todo.change(self.todo.todolist[i], "Done")
         self.assertEqual(self.todo.is_completed(), True)
+
+    def change_status(self):
+        self.todo.change(self.to_do_list[5], "Done")
+        self.todo.change(self.to_do_list[6], "Doing")
+        self.todo.change(self.to_do_list[2], "Rescheduled")
+        self.todo.change(self.to_do_list[8], "Rescheduled")
+        self.todo.change(self.to_do_list[3], "Doing")
+        self.todo.change(self.to_do_list[0], "Done")
+        self.todo.change(self.to_do_list[1], "Done")
