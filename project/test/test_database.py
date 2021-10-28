@@ -1,7 +1,8 @@
 import os
 import unittest
-import pandas as pd
+
 import numpy as np
+import pandas as pd
 
 from project.task_list.data_for_database import TaskList, TaskObject
 
@@ -21,13 +22,13 @@ class TestDatabase(unittest.TestCase):
 
         # Create a dataframe for the remaining task
         remaining_task = pd.DataFrame({
-                                    'Task': ['Take a walk'],
-                                    'Estimated time (minutes)': [30],
-                                    'Priority': ['normal'],
-                                    'Periodic': ['max once a day'],
-                                    'Preferred time': ['Whole day'],
-                                    'Delete task': [np.nan],
-                                    'Edit task:': [np.nan]})
+            'Task': ['Take a walk'],
+            'Estimated time (minutes)': [30],
+            'Priority': ['normal'],
+            'Periodic': ['max once a day'],
+            'Preferred time': ['Whole day'],
+            'Delete task': [np.nan],
+            'Edit task:': [np.nan]})
 
         # Create the input for the deleted task, to restore the file
         task = ['Get some coffee', 10, 'low', 'several times a day', 'Morning']
@@ -62,8 +63,8 @@ class TestDatabase(unittest.TestCase):
         # Check if the task is really added
         categories = ['Task', 'Estimated time (minutes)', 'Priority', 'Periodic', 'Preferred time']
         self.assertEqual(3, len(task_list.data))
-        for i in range(len(task)):
-            self.assertEqual(task[i], task_list.data.iloc[2][categories[i]])
+        for i, element in enumerate(task):
+            self.assertEqual(element, task_list.data.iloc[2][categories[i]])
 
         # Try the delete if not periodic function on all the tasks
         title = ['Take a walk', 'Get some coffee', 'Water the plants']
