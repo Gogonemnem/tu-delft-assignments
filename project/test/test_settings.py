@@ -1,7 +1,7 @@
 import os
 import unittest
 
-from project.gui.settings_tab import Settings
+from project.settings.settings_tab import Settings
 
 absolute_path = os.path.abspath(__file__)
 fileDirectory = os.path.dirname(absolute_path)

@@ -1,12 +1,13 @@
+import sys
 from datetime import datetime, timedelta
-
 from PyQt5 import QtWidgets, QtGui, sip
 from PyQt5.QtCore import QDateTime
-from PyQt5.QtWidgets import QComboBox, QTimeEdit, QFormLayout, QPushButton, \
+from PyQt5.QtWidgets import QComboBox, QTimeEdit, QApplication, QFormLayout, QPushButton, \
     QMessageBox, QLineEdit, QDateTimeEdit, QRadioButton, QHBoxLayout, QWidget, QSpinBox
 
-from project.agenda.agenda import Activity
-from project.gui.agenda_widget import AgendaWidget
+from project.agenda.agenda import Activity, Agenda
+from project.agenda.agenda_widget import AgendaWidget
+from project.settings.help_button import HelpButton
 
 
 class IndividualAgendaWidget(QtWidgets.QGroupBox):
@@ -27,34 +28,24 @@ class IndividualAgendaWidget(QtWidgets.QGroupBox):
         self.duration = QTimeEdit()
         self.description = QLineEdit()
         self.button = QPushButton()
+        self.help = HelpButton()
 
-        # Main layout/info for this widget
         self.setTitle('Agenda activities can be added here')
         self.layout = QFormLayout()
         self.setLayout(self.layout)
-        self.setWhatsThis(
-            'You can modify your agenda here and create your own schedule.\n\n'
-            'First, select if you want to create an activity, modify one or delete one. '
-            'When deleting an activity, simply enter the corresponding id and click "Delete" '
-            'When creating or modifying an activity add the details of your activity '
-            'and click on Add "activity" or "Modify activity". '
-            'When modifying an activity, only edit the preferred options.\n'
-            'If everything went right, you can now see your activity in the agenda.')
 
-        # Create the first 3 choices
         self.crea_mod_del()
 
     def keep_old_widgets(self, count):
-        """Remove widgets which will be recreated when selecting an option on the screen."""
-        if len(self.children()) <= count:
-            return
-
-        for widget in self.children()[:count - 1:-1]:
-            self.layout.removeWidget(widget)
-            sip.delete(widget)
+        """Remove widgets which will be recreated when selecting an option on the screen"""
+        if len(self.children()) > count:
+            for widget in self.children()[:count - 1:-1]:
+                self.layout.removeWidget(widget)
+                sip.delete(widget)
+                # del widget
 
     def calculate_keep_widgets(self):
-        """Determine how many widgets should be kept with each option."""
+        """Determine how many widgets should be kept with each option"""
         widgets = 2
         if self.delete.isChecked():
             widgets += 1
@@ -66,7 +57,8 @@ class IndividualAgendaWidget(QtWidgets.QGroupBox):
         return widgets
 
     def crea_mod_del(self):
-        """Show three options the user can use to manipulate the agenda."""
+        """Show three options the user can use to manipulate the agenda
+        with creating an activity as the default option"""
         self.create = QRadioButton('Create an activity', self)
         self.modify = QRadioButton('Modify an activity', self)
         self.delete = QRadioButton('Delete an activity', self)
@@ -84,11 +76,10 @@ class IndividualAgendaWidget(QtWidgets.QGroupBox):
         buttons.setLayout(button_layout)
         self.layout.addRow(buttons)
 
-        # Set creating an activity as default option
         self.create.toggle()
 
     def first_stage(self):
-        """Show the next option depending on the three options."""
+        """Show the next option depending on the three options"""
         self.keep_old_widgets(2)
         if self.create.isChecked():
             self.end_or_dur()
@@ -99,7 +90,8 @@ class IndividualAgendaWidget(QtWidgets.QGroupBox):
             self.second_stage()
 
     def end_or_dur(self):
-        """Show two options the user can use to specify the activity."""
+        """Show two options the user can use to specify the activity
+        with relaying the end time as the default option"""
         self.end = QRadioButton('Set ending time', self)
         self.dur = QRadioButton('Set duration time', self)
 
@@ -114,15 +106,13 @@ class IndividualAgendaWidget(QtWidgets.QGroupBox):
         buttons.setLayout(button_layout)
         self.layout.addRow(buttons)
 
-        # Add the id form
         if self.modify.isChecked():
             self.layout_id()
 
-        # Set relaying end time as default option
         self.end.toggle()
 
     def second_stage(self):
-        """Show the form depending on the two options."""
+        """Show the form depending on the two options"""
         count = self.calculate_keep_widgets()
         self.keep_old_widgets(count)
 
@@ -135,18 +125,19 @@ class IndividualAgendaWidget(QtWidgets.QGroupBox):
                 self.layout_duration()
             self.layout_description()
         self.layout_button()
+        self.help_button()
 
     def layout_id(self):
-        """Show the option to choose the id."""
+        """Show the option to choose the id"""
         self.id = QSpinBox(self)
         self.id.setMinimum(0)
         self.id.setMaximum(max(len(self.agenda_widget.agenda.agenda) - 1, 0))
         self.layout.addRow("Id", self.id)
 
     def layout_activity(self):
-        """Show the option to choose the activity."""
+        """Show the option to choose the activity"""
         self.activity = QComboBox(self)
-        activities = ['No work', 'Planned break', 'Do not disturb me', 'Doing task']
+        activities = ['No work', 'Work', 'Planned break', 'Do not disturb me', 'Doing task']
         if self.modify.isChecked():
             activities.insert(0, '')
         for activity in activities:
@@ -154,14 +145,15 @@ class IndividualAgendaWidget(QtWidgets.QGroupBox):
         self.layout.addRow("Activity", self.activity)
 
     def layout_start_time(self):
-        """Show the option to choose the starting time."""
+        """Show the option to choose the starting time"""
         self.start_time = QDateTimeEdit(self)
         if self.create.isChecked():
             self.start_time.setDateTime(QDateTime.currentDateTime())
         self.layout.addRow("Start time", self.start_time)
 
     def layout_end_time(self):
-        """Show the option to choose the ending time."""
+        """Show the option to choose the ending time
+        while setting the duration automatically to None"""
         self.duration = None
         self.end_time = QDateTimeEdit(self)
         if self.create.isChecked():
@@ -169,18 +161,19 @@ class IndividualAgendaWidget(QtWidgets.QGroupBox):
         self.layout.addRow("End time", self.end_time)
 
     def layout_duration(self):
-        """Show the option to choose the duration."""
+        """Show the option to choose the duration of the task
+        while setting the ending time automatically to None"""
         self.end_time = None
         self.duration = QTimeEdit(self)
         self.layout.addRow("Duration", self.duration)
 
     def layout_description(self):
-        """Show the option to give a short description."""
+        """Show the option to give a short description of the task"""
         self.description = QLineEdit(self)
         self.layout.addRow("Description", self.description)
 
     def layout_button(self):
-        """Show the button to add, modify or delete the activity in the agenda."""
+        """Show the button to add, modify or delete the activity in the agenda"""
         if self.create.isChecked():
             label = 'Add activity'
             self.button = QPushButton(label, self)
@@ -197,7 +190,7 @@ class IndividualAgendaWidget(QtWidgets.QGroupBox):
         self.layout.addWidget(self.button)
 
     def click_create(self):
-        """Add the activity to the agenda widget."""
+        """Add the activity to the agenda widget"""
         activity, start_time, end_or_dur, summary = self.read_data()
         activity1 = Activity(activity, start_time, end_or_dur, summary)
 
@@ -206,7 +199,7 @@ class IndividualAgendaWidget(QtWidgets.QGroupBox):
         self.show_popup(text)
 
     def click_modify(self):
-        """Modify the activity in the agenda widget."""
+        """Modify the activity in the agenda widget"""
         activity, start_time, end_or_dur, summary = self.read_data()
 
         if len(self.agenda_widget.agenda.agenda):
@@ -217,7 +210,7 @@ class IndividualAgendaWidget(QtWidgets.QGroupBox):
         self.show_popup(text)
 
     def click_delete(self):
-        """Delete the activity from the agenda widget."""
+        """Delete the activity from the agenda widget"""
         if len(self.agenda_widget.agenda.agenda):
             identifier = self.id.value()
             self.agenda_widget.delete_activity(identifier)
@@ -225,7 +218,7 @@ class IndividualAgendaWidget(QtWidgets.QGroupBox):
         self.show_popup(text)
 
     def show_popup(self, text):
-        """Show that the manipulation was a success and what modification was done."""
+        """Show that the manipulation was a success and what modification was done"""
         msg = QMessageBox()
         msg.setText(text)
         msg.setWindowTitle("Success!")
@@ -236,19 +229,17 @@ class IndividualAgendaWidget(QtWidgets.QGroupBox):
         self.create.click()
 
     def read_data(self):
-        """Turn the data of the form into correct types for the Activity class."""
+        """Turn the data of the form into correct types for the Activity class"""
         activity = self.activity.currentText()
         start_time = self.start_time.dateTime().toPyDateTime()
         summary = self.description.text()
 
-        # Get end time or duration
         if self.end_time:
             end_or_dur = self.end_time.dateTime().toPyDateTime()
             start_time, end_or_dur = min(start_time, end_or_dur), max(start_time, end_or_dur)
         else:
             end_or_dur = timedelta(milliseconds=self.duration.time().msecsSinceStartOfDay())
 
-        # Not touching the time will set the variables to None
         empty_mod = datetime.strptime('2000-01-01 00:00:00', "%Y-%m-%d %H:%M:%S")
         if start_time == empty_mod:
             start_time = None
@@ -256,3 +247,29 @@ class IndividualAgendaWidget(QtWidgets.QGroupBox):
             end_or_dur = None
 
         return activity, start_time, end_or_dur, summary
+
+    def help_button(self):
+        self.help = HelpButton()
+        self.help.msg.setText('You can modify your agenda here and create your own schedule.\n\n'
+                              'First, select if you want to create an activity, modify one or delete one. '
+                              'When deleting an activity, simply enter the corresponding id and click "Delete" '
+                              'When creating or modifying an activity add the details of your activity ' 
+                              'and click on Add "activity" or "Modify activity". '
+                              'When modifying an activity, only edit the preferred options.\n'
+                              'If everything went right, you can now see your activity in the agenda.')
+
+        self.layout.addWidget(self.help.button)
+
+
+def main():
+    app = QApplication(sys.argv)
+
+    agenda = Agenda()
+    agenda_widget1 = AgendaWidget(agenda)  # is not shown
+    widget = IndividualAgendaWidget(agenda_widget1)
+    widget.show()
+    sys.exit(app.exec_())
+
+
+if __name__ == '__main__':
+    main()

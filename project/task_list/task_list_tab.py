@@ -1,7 +1,8 @@
 from PyQt5 import QtWidgets
-from PyQt5.QtCore import QAbstractTableModel, Qt
-
+from PyQt5 import QtCore
+from project.task_list.database_task_list import TaskListDatabase
 from project.task_list.data_for_database import TaskList
+from project.settings.help_button import HelpButton
 
 
 class TaskListTab(QtWidgets.QTableView):
@@ -9,9 +10,11 @@ class TaskListTab(QtWidgets.QTableView):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.database = TaskList()
+        self.database = None
         self.model = None
+        self.delete_button = None
         self.index = None
+        self.edit_button = None  # those five self.statements aren't needed but pycharm is annoying
 
         # Visualise the database, including the delete and edit buttons
         self.refresh()
@@ -19,19 +22,24 @@ class TaskListTab(QtWidgets.QTableView):
         # Creates a help button, which explains the database
         layout = QtWidgets.QVBoxLayout()
         self.setLayout(layout)
-        self.setWhatsThis('This tab shows the whole database. '
-                          'This means it shows all the possible tasks '
-                          'that might appear on your daily to do list. '
-                          'Except the tasks you have marked as: "must be done today" '
-                          'Those are certain to appear.\n'
-                          'You can also edit or delete your tasks here.\n'
-                          'To delete a task, simply click the delete button, '
-                          'but be beware! The task will be permanently deleted once you click.\n'
-                          'To edit a task, click the edit button. '
-                          'You will then get the option to edit a specific part of a task.')
+        self.help = HelpButton()
+        self.help.msg.setText('This tab shows the whole database. '
+                              'This means it shows all the possible tasks '
+                              'that might appear on your daily to do list. '
+                              'Except the tasks you have marked as: "must be done today" '
+                              'Those are certain to appear.\n'
+                              'You can also edit or delete your tasks here.\n'
+                              'To delete a task, simply click the delete button, '
+                              'but be beware! The task will be permanently deleted once you click.\n'
+                              'To edit a task, click the edit button. '
+                              'You will then get the option to edit a specific part of a task.')
+
+        layout.addWidget(self.help.button, alignment=QtCore.Qt.AlignBottom)
 
     def delete_button_clicked(self):
-        """Delete a row from the database and refresh the screen."""
+        """Deletes a row from the database and refreshes the screen"""
+        # Updates self.database to make sure it deletes from the most recent version
+        self.database = TaskList()
 
         # Gets the index of the deleted row
         button = self.sender()
@@ -44,7 +52,9 @@ class TaskListTab(QtWidgets.QTableView):
             self.refresh()
 
     def edit_button_clicked(self):
-        """Give the user the option to edit a task from the database."""
+        """Gives the user the option to edit a task from the database"""
+        # Updates self.database to make sure it edits the most recent version
+        self.database = TaskList()
 
         # Gets the index of the to be edited row
         button = self.sender()
@@ -73,7 +83,9 @@ class TaskListTab(QtWidgets.QTableView):
             self.refresh()
 
     def edit_title(self):
-        """Give a pop-up dialog to edit the title."""
+        """Gives a pop-up dialog to edit the title"""
+        # Refreshes the self.database
+        self.database = TaskList()
 
         # Creates the pop-up dialog with input line
         text, okay = QtWidgets.QInputDialog.getText(
@@ -83,133 +95,130 @@ class TaskListTab(QtWidgets.QTableView):
 
         # Edits the database after the user finishes the input
         if okay:
-            self.database.edit_task(self.index.row(), 'Task', text)
+            self.database.edit_task(
+                self.index.row(),
+                'Task',
+                text
+            )
 
     def edit_time_taken(self):
-        """Give a pop-up dialog to edit the estimated time."""
+        """Gives a pop-up dialog to edit the estimated time"""
+        # Refreshes the self.database
+        self.database = TaskList()
 
         # Creates a pop-up with a combobox to edit the time
         lst = ['5 min', '10 min', '15 min', '20 min', '25 min', '30 min']
         sol = QtWidgets.QInputDialog()
         sol.setComboBoxItems(lst)
+        output = sol.comboBoxItems()
         text, okay = sol.getItem(
             self,
             f'Edit estimated time taken for "{self.database.data.Task[self.index.row()]}"',
             f'Current time: {self.database.data.iloc[self.index.row()][1]} min',
-            lst,
+            output,
             editable=False)
 
         # Edits the database after selection of a time
         if okay:
-            self.database.edit_task(self.index.row(), 'Estimated time (minutes)', text[:-4])
+            self.database.edit_task(
+                self.index.row(),
+                'Estimated time (minutes)',
+                text[:-4]
+            )
 
     def edit_priority(self):
-        """Give a pop-up dialog to edit the priority."""
+        """Gives a pop-up dialog to edit the priority"""
+        # Refreshes the self.database
+        self.database = TaskList()
 
         # Creates a pop-up with a combobox to edit the priority
         lst = ['low', 'normal', 'high', 'must be done today']
         sol = QtWidgets.QInputDialog()
         sol.setComboBoxItems(lst)
+        output = sol.comboBoxItems()
         text, okay = sol.getItem(
             self,
             f'Edit the priority of: "{self.database.data.Task[self.index.row()]}"',
             f'Current priority: {self.database.data.iloc[self.index.row()][2]}',
-            lst,
+            output,
             editable=False)
 
         # Edits the database after selection of a priority
         if okay:
-            self.database.edit_task(self.index.row(), 'Priority', text)
+            self.database.edit_task(
+                self.index.row(),
+                'Priority',
+                text
+            )
 
     def edit_periodic(self):
-        """Give a pop-up dialog to edit the periodicity."""
+        """Gives a pop-up dialog to edit the periodicity"""
+        # Refreshes the self.database
+        self.database = TaskList()
 
         # Creates a pop-up with a combobox to edit if the task is periodic
         lst = ['max once a day', 'several times a day', 'not periodic']
         sol = QtWidgets.QInputDialog()
         sol.setComboBoxItems(lst)
+        output = sol.comboBoxItems()
         text, okay = sol.getItem(
             self,
             f'Edit the periodicity of: "{self.database.data.Task[self.index.row()]}"',
             f'The current periodicity: {self.database.data.iloc[self.index.row()][3]}',
-            lst,
+            output,
             editable=False)
 
         # Edits the database after selection of True or False
         if okay:
-            self.database.edit_task(self.index.row(), 'Periodic', text)
+            self.database.edit_task(
+                self.index.row(),
+                'Periodic',
+                text
+            )
 
     def edit_preferred_time(self):
-        """Give a pop-up dialog to edit the preferred time frame."""
+        """Gives a pop-up dialog to edit the preferred time frame"""
+        # Refreshes the self.database
+        self.database = TaskList()
 
         # Creates a pop-up with a combobox to edit the preferred time
         lst = ['Whole day', 'Morning', 'Afternoon', 'Evening']
         sol = QtWidgets.QInputDialog()
         sol.setComboBoxItems(lst)
+        output = sol.comboBoxItems()
         text, okay = sol.getItem(
             self,
             f'Edit the preferred time of: "{self.database.data.Task[self.index.row()]}"',
             f'Current preferred time: {self.database.data.iloc[self.index.row()][4]}',
-            lst,
+            output,
             editable=False)
 
         # Edits the database after selection of a preferred time
         if okay:
-            self.database.edit_task(self.index.row(), 'Preferred time', text)
+            self.database.edit_task(
+                self.index.row(),
+                'Preferred time',
+                text
+            )
 
     def refresh(self):
-        """Refresh the screen, by creating it again."""
+        """Refreshes the screen, by creating it again"""
+        # Refreshes the self.database
+        self.database = TaskList()
 
         # Creates the table for the database
         self.model = TaskListDatabase(self.database.data)
         self.setModel(self.model)
+        self.resizeColumnsToContents()
         header = self.horizontalHeader()
         header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
 
         # Creates the delete and edit buttons on every row
         for index in range(len(self.database.data.index)):
-            delete_button = QtWidgets.QPushButton('Delete', self)
-            self.setIndexWidget(self.model.index(index, 5), delete_button)
-            delete_button.clicked.connect(self.delete_button_clicked)
+            self.delete_button = QtWidgets.QPushButton('Delete')
+            self.setIndexWidget(self.model.index(index, 5), self.delete_button)
+            self.delete_button.clicked.connect(self.delete_button_clicked)
 
-            edit_button = QtWidgets.QPushButton('Edit', self)
-            self.setIndexWidget(self.model.index(index, 6), edit_button)
-            edit_button.clicked.connect(self.edit_button_clicked)
-
-    def add_task(self, task):
-        self.database.add_task(task)
-        self.refresh()
-
-
-class TaskListDatabase(QAbstractTableModel):
-    """This class creates the visualisation of the database in the PyQT5 application"""
-
-    def __init__(self, database):
-        QAbstractTableModel.__init__(self)
-        self._database = database
-
-    def rowCount(self, _parent=None):
-        """Return the amount of rows."""
-        return len(self._database.index)
-
-    def columnCount(self, _parent=None):
-        """Return the amount of columns."""
-        return len(self._database.columns)
-
-    def data(self, index, role=Qt.DisplayRole):
-        """Fill the empty table with values."""
-        if index.isValid():
-            if role == Qt.DisplayRole:
-                return str(self._database.iloc[index.row(), index.column()])
-        return None
-
-    def headerData(self, col, orientation, role=Qt.DisplayRole):
-        """Set the column names."""
-        if orientation == Qt.Horizontal and role == Qt.DisplayRole:
-            return self._database.columns[col]
-        return None
-
-    @property
-    def database(self):
-        """Return the database."""
-        return self._database
+            self.edit_button = QtWidgets.QPushButton('Edit')
+            self.setIndexWidget(self.model.index(index, 6), self.edit_button)
+            self.edit_button.clicked.connect(self.edit_button_clicked)

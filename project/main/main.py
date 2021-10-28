@@ -1,29 +1,26 @@
-import sys
 import traceback
-
+import sys
 from PyQt5 import QtWidgets
-from PyQt5.QtCore import Qt
-
-from project.gui.agenda_widget import AgendaWidget
-from project.gui.individual_agenda_widget import IndividualAgendaWidget
-from project.gui.settings_tab import SettingsTab
-from project.gui.task_list_tab import TaskListTab
-from project.gui.task_widget import TaskWidget
-from project.gui.to_do_list_widget import ToDoListWidget
+from project.agenda.agenda_widget import AgendaWidget
+from project.task_list.task_list_widget import TaskListWidget
+from project.task_list.task_list_tab import TaskListTab
+from project.individual_task.individual_task_widget import TaskWidget
+from project.settings.settings_tab import SettingsTab
+from project.agenda.agenda import Agenda
+from project.agenda.individual_agenda_widget import IndividualAgendaWidget
 
 
 class MainWindow(QtWidgets.QMainWindow):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, agenda, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         self.setWindowTitle("Breaksum")
-        self.setWindowFlags(Qt.WindowCloseButtonHint | Qt.WindowContextHelpButtonHint)
-        self.agenda = AgendaWidget()
-        self.task_list_tab = TaskListTab()
-        self.to_do_list = ToDoListWidget(self.agenda, self.task_list_tab)
-        self.task = TaskWidget(self.task_list_tab)
+        self.agenda = AgendaWidget(agenda)
+        self.tasklisttab = TaskListTab()
+        self.tasklist = TaskListWidget(self.agenda, self.tasklisttab)
+        self.task = TaskWidget(self.tasklisttab)
         self.add_activity = IndividualAgendaWidget(self.agenda)
-        self.settings = SettingsTab(self.to_do_list.time_randomizer)
+        self.settings = SettingsTab(self.tasklist.time_randomizer)
         self.home = QtWidgets.QWidget()
         self.tabs = QtWidgets.QTabWidget()
         self.file = QtWidgets.QWidget()
@@ -41,7 +38,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def visual(self):
         layout = QtWidgets.QGridLayout()
         layout.addWidget(self.agenda, 0, 2, 2, 1)
-        layout.addWidget(self.to_do_list, 0, 0, 1, 2)
+        layout.addWidget(self.tasklist, 0, 0, 1, 2)
         layout.addWidget(self.task, 1, 0)
         layout.addWidget(self.add_activity, 1, 1)
 
@@ -53,19 +50,17 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.tabs.addTab(self.settings, "File")
         self.tabs.addTab(self.home, "Home")
-        self.tabs.addTab(self.task_list_tab, "Task list")
+        self.tabs.addTab(self.tasklisttab, "Task list")
         self.tabs.setCurrentIndex(1)
         self.setCentralWidget(self.tabs)
         self.showMaximized()
 
 
-def main():
-    sys.excepthook = MainWindow.catch_exceptions
-    app = QtWidgets.QApplication(sys.argv)
-    window = MainWindow()
-    window.show()
-    app.exec_()
-
+hook = sys.excepthook
+sys.excepthook = MainWindow.catch_exceptions
 
 if __name__ == '__main__':
-    main()
+    agenda0 = Agenda()
+    app = QtWidgets.QApplication(sys.argv)
+    window = MainWindow(agenda0)
+    app.exec_()

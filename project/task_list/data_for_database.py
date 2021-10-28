@@ -1,7 +1,7 @@
 import os
-
-import numpy as np
 import pandas as pd
+import numpy as np
+
 
 # Creates an absolute path, that works on different computers
 absolute_path = os.path.abspath(__file__)
@@ -18,10 +18,8 @@ class TaskList:
         self.data = self.add_file_data(file)
 
     def add_task(self, task):
-        """Append the new task to the dataframe and updates the external database.
-
-         Parameters: Task, estimated time, priority, periodic, preferred time.
-         """
+        """Appends the new task to the dataframe and updates the external database. \
+        Needs a list as input: [Task, estimated time, priority, periodic, preferred time]"""
 
         new_task = {
             'Task': task[0],
@@ -36,48 +34,41 @@ class TaskList:
         self.__write_to_file()
 
     def delete_task(self, index):
-        """Delete a task from the dataframe and update the external database.
-
-        Parameter: the index (int) of the row as input.
-        """
+        """Deletes a task from the dataframe and updates the external database. \
+        Needs the index (int) of the row as input."""
 
         self.data = self.data.drop(index)
         self.data = self.data.reset_index(drop=True)
         self.__write_to_file()
 
     def delete_task_periodic(self, title):
-        """Delete a task from the database if task is not periodic and update the external database.
+        """Deletes a task from the database and updates the external database, \
+        but only if the task is not periodic. \
+        Needs the name (str) of the task as input."""
 
-        Parameter: the name (str) of the task as input.
-        """
-
-        if (self.data[self.data.Task == title].Periodic == 'not periodic').bool():
+        if (self.data[self.data.Task == title].Periodic == 'not periodic').bool() is True:
             index = self.data.index[self.data.Task == title][0]
             self.delete_task(index)
 
     def edit_task(self, index, category, new_value):
-        """Edit one part of the task and updates the external database.
-
-        Parameters: the index of the row (int), the category (str) and the new value.
-        """
+        """Edits one part of the task and updates the external database \
+        Needs as input: the index of the row (int), the category (str) and the new value"""
 
         self.data.at[index, category] = new_value
         self.__write_to_file()
 
     @staticmethod
     def add_file_data(file):
-        """Return a dataframe of the task list database."""
+        """Returns a dataframe of the task list database."""
         return pd.read_csv(file, sep='$')
 
     def __write_to_file(self):
-        """Replace the external database with the current dataframe.
-
-        This function must be used after every addition of the dataframe.
-        """
+        """Replaces the external database with the current dataframe. \
+        This function must be used after every addition of the dataframe"""
         self.data.to_csv(self.file, sep='$', index=False)
 
     def data_output(self):
-        """Return a list of objects from the class TaskObject."""
+        """Returns a list of objects from the class TaskObject."""
         task_object_list = []
         for i in range(len(self.data)):
             task_object_list.append(TaskObject(*self.data.iloc[i][:5]))
@@ -86,10 +77,8 @@ class TaskList:
 
 
 class TaskObject:
-    """This class represents tasks.
-
-    Attributes: name, estimated time, priority, priority, periodic and preferred time.
-    """
+    """Creates an object with the attributes: \
+    name, estimated time, priority, priority, periodic and preferred time"""
 
     def __init__(self, name, time, priority, periodic, preferred_time):
         self.name = name
