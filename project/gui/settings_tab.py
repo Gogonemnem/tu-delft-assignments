@@ -26,7 +26,7 @@ class SettingsTab(QtWidgets.QWidget):
 
 
 class Settings(QtWidgets.QGroupBox):
-    """Ables the user to change some of the settings for the application"""
+    """Ables the user to change some of the settings for the application."""
 
     def __init__(self, time_randomizer: TimeRandomizer, *args, file=path, **kwargs):
         super().__init__(*args, **kwargs)
@@ -50,12 +50,13 @@ class Settings(QtWidgets.QGroupBox):
         self.change = QtWidgets.QPushButton('Change settings')
         self.change.clicked.connect(self.change_settings)
         self.layout.addWidget(self.change)
+        self.change_settings()
 
         # Set layout
         self.setLayout(self.layout)
 
     def change_settings(self):
-        """Changes the settings and saves them externally"""
+        """Changes the settings and saves them externally."""
         self.settings[0] = self.time.value()
         self.settings[1] = self.snooze.value()
         self.save_settings(self.file, self.settings)
@@ -64,14 +65,14 @@ class Settings(QtWidgets.QGroupBox):
         self.time_randomizer.snooze_time = int(self.settings[1]) * 60000
 
     def set_time_breaks(self):
-        """Lets the user set the average time between breaks"""
+        """Lets the user set the average time between breaks."""
         self.time.setMinimum(15)
         self.time.setMaximum(120)
         self.time.setValue(int(self.settings[0]))
         self.layout.addRow('The average time between breaks in minutes', self.time)
 
     def set_snooze_time(self):
-        """Lets the user set the time of the snooze"""
+        """Lets the user set the time of the snooze."""
         self.snooze.setMinimum(1)
         self.snooze.setMaximum(20)
         self.snooze.setValue(int(self.settings[1]))
@@ -79,7 +80,7 @@ class Settings(QtWidgets.QGroupBox):
 
     @staticmethod
     def read_settings(file):
-        """Reads the settings from the file and returns them as a list"""
+        """Reads the settings from the file and returns them as a list."""
         settings = []
         with open(file, encoding='utf-8') as fin:
             for line in fin:
@@ -89,7 +90,7 @@ class Settings(QtWidgets.QGroupBox):
 
     @staticmethod
     def save_settings(file, settings):
-        """Saves the settings from the list in the file"""
+        """Saves the settings from the list in the file."""
         with open(file, 'w', encoding='utf-8') as fin:
             for setting in settings:
                 fin.write(f'{setting}\n')
