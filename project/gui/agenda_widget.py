@@ -49,7 +49,6 @@ class AgendaWidget(QtWidgets.QGroupBox):
         self.timer = QTimer()
         self.timer.timeout.connect(self.show_graph)
         self.update_button.clicked.connect(self.start)
-        self.update_button.click()
         self.stop_button.clicked.connect(self.stop)
         self.resize(1000, 800)
 

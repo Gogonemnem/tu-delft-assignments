@@ -55,7 +55,7 @@ class TestTime(unittest.TestCase):
         self.assertEqual(time_randomizer.average_break_time, 100)
         self.assertTrue(time_randomizer.timer.isActive())
 
-        QTimer.singleShot(500, lambda: self.assertTrue(time_randomizer.timer.isActive()))
+        QTimer.singleShot(500, lambda: self.assertFalse(time_randomizer.timer.isActive()))
 
         QTimer.singleShot(700, self.close)
         app.exec_()
