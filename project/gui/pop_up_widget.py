@@ -8,18 +8,20 @@ from PyQt5.QtWidgets import QMessageBox, QTimeEdit, QDialog, QVBoxLayout, \
 class Popup:
     @staticmethod
     def pop_up(task: dict):
+        """Create a pop-up with the task and available actions"""
         statuses = 'Do', 'Remove', 'Complete', 'Reschedule', 'Do another', 'Snooze', 'Skip', 'Redo'
         buttons = [None]
         pop_up = QMessageBox()
         pop_up.setText(task['Task'])
 
-        # Creates buttons on the pop-up
+        # Create buttons on the pop-up
         for status in statuses:
             button = pop_up.addButton(status + ' Task', QMessageBox.YesRole)
             buttons.append(button)
 
         pop_up.exec()
 
+        # Return which button was press if any
         for i, button in enumerate(buttons):
             if pop_up.clickedButton() == button:
                 return i
@@ -30,7 +32,7 @@ class TimeDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        # nice widget for editing the date
+        # Edit the date form
         self.time = QTimeEdit(self)
         self.time.setTime(QTime.currentTime())
         self.time.setMinimumTime(QTime.currentTime())
@@ -44,9 +46,9 @@ class TimeDialog(QDialog):
         buttons.rejected.connect(self.reject)
         layout.addWidget(buttons)
 
-    # static method to create the dialog and return (time, accepted)
     @staticmethod
     def get_time(parent=None):
+        """Static method to create the dialog and return (time, accepted)"""
         dialog = TimeDialog(parent)
         result = dialog.exec_()
         time = dialog.time.time().toPyTime()
