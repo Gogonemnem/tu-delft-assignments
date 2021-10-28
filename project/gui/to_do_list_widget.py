@@ -14,11 +14,11 @@ from project.task_list.to_do_list import ToDoList
 class ToDoListWidget(QGroupBox):
     """Visualise Task that need to be done today"""
 
-    def __init__(self, agenda: AgendaWidget, tasklisttab: TaskListTab, *args, **kwargs):
+    def __init__(self, agenda: AgendaWidget, task_list_tab: TaskListTab, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.agenda = agenda
-        self.tasklisttab = tasklisttab
-        self.todolist = ToDoList(self.tasklisttab.database)
+        self.task_list_tab = task_list_tab
+        self.todolist = ToDoList(self.task_list_tab.database)
         self.time_randomizer = TimeRandomizer(self.todolist, agenda)
 
         timer = QTimer()
@@ -53,11 +53,13 @@ class ToDoListWidget(QGroupBox):
                           'but it will give you a nice overview of your tasks anyway.')
 
     def create_to_do_list_visual(self):
+        """Visualize the to do list."""
         self.todolist.status()
         for task in self.todolist.todolist:
             self.create_row(task)
 
     def create_row(self, task: dict):
+        """Visualize a task of the todolist."""
         for i, _ in enumerate(self.tuple_of_groups[1:]):
             self.create_checkable_button(task, i + 1)
 
@@ -65,7 +67,7 @@ class ToDoListWidget(QGroupBox):
         self.color_buttons(task)
 
     def create_task_select(self, task: dict):
-        """Visualize the selection radio button"""
+        """Visualize the selection radio button."""
         identifier = int(task['ID'])
         task_button = QRadioButton(f"Task {identifier} for today is: {task['Task']}")
 
@@ -77,6 +79,7 @@ class ToDoListWidget(QGroupBox):
         self.change_status_layout(task, task['Task Status'])
 
     def create_checkable_button(self, task: dict, group_index: int):
+        """Visualize the rest of the buttons."""
         labels = None, 'Do task', 'Remove task', 'Task completed'
 
         identifier = int(task['ID'])
@@ -95,6 +98,7 @@ class ToDoListWidget(QGroupBox):
         self.layout.addWidget(button, identifier, min(group_index, 2))
 
     def change_status_layout(self, task: dict, status: str):
+        """Change the visual depending on the task action."""
         if status == 'Doing':
             self.doing_task_layout(task)
 
@@ -103,13 +107,13 @@ class ToDoListWidget(QGroupBox):
 
         elif status == 'Done':
             self.complete_task_layout(task)
-            self.tasklisttab.refresh()
+            self.task_list_tab.refresh()
 
         elif status == 'Rescheduled':
             self.reschedule_task_layout(task)
 
     def doing_task_layout(self, task: dict):
-        """Set status of task to "Doing"."""
+        """Set status of task to 'Doing' and manage buttons."""
 
         identifier = int(task['ID'])
 
@@ -120,7 +124,7 @@ class ToDoListWidget(QGroupBox):
         self.group_done.button(identifier).setVisible(True)
 
     def remove_task_layout(self, task: dict):
-
+        """Set status of task to 'Removed' and remove the row."""
         identifier = int(task['ID'])
 
         for button_group in self.tuple_of_groups:
@@ -131,7 +135,7 @@ class ToDoListWidget(QGroupBox):
             self.agenda.delete_activity(agenda_id)
 
     def complete_task_layout(self, task: dict):
-        """Set status of task to "Done"."""
+        """Set status of task to 'Done' and manage buttons."""
 
         identifier = int(task['ID'])
 
@@ -146,6 +150,7 @@ class ToDoListWidget(QGroupBox):
         self.group_done.button(identifier).setVisible(False)
 
     def reschedule_task_layout(self, task: dict):
+        """Set status of task to 'Rescheduled' and manage buttons."""
         if isinstance(task['Rescheduled Time'], str):
             time = datetime.datetime.fromisoformat(task['Rescheduled Time'])
         else:
@@ -172,26 +177,31 @@ class ToDoListWidget(QGroupBox):
             button_group.button(identifier).setStyleSheet("background-color:  rgb" + str(color))
 
     def create_generator_button(self):
+        """Add a button that generates a new to do list when clicked."""
         self.generate_button = QPushButton('Generate new to do list', self)
         self.layout.addWidget(self.generate_button, 99, 0, 1, 3)
         self.generate_button.clicked.connect(self.refresh)
 
     def refresh(self):
+        """Reset the widget."""
         self.clear_widget()
         self.create_to_do_list_visual()
         self.timers = {-1: self.timers[-1], 0: self.timers[0]}
         self.initialize_timers()
 
     def clear_widget(self):
+        """Remove the widgets."""
         for task in reversed(self.todolist.todolist):
             self.check_pop_up(2, task)
 
     def initialize_timers(self):
+        """Start timers which check if popup can be presented."""
         self.time_randomizer.start()
         self.timers[-1].timeout.connect(self.check_randomizer_timer)
         self.timers[-1].start(5_000)
 
     def check_randomizer_timer(self):
+        """Use timer of randomizer to check if popup can be presented and present it."""
         if self.timers[0].isActive():
             return
 
@@ -204,6 +214,7 @@ class ToDoListWidget(QGroupBox):
             self.check_pop_up(choice, task)
 
     def check_pop_up(self, choice, task):
+        """Get the choice of the user and set the status of the task accordingly."""
         statuses = 'To Do', 'Doing', 'Removed', 'Done', 'Rescheduled', 'Another', 'Snoozed', \
                    'Skipped', 'Redo'
         status = statuses[choice]
@@ -243,6 +254,7 @@ class ToDoListWidget(QGroupBox):
             self.check_pop_up(Popup.pop_up(task), task)
 
     def setup_rescheduler(self, task: dict, time: datetime.datetime):
+        """Set a timer to get a popup at the rescheduled time."""
         timer = self.time_randomizer.reschedule_popup(time)
         timer.timeout.connect(lambda: self.check_pop_up(Popup.pop_up(task), task))
         self.timers[int(task['ID'])] = timer
