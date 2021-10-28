@@ -80,7 +80,8 @@ class Agenda:
         return next_activity.start_time <= time + timespan
 
     def task_right_after(self):
-        """Return T|F whether a task should be right after activity."""
+        """Return whether a task should be right after activity and duration until it ends."""
+        # Check whether anything is planned
         self.remove_activity_over()
         if not self.agenda:
             return False, -1
@@ -135,8 +136,8 @@ class Agenda:
             list_of_rows = list(csv.DictReader(fin, delimiter='$'))
             for row in list_of_rows:
                 activity = Activity(row['activity'],
-                                    datetime.strptime(row['start_time'], '%Y-%m-%d %H:%M:%S.%f'),
-                                    datetime.strptime(row['end_time'], '%Y-%m-%d %H:%M:%S.%f'),
+                                    datetime.fromisoformat(row['start_time']),
+                                    datetime.fromisoformat(row['end_time']),
                                     row['summary']
                                     )
                 self.add_activity(activity)
