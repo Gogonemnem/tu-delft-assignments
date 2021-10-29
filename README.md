@@ -111,11 +111,12 @@ The breaksum application has two main parts, the main window and a pop-up window
 We hope you enjoy our application.
 
 greeting from the Breaksum team,
+```
 Betsie
 Cristian
 Gonem
 Janine
 Nils
-
+```
 
 
