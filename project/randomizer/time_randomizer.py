@@ -1,25 +1,21 @@
-import sys
-from datetime import timedelta, datetime, time
+from datetime import timedelta, datetime
 
-from PyQt5.QtWidgets import QApplication, QWidget
-from PyQt5.QtCore import QTimer, QDateTime, QTime
 import numpy as np
+from PyQt5.QtCore import QTimer
 
-from project.agenda.agenda import Agenda
-from project.agenda.agenda_widget import AgendaWidget
+from project.gui.agenda_widget import AgendaWidget
 from project.task_list.to_do_list import ToDoList
 
 
-# TESTING IS VIRTUALLY IMPOSSIBLE FOR THIS CLASS
-# WEIRDLY, IT NEEDS THE GUI FOR IT TO WORK
-# Therefore, only manual testing is possible
 class TimeRandomizer:
+    """This class keeps a timer which goes off when a task is to be done."""
+
     def __init__(self, to_do_list: ToDoList, agenda: AgendaWidget):
         self.to_do_list = to_do_list
         self.agenda = agenda.agenda
 
-        # 45 minutes = 2_700_000 milliseconds
-        # 5 minutes = 300_000
+        # These can be used for demo or testing
+        # In the settings tab.py, comment out change_settings
         self.average_break_time = 1_000
         self.snooze_time = 20_000
         self.deterministic = False
@@ -28,7 +24,7 @@ class TimeRandomizer:
         self.timer.timeout.connect(self.next_task)
 
     def generate_break_time(self, mean=None, minimum=None):
-        """Returns how much time will be in between now and the following task"""
+        """Returns how much time will be in between now and the following task."""
         if self.deterministic:
             time = mean if mean is not None else self.average_break_time
         else:  # Stochastic
@@ -40,25 +36,28 @@ class TimeRandomizer:
         return time
 
     def start(self):
-        """Start the timer, once over it summons the next task"""
+        """Start the timer, once over it summons the next task."""
         break_time = self.generate_break_time()
         self.timer.start(break_time)
 
     def stop(self):
+        """Stop the timer."""
         self.timer.stop()
 
     def set_timer(self, task: dict):
+        """Set a timer based on the action the user did to a task."""
         time = self.task_action_break_time(task)
         if time:
             self.timer.start(time)
 
     def set_average_break_time(self, msecs):
+        """Set the mean of the break time and start the timer."""
         self.average_break_time = msecs
         if self.timer.isActive():
             self.start()
 
-    # Needs to be tested
     def next_task(self):
+        """Stop the timer if a task can be done, else it starts again."""
 
         self.timer.stop()
 
@@ -78,8 +77,9 @@ class TimeRandomizer:
 
     def activity_break_time(self):
         """User is busy -> Returns a new break time depending on the activity.
-        Note: It may suggest a new time in which the user is still busy."""
-        # check if person wants task right after activity
+
+        Note: It may suggest a new time in which the user is still busy.
+        """
         right_after, duration = self.agenda.task_right_after()
 
         if right_after:
@@ -89,8 +89,9 @@ class TimeRandomizer:
         return break_time
 
     def task_action_break_time(self, task: dict):
-        """User can do a task right now -> Returns a new break time depending on the task"""
-        # 'To Do', 'Doing', 'Removed', 'Done', 'Rescheduled', 'Another', 'Snoozed', 'Skipped', 'Redo'
+        """Return a new break time depending on the task."""
+        # 'To Do', 'Doing', 'Removed', 'Done', 'Rescheduled', 'Another', 'Snoozed',
+        # 'Skipped', 'Redo'
         status = task['Task Status']
 
         if status in ('To Do', 'Done', 'Rescheduled', 'Skipped'):
@@ -110,30 +111,12 @@ class TimeRandomizer:
 
     @staticmethod
     def reschedule_popup(date_time: datetime) -> QTimer:
-        """Execute a pop-up for the rescheduled task at specified time"""
+        """Execute a pop-up for the rescheduled task at specified time."""
         now = datetime.now()
 
-        duration = int((date_time-now).total_seconds()*1000)
+        duration = int((date_time - now).total_seconds() * 1000)
         timer = QTimer()
         timer.setSingleShot(True)
         timer.start(duration)
 
         return timer
-
-# def main():
-#     app = QApplication(sys.argv)
-#
-#     agenda0 = AgendaWidget(Agenda())
-#     time_randomizer = TimeRandomizer([1, 2, 3, 4], agenda0)
-#     time_randomizer.start()
-#
-#     wdgt = QWidget()
-#     wdgt.setWindowTitle('Useless window, for debugging purposes only')
-#
-#     sys.exit(app.exec_())
-#
-#
-# # EXAMPLE FUNCTION TO SEE HOW QTIMER WORKS
-# # https://pythonpyqt.com/qtimer/
-# if __name__ == '__main__':
-#     main()

@@ -1,10 +1,11 @@
 import random
+
 from project.task_list.data_for_database import TaskList
 
 
-class Randomizer:
-    def __init__(self):
-        self.database = TaskList().data_output()
+class QueueRandomizer:
+    def __init__(self, tasklist: TaskList):
+        self.database = tasklist.data_output()
         self.lst = []
         self.already_chosen = []
         self.dict_priority_less = {}
@@ -13,9 +14,11 @@ class Randomizer:
         self.biggest = "key"
 
     def hof_must_be_done_today(self, pref):
-        """Takes the priority and the preferred time of a certain task as input
-            and creates a list with tasks with that same priority and preferred time.
-            Tasks with preferred time "Whole day" can be added too."""
+        """Create a list with tasks with same priority and preferred time.
+
+        Parameters: priority and preferred time of a task
+        Note. Tasks with preferred time "Whole day" can be added too.
+        """
         self.lst = [task.name for task in self.database
                     if task.priority == "must be done today"
                     and task.preferred_time == pref]
@@ -31,9 +34,11 @@ class Randomizer:
                 self.already_chosen.append(task.name)
 
     def creates_list_random(self, pref):
-        """"Creates a randomized list of tasks for the given preferred part of the day.
-        The tasks with a higher priority are more likely to appear in the list and may
-        appear multiple times."""
+        """"Create a randomized list of tasks for the given preferred part of the day.
+
+        The tasks with a higher priority are more likely to appear in the list and may appear
+        multiple times.
+        """
         self.dict_priority_less.clear()
         weight = 0
 
@@ -54,7 +59,7 @@ class Randomizer:
                     self.dict_priority_less[task.name] = weight
 
         if not self.dict_priority_less:
-            return None
+            return
 
         # Create a list with random tasks for the given part of the day.
         # The tasks in this list are not necessary unique (yet).
@@ -62,9 +67,11 @@ class Randomizer:
                                          weights=list(self.dict_priority_less.values()), k=5)
 
     def most_freq(self):
-        """"Detects the task that appears most often in the randomized list.
-        When there are multiple tasks that appear the most often,
-        the first task that appears will be detected as the biggest."""
+        """"Detect the task that appears most often in the randomized list.
+
+        When there are multiple tasks that appear the most often, the first task that appears will
+        be detected as the biggest.
+        """
         self.dict_counter.clear()
         if not self.lst_random:
             return
@@ -82,8 +89,7 @@ class Randomizer:
         self.biggest = max(self.dict_counter, key=lambda k: self.dict_counter[k])
 
     def adds_most_freq_to_task_list(self):
-        """"Adds the task that appears most often to the
-        task list for the given part of the day."""
+        """"Add task that appears most often to the task list for the given part of the day."""
         if self.biggest not in self.lst \
                 and self.biggest not in self.already_chosen:
             self.lst.append(self.biggest)
@@ -96,7 +102,7 @@ class Randomizer:
                     self.already_chosen.append(self.biggest)
 
     def hof_randomize_tasks_other_today(self, pref):
-        """"Returns the task list for the given part of the day."""
+        """"Return the task list for the given part of the day."""
         self.hof_must_be_done_today(pref)
 
         # Keep adding tasks to task list while the list contains fewer
@@ -110,13 +116,13 @@ class Randomizer:
         return self.lst
 
     def randomize_tasks_other_morning(self):
-        """Returns a randomized list of tasks for the morning."""
+        """Return a randomized list of tasks for the morning."""
         return self.hof_randomize_tasks_other_today("Morning")
 
     def randomize_tasks_other_afternoon(self):
-        """Returns a randomized list of tasks for the afternoon."""
+        """Return a randomized list of tasks for the afternoon."""
         return self.hof_randomize_tasks_other_today("Afternoon")
 
     def randomize_tasks_other_evening(self):
-        """Returns a randomized list of tasks for the evening."""
+        """Return a randomized list of tasks for the evening."""
         return self.hof_randomize_tasks_other_today("Evening")
