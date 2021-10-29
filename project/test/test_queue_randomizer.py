@@ -1,15 +1,13 @@
 import unittest
-
-from project.randomizer.queue_randomizer import QueueRandomizer
-from project.task_list.data_for_database import TaskList
+from project.randomizer.randomizer_of_tasks import Randomizer
 
 
 class TestRandomizerOfTasks(unittest.TestCase):
 
-    def test_returns_none_list_random(self):
+    def test_returns_None_list_random(self):
         """"Tests if None is asserted to dict_priority_less
         if 'lst' contains more than three tasks."""
-        test = QueueRandomizer(TaskList())
+        test = Randomizer()
         test.hof_must_be_done_today("Morning")
         test.creates_list_random("Morning")
         if len(test.lst) >= 3:
@@ -18,11 +16,11 @@ class TestRandomizerOfTasks(unittest.TestCase):
     def test_most_freq(self):
         """Tests that when multiple tasks have the same amount of occurrences in list_random,
         that the first one of these tasks in dict_counter gets chosen as the biggest."""
-        test = QueueRandomizer(TaskList())
+        test = Randomizer()
         test.randomize_tasks_other_morning()
         all_values = test.dict_counter.values()
         max_value = max(all_values)
-        list_of_keys = []
+        list_of_keys = list()
 
         for key, value in test.dict_counter.items():
             if value == max_value:
@@ -34,28 +32,28 @@ class TestRandomizerOfTasks(unittest.TestCase):
 
     def test_if_returns(self):
         """"Tests if the function 'most_freq' returns if 'lst_random' is empty."""
-        test = QueueRandomizer(TaskList())
+        test = Randomizer()
         test.hof_must_be_done_today("Morning")
         test.creates_list_random("Morning")
         test.most_freq()
         if not test.lst_random:
             self.assertEqual(None, test.lst_random)
 
-    def test_most_freq_to_list(self):
+    def test_adds_most_freq_to_task_list(self):
         """"Tests if the function adds_most_freq_to_task_list actually adds the task
         with the biggest amount of occurrences in lst_random."""
-        test = QueueRandomizer(TaskList())
+        test = Randomizer()
         test.hof_must_be_done_today("Morning")
         test.creates_list_random("Morning")
         test.most_freq()
         test.adds_most_freq_to_task_list()
         self.assertEqual(test.lst[-1], test.biggest)
 
-    def test_biggest_to_already_chosen(self):
+    def test_add_biggest_to_already_chosen_list(self):
         """"Tests if task name is added to the list 'already_chosen'
         if task has biggest amount of occurrences is lst_random and
         if the periodicity is not several times a day."""
-        test = QueueRandomizer(TaskList())
+        test = Randomizer()
         test.hof_must_be_done_today("Morning")
         test.creates_list_random("Morning")
         test.most_freq()
@@ -67,11 +65,11 @@ class TestRandomizerOfTasks(unittest.TestCase):
     def test_afternoon(self):
         """"Tests if the function randomize_tasks_other_afternoon actually returns
         the list that is return by the function hof_randomize_tasks_other_today."""
-        test = QueueRandomizer(TaskList())
+        test = Randomizer()
         self.assertEqual(test.randomize_tasks_other_afternoon(), test.lst)
 
     def test_evening(self):
         """"Tests if the function randomize_tasks_other_evening actually returns
         the list that is return by the function hof_randomize_tasks_other_today."""
-        test = QueueRandomizer(TaskList())
+        test = Randomizer()
         self.assertEqual(test.randomize_tasks_other_evening(), test.lst)

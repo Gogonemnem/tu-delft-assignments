@@ -49,7 +49,7 @@ class TestAgenda(unittest.TestCase):
     def test_empty_agenda(self):
         agenda = Agenda(file=path_empty)
         for _ in range(len(agenda.agenda)):
-            agenda.pop_activity(0)
+            agenda.delete_activity(0)
         self.assertTrue(agenda.is_free())
         self.assertEqual(agenda.task_right_after(), (False, -1))
         self.assertEqual(agenda.today(), [])
@@ -79,7 +79,7 @@ class TestAgenda(unittest.TestCase):
 
         # change so that index will be 1
         agenda.modify_activity(
-            0, activity='No Work', start_time=now + 2 * duration, end_or_dur=duration)
+            0, activity='No Work', start_time=now+2*duration, end_or_dur=duration)
 
         self.assertEqual(agenda.agenda[1], activity_new)
         self.assertEqual(agenda.agenda[0], activity_old)
@@ -94,15 +94,15 @@ class TestAgenda(unittest.TestCase):
         agenda = Agenda(file=path_empty)
         now = datetime.now()
         duration = timedelta(hours=1)
-        activity0 = Activity('Work', now - 1 / 2 * duration, duration)
+        activity0 = Activity('Work', now - 1/2 * duration, duration)
         activity1 = Activity('Work', now, duration)
         activities = [
             # is needed to check whether elements of self.agenda are equal
             activity0,
             activity1,
             # these are gonna be deleted
-            Activity('Work', now - 2 * duration, duration),
-            Activity('Work', now - 3 * duration, duration)
+            Activity('Work', now-2*duration, duration),
+            Activity('Work', now-3*duration, duration)
         ]
 
         for activity in activities:
@@ -125,7 +125,7 @@ class TestAgenda(unittest.TestCase):
 
         # today
         activity0 = Activity('Work', now, duration)
-        activity1 = Activity('Work', now - 1 / 2 * duration, duration)
+        activity1 = Activity('Work', now - 1/2 * duration, duration)
 
         activities = [
             # is needed to check whether elements of self.agenda are equal
@@ -209,7 +209,7 @@ class TestAgenda(unittest.TestCase):
         agenda.add_activity(Activity('No Work', now, duration))
         right_after, _ = agenda.task_right_after()
         self.assertFalse(right_after)
-        agenda.pop_activity(0)
+        agenda.delete_activity(0)
 
         agenda.add_activity(Activity('Do not disturb me', now, duration))
         right_after, _ = agenda.task_right_after()
@@ -255,14 +255,14 @@ class TestAgenda(unittest.TestCase):
         self.assertEqual(2, len(agenda.agenda_dataframe))
         self.assertEqual('Work', agenda.agenda_dataframe.activity[1])
         self.assertEqual(time, agenda.agenda_dataframe['start_time'][1])
-        self.assertEqual(time + duration, agenda.agenda_dataframe['end_time'][1])
+        self.assertEqual(time+duration, agenda.agenda_dataframe['end_time'][1])
         self.assertEqual('Lots of work', agenda.agenda_dataframe.summary[1])
         self.assertEqual(time - 1 / 2 * duration, agenda.agenda_dataframe['start_time'][0])
         self.assertEqual('Much work indeed', agenda.agenda_dataframe.summary[0])
 
         # Delete activities from dataframe
         # This is to test the delete function and to reset the file
-        agenda.pop_activity(1)
+        agenda.delete_activity(1)
         self.assertEqual(len(agenda.agenda_dataframe), 1)
         self.assertEqual(agenda.agenda_dataframe['start_time'][0], time - 1 / 2 * duration)
         self.assertEqual(agenda.agenda_dataframe.summary[0], 'Much work indeed')
@@ -321,7 +321,7 @@ class TestAgenda(unittest.TestCase):
                              agenda2.agenda_dataframe[name][0])
 
         # Delete activity and test it, to reset the file
-        agenda1.pop_activity(0)
+        agenda1.delete_activity(0)
         self.assertEqual(len(agenda1.agenda_dataframe), 0)
 
         # Reset agenda2 to update the dataframe
@@ -335,7 +335,7 @@ class TestAgenda(unittest.TestCase):
         agenda = Agenda(file=path_empty)
         # Delete the activities to reset the file
         for _ in range(len(agenda.agenda)):
-            agenda.pop_activity(0)
+            agenda.delete_activity(0)
 
         # Check if the agenda is empty
         self.test_empty_agenda()
