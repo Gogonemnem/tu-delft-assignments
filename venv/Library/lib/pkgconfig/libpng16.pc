@@ -1,0 +1,12 @@
+prefix=C:/Users/GLau/OneDrive/Documenten/PythonDelft/env-01/Library
+exec_prefix=C:/Users/GLau/OneDrive/Documenten/PythonDelft/env-01/Library
+libdir=C:/Users/GLau/OneDrive/Documenten/PythonDelft/env-01/Library/lib
+includedir=C:/Users/GLau/OneDrive/Documenten/PythonDelft/env-01/Library/include/libpng16
+
+Name: libpng
+Description: Loads and saves PNG files
+Version: 1.6.37
+Requires: zlib
+Libs: -L${libdir} -lpng16
+Libs.private: -lz -lm
+Cflags: -I${includedir}

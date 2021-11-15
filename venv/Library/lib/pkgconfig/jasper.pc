@@ -1,0 +1,9 @@
+libdir=C:/Users/GLau/OneDrive/Documenten/PythonDelft/env-01/Library/lib
+includedir=C:/Users/GLau/OneDrive/Documenten/PythonDelft/env-01/Library/include
+
+Name: JasPer
+Description: Image Processing/Coding Tool Kit with JPEG-2000 Support
+Version: 2.0.33
+
+Libs: -L${libdir} -ljasper
+Cflags: -I${includedir}/jasper -I${includedir}

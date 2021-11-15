@@ -1,0 +1,298 @@
+{
+  "build": "pyhd3eb1b0_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/noarch",
+  "constrains": [],
+  "depends": [
+    "ipykernel >=4.7",
+    "ipywidgets >=7.5.0,<8.0",
+    "matplotlib >=2.2.0",
+    "python",
+    "six"
+  ],
+  "extracted_package_dir": "C:\\Users\\GLau\\.conda\\pkgs\\ipympl-0.7.0-pyhd3eb1b0_0",
+  "features": "",
+  "files": [
+    "etc/jupyter/nbconfig/notebook.d/jupyter-matplotlib.json",
+    "share/jupyter/labextensions/jupyter-matplotlib/package.json",
+    "share/jupyter/labextensions/jupyter-matplotlib/static/240.c47204a2de8287b9c2f3.js",
+    "share/jupyter/labextensions/jupyter-matplotlib/static/459.d79d19dda3d06f4af030.js",
+    "share/jupyter/labextensions/jupyter-matplotlib/static/remoteEntry.a458e80b4361f068e82d.js",
+    "share/jupyter/labextensions/jupyter-matplotlib/static/style.js",
+    "share/jupyter/nbextensions/jupyter-matplotlib/extension.js",
+    "share/jupyter/nbextensions/jupyter-matplotlib/index.js",
+    "share/jupyter/nbextensions/jupyter-matplotlib/index.js.map",
+    "share/jupyter/nbextensions/jupyter-matplotlib/package.json",
+    "Lib/site-packages/ipympl-0.7.0.dist-info/INSTALLER",
+    "Lib/site-packages/ipympl-0.7.0.dist-info/LICENSE",
+    "Lib/site-packages/ipympl-0.7.0.dist-info/METADATA",
+    "Lib/site-packages/ipympl-0.7.0.dist-info/RECORD",
+    "Lib/site-packages/ipympl-0.7.0.dist-info/REQUESTED",
+    "Lib/site-packages/ipympl-0.7.0.dist-info/WHEEL",
+    "Lib/site-packages/ipympl-0.7.0.dist-info/direct_url.json",
+    "Lib/site-packages/ipympl-0.7.0.dist-info/top_level.txt",
+    "Lib/site-packages/ipympl/__init__.py",
+    "Lib/site-packages/ipympl/_version.py",
+    "Lib/site-packages/ipympl/backend_nbagg.py",
+    "Lib/site-packages/ipympl/labextension/package.json",
+    "Lib/site-packages/ipympl/labextension/static/240.c47204a2de8287b9c2f3.js",
+    "Lib/site-packages/ipympl/labextension/static/459.d79d19dda3d06f4af030.js",
+    "Lib/site-packages/ipympl/labextension/static/remoteEntry.a458e80b4361f068e82d.js",
+    "Lib/site-packages/ipympl/labextension/static/style.js",
+    "Lib/site-packages/ipympl/nbextension/extension.js",
+    "Lib/site-packages/ipympl/nbextension/index.js",
+    "Lib/site-packages/ipympl/nbextension/index.js.map",
+    "Lib/site-packages/ipympl/nbextension/package.json",
+    "Lib/site-packages/ipympl/__pycache__/__init__.cpython-39.pyc",
+    "Lib/site-packages/ipympl/__pycache__/_version.cpython-39.pyc",
+    "Lib/site-packages/ipympl/__pycache__/backend_nbagg.cpython-39.pyc"
+  ],
+  "fn": "ipympl-0.7.0-pyhd3eb1b0_0.conda",
+  "legacy_bz2_md5": "b0c4efdcf6e3fa64894a176f0b1ab761",
+  "license": "BSD 3-Clause",
+  "license_family": "BSD",
+  "link": {
+    "source": "C:\\Users\\GLau\\.conda\\pkgs\\ipympl-0.7.0-pyhd3eb1b0_0",
+    "type": 1
+  },
+  "md5": "886d8bda96c866877297dc601c14bfbc",
+  "name": "ipympl",
+  "noarch": "python",
+  "package_tarball_full_path": "C:\\Users\\GLau\\.conda\\pkgs\\ipympl-0.7.0-pyhd3eb1b0_0.conda",
+  "package_type": "noarch_python",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "etc/jupyter/nbconfig/notebook.d/jupyter-matplotlib.json",
+        "path_type": "hardlink",
+        "sha256": "1346da66a95ec0ac4d2ed64b6cc69a2225cb8aa1692791a914d95b611bd09d10",
+        "sha256_in_prefix": "1346da66a95ec0ac4d2ed64b6cc69a2225cb8aa1692791a914d95b611bd09d10",
+        "size_in_bytes": 72
+      },
+      {
+        "_path": "share/jupyter/labextensions/jupyter-matplotlib/package.json",
+        "path_type": "hardlink",
+        "sha256": "496c3dd4a90cdd8e2e5785c8a76ad53a178480e6fa3ea91069d3328e7933e6d9",
+        "sha256_in_prefix": "496c3dd4a90cdd8e2e5785c8a76ad53a178480e6fa3ea91069d3328e7933e6d9",
+        "size_in_bytes": 1919
+      },
+      {
+        "_path": "share/jupyter/labextensions/jupyter-matplotlib/static/240.c47204a2de8287b9c2f3.js",
+        "path_type": "hardlink",
+        "sha256": "77f948112b6ec782a054300cc052ea34fc244fc64bb8101ceb14c7c5e51c3e3c",
+        "sha256_in_prefix": "77f948112b6ec782a054300cc052ea34fc244fc64bb8101ceb14c7c5e51c3e3c",
+        "size_in_bytes": 22445
+      },
+      {
+        "_path": "share/jupyter/labextensions/jupyter-matplotlib/static/459.d79d19dda3d06f4af030.js",
+        "path_type": "hardlink",
+        "sha256": "7b16aea77ba6df729328b324e49efb9b07b204d4b71e1f0faa46cb4aad8393f4",
+        "sha256_in_prefix": "7b16aea77ba6df729328b324e49efb9b07b204d4b71e1f0faa46cb4aad8393f4",
+        "size_in_bytes": 22224
+      },
+      {
+        "_path": "share/jupyter/labextensions/jupyter-matplotlib/static/remoteEntry.a458e80b4361f068e82d.js",
+        "path_type": "hardlink",
+        "sha256": "e7fa11a5959024db942344958443e03dd29d57f897423028dd712b82edf8406c",
+        "sha256_in_prefix": "e7fa11a5959024db942344958443e03dd29d57f897423028dd712b82edf8406c",
+        "size_in_bytes": 6239
+      },
+      {
+        "_path": "share/jupyter/labextensions/jupyter-matplotlib/static/style.js",
+        "path_type": "hardlink",
+        "sha256": "f8242dd194cf6824efad188b7339f17e501b7ef20a94e5738cea2cfa6b9a5d0f",
+        "sha256_in_prefix": "f8242dd194cf6824efad188b7339f17e501b7ef20a94e5738cea2cfa6b9a5d0f",
+        "size_in_bytes": 118
+      },
+      {
+        "_path": "share/jupyter/nbextensions/jupyter-matplotlib/extension.js",
+        "path_type": "hardlink",
+        "sha256": "b5387cd7d49b05a98b49c6763036532b96bf0978d6bc70d04e740865547d1d48",
+        "sha256_in_prefix": "b5387cd7d49b05a98b49c6763036532b96bf0978d6bc70d04e740865547d1d48",
+        "size_in_bytes": 320
+      },
+      {
+        "_path": "share/jupyter/nbextensions/jupyter-matplotlib/index.js",
+        "path_type": "hardlink",
+        "sha256": "93c547286ea233ca96e8d0e548ccc424e197e2cd7f333d3dbb3e2a35217a75c4",
+        "sha256_in_prefix": "93c547286ea233ca96e8d0e548ccc424e197e2cd7f333d3dbb3e2a35217a75c4",
+        "size_in_bytes": 22838
+      },
+      {
+        "_path": "share/jupyter/nbextensions/jupyter-matplotlib/index.js.map",
+        "path_type": "hardlink",
+        "sha256": "e1dcbd83bab995b8d95abeb3b94cdb306f435a8630b9ba7a352022fcbacaea34",
+        "sha256_in_prefix": "e1dcbd83bab995b8d95abeb3b94cdb306f435a8630b9ba7a352022fcbacaea34",
+        "size_in_bytes": 77398
+      },
+      {
+        "_path": "share/jupyter/nbextensions/jupyter-matplotlib/package.json",
+        "path_type": "hardlink",
+        "sha256": "792a7a855a16bb8273cf2879f61adbef6ed5cc3923265869bea65becc12b59b0",
+        "sha256_in_prefix": "792a7a855a16bb8273cf2879f61adbef6ed5cc3923265869bea65becc12b59b0",
+        "size_in_bytes": 1803
+      },
+      {
+        "_path": "site-packages/ipympl-0.7.0.dist-info/INSTALLER",
+        "path_type": "hardlink",
+        "sha256": "d0edee15f91b406f3f99726e44eb990be6e34fd0345b52b910c568e0eef6a2a8",
+        "sha256_in_prefix": "d0edee15f91b406f3f99726e44eb990be6e34fd0345b52b910c568e0eef6a2a8",
+        "size_in_bytes": 5
+      },
+      {
+        "_path": "site-packages/ipympl-0.7.0.dist-info/LICENSE",
+        "path_type": "hardlink",
+        "sha256": "a8bfd012857edfaebb198ec24319b7b02bbedc42019f3f665ef29613057f1610",
+        "sha256_in_prefix": "a8bfd012857edfaebb198ec24319b7b02bbedc42019f3f665ef29613057f1610",
+        "size_in_bytes": 1509
+      },
+      {
+        "_path": "site-packages/ipympl-0.7.0.dist-info/METADATA",
+        "path_type": "hardlink",
+        "sha256": "c1a6d432efd17aa572ac2dd47df7f2efaa7270ed793509805382430472b340a9",
+        "sha256_in_prefix": "c1a6d432efd17aa572ac2dd47df7f2efaa7270ed793509805382430472b340a9",
+        "size_in_bytes": 930
+      },
+      {
+        "_path": "site-packages/ipympl-0.7.0.dist-info/RECORD",
+        "path_type": "hardlink",
+        "sha256": "924c80db7de8efc14b4df99fa34693e68e9111d447b7961ce1e33bb52faefef9",
+        "sha256_in_prefix": "924c80db7de8efc14b4df99fa34693e68e9111d447b7961ce1e33bb52faefef9",
+        "size_in_bytes": 3233
+      },
+      {
+        "_path": "site-packages/ipympl-0.7.0.dist-info/REQUESTED",
+        "path_type": "hardlink",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sha256_in_prefix": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size_in_bytes": 0
+      },
+      {
+        "_path": "site-packages/ipympl-0.7.0.dist-info/WHEEL",
+        "path_type": "hardlink",
+        "sha256": "67e9f2629c2b712ab17ddbb1e4c6e7fc3439db988fec9d831b72601af398c934",
+        "sha256_in_prefix": "67e9f2629c2b712ab17ddbb1e4c6e7fc3439db988fec9d831b72601af398c934",
+        "size_in_bytes": 110
+      },
+      {
+        "_path": "site-packages/ipympl-0.7.0.dist-info/direct_url.json",
+        "path_type": "hardlink",
+        "sha256": "fc6bed5ee20a50cbb5b9c10f61d9e9e89ee53c685b0d593228346768bfa648dd",
+        "sha256_in_prefix": "fc6bed5ee20a50cbb5b9c10f61d9e9e89ee53c685b0d593228346768bfa648dd",
+        "size_in_bytes": 79
+      },
+      {
+        "_path": "site-packages/ipympl-0.7.0.dist-info/top_level.txt",
+        "path_type": "hardlink",
+        "sha256": "be4eb72ddad65a9518b0471fa7fed0edc16972af7812db0a1fdab4d2606d8dca",
+        "sha256_in_prefix": "be4eb72ddad65a9518b0471fa7fed0edc16972af7812db0a1fdab4d2606d8dca",
+        "size_in_bytes": 7
+      },
+      {
+        "_path": "site-packages/ipympl/__init__.py",
+        "path_type": "hardlink",
+        "sha256": "abb1744b4091bf71e3eff4e94c8b37d4714e9caa183010357b7d23d74059a4f3",
+        "sha256_in_prefix": "abb1744b4091bf71e3eff4e94c8b37d4714e9caa183010357b7d23d74059a4f3",
+        "size_in_bytes": 636
+      },
+      {
+        "_path": "site-packages/ipympl/_version.py",
+        "path_type": "hardlink",
+        "sha256": "32390240c8e4df6d4e8823b08ba830d3b3210200a75afe8c70e220eba1a41489",
+        "sha256_in_prefix": "32390240c8e4df6d4e8823b08ba830d3b3210200a75afe8c70e220eba1a41489",
+        "size_in_bytes": 93
+      },
+      {
+        "_path": "site-packages/ipympl/backend_nbagg.py",
+        "path_type": "hardlink",
+        "sha256": "be1ad405f11dd1aa6d2365bad186be4e3aadfa1103ac023007c9ed4b82485b25",
+        "sha256_in_prefix": "be1ad405f11dd1aa6d2365bad186be4e3aadfa1103ac023007c9ed4b82485b25",
+        "size_in_bytes": 11918
+      },
+      {
+        "_path": "site-packages/ipympl/labextension/package.json",
+        "path_type": "hardlink",
+        "sha256": "496c3dd4a90cdd8e2e5785c8a76ad53a178480e6fa3ea91069d3328e7933e6d9",
+        "sha256_in_prefix": "496c3dd4a90cdd8e2e5785c8a76ad53a178480e6fa3ea91069d3328e7933e6d9",
+        "size_in_bytes": 1919
+      },
+      {
+        "_path": "site-packages/ipympl/labextension/static/240.c47204a2de8287b9c2f3.js",
+        "path_type": "hardlink",
+        "sha256": "77f948112b6ec782a054300cc052ea34fc244fc64bb8101ceb14c7c5e51c3e3c",
+        "sha256_in_prefix": "77f948112b6ec782a054300cc052ea34fc244fc64bb8101ceb14c7c5e51c3e3c",
+        "size_in_bytes": 22445
+      },
+      {
+        "_path": "site-packages/ipympl/labextension/static/459.d79d19dda3d06f4af030.js",
+        "path_type": "hardlink",
+        "sha256": "7b16aea77ba6df729328b324e49efb9b07b204d4b71e1f0faa46cb4aad8393f4",
+        "sha256_in_prefix": "7b16aea77ba6df729328b324e49efb9b07b204d4b71e1f0faa46cb4aad8393f4",
+        "size_in_bytes": 22224
+      },
+      {
+        "_path": "site-packages/ipympl/labextension/static/remoteEntry.a458e80b4361f068e82d.js",
+        "path_type": "hardlink",
+        "sha256": "e7fa11a5959024db942344958443e03dd29d57f897423028dd712b82edf8406c",
+        "sha256_in_prefix": "e7fa11a5959024db942344958443e03dd29d57f897423028dd712b82edf8406c",
+        "size_in_bytes": 6239
+      },
+      {
+        "_path": "site-packages/ipympl/labextension/static/style.js",
+        "path_type": "hardlink",
+        "sha256": "f8242dd194cf6824efad188b7339f17e501b7ef20a94e5738cea2cfa6b9a5d0f",
+        "sha256_in_prefix": "f8242dd194cf6824efad188b7339f17e501b7ef20a94e5738cea2cfa6b9a5d0f",
+        "size_in_bytes": 118
+      },
+      {
+        "_path": "site-packages/ipympl/nbextension/extension.js",
+        "path_type": "hardlink",
+        "sha256": "b5387cd7d49b05a98b49c6763036532b96bf0978d6bc70d04e740865547d1d48",
+        "sha256_in_prefix": "b5387cd7d49b05a98b49c6763036532b96bf0978d6bc70d04e740865547d1d48",
+        "size_in_bytes": 320
+      },
+      {
+        "_path": "site-packages/ipympl/nbextension/index.js",
+        "path_type": "hardlink",
+        "sha256": "93c547286ea233ca96e8d0e548ccc424e197e2cd7f333d3dbb3e2a35217a75c4",
+        "sha256_in_prefix": "93c547286ea233ca96e8d0e548ccc424e197e2cd7f333d3dbb3e2a35217a75c4",
+        "size_in_bytes": 22838
+      },
+      {
+        "_path": "site-packages/ipympl/nbextension/index.js.map",
+        "path_type": "hardlink",
+        "sha256": "e1dcbd83bab995b8d95abeb3b94cdb306f435a8630b9ba7a352022fcbacaea34",
+        "sha256_in_prefix": "e1dcbd83bab995b8d95abeb3b94cdb306f435a8630b9ba7a352022fcbacaea34",
+        "size_in_bytes": 77398
+      },
+      {
+        "_path": "site-packages/ipympl/nbextension/package.json",
+        "path_type": "hardlink",
+        "sha256": "792a7a855a16bb8273cf2879f61adbef6ed5cc3923265869bea65becc12b59b0",
+        "sha256_in_prefix": "792a7a855a16bb8273cf2879f61adbef6ed5cc3923265869bea65becc12b59b0",
+        "size_in_bytes": 1803
+      },
+      {
+        "_path": "Lib/site-packages/ipympl/__pycache__/__init__.cpython-39.pyc",
+        "path_type": "pyc_file"
+      },
+      {
+        "_path": "Lib/site-packages/ipympl/__pycache__/_version.cpython-39.pyc",
+        "path_type": "pyc_file"
+      },
+      {
+        "_path": "Lib/site-packages/ipympl/__pycache__/backend_nbagg.cpython-39.pyc",
+        "path_type": "pyc_file"
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "ipympl",
+  "sha256": "1e030e04b4f470087f489093c499d17f9498674d31b5257354ca68eaf7c8ebf9",
+  "size": 42772,
+  "subdir": "noarch",
+  "timestamp": 1616528903142,
+  "track_features": "",
+  "url": "https://repo.anaconda.com/pkgs/main/noarch/ipympl-0.7.0-pyhd3eb1b0_0.conda",
+  "version": "0.7.0"
+}

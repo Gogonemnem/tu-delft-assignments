@@ -1,0 +1,8 @@
+libdir=C:/Users/GLau/OneDrive/Documenten/PythonDelft/env-01/Library/lib
+includedir=C:/Users/GLau/OneDrive/Documenten/PythonDelft/env-01/Library/include
+
+Name: BLAS
+Description: FORTRAN reference implementation of BLAS Basic Linear Algebra Subprograms
+Version: 3.9.0
+URL: http://www.netlib.org/blas/
+Libs: -L${libdir} -lblas
