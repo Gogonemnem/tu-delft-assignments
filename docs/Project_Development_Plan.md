@@ -4,31 +4,24 @@
 -   It doesn’t make trades for the user. The software does not guarantee profit.
 ## Requirements
 ### Must Haves
--   Retrieve historical (including current/live) prices (from web)
--   Give advice on (5) single indicators based on historical prices whether to buy or sell certain stocks/crypto. E.g., moving averages, oscillators & momentum. Compare these results to (a) value(s). 
--   Give advice for different intervals of the data (1 minute/ day/ week/ month)
--   Combine advice of indicators into a single advice
-    ___
--   Retrieve financial data
--   Give advice on (5) single indicators based on financial data (/company info) whether to buy or sell certain stocks. E.g., earnings-per-share, debt-to-equity, price-to-earnings. Compare these results to (a) value(s).
--   Combine advice of indicators into a single advice
-    ___
--   Give overview of all user selected stocks/crypto
+- Retrieve historical (including current/live) prices (from web)
+- Give advice on single indicators based on historical prices whether to buy or sell certain stocks/crypto. E.g., moving averages, oscillators & momentum. Compare these results to (a) value(s). 
+- Give overview of all user selected stocks/crypto
+
 ### Should Haves
--   Retrieve & show analysts’ consensus (buy/sell)
-    ___
--   Aggregate advices of all sections into a single advice
--   Add (5 for hist. price & 5 for financial data) indicators
--   Compare indicators with some market index (for stocks) or Bitcoin (or similar market index for crypto if it exists)
-    ___
--   Ability to sort the stocks/crypto on a certain value
+- Add financial data advice on indicators
+- Retrieve & show analysts’ consensus (buy/sell)
+- Combine advice of indicators into a single advice
+- Give advice for different intervals of the data (1 minute/ day/ week/ month)
+- Add indicators (for financial data) 
+
 ### Could Haves
--   Show the recent news (url) for the stock/crypto
-    ___
--   Give advice by comparing financial data indicators (mentioned in MH) with other companies in a similar market (/industry/sector) in some market index
--   Find best performer in market and give advice
-    ___
--   Select two stocks or two crypto to compare
+- Show the recent news (url) for the stock/crypto
+- Ability to sort the stocks/crypto on a certain value
+- Compare indicators with some market index (for stocks) or Bitcoin (or similar market index for crypto if it exists)
+- Give advice by comparing financial data indicators (mentioned in MH) with other companies in a similar market (/industry/sector) in some market index
+- Select two stocks or two crypto to compare
+
 ### Won’t Haves
 -   Make trades for the user
 -   Do ‘advanced’ data analysis (regression, machine learning)
