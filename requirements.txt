@@ -9,3 +9,6 @@ matplotlib
 beautifulsoup4
 lxml
 html5lib
+
+PyQt6
+pyqt6-tools
