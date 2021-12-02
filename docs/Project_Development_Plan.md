@@ -19,7 +19,7 @@
 - Show the recent news (url) for the stock/crypto
 - Ability to sort the stocks/crypto on a certain value
 - Compare indicators with some market index (for stocks) or Bitcoin (or similar market index for crypto if it exists)
-- Give advice by comparing financial data indicators (mentioned in MH) with other companies in a similar market (/industry/sector) in some market index
+- Filter overview by market (/industry/sector)
 - Select two stocks or two crypto to compare
 
 ### Won’t Haves
