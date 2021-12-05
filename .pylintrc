@@ -148,7 +148,8 @@ disable=c-extension-no-member,
           no-member,
           no-self-use,
           missing-docstring,
-          no-else-return
+          no-else-return,
+          no-name-in-module
 
 [REPORTS]
 
