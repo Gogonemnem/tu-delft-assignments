@@ -1,6 +1,7 @@
 import pandas as pd
 from PyQt6 import QtWidgets, uic
 from project.input import Input
+from project.overview import Overview
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -10,7 +11,8 @@ class MainWindow(QtWidgets.QMainWindow):
         uic.loadUi("./MainWindow.ui", self)
 
         # at end of project, remove df as we now use it only for debugging
-        Input(self, df)
+        input_tab = Input(self, df)
+        Overview(self, input_tab)
 
 
 if __name__ == "__main__":
