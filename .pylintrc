@@ -418,12 +418,31 @@ function-naming-style=snake_case
 #function-rgx=
 
 # Good variable names which should always be accepted, separated by a comma.
-good-names=i,
+good-names=_,
+           i,
            j,
            k,
+           df,
            ex,
            Run,
-           _
+           rowCount,
+           columnCount,
+           insertRow,
+           removeRow,
+           insertColumn,
+           removeColumn,
+           on_rowChanged,
+           on_columnChanged,
+           createEditor,
+           setEditorData,
+           dataFrame,
+           setDataFrame,
+           setData,
+           setModelData,
+           headerData,
+           roleNames,
+           displayText,
+           DBL_MAX,
 
 # Include a hint for the correct naming format with invalid-name.
 include-naming-hint=no
