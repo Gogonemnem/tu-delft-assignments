@@ -12,5 +12,6 @@ html5lib
 
 PyQt6
 pyqt6-tools
+qt6-applications
 pandas
 yfinance
