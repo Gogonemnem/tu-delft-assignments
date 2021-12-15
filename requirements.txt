@@ -7,3 +7,4 @@ matplotlib
 scipy
 markdown-katex
 plotnine
+statsmodels
