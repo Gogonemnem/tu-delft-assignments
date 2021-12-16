@@ -92,7 +92,11 @@ class DataFrameModel(QAbstractTableModel):
         row = self._dataframe.index[index.row()]
         col = self._dataframe.columns[index.column()]
         dtype = self._dataframe[col].dtype
-        val = self._dataframe.iloc[row][col]
+
+        if isinstance(row, int):
+            val = self._dataframe.iloc[row][col]
+        else:
+            val = str(self._dataframe.loc[row, col])
 
         if role == Qt.ItemDataRole.DisplayRole:
             return val
