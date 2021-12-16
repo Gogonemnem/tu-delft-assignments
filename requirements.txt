@@ -11,7 +11,12 @@ lxml
 html5lib
 
 PyQt6
-pyqt6-tools
+PyQt6-WebEngine
 qt6-applications
-pandas
 yfinance
+pandas
+pandas_ta
+numpy
+plotly
+fear_and_greed
+

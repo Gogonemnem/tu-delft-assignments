@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1168</width>
-    <height>600</height>
+    <width>1195</width>
+    <height>797</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -24,7 +24,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <property name="documentMode">
        <bool>false</bool>
@@ -173,17 +173,17 @@
         <item row="2" column="2">
          <layout class="QGridLayout" name="gridLayout_2">
           <item row="1" column="0">
-           <widget class="QComboBox" name="comboBox"/>
+           <widget class="QComboBox" name="first_select"/>
           </item>
           <item row="1" column="1">
-           <widget class="QComboBox" name="comboBox_2">
+           <widget class="QComboBox" name="second_select">
             <property name="enabled">
              <bool>false</bool>
             </property>
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QRadioButton" name="radioButton_2">
+           <widget class="QRadioButton" name="compare_button">
             <property name="enabled">
              <bool>true</bool>
             </property>
@@ -193,7 +193,7 @@
            </widget>
           </item>
           <item row="0" column="0">
-           <widget class="QRadioButton" name="radioButton">
+           <widget class="QRadioButton" name="single_button">
             <property name="text">
              <string>Single</string>
             </property>
@@ -203,7 +203,7 @@
            </widget>
           </item>
           <item row="2" column="0" colspan="2">
-           <widget class="QPushButton" name="pushButton">
+           <widget class="QPushButton" name="results_button">
             <property name="text">
              <string>Get results</string>
             </property>
@@ -217,6 +217,129 @@
        <attribute name="title">
         <string>Individual</string>
        </attribute>
+       <layout class="QGridLayout" name="gridLayout" rowstretch="1,3,0,0,0,2" columnstretch="3,1,0,5">
+        <item row="1" column="0" rowspan="4" colspan="2">
+         <widget class="QFrame" name="frame_3">
+          <property name="styleSheet">
+           <string notr="true">#frame_3{
+background-color: rgb(221, 221, 221)}</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_5">
+           <item>
+            <widget class="QTableView" name="price_table"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QFrame" name="frame_6">
+          <property name="styleSheet">
+           <string notr="true">#frame_6{
+background-color: rgb(221, 221, 221)}</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_3">
+           <item row="0" column="0" colspan="2">
+            <widget class="QLabel" name="symbol_label">
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="interval_label">
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLabel" name="label_3">
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QFrame" name="price_frame">
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_2"/>
+         </widget>
+        </item>
+        <item row="0" column="3" rowspan="5">
+         <widget class="QFrame" name="price_graph_frame">
+          <property name="styleSheet">
+           <string notr="true">#price_graph_frame
+{
+background-color: rgb(221, 221, 221)}</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_2"/>
+         </widget>
+        </item>
+        <item row="5" column="3">
+         <widget class="QFrame" name="indicator_frame">
+          <property name="styleSheet">
+           <string notr="true">#indicator_frame
+{
+background-color: rgb(221, 221, 221)}</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_3"/>
+         </widget>
+        </item>
+        <item row="5" column="0" colspan="2">
+         <widget class="QFrame" name="frame_5">
+          <property name="styleSheet">
+           <string notr="true">#frame_5{
+background-color: rgb(221, 221, 221)}</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_4">
+           <item row="0" column="0">
+            <widget class="QTableView" name="tableView_2"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="comparison">
        <attribute name="title">
@@ -232,7 +355,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1168</width>
+     <width>1195</width>
      <height>22</height>
     </rect>
    </property>
@@ -242,18 +365,18 @@
  <resources/>
  <connections>
   <connection>
-   <sender>radioButton_2</sender>
+   <sender>compare_button</sender>
    <signal>toggled(bool)</signal>
-   <receiver>comboBox_2</receiver>
+   <receiver>second_select</receiver>
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1122</x>
-     <y>206</y>
+     <x>1171</x>
+     <y>259</y>
     </hint>
     <hint type="destinationlabel">
-     <x>1114</x>
-     <y>329</y>
+     <x>1171</x>
+     <y>431</y>
     </hint>
    </hints>
   </connection>
