@@ -14,14 +14,6 @@ simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
 pd.set_option('display.max_columns', None)
 
 
-def main():
-    # symbols = 'ETH-USD BTC-USD BNB-USD ADA-USD LINK-USD DOT1-USD LTC-USD'
-    symbols = 'LINK-USD'
-
-    df = apply_indicators(symbols)
-    apply_signals(df, symbols)
-
-
 class CryptoCurrencies:
     def __init__(self, symbols, intervals, periods):
         self.symbols = symbols
@@ -289,7 +281,7 @@ class CalculateSignals:
                 signal = 'Sell'
             else:
                 signal = 'Hold'
-            self.dic['Moving Average Convergence Divergence'] = signal, 'MACD-Line: ' + str(MACD) + '      ' \
+            self.dic['Moving Average CD'] = signal, 'MACD-Line: ' + str(MACD) + '      ' \
                 + 'Slow-Line: ' + str(MACDs)
         return self.dic
 
@@ -368,9 +360,15 @@ def apply_signals(df, symbols):
     return signal_transposed
 
 
+def main(symbol):
+    df = apply_indicators(symbol)
+    signal = apply_signals(df, symbol)
+    return df, signal
+
+
 if __name__ == "__main__":
     start_time = time.time()
-    main()
+    main('BTC-USD')
     print(f'Runtime= {time.time() - start_time}')
 
 
