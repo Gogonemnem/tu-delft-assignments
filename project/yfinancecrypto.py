@@ -61,13 +61,16 @@ class CryptoCurrencies:
     def simple_moving_average(self):
         """Calculates moving averages over N candlesticks"""
         for symbol in self.symbols:
-            # self.ma = ta.hma(close=self.data[(symbol, 'Close')], length=30, append=True)
-            self.data[(symbol, 'MA_20')] = ta.sma(
-                close=self.data[(symbol, 'Close')], length=20, append=True)
-            self.data[(symbol, 'MA_50')] = ta.sma(
-                close=self.data[(symbol, 'Close')], length=50, append=True)
-            self.data[(symbol, 'MA_200')] = ta.sma(
-                close=self.data[(symbol, 'Close')], length=200, append=True)
+            if len(self.data) >= 200:
+                # self.ma = ta.hma(close=self.data[(symbol, 'Close')], length=30, append=True)
+                self.data[(symbol, 'MA_200')] = ta.sma(
+                    close=self.data[(symbol, 'Close')], length=200, append=True)
+            if len(self.data) >= 50:
+                self.data[(symbol, 'MA_50')] = ta.sma(
+                    close=self.data[(symbol, 'Close')], length=50, append=True)
+            if len(self.data) >= 20:
+                self.data[(symbol, 'MA_20')] = ta.sma(
+                    close=self.data[(symbol, 'Close')], length=20, append=True)
         return self.data
 
     def bollinger_bands(self):
@@ -100,12 +103,15 @@ class CryptoCurrencies:
 
     def exponential_moving_average(self):
         for symbol in self.symbols:
-            self.data[(symbol, 'EMA_200')] = ta.ema(
-                    close=self.data[(symbol, 'Close')], length=200, append=True)
-            self.data[(symbol, 'EMA_100')] = ta.ema(
-                close=self.data[(symbol, 'Close')], length=100, append=True)
-            self.data[(symbol, 'EMA_50')] = ta.ema(
-                close=self.data[(symbol, 'Close')], length=50, append=True)
+            if len(self.data) >= 200:
+                self.data[(symbol, 'EMA_200')] = ta.ema(
+                        close=self.data[(symbol, 'Close')], length=200, append=True)
+            if len(self.data) >= 100:
+                self.data[(symbol, 'EMA_100')] = ta.ema(
+                    close=self.data[(symbol, 'Close')], length=100, append=True)
+            if len(self.data) >= 50:
+                self.data[(symbol, 'EMA_50')] = ta.ema(
+                    close=self.data[(symbol, 'Close')], length=50, append=True)
         return self.data
 
     def money_flow_index(self):
@@ -268,14 +274,40 @@ def apply_signals(df, symbols):
     return signal_transposed
 
 
+def advice(signals, symbols):
+    overall_advice_dic = {}
+    for symbol in symbols:
+        tot = 0
+        for i in signals.itertuples():
+            if i[0][0] == symbol:
+                if 'Buy' in i[1]:
+                    tot += 1
+                if 'Sell' in i[1]:
+                    tot -= 1
+        if tot == -6:
+            overall_advice_dic[symbol] = 'Very strong sell'
+        elif -6 < tot <= -4:
+            overall_advice_dic[symbol] = 'Strong sell'
+        elif -4 < tot <= -2:
+            overall_advice_dic[symbol] = 'Sell'
+        elif -2 < tot < 2:
+            overall_advice_dic[symbol] = 'Hold'
+        elif 2 <= tot < 4:
+            overall_advice_dic[symbol] = 'Buy'
+        elif 4 <= tot < 6:
+            overall_advice_dic[symbol] = 'Strong buy'
+        elif tot == 6:
+            overall_advice_dic[symbol] = 'Very strong buy'
+    return overall_advice_dic
 def main(symbols):
     # symbols = 'ETH-USD BTC-USD BNB-USD ADA-USD LINK-USD DOT1-USD LTC-USD'.split(' ')
     # symbols = ['LINK-USD']
 
-    df = apply_indicators(symbols, intervals='1d')
+    df = apply_indicators(symbols, intervals='1m')
     print(df)
     signals = apply_signals(df, symbols)
     print(signals)
+    print(advice(signals, symbols))
     return df, signals
 
 
@@ -285,7 +317,7 @@ if __name__ == "__main__":
     print(f'Runtime= {time.time() - start_time}')
 
 
-# Different kind of indicators:
+# Different kind of indicators
 # Trend: PSAR, MA_200, MA_20, EMA, MACD
 # Volatility: BOLLINGER BANDS, ATR, ADX
 # Momentum: MACD, STOCHASTIC, RSI, On Balance Volume, ROC
