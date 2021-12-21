@@ -6,7 +6,7 @@ from dataframe_model import DataFrameModel, FloatDelegate
 from individual import Individual
 from input import Input
 from comparison import Comparison
-from yfinancecrypto import apply_indicators, apply_signals
+from yfinancecrypto import apply_indicators, apply_signals, advice
 
 # column_names = ['Ticker', 'Name', 'Price', 'Advice']
 # assets = [['AAPL', 'Apple Inc.', '100', 'hold'], ['AMZN', 'Amazon.com, Inc.', '100', 'hold']]
@@ -102,6 +102,7 @@ class Overview:
 
         data_stock = df_indicators_stock.xs('Close', axis=1, level=1).iloc[-1].rename('Price')
         df_stock = df_stock.merge(data_stock, left_on='Symbol', right_index=True)
+        df_stock['Advice'] = df_stock['Symbol'].map(advice(df_signals_stock, symbols_stock))
         self.model_stock.setDataFrame(df_stock)
 
         df_crypto = dataframe.query('@crypto_mask').reset_index(drop=True)
@@ -111,9 +112,11 @@ class Overview:
 
         data_crypto = df_indicators_crypto.xs('Close', axis=1, level=1).iloc[-1].rename('Price')
         df_crypto = df_crypto.merge(data_crypto, left_on='Symbol', right_index=True)
+        df_crypto['Advice'] = df_crypto['Symbol'].map(advice(df_signals_crypto, symbols_crypto))
         self.model_crypto.setDataFrame(df_crypto)
 
         # ##
+        print(df_stock.loc[:, 'Symbol'].tolist())
 
         first_select: QComboBox = self.main_window.findChild(QComboBox, "first_select")
         first_select.clear()
@@ -139,8 +142,8 @@ class Overview:
             # this is temporary, needs to be changed in overview-back
             interval = self.get_interval()
             data = apply_indicators([symbol], interval)
-            advice = apply_signals(data, [symbol])
-            Individual(self.main_window, data, advice, symbol, interval)
+            advices = apply_signals(data, [symbol])
+            Individual(self.main_window, data, advices, symbol, interval)
 
             tab: QTabWidget = self.main_window.findChild(QTabWidget, "tabWidget")
             tab.setCurrentIndex(2)
