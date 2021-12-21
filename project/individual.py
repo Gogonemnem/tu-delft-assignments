@@ -2,8 +2,8 @@ import pandas as pd
 from PyQt6.QtWebEngineWidgets import QWebEngineView
 from PyQt6.QtWidgets import QHeaderView, QLabel, QMainWindow, QTableView
 
-from project.dataframe_model import DataFrameModel
-from project.graphdesigner import GraphDesigner
+from dataframe_model import DataFrameModel
+from graphdesigner import GraphDesigner
 
 
 class Individual:
@@ -25,8 +25,9 @@ class Individual:
                 GraphDesigner.indicator_chart(advice, symbol).to_html(include_plotlyjs='cdn'))
 
         self.main_window = main_window
-
+        dataframe = dataframe.droplevel(0, axis=1)
         self.dataframe = dataframe
+
         self.advice = advice
         self.price_df = dataframe[['High', 'Low', 'Close', 'Volume']].round(3)
 

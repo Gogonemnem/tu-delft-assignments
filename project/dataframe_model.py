@@ -52,7 +52,7 @@ class DataFrameModel(QAbstractTableModel):
         self.endResetModel()
 
     def dataFrame(self):
-        return self._dataframe
+        return self._dataframe.copy()
 
     dataFrame: pd.DataFrame = QtCore.pyqtProperty(
         pd.DataFrame, fget=dataFrame, fset=setDataFrame
@@ -124,7 +124,7 @@ class DataFrameModel(QAbstractTableModel):
         flags = (
             QtCore.Qt.ItemFlag.ItemIsSelectable
             | QtCore.Qt.ItemFlag.ItemIsDragEnabled
-            | QtCore.Qt.ItemFlag.ItemIsEditable
+            # | QtCore.Qt.ItemFlag.ItemIsEditable
             | QtCore.Qt.ItemFlag.ItemIsEnabled
         )
         return flags

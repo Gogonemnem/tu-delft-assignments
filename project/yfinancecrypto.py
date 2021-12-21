@@ -15,149 +15,114 @@ pd.set_option('display.max_columns', None)
 
 
 class CryptoCurrencies:
-    def __init__(self, symbols, intervals, periods):
+    interval_period = {
+        '1m': '1d',
+        '5m': '5d',
+        '15m': '15d',
+        '30m': '30d',
+        '1h': '60d',
+        '1d': '5y',
+        '1wk': '10y',
+        '1mo': '10y',
+        '3mo': '10y',
+    }
+
+    def __init__(self, symbols, intervals, periods=None):
         self.symbols = symbols
         self.intervals = intervals
-        self.periods = periods
+        if periods:
+            self.periods = periods
+        elif intervals in CryptoCurrencies.interval_period:
+            self.periods = CryptoCurrencies.interval_period[intervals]
+        else:
+            self.periods = 'max' # default
         # Use group_by function to be able to add indicators to dataframe with multiple coins
         self.data = yf.download(tickers=self.symbols, group_by='Ticker',
                                 period=self.periods, interval=self.intervals)
-        # print(self.data)
+
+        if len(symbols) == 1:
+            self.data.loc[symbols[0], :] = symbols[0]
+            self.data = self.data.transpose().set_index(symbols[0], append=True) \
+                            .swaplevel().transpose()
+
         self.data.dropna(inplace=True)
 
     def stochastic_oscillator(self):
         """Calculates stochastic oscillator indicator
         to see if a coin/stock has been oversold/overbought"""
-        # Check how many symbols are given
-        if len(self.symbols.split(' ')) > 1:
-            for symbol in self.symbols.split(' '):
-                self.data[[(symbol, '%K'), (symbol, '%D')]] = \
-                    ta.stoch(
-                        high=self.data[symbol, 'High'], low=self.data[symbol, 'Low'],
-                        close=self.data[symbol, 'Close'], k=14, d=3, append=True
-                    )
-                # sort indicator values by other values from the same symbol
-        # only 1 symbol given
-        else:
-            self.data[['%K', '%D']] = ta.stoch(
-                high=self.data['High'], low=self.data['Low'],
-                close=self.data['Close'], k=14, d=3, append=True
+        for symbol in self.symbols:
+            self.data[[(symbol, '%K'), (symbol, '%D')]] = \
+                ta.stoch(
+                    high=self.data[symbol, 'High'], low=self.data[symbol, 'Low'],
+                    close=self.data[symbol, 'Close'], k=14, d=3, append=True
                 )
         return self.data
 
     def simple_moving_average(self):
         """Calculates moving averages over N candlesticks"""
-        # Check how many symbols are given
-        if len(self.symbols.split(' ')) > 1:
-            for symbol in self.symbols.split(' '):
-                # self.ma = ta.hma(close=self.data[(symbol, 'Close')], length=30, append=True)
-                self.data[(symbol, 'MA_20')] = ta.sma(
-                    close=self.data[(symbol, 'Close')], length=20, append=True)
-                self.data[(symbol, 'MA_50')] = ta.sma(
-                    close=self.data[(symbol, 'Close')], length=50, append=True)
-                self.data[(symbol, 'MA_200')] = ta.sma(
-                    close=self.data[(symbol, 'Close')], length=200, append=True)
-                # sort indicator values by other values from the same symbol
-        # only 1 symbol given
-        else:
-            self.data['MA_20'] = ta.sma(
-                close=self.data['Close'], length=20, append=True)
-            self.data['MA_50'] = ta.sma(
-                close=self.data['Close'], length=50, append=True)
-            self.data['MA_200'] = ta.sma(
-                close=self.data['Close'], length=200, append=True)
-        # return self.ma
+        for symbol in self.symbols:
+            # self.ma = ta.hma(close=self.data[(symbol, 'Close')], length=30, append=True)
+            self.data[(symbol, 'MA_20')] = ta.sma(
+                close=self.data[(symbol, 'Close')], length=20, append=True)
+            self.data[(symbol, 'MA_50')] = ta.sma(
+                close=self.data[(symbol, 'Close')], length=50, append=True)
+            self.data[(symbol, 'MA_200')] = ta.sma(
+                close=self.data[(symbol, 'Close')], length=200, append=True)
         return self.data
 
     def bollinger_bands(self):
         """Calculates the bollinger bands indicator
         to check if a coin/stock has been oversold/overbought"""
-        # Check how many symbols are given
-        if len(self.symbols.split(' ')) > 1:
-            for symbol in self.symbols.split(' '):
-                self.data[[
-                    (symbol, 'BBL'), (symbol, 'BBM'), (symbol, 'BBU'), (symbol, 'BBB'),
-                    (symbol, 'BBP')
-                    ]] = \
-                    ta.bbands(
-                        close=self.data[symbol, 'Close'], length=20, StdDev=2, append=True
-                        )
-                # sort indicator values by other values from the same symbol
-        # only 1 symbol given
-        else:
-            self.data[['BBL', 'BBM', 'BBU', 'BBB', 'BBP']] = ta.bbands(
-                close=self.data['Close'], length=20, StdDev=2, append=True)
+        for symbol in self.symbols:
+            self.data[[
+                (symbol, 'BBL'), (symbol, 'BBM'), (symbol, 'BBU'), (symbol, 'BBB'),
+                (symbol, 'BBP')
+                ]] = \
+                ta.bbands(
+                    close=self.data[symbol, 'Close'], length=20, StdDev=2, append=True
+                    )
         return self.data
 
     def moving_average_convergence_divergence(self):
         """Calculates the MACD to check for momemtum indications"""
-        # Check how many symbols are given
-        if len(self.symbols.split(' ')) > 1:
-            for symbol in self.symbols.split(' '):
-                self.data[[(symbol, 'MACD'), (symbol, 'MACDh'), (symbol, 'MACDs')]] = ta.macd(
-                    close=self.data[(symbol, 'Close')], append=True)
-        # only 1 symbol given
-        else:
-            self.data[['MACD', 'MACDh', 'MACDs']] = ta.macd(
-                close=self.data['Close'], append=True)
+        for symbol in self.symbols:
+            self.data[[(symbol, 'MACD'), (symbol, 'MACDh'), (symbol, 'MACDs')]] = ta.macd(
+                close=self.data[(symbol, 'Close')], append=True)
         return self.data
 
     def rsi(self):
         """Calculates the stochastic RSI
         to check if a coin/stock is oversold/overbought ( I THINK )"""
-        # Check how many symbols are given
-        if len(self.symbols.split(' ')) > 1:
-            for symbol in self.symbols.split(' '):
-                self.data[(symbol, 'RSI_14')] = ta.rsi(
-                    close=self.data[(symbol, 'Close')], length=14, append=True)
-        # only 1 symbol given
-        else:
-            self.data['RSI_14'] = ta.rsi(
-                close=self.data['Close'], length=14, append=True)
+        for symbol in self.symbols:
+            self.data[(symbol, 'RSI_14')] = ta.rsi(
+                close=self.data[(symbol, 'Close')], length=14, append=True)
         return self.data
 
     def exponential_moving_average(self):
-        if len(self.symbols.split(' ')) > 1:
-            for symbol in self.symbols.split(' '):
-                self.data[(symbol, 'EMA_200')] = ta.ema(
+        for symbol in self.symbols:
+            self.data[(symbol, 'EMA_200')] = ta.ema(
                     close=self.data[(symbol, 'Close')], length=200, append=True)
-                self.data[(symbol, 'EMA_100')] = ta.ema(
-                    close=self.data[(symbol, 'Close')], length=100, append=True)
-                self.data[(symbol, 'EMA_50')] = ta.ema(
-                    close=self.data[(symbol, 'Close')], length=50, append=True)
-        else:
-            self.data['EMA_200'] = ta.ema(
-                close=self.data['Close'], length=200, append=True)
-            self.data['EMA_100'] = ta.ema(
-                close=self.data['Close'], length=100, append=True)
-            self.data['EMA_50'] = ta.ema(
-                close=self.data['Close'], length=50, append=True)
+            self.data[(symbol, 'EMA_100')] = ta.ema(
+                close=self.data[(symbol, 'Close')], length=100, append=True)
+            self.data[(symbol, 'EMA_50')] = ta.ema(
+                close=self.data[(symbol, 'Close')], length=50, append=True)
         return self.data
 
     def money_flow_index(self):
-        if len(self.symbols.split(' ')) > 1:
-            for symbol in self.symbols.split(' '):
-                self.data[(symbol, 'MFI_14')] = ta.mfi(
-                    close=self.data[(symbol, 'Close')], low=self.data[(symbol, 'Low')],
-                    high=self.data[(symbol, 'High')], volume=self.data[(symbol, 'Volume')],
-                    length=14, append=True
-                    )
-        else:
-            self.data['MFI_14'] = ta.mfi(
-                close=self.data['Close'], low=self.data['Low'],
-                high=self.data['High'], volume=self.data['Volume'], length=14, append=True)
+        for symbol in self.symbols:
+            self.data[(symbol, 'MFI_14')] = ta.mfi(
+                close=self.data[(symbol, 'Close')], low=self.data[(symbol, 'Low')],
+                high=self.data[(symbol, 'High')], volume=self.data[(symbol, 'Volume')],
+                length=14, append=True
+                )
         return self.data
 
     def stochastic_rsi(self):
-        if len(self.symbols.split(' ')) > 1:
-            for symbol in self.symbols.split(' '):
-                self.data[[(symbol, 'StochRSI_%K'), (symbol, 'StochRSI_%D')]] = ta.stochrsi(
+        for symbol in self.symbols:
+            self.data[[(symbol, 'StochRSI_%K'), (symbol, 'StochRSI_%D')]] = ta.stochrsi(
                     close=self.data[(symbol, 'Close')], length=14, rsi_length=14,
                     k=3, d=3, append=True
                 )
-        else:
-            self.data[['StochRSI_%K', 'StochRSI_%D']] = ta.stochrsi(
-                close=self.data['Close'], length=14, rsi_length=14, k=3, d=3, append=True)
         return self.data
 
 
@@ -190,149 +155,89 @@ class CalculateSignals:
 
     def stochastic_signal(self):
         """Stochastic oscillator"""
-        if len(self.symbols.split(' ')) > 1:
-            for symbol in self.symbols.split(' '):
-                k = self.df[(symbol, '%K')].iat[-1].round(3)
-                d = self.df[(symbol, '%D')].iat[-1].round(3)
-                if k >= 80 and d >= 80:
-                    signal = 'Sell'
-                elif k <= 20 and d <= 20:
-                    signal = 'Buy'
-                else:
-                    signal = 'Hold'
-                self.dic[(symbol, 'Stochastic Oscillator')] = signal, '%K: ' + str(k) + '        ' + ' %D: ' + str(d)
-        else:
-            k = self.df['%K'].iat[-1].round(3)
-            d = self.df['%D'].iat[-1].round(3)
+        for symbol in self.symbols:
+            k = self.df[(symbol, '%K')].iat[-1].round(3)
+            d = self.df[(symbol, '%D')].iat[-1].round(3)
             if k >= 80 and d >= 80:
                 signal = 'Sell'
             elif k <= 20 and d <= 20:
                 signal = 'Buy'
             else:
                 signal = 'Hold'
-            self.dic['Stochastic Oscillator'] = signal, '%K: ' + str(k) + '        ' + '%D: ' + str(d)
+            self.dic[(symbol, 'Stochastic Oscillator')] = \
+                signal, '%K: ' + str(k) + '        ' + ' %D: ' + str(d)
         return self.dic
 
     def bollinger_signal(self):
-        if len(self.symbols.split(' ')) > 1:
-            for symbol in self.symbols.split(' '):
-                bbp = self.df[(symbol, 'BBP')].iat[-1].round(3)
-                if bbp > 1:
-                    signal = 'Sell'
-                elif bbp < 0:
-                    signal = 'Buy'
-                else:
-                    signal = 'Hold'
-                self.dic[(symbol, 'Bollinger Bands')] = signal, '%BB: ' + str(bbp)
-        else:
-            bbp = self.df['BBP'].iat[-1].round(3)
+        for symbol in self.symbols:
+            bbp = round(self.df[(symbol, 'BBP')].iat[-1], 3)
             if bbp > 1:
                 signal = 'Sell'
             elif bbp < 0:
                 signal = 'Buy'
             else:
                 signal = 'Hold'
-            self.dic['Bollinger Bands'] = signal, '%BB: ' + str(bbp)
+            self.dic[(symbol, 'Bollinger Bands')] = signal, '%BB: ' + str(bbp)
         return self.dic
 
     def mfi_signal(self):
-        if len(self.symbols.split(' ')) > 1:
-            for symbol in self.symbols.split(' '):
-                mfi = self.df[(symbol, 'MFI_14')].iat[-1].round(3)
-                if mfi >= 90:
-                    signal = 'Sell'
-                elif mfi <= 10:
-                    signal = 'Buy'
-                else:
-                    signal = 'Hold'
-                self.dic[(symbol, 'Money Flow Index')] = signal, 'MFI-14: ' + str(mfi)
-        else:
-            mfi = self.df['MFI_14'].iat[-1].round(3)
+        for symbol in self.symbols:
+            mfi = self.df[(symbol, 'MFI_14')].iat[-1].round(3)
             if mfi >= 90:
                 signal = 'Sell'
             elif mfi <= 10:
                 signal = 'Buy'
             else:
                 signal = 'Hold'
-            self.dic['Money Flow Index'] = signal, 'MFI-14: ' + str(mfi)
+            self.dic[(symbol, 'Money Flow Index')] = signal, 'MFI-14: ' + str(mfi)
         return self.dic
 
     def macd_signal(self):
-        if len(self.symbols.split(' ')) > 1:
-            for symbol in self.symbols.split(' '):
-                MACD = self.df[(symbol, 'MACD')].iat[-1].round(3)        # black line
-                # MACDh = self.df[(symbol, 'MACDh')]      # difference betweeen MACD and MACDs
-                MACDs = self.df[(symbol, 'MACDs')].iat[-1].round(3)      # red line
-                if MACDs < MACD < 0:
-                    signal = 'Buy'
-                elif MACDs > MACD > 0:
-                    signal = 'Sell'
-                else:
-                    signal = 'Hold'
-                self.dic[(symbol, 'Moving Average Convergence Divergence')] = signal, 'MACD-Line: ' + str(MACD) + \
-                    '      ' + 'Slow-Line: ' + str(MACDs)
-        else:
-            MACD = self.df['MACD'].iat[-1].round(3)   # black line
+        for symbol in self.symbols:
+            MACD = self.df[(symbol, 'MACD')].iat[-1].round(3)        # black line
             # MACDh = self.df[(symbol, 'MACDh')]      # difference betweeen MACD and MACDs
-            MACDs = self.df['MACDs'].iat[-1].round(3)   # red line
+            MACDs = self.df[(symbol, 'MACDs')].iat[-1].round(3)      # red line
             if MACDs < MACD < 0:
                 signal = 'Buy'
             elif MACDs > MACD > 0:
                 signal = 'Sell'
             else:
                 signal = 'Hold'
-            self.dic['Moving Average CD'] = signal, 'MACD-Line: ' + str(MACD) + '      ' \
-                + 'Slow-Line: ' + str(MACDs)
+            self.dic[(symbol, 'Moving Average CD')] = signal, 'MACD-Line: ' + str(MACD) + \
+                '      ' + 'Slow-Line: ' + str(MACDs)
         return self.dic
 
     def long_term_trend(self):
-        if len(self.symbols.split(' ')) > 1:
-            for symbol in self.symbols.split(' '):
-                ema = self.df[(symbol, 'EMA_200')].iat[-1].round(3)
-                close = self.df[(symbol, 'Close')].iat[-1].round(3)
-                if ema - close > 0:
-                    signal = 'Buy/Bullish'
-                else:
-                    signal = 'Sell/Bearish'
-                self.dic[(symbol, 'Long Term Trend')] = signal, 'EMA: ' + str(ema) + '      ' + \
-                    'Close-price: ' + str(close)
-        else:
-            ema = self.df['EMA_200'].iat[-1].round(3)
-            close = self.df['Close'].iat[-1].round(3)
+        for symbol in self.symbols:
+            ema = self.df[(symbol, 'EMA_200')].iat[-1].round(3)
+            close = round(self.df[(symbol, 'Close')].iat[-1], 3)
             if ema - close > 0:
                 signal = 'Buy/Bullish'
             else:
                 signal = 'Sell/Bearish'
-            self.dic['Long Term Trend'] = signal, 'EMA-200: ' + str(ema) + '      ' + \
+            self.dic[(symbol, 'Long Term Trend')] = signal, 'EMA: ' + str(ema) + '      ' + \
                 'Close-price: ' + str(close)
         return self.dic
 
     def rsi_signal(self):
-        if len(self.symbols.split(' ')) > 1:
-            for symbol in self.symbols.split(' '):
-                rsi = self.df[(symbol, 'RSI_14')].iat[-1].round(3)
-                if rsi >= 70:
-                    signal = 'Sell'
-                elif rsi <= 30:
-                    signal = 'Buy'
-                else:
-                    signal = 'Hold'
-                self.dic[(symbol, 'Relative Strength Index')] = signal, 'RSI-14: ' + str(rsi)
-        else:
-            rsi = self.df['RSI_14'].iat[-1].round(3)
+        for symbol in self.symbols:
+            rsi = self.df[(symbol, 'RSI_14')].iat[-1].round(3)
             if rsi >= 70:
                 signal = 'Sell'
             elif rsi <= 30:
                 signal = 'Buy'
             else:
                 signal = 'Hold'
-            self.dic['Relative Strength Index'] = signal, 'RSI-14: ' + str(rsi)
+            self.dic[(symbol, 'Relative Strength Index')] = signal, 'RSI-14: ' + str(rsi)
         return self.dic
 
 
-def apply_indicators(symbols):
+def apply_indicators(symbols, intervals, periods=None):
     """Call all indcator functions"""
-    btc_1 = CryptoCurrencies(symbols=symbols, periods='1000d', intervals='1d')
+    if len(symbols) == 0:
+        return None
+
+    btc_1 = CryptoCurrencies(symbols, intervals, periods)
     btc_1.stochastic_oscillator()
     btc_1.simple_moving_average()
     btc_1.bollinger_bands()
@@ -346,6 +251,9 @@ def apply_indicators(symbols):
 
 
 def apply_signals(df, symbols):
+    if len(symbols) == 0:
+        return None
+
     signal = CalculateSignals(df, symbols)
     signal.stochastic_signal()
     signal.bollinger_signal()
@@ -360,15 +268,20 @@ def apply_signals(df, symbols):
     return signal_transposed
 
 
-def main(symbol):
-    df = apply_indicators(symbol)
-    signal = apply_signals(df, symbol)
-    return df, signal
+def main(symbols):
+    # symbols = 'ETH-USD BTC-USD BNB-USD ADA-USD LINK-USD DOT1-USD LTC-USD'.split(' ')
+    # symbols = ['LINK-USD']
+
+    df = apply_indicators(symbols, intervals='1d')
+    print(df)
+    signals = apply_signals(df, symbols)
+    print(signals)
+    return df, signals
 
 
 if __name__ == "__main__":
     start_time = time.time()
-    main('BTC-USD')
+    main(['BTC-USD'])
     print(f'Runtime= {time.time() - start_time}')
 
 
