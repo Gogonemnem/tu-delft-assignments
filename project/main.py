@@ -3,8 +3,8 @@ from PyQt6 import uic
 from PyQt6.QtWebEngineWidgets import QWebEngineView
 from PyQt6.QtWidgets import QApplication, QFrame, QMainWindow
 
-from project.input import Input
-from project.overview import Overview
+from input import Input
+from overview import Overview
 
 
 class MainWindow(QMainWindow):
@@ -64,7 +64,8 @@ if __name__ == "__main__":
     column_names = ['Symbol', 'Name']
     assets = [['AAPL', 'Apple Inc.'], ['AMZN', 'Amazon.com, Inc.'], \
             ['TSLA', 'Tesla, Inc.'], ['FB', 'Meta Platforms, Inc.'], \
-            ['Test', 'TEST'], ['LALA', 'LA'], ['CH', 'CHECK']]
+            ['BTC-USD', 'Bitcoin'], ['ETH-USD', 'Ethereum'], \
+            ['BNB-USD', 'Binance Coin']]
     df = pd.DataFrame(assets, columns = column_names)
 
     # symbol = 'BTC-USD'
@@ -83,5 +84,5 @@ if __name__ == "__main__":
 
     app = QApplication(sys.argv)
     ui = MainWindow()
-    ui.show()
+    ui.showMaximized()
     sys.exit(app.exec())

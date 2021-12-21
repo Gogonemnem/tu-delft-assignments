@@ -1,16 +1,26 @@
-import pandas as pd
+# import pandas as pd
 from PyQt6.QtWidgets import (QComboBox, QHeaderView, QMainWindow, QPushButton,
                              QRadioButton, QTableView, QTabWidget)
 
-from project.dataframe_model import DataFrameModel
-from project.individual import Individual
-from project.input import Input
-from project.comparison import Comparison
-from project.yfinancecrypto import apply_indicators, apply_signals
+from dataframe_model import DataFrameModel, FloatDelegate
+from individual import Individual
+from input import Input
+from comparison import Comparison
+from yfinancecrypto import apply_indicators, apply_signals
 
-column_names = ['Ticker', 'Name', 'Price', 'Advice']
-assets = [['AAPL', 'Apple Inc.', '100', 'hold'], ['AMZN', 'Amazon.com, Inc.', '100', 'hold']]
-df = pd.DataFrame(assets, columns = column_names)
+# column_names = ['Ticker', 'Name', 'Price', 'Advice']
+# assets = [['AAPL', 'Apple Inc.', '100', 'hold'], ['AMZN', 'Amazon.com, Inc.', '100', 'hold']]
+# df = pd.DataFrame(assets, columns = column_names)
+
+# column_names = ['Ticker', 'Name', 'Price', 'Advice']
+# assets_stock = [['AAPL', 'Apple Inc.', '100', 'hold'],
+#                 ['AMZN', 'Amazon.com, Inc.', '200', 'very strong buy'],
+#                 ['AMZN', 'Amazon.com, Inc.', '200', 'very strong sell'],
+#                 ['AMZN', 'Amazon.com, Inc.', '200', 'strong buy']]
+# df_stock = pd.DataFrame(assets_stock, columns = column_names)
+# assets_crypto= [['AAPL', 'Apple Inc.', '100', 'hold'],
+#                 ['AMZN', 'Amazon.com, Inc.', '200', 'very strong buy']]
+# df_crypto = pd.DataFrame(assets_crypto, columns = column_names)
 
 
 class Overview:
@@ -31,6 +41,12 @@ class Overview:
         self.view_stock: QTableView = self.main_window.findChild(QTableView, "tableView_stock")
         self.view_crypto: QTableView = self.main_window.findChild(QTableView, "tableView_crypto")
 
+        delegate_stock = FloatDelegate(self.view_stock)
+        self.view_stock.setItemDelegate(delegate_stock)
+
+        delegate_crypto = FloatDelegate(self.view_crypto)
+        self.view_crypto.setItemDelegate(delegate_crypto)
+
         self.model_stock = DataFrameModel()
         self.model_crypto = DataFrameModel()
 
@@ -46,30 +62,71 @@ class Overview:
         results_button: QPushButton = self.main_window.findChild(QPushButton, "results_button")
         results_button.clicked.connect(self.get_results)
 
-    def set_dataframes(self):
-        dataframe = self.input.model.dataFrame
 
-        self.model_stock.setDataFrame(dataframe)
-        self.model_crypto.setDataFrame(dataframe)
+        self.strategy_box = self.main_window.findChild(QComboBox, "strategy_box")
+        self.interval_box = self.main_window.findChild(QComboBox, "interval_box")
 
-        print(dataframe.loc[:, 'Symbol'].tolist())
+    # The part we wanna keep from previous code
+    # def strategy_sort(self):
+    #     if self.comboBox_sorting_stocks.currentText() == IETS:
+    #         df_stock["Advice"] = pd.Categorical(df_stock['Advice'],
+    #             ["very strong buy", "strong buy", "buy", "hold",
+    #              "sell", "strong sell", "very strong sell"])
+    #         df_stock.sort_values(by='Advice', inplace=True)
+    #         self.model_stock = DataFrameModel(df_stock)
+    #         self.view_stock.setModel(self.model_stock)
 
-        first_select: QComboBox = self.main_window.findChild(QComboBox, "first_select")
-        second_select = self.main_window.findChild(QComboBox, "second_select")
-
-        first_select.clear()
-        second_select.clear()
-        first_select.addItems(dataframe.loc[:, 'Symbol'].tolist())
-        second_select.addItems(dataframe.loc[:, 'Symbol'].tolist())
+    # Steps we have to implement
+    # 1. Calculate new advices
+    # 2. Replace old advices with the new advices in dataframe
+    # 3. Make sure it is in pd. Categorical so it can be sorted
 
     def calculate_advices(self):
+        # pylint: disable=unused-variable
+        # we use a mask for the query
+        # the mask is called inside a string, pylint is not smart enough to recognize that
         tab: QTabWidget = self.main_window.findChild(QTabWidget, "tabWidget")
         tab.setCurrentIndex(1)
 
-        self.set_dataframes()
+        dataframe = self.input.model.dataFrame
 
-        # ADD methods to add prices
-        # ADD advices
+        interval = self.get_interval()
+
+        # ## Some parts need to be refactored to yfinancecrypto
+        crypto_mask = dataframe['Symbol'].str.contains('-USD')
+
+        df_stock = dataframe.query('@crypto_mask == False').reset_index(drop=True)
+        symbols_stock = df_stock['Symbol'].tolist()
+        df_indicators_stock = apply_indicators(symbols_stock, interval)
+        df_signals_stock = apply_signals(df_indicators_stock, symbols_stock)
+
+        data_stock = df_indicators_stock.xs('Close', axis=1, level=1).iloc[-1].rename('Price')
+        df_stock = df_stock.merge(data_stock, left_on='Symbol', right_index=True)
+        self.model_stock.setDataFrame(df_stock)
+
+        df_crypto = dataframe.query('@crypto_mask').reset_index(drop=True)
+        symbols_crypto = df_crypto['Symbol'].tolist()
+        df_indicators_crypto = apply_indicators(symbols_crypto, interval)
+        df_signals_crypto = apply_signals(df_indicators_crypto, symbols_crypto)
+
+        data_crypto = df_indicators_crypto.xs('Close', axis=1, level=1).iloc[-1].rename('Price')
+        df_crypto = df_crypto.merge(data_crypto, left_on='Symbol', right_index=True)
+        self.model_crypto.setDataFrame(df_crypto)
+
+        # ##
+
+        first_select: QComboBox = self.main_window.findChild(QComboBox, "first_select")
+        first_select.clear()
+        first_select.addItems(df_stock.loc[:, 'Symbol'].tolist())
+        first_select.addItems(df_crypto.loc[:, 'Symbol'].tolist())
+
+        second_select: QComboBox = self.main_window.findChild(QComboBox, "second_select")
+        second_select.clear()
+        second_select.addItems(df_stock.loc[:, 'Symbol'].tolist())
+        second_select.addItems(df_crypto.loc[:, 'Symbol'].tolist())
+
+
+        # ## ADD advices
 
     def get_results(self):
         single_button: QRadioButton = self.main_window.findChild(QRadioButton, "single_button")
@@ -79,16 +136,14 @@ class Overview:
             first_select: QComboBox = self.main_window.findChild(QComboBox, "first_select")
             symbol = first_select.currentText()
 
-            if symbol:
+            # this is temporary, needs to be changed in overview-back
+            interval = self.get_interval()
+            data = apply_indicators([symbol], interval)
+            advice = apply_signals(data, [symbol])
+            Individual(self.main_window, data, advice, symbol, interval)
 
-                # this is temporary, needs to be changed in overview-back
-                interval = '1d'
-                data = apply_indicators(symbol)
-                advice = apply_signals(data, symbol)
-                Individual(self.main_window, data, advice, symbol, interval)
-
-                tab: QTabWidget = self.main_window.findChild(QTabWidget, "tabWidget")
-                tab.setCurrentIndex(2)
+            tab: QTabWidget = self.main_window.findChild(QTabWidget, "tabWidget")
+            tab.setCurrentIndex(2)
 
 
         elif compare_button.isChecked():
@@ -99,18 +154,35 @@ class Overview:
 
             if first_select and second_select:
                 # this is temporary, needs to be changed in overview-back
-                interval = '1d'
-                data1 = apply_indicators(symbol1)
-                advice1 = apply_signals(data1, symbol1)
-                data2 = apply_indicators(symbol2)
-                advice2 = apply_signals(data2, symbol2)
+                interval = self.get_interval()
+                data1 = apply_indicators([symbol1], interval)
+                advice1 = apply_signals(data1, [symbol1])
+                data2 = apply_indicators([symbol2], interval)
+                advice2 = apply_signals(data2, [symbol2])
 
-                Comparison(self.main_window, data1, advice1, symbol1, data2, advice2, symbol2, interval)
+                Comparison(self.main_window, data1, advice1, symbol1,
+                           data2, advice2, symbol2, interval)
 
                 tab: QTabWidget = self.main_window.findChild(QTabWidget, "tabWidget")
                 tab.setCurrentIndex(3)
 
 
+    def get_interval(self):
+        interval_labels = {
+        '1 minute': '1m',
+        '5 minutes': '5m',
+        '15 minutes':'15m',
+        '30 minutes':'30m',
+        '1 hour': '1h',
+        '1 day': '1d',
+        '1 week': '1wk',
+        '1 month': '1mo',
+        '3 months': '3mo',
+        }
+        interval_box: QComboBox = self.main_window.findChild(QComboBox, "interval_box")
+
+        # could also get currentindex for a miniscule efficiency increase
+        return interval_labels[interval_box.currentText()]
 
 
 # if __name__ == "__main__":

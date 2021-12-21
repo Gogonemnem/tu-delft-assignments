@@ -3,13 +3,11 @@ import yfinance as yf
 from PyQt6.QtWidgets import (QHeaderView, QLineEdit, QMainWindow,
                              QMessageBox, QPushButton, QTableView)
 
-# I don't know why, but 'project.' needs to be in front of dataframe_model for pylint
-# However, if i do that, the code does not run for me (@Gonem).
-from project.dataframe_model import DataFrameModel
+from dataframe_model import DataFrameModel
 
 
 class Input:
-    def __init__(self, main_window: QMainWindow, df=pd.DataFrame()):
+    def __init__(self, main_window: QMainWindow, df=pd.DataFrame(columns=['Symbol', 'Name'])):
         self.main_window = main_window
         self.view: QTableView = self.main_window.findChild(QTableView, "tableView")
 

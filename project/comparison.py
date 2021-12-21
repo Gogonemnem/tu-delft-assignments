@@ -2,8 +2,8 @@ import pandas as pd
 from PyQt6.QtWebEngineWidgets import QWebEngineView
 from PyQt6.QtWidgets import QHeaderView, QLabel, QMainWindow, QTableView
 
-from project.dataframe_model import DataFrameModel
-from project.graphdesigner import GraphDesigner
+from dataframe_model import DataFrameModel
+from graphdesigner import GraphDesigner
 
 pd.options.mode.chained_assignment = None  # default='warn'
 
@@ -18,11 +18,13 @@ class Comparison:
         self.second = symbol2
         self.interval = interval
 
+        dataframe1 = dataframe1.droplevel(0, axis=1)
         self.dataframe1 = dataframe1
         self.advice1 = advice1
         self.price_df1 = dataframe1[[
             'High', 'Low', 'Close', 'Volume']].round(3)
 
+        dataframe2 = dataframe2.droplevel(0, axis=1)
         self.dataframe2 = dataframe2
         self.advice2 = advice2
         self.price_df2 = dataframe2[[
