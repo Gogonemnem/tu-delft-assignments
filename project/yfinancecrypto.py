@@ -299,21 +299,21 @@ def advice(signals, symbols):
         elif tot == 6:
             overall_advice_dic[symbol] = 'Very strong buy'
     return overall_advice_dic
+
+
 def main(symbols):
     # symbols = 'ETH-USD BTC-USD BNB-USD ADA-USD LINK-USD DOT1-USD LTC-USD'.split(' ')
     # symbols = ['LINK-USD']
 
     df = apply_indicators(symbols, intervals='1m')
-    print(df)
     signals = apply_signals(df, symbols)
-    print(signals)
-    print(advice(signals, symbols))
-    return df, signals
+    overall_advice = advice(signals, symbols)
+    return df, signals, overall_advice
 
 
 if __name__ == "__main__":
     start_time = time.time()
-    main(['BTC-USD'])
+    dataframe, signal_frame, advice = main(['BTC-USD'])
     print(f'Runtime= {time.time() - start_time}')
 
 

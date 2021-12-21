@@ -143,7 +143,8 @@ class Overview:
             interval = self.get_interval()
             data = apply_indicators([symbol], interval)
             advices = apply_signals(data, [symbol])
-            Individual(self.main_window, data, advices, symbol, interval)
+            overall_advice = advice(advices, [symbol])
+            Individual(self.main_window, data, advices, symbol, interval, overall_advice)
 
             tab: QTabWidget = self.main_window.findChild(QTabWidget, "tabWidget")
             tab.setCurrentIndex(2)
