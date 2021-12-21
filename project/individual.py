@@ -8,7 +8,7 @@ from graphdesigner import GraphDesigner
 
 class Individual:
     def __init__(self, main_window: QMainWindow, dataframe: pd.DataFrame,
-                 advice: pd.DataFrame, symbol, interval):
+                 advice: pd.DataFrame, symbol, interval, overall_advice):
 
         def draw_graphs():
             price_change = self.main_window.findChild(QWebEngineView, 'price_change')
@@ -38,7 +38,6 @@ class Individual:
         view.resizeRowsToContents()
         header = view.horizontalHeader()
         header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
-
         # Advice Dataframe
         model2 = DataFrameModel(self.advice)
         advice_view: QTableView = self.main_window.findChild(QTableView, 'tableView_2')
@@ -54,6 +53,9 @@ class Individual:
 
         interval_label = self.main_window.findChild(QLabel, "interval_label")
         interval_label.setText(interval)
+
+        advice_label = self.main_window.findChild(QLabel, 'label_3')
+        advice_label.setText(overall_advice[symbol])
 
         draw_graphs()
 
