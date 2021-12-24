@@ -1,6 +1,7 @@
 import pandas as pd
 import yfinance as yf
-from PyQt6.QtWidgets import (QHeaderView, QLineEdit, QMainWindow,
+from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import (QApplication, QHeaderView, QLineEdit, QMainWindow,
                              QMessageBox, QPushButton, QTableView)
 
 from dataframe_model import DataFrameModel
@@ -13,15 +14,15 @@ class Input:
 
         self.model = DataFrameModel(df)
         self.view.setModel(self.model)
+        self.view.setSelectionBehavior(QTableView.SelectionBehavior.SelectRows)
 
         self.remove_rows_button = self.main_window.findChild(QPushButton, "remove_selected_button")
         self.remove_rows_button.clicked.connect(self.remove_rows)
 
-        self.insert_button = self.main_window.findChild(QPushButton, "insert_button")
-        self.insert_button.clicked.connect(self.append_ticker)
-
-        self.remove_all_button = self.main_window.findChild(QPushButton, "remove_all_button")
-        self.remove_all_button.clicked.connect(lambda: self.remove_rows(True))
+        insert = self.main_window.findChild(QLineEdit, "insert")
+        insert_button = self.main_window.findChild(QPushButton, "insert_button")
+        insert.returnPressed.connect(self.append_ticker)
+        insert_button.clicked.connect(self.append_ticker)
 
         self.save_button = self.main_window.findChild(QPushButton, "save_button")
         self.save_button.clicked.connect(self.export)
@@ -36,6 +37,7 @@ class Input:
         line_edit: QLineEdit = self.main_window.findChild(QLineEdit, "insert")
         text = line_edit.text().upper()
         line_edit.clear()
+        QApplication.setOverrideCursor(Qt.CursorShape.WaitCursor)
 
         all_tickers = [ticker.upper() for ticker in self.model.dataFrame.Symbol]
         information = yf.Ticker(text).info
@@ -48,30 +50,29 @@ class Input:
                         full_name = information[key]
                         break
                 self.model.insertRow([text, full_name])
+                QApplication.restoreOverrideCursor()
             else:
+                QApplication.restoreOverrideCursor()
                 self.show_pop_up('Something went wrong',
                                  f'Ticker {text} is already in the list')
         else:
+            QApplication.restoreOverrideCursor()
             self.show_pop_up('Something went wrong',
                              f'Ticker {text} is not in our system. ' \
                              'Please check Yahoo Finance for the right ticker and try again.')
 
-    def remove_rows(self, all_rows=False):
+    def remove_rows(self):
 
-        def get_selected_rows():
-            rows = set()
-            indexes = self.view.selectionModel().selectedIndexes()
-            for index in indexes:
-                rows.add(index.row())
-            return sorted(rows, reverse=True)
+        rows = [row.row() for row in self.view.selectionModel().selectedRows()]
 
-        if all_rows:
-            rows = reversed(range(self.model.rowCount()))
-        else:
-            rows = get_selected_rows()
+        # if not rows:
+        #     rows = range(self.model.rowCount())
 
-        for row in rows:
+        for row in reversed(rows):
             self.model.removeRow(row)
+
+        if not rows:
+            self.show_pop_up('Nothing to delete', 'No tickers were selected')
 
     def show_pop_up(self, title, message):
         QMessageBox.about(self.main_window, title, message)

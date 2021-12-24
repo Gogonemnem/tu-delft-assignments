@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1086</width>
-    <height>913</height>
+    <width>1296</width>
+    <height>1009</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -26,79 +26,199 @@
       <property name="currentIndex">
        <number>0</number>
       </property>
-      <property name="documentMode">
-       <bool>false</bool>
-      </property>
       <widget class="QWidget" name="input">
+       <property name="styleSheet">
+        <string notr="true">QPushButton:hover {
+	color: rgb(187, 187, 187);
+}
+QPushButton {
+	border: 1px none lightgray;
+	border-radius: 10px;
+	background-color:rgba(255, 255, 255,100);
+	padding: 2px;
+	
+}</string>
+       </property>
        <attribute name="title">
         <string>Input</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout">
+        <item row="2" column="0">
+         <widget class="QTableView" name="tableView">
+          <property name="styleSheet">
+           <string notr="true">QTableView {
+	border: none;
+}
+
+QTableView::item {
+	border-bottom: 1px double #d6d9dc;
+	color: rgb(0, 85, 255);
+}
+QTableView::item:selected{
+	background-color: rgb(187, 217, 251);
+}
+QTableView::item:hover {
+    background-color: rgb(243, 245, 249);
+}</string>
+          </property>
+          <property name="showGrid">
+           <bool>false</bool>
+          </property>
+          <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+         </widget>
+        </item>
         <item row="0" column="0">
-         <layout class="QVBoxLayout" name="verticalLayout_3">
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_2">
-            <item>
-             <widget class="QLineEdit" name="insert"/>
-            </item>
-            <item>
-             <widget class="QPushButton" name="insert_button">
-              <property name="text">
-               <string>Add</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <widget class="QTableView" name="tableView">
-            <property name="sortingEnabled">
-             <bool>true</bool>
+           <widget class="QPushButton" name="save_button">
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="toolTip">
+             <string>Save current tickers to a .csv file</string>
+            </property>
+            <property name="text">
+             <string>Save</string>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>images/save.svg</normaloff>images/save.svg</iconset>
+            </property>
+            <property name="shortcut">
+             <string>Ctrl+S</string>
             </property>
            </widget>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_3">
-            <item>
-             <widget class="QPushButton" name="remove_selected_button">
-              <property name="text">
-               <string>Remove Selected</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="remove_all_button">
-              <property name="text">
-               <string>Remove all</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="Confirm_button">
-              <property name="text">
-               <string>Confirm and compare</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
+           <widget class="QPushButton" name="import_button">
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="toolTip">
+             <string>Load the .csv file with all tickers</string>
+            </property>
+            <property name="text">
+             <string>Import</string>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>images/download.svg</normaloff>images/download.svg</iconset>
+            </property>
+            <property name="shortcut">
+             <string>Ctrl+O</string>
+            </property>
+           </widget>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_3">
-            <item>
-             <widget class="QPushButton" name="save_button">
-              <property name="text">
-               <string>Save</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="import_button">
-              <property name="text">
-               <string>Import</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
+           <widget class="QPushButton" name="remove_selected_button">
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="toolTip">
+             <string>Delete all selected tickers</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>Delete Ticker(s)</string>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>images/delete.svg</normaloff>images/delete.svg</iconset>
+            </property>
+            <property name="shortcut">
+             <string>Del</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="Confirm_button">
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="toolTip">
+             <string>Calculate all advices</string>
+            </property>
+            <property name="text">
+             <string>Get Overview</string>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>images/return.svg</normaloff>images/return.svg</iconset>
+            </property>
+            <property name="shortcut">
+             <string>Ctrl+Return</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="1" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QLineEdit" name="insert">
+            <property name="styleSheet">
+             <string notr="true">QLineEdit {
+	color: rgb(130, 133, 144);
+	font: bold;
+
+	background-color: rgb(240, 243, 250);
+	border-color: rgb(240, 243, 250);
+
+	border-style: solid;
+    border-width: 1px;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+
+	padding: 2px;
+	padding-left: 10px;
+}</string>
+            </property>
+            <property name="placeholderText">
+             <string>Ticker</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="insert_button">
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="toolTip">
+             <string>Add the ticker to the list</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+	
+	background-color: rgb(240, 243, 250);
+	border-color: rgb(240, 243, 250);
+	border-style: solid;
+    border-width: 1px;
+	border-top-left-radius: 1px;
+	border-bottom-left-radius: 1px;
+	padding: 1px;
+}</string>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>images/magnifying-glass.svg</normaloff>images/magnifying-glass.svg</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -295,7 +415,8 @@ background-color: rgb(221, 221, 221)}</string>
         <item row="0" column="0">
          <widget class="QFrame" name="frame_6">
           <property name="styleSheet">
-           <string notr="true"/>
+           <string notr="true">#frame_6{
+background-color: rgb(221, 221, 221)}</string>
           </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
@@ -306,11 +427,6 @@ background-color: rgb(221, 221, 221)}</string>
           <layout class="QGridLayout" name="gridLayout_3">
            <item row="0" column="0" colspan="2">
             <widget class="QLabel" name="symbol_label">
-             <property name="font">
-              <font>
-               <pointsize>24</pointsize>
-              </font>
-             </property>
              <property name="text">
               <string>TextLabel</string>
              </property>
@@ -318,11 +434,6 @@ background-color: rgb(221, 221, 221)}</string>
            </item>
            <item row="1" column="0">
             <widget class="QLabel" name="interval_label">
-             <property name="font">
-              <font>
-               <pointsize>24</pointsize>
-              </font>
-             </property>
              <property name="text">
               <string>TextLabel</string>
              </property>
@@ -330,11 +441,6 @@ background-color: rgb(221, 221, 221)}</string>
            </item>
            <item row="1" column="1">
             <widget class="QLabel" name="label_3">
-             <property name="font">
-              <font>
-               <pointsize>24</pointsize>
-              </font>
-             </property>
              <property name="text">
               <string>TextLabel</string>
              </property>
@@ -354,7 +460,11 @@ background-color: rgb(221, 221, 221)}</string>
           <property name="frameShadow">
            <enum>QFrame::Raised</enum>
           </property>
-          <layout class="QGridLayout" name="gridLayout_2"/>
+          <layout class="QGridLayout" name="gridLayout_2">
+           <item row="0" column="0">
+            <widget class="QWebEngineView" name="price_change" native="true"/>
+           </item>
+          </layout>
          </widget>
         </item>
         <item row="0" column="3" rowspan="5">
@@ -370,7 +480,11 @@ background-color: rgb(221, 221, 221)}</string>
           <property name="frameShadow">
            <enum>QFrame::Raised</enum>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_2"/>
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <item>
+            <widget class="QWebEngineView" name="price_graph" native="true"/>
+           </item>
+          </layout>
          </widget>
         </item>
         <item row="5" column="3">
@@ -386,7 +500,11 @@ background-color: rgb(221, 221, 221)}</string>
           <property name="frameShadow">
            <enum>QFrame::Raised</enum>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_3"/>
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <widget class="QWebEngineView" name="indicator_chart" native="true"/>
+           </item>
+          </layout>
          </widget>
         </item>
         <item row="5" column="0" colspan="2">
@@ -414,117 +532,21 @@ background-color: rgb(221, 221, 221)}</string>
        <attribute name="title">
         <string>Comparison</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_5" rowstretch="1,5,3,0" columnstretch="1,2,1,2,12">
-        <item row="0" column="3">
-         <widget class="QFrame" name="price_frame_right">
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_9"/>
-         </widget>
-        </item>
-        <item row="1" column="0" colspan="2">
-         <widget class="QFrame" name="frame_price_1">
-          <property name="styleSheet">
-           <string notr="true">#frame_3{
-background-color: rgb(221, 221, 221)}</string>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_7">
-           <item>
-            <widget class="QTableView" name="price_1"/>
-           </item>
-          </layout>
-         </widget>
-        </item>
+       <layout class="QGridLayout" name="gridLayout_5" rowstretch="1,5,3" columnstretch="1,2,1,2,12">
         <item row="0" column="1">
-         <widget class="QFrame" name="price_frame_left">
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
+         <widget class="QWebEngineView" name="price_left" native="true">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
           </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
+          <property name="minimumSize">
+           <size>
+            <width>50</width>
+            <height>0</height>
+           </size>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_6"/>
-         </widget>
-        </item>
-        <item row="0" column="4" rowspan="2">
-         <widget class="QFrame" name="frame_graph_comparison">
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_12">
-           <item>
-            <widget class="QPushButton" name="comparison_button">
-             <property name="text">
-              <string>Show Graph</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item row="0" column="2">
-         <widget class="QFrame" name="frame_ticker_2">
-          <property name="styleSheet">
-           <string notr="true">#frame{
-background-color: rgb(221, 221, 221)}</string>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
-          </property>
-          <layout class="QGridLayout" name="gridLayout_4">
-           <item row="1" column="0">
-            <widget class="QLabel" name="comp_advice_2">
-             <property name="font">
-              <font>
-               <pointsize>24</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>Advice</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="0" colspan="2">
-            <widget class="QLabel" name="comp_symbol_2">
-             <property name="font">
-              <font>
-               <pointsize>32</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>Symbol</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QLabel" name="comp_interval_2">
-             <property name="font">
-              <font>
-               <pointsize>24</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>Interval</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
          </widget>
         </item>
         <item row="0" column="0">
@@ -579,68 +601,98 @@ background-color: rgb(221, 221, 221)}</string>
           </layout>
          </widget>
         </item>
+        <item row="2" column="0" colspan="2">
+         <widget class="QTableView" name="indicator_1"/>
+        </item>
+        <item row="1" column="0" colspan="2">
+         <widget class="QTableView" name="price_1"/>
+        </item>
+        <item row="0" column="2">
+         <widget class="QFrame" name="frame_ticker_2">
+          <property name="styleSheet">
+           <string notr="true">#frame{
+background-color: rgb(221, 221, 221)}</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_4">
+           <item row="1" column="0">
+            <widget class="QLabel" name="comp_advice_2">
+             <property name="font">
+              <font>
+               <pointsize>24</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Advice</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0" colspan="2">
+            <widget class="QLabel" name="comp_symbol_2">
+             <property name="font">
+              <font>
+               <pointsize>32</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Symbol</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLabel" name="comp_interval_2">
+             <property name="font">
+              <font>
+               <pointsize>24</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Interval</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="0" column="3">
+         <widget class="QWebEngineView" name="price_right" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>50</width>
+            <height>0</height>
+           </size>
+          </property>
+         </widget>
+        </item>
         <item row="1" column="2" colspan="2">
-         <widget class="QFrame" name="frame_price_2">
-          <property name="styleSheet">
-           <string notr="true">#frame_3{
-background-color: rgb(221, 221, 221)}</string>
+         <widget class="QTableView" name="price_2"/>
+        </item>
+        <item row="2" column="2" colspan="2">
+         <widget class="QTableView" name="indicator_2"/>
+        </item>
+        <item row="0" column="4" rowspan="2">
+         <widget class="QWebEngineView" name="graph_comparison" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>50</width>
+            <height>0</height>
+           </size>
           </property>
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_10">
-           <item>
-            <widget class="QTableView" name="price_2"/>
-           </item>
-          </layout>
          </widget>
         </item>
-        <item row="2" column="2" rowspan="2" colspan="2">
-         <widget class="QFrame" name="frame_8">
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
+        <item row="2" column="4">
+         <widget class="QWebEngineView" name="indicator_comparison" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>50</width>
+            <height>0</height>
+           </size>
           </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_11">
-           <item>
-            <widget class="QTableView" name="indicator_2"/>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item row="2" column="4" rowspan="2">
-         <widget class="QFrame" name="frame_9">
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_13"/>
-         </widget>
-        </item>
-        <item row="2" column="0" rowspan="2" colspan="2">
-         <widget class="QFrame" name="frame_indicator_comparison">
-          <property name="styleSheet">
-           <string notr="true">#frame_4{
-background-color: rgb(221, 221, 221)}</string>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_8">
-           <item>
-            <widget class="QTableView" name="indicator_1"/>
-           </item>
-          </layout>
          </widget>
         </item>
        </layout>
@@ -654,14 +706,24 @@ background-color: rgb(221, 221, 221)}</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1086</width>
+     <width>1296</width>
      <height>22</height>
     </rect>
    </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources/>
+ <customwidgets>
+  <customwidget>
+   <class>QWebEngineView</class>
+   <extends>QWidget</extends>
+   <header>PyQtWebEngineWidgets</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="input.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>compare_button</sender>
