@@ -115,9 +115,6 @@ class Overview:
         df_crypto['Advice'] = df_crypto['Symbol'].map(advice(df_signals_crypto, symbols_crypto))
         self.model_crypto.setDataFrame(df_crypto)
 
-        # ##
-        print(df_stock.loc[:, 'Symbol'].tolist())
-
         first_select: QComboBox = self.main_window.findChild(QComboBox, "first_select")
         first_select.clear()
         first_select.addItems(df_stock.loc[:, 'Symbol'].tolist())
