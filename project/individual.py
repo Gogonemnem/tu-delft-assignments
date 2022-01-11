@@ -1,4 +1,5 @@
 import pandas as pd
+import yfinance as yf
 from PyQt6.QtWebEngineWidgets import QWebEngineView
 from PyQt6.QtWidgets import QHeaderView, QLabel, QMainWindow, QTableView
 
@@ -30,6 +31,37 @@ class Individual:
 
         self.advice = advice
         self.price_df = dataframe[['High', 'Low', 'Close', 'Volume']].round(3)
+        self.ticker = yf.Ticker(symbol)
+        self.news = self.ticker.news
+        self.newsframe = pd.DataFrame(self.news)
+        self.newsframe = self.newsframe.drop(['uuid', 'providerPublishTime', 'type'], 1)
+
+        if 'USD' not in symbol:
+            self.recommendations = self.ticker.recommendations.tail()
+            self.recommendations = self.ticker.recommendations.tail()
+            self.recommendationsframe = pd.DataFrame(self.recommendations)
+            self.recommendationsframe = self.recommendationsframe.drop(['From Grade', 'Action'], 1)
+            # Setup Recommendations Model
+            recommendations_model = DataFrameModel(self.recommendationsframe)
+            recommendationsview: QTableView = self.main_window.findChild(QTableView, 'tableView_3')
+            recommendationsview.setModel(recommendations_model)
+            recommendationsview.resizeRowsToContents()
+            header = recommendationsview.horizontalHeader()
+            header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+            vertheader = recommendationsview.verticalHeader()
+            vertheader.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+        else:
+            print('no')
+
+
+
+        # Setup News Model
+        news_model = DataFrameModel(self.newsframe)
+        newsview: QTableView = self.main_window.findChild(QTableView, 'tableView_4')
+        newsview.setModel(news_model)
+        header = newsview.horizontalHeader()
+        header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+
 
         # Prices Dataframe
         model = DataFrameModel(self.price_df)
@@ -38,6 +70,7 @@ class Individual:
         view.resizeRowsToContents()
         header = view.horizontalHeader()
         header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+
         # Advice Dataframe
         model2 = DataFrameModel(self.advice)
         advice_view: QTableView = self.main_window.findChild(QTableView, 'tableView_2')
