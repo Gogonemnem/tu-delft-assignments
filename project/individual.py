@@ -32,6 +32,7 @@ class Individual:
         self.advice = advice
         self.price_df = dataframe[['High', 'Low', 'Close', 'Volume']].round(3)
         self.ticker = yf.Ticker(symbol)
+        self.full_ticker = yf.Ticker(symbol).info['shortName']
         self.news = self.ticker.news
         self.newsframe = pd.DataFrame(self.news)
         self.newsframe = self.newsframe.drop(['uuid', 'providerPublishTime', 'type'], 1)
@@ -83,12 +84,14 @@ class Individual:
 
         symbol_label = self.main_window.findChild(QLabel, "symbol_label")
         symbol_label.setText(symbol)
+        full_ticker_label = self.main_window.findChild(QLabel, "label")
+        full_ticker_label.setText(self.full_ticker)
 
         interval_label = self.main_window.findChild(QLabel, "interval_label")
-        interval_label.setText(interval)
+        interval_label.setText('Interval: ' + interval)
 
         advice_label = self.main_window.findChild(QLabel, 'label_3')
-        advice_label.setText(overall_advice[symbol])
+        advice_label.setText('Advice: ' + overall_advice[symbol])
 
         draw_graphs()
 
