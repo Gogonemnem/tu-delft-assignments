@@ -32,12 +32,14 @@ class Individual:
         self.advice = advice
         self.price_df = dataframe[['High', 'Low', 'Close', 'Volume']].round(3)
         self.ticker = yf.Ticker(symbol)
+        self.ticker_info = yf.Ticker(symbol).info
+        print(self.ticker_info)
         self.full_ticker = yf.Ticker(symbol).info['shortName']
         self.news = self.ticker.news
         self.newsframe = pd.DataFrame(self.news)
         self.newsframe = self.newsframe.drop(['uuid', 'providerPublishTime', 'type'], 1)
 
-        if 'USD' not in symbol:
+        if self.ticker_info['toCurrency'] is None:
             self.recommendations = self.ticker.recommendations.tail()
             self.recommendations = self.ticker.recommendations.tail()
             self.recommendationsframe = pd.DataFrame(self.recommendations)
@@ -52,7 +54,7 @@ class Individual:
             vertheader = recommendationsview.verticalHeader()
             vertheader.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
         else:
-            print('no')
+            pass
 
 
 
@@ -62,7 +64,6 @@ class Individual:
         newsview.setModel(news_model)
         header = newsview.horizontalHeader()
         header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
-
 
         # Prices Dataframe
         model = DataFrameModel(self.price_df)
@@ -117,6 +118,4 @@ class Individual:
 
 if __name__ == "__main__":
     raise Exception("De executie is verplaatst naar main.py")
-    # import sys
 
-    # main()
