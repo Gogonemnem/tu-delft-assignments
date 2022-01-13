@@ -10,6 +10,7 @@ from PyQt6.QtWidgets import (QApplication, QDoubleSpinBox, QGridLayout,
 # Forked from these sites
 # https://www.pythonguis.com/tutorials/pyqt6-qtableview-modelviews-numpy-pandas/
 # https://www.stackoverflow.com/questions/55790561/how-to-remove-data-from-excel-file-displayed-in-pyqt5-and-refresh-it
+# https://stackoverflow.com/questions/63089233/how-to-create-filter-rows-for-qtableview-with-using-qsqltablemodel
 class FloatDelegate(QStyledItemDelegate):
     @property
     def decimals(self):
@@ -36,6 +37,31 @@ class FloatDelegate(QStyledItemDelegate):
 
     def displayText(self, value, _locale):
         return f"{value}"
+
+
+class FilterProxyModel(QtCore.QSortFilterProxyModel):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self._filter_value = None
+
+    @property
+    def filter_value(self):
+        return self._filter_value
+
+    @filter_value.setter
+    def filter_value(self, value):
+        self._filter_value = value
+        self.invalidateFilter()
+
+    def filterAcceptsRow(self, sourceRow, sourceParent):
+        if self.filter_value is None:
+            return True
+        value = (
+            self.sourceModel()
+            .index(sourceRow, self.filterKeyColumn(), sourceParent)
+            .data(self.filterRole())
+        )
+        return value == self.filter_value
 
 
 class DataFrameModel(QAbstractTableModel):

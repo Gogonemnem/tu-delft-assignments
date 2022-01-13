@@ -12,7 +12,7 @@ class MainWindow(QMainWindow):
         super().__init__()
 
         #loading ui is temporary as layout changes every time
-        uic.loadUi("./MainWindow.ui", self)
+        uic.loadUi("../project/MainWindow.ui", self)
 
         # at end of project, remove df as we now use it only for debugging
         input_tab = Input(self, df)
@@ -22,11 +22,11 @@ class MainWindow(QMainWindow):
 if __name__ == "__main__":
     import sys
 
-    column_names = ['Symbol', 'Name']
-    assets = [['AAPL', 'Apple Inc.'], ['AMZN', 'Amazon.com, Inc.'], \
-            ['TSLA', 'Tesla, Inc.'], ['FB', 'Meta Platforms, Inc.'], \
-            ['BTC-USD', 'Bitcoin'], ['ETH-USD', 'Ethereum'], \
-            ['BNB-USD', 'Binance Coin']]
+    column_names = ['Symbol', 'Name', 'Sector']
+    assets = [['AAPL', 'Apple Inc.', 'Technology'], ['AMZN', 'Amazon.com, Inc.', 'Consumer Cyclical'], \
+            ['TSLA', 'Tesla, Inc.', 'Consumer Cyclical'], ['FB', 'Meta Platforms, Inc.', 'Communication Services'], \
+            ['BTC-USD', 'Bitcoin', 'Cryptocurrency'], ['ETH-USD', 'Ethereum', 'Cryptocurrency'], \
+            ['BNB-USD', 'Binance Coin', 'Cryptocurrency']]
     df = pd.DataFrame(assets, columns = column_names)
 
     # symbol = 'BTC-USD'

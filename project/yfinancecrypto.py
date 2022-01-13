@@ -16,8 +16,8 @@ pd.set_option('display.max_columns', None)
 
 class CryptoCurrencies:
     interval_period = {
-        '1m': '1d',
-        '5m': '5d',
+        '1m': '5d',
+        '5m': '10d',
         '15m': '15d',
         '30m': '30d',
         '1h': '60d',
@@ -252,6 +252,7 @@ def apply_indicators(symbols, intervals, periods=None):
     btc_1.exponential_moving_average()
     btc_1.money_flow_index()
     btc_1.stochastic_rsi()
+    print(btc_1.data)
     btc_1.data = btc_1.data.sort_index(level=0, axis=1)
     return btc_1.data
 
