@@ -49,7 +49,8 @@ class Input:
                     if 'ame' in key:
                         full_name = information[key]
                         break
-                self.model.insertRow([text, full_name])
+                sector = 'Cryptocurrency' if text.endswith('-USD') else information['sector']
+                self.model.insertRow([text, full_name, sector])
                 QApplication.restoreOverrideCursor()
             else:
                 QApplication.restoreOverrideCursor()

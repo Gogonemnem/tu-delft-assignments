@@ -1,8 +1,10 @@
 # import pandas as pd
-from PyQt6.QtWidgets import (QComboBox, QHeaderView, QMainWindow, QPushButton,
+from PyQt6.QtWidgets import (QComboBox, QHeaderView, QMainWindow, QMenu, QPushButton,
                              QRadioButton, QTableView, QTabWidget)
+from PyQt6.QtCore import QPoint
+from PyQt6.QtGui import QAction
 
-from dataframe_model import DataFrameModel, FloatDelegate
+from dataframe_model import DataFrameModel, FloatDelegate, FilterProxyModel
 from individual import Individual
 from input import Input
 from comparison import Comparison
@@ -39,25 +41,23 @@ class Overview:
         self.confirm.clicked.connect(lambda: self.calculate_advices())
 
         self.view_stock: QTableView = self.main_window.findChild(QTableView, "tableView_stock")
-        self.view_crypto: QTableView = self.main_window.findChild(QTableView, "tableView_crypto")
 
         delegate_stock = FloatDelegate(self.view_stock)
         self.view_stock.setItemDelegate(delegate_stock)
-
-        delegate_crypto = FloatDelegate(self.view_crypto)
-        self.view_crypto.setItemDelegate(delegate_crypto)
-
         self.model_stock = DataFrameModel()
-        self.model_crypto = DataFrameModel()
 
-        self.view_stock.setModel(self.model_stock)
-        self.view_crypto.setModel(self.model_crypto)
+        self.proxy = FilterProxyModel(self.main_window)
+        self.proxy.setSourceModel(self.model_stock)
 
-        header_stock = self.view_stock.horizontalHeader()
-        header_stock.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+        self.view_stock.setModel(self.proxy)
 
-        header_crypto = self.view_crypto.horizontalHeader()
-        header_crypto.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+        self.header_stock = self.view_stock.horizontalHeader()
+        self.header_stock.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+
+
+        self.filter_button: QPushButton = self.main_window.findChild(QPushButton, "filter_button")
+        self.filter_button.clicked.connect(self.filter)
+        # self.header_stock.sectionClicked.connect(self.filter)
 
         results_button: QPushButton = self.main_window.findChild(QPushButton, "results_button")
         results_button.clicked.connect(self.get_results)
@@ -65,6 +65,35 @@ class Overview:
 
         self.strategy_box = self.main_window.findChild(QComboBox, "strategy_box")
         self.interval_box = self.main_window.findChild(QComboBox, "interval_box")
+
+    def filter(self, logical_index):
+        logical_index = 2
+        menu = QMenu(self.main_window)
+
+        values = []
+
+        for row in range(self.model_stock.rowCount()):
+            value = self.model_stock.index(row, logical_index).data(self.proxy.filterRole())
+            values.append(value)
+
+        action_all = QAction("All", self.main_window)
+        action_all.setData(None)
+        menu.addAction(action_all)
+        menu.addSeparator()
+
+        for value in sorted(list(set(values))):
+            action = QAction(str(value), self.main_window)
+            action.setData(value)
+            menu.addAction(action)
+
+        button_pos = self.main_window.mapToGlobal(self.filter_button.pos())
+        pos_y = button_pos.y()
+        pos_x = button_pos.x()
+
+        action = menu.exec(QPoint(pos_x, pos_y))
+        if action is not None:
+            self.proxy.setFilterKeyColumn(logical_index)
+            self.proxy.filter_value = action.data()
 
     # The part we wanna keep from previous code
     # def strategy_sort(self):
@@ -82,9 +111,6 @@ class Overview:
     # 3. Make sure it is in pd. Categorical so it can be sorted
 
     def calculate_advices(self):
-        # pylint: disable=unused-variable
-        # we use a mask for the query
-        # the mask is called inside a string, pylint is not smart enough to recognize that
         tab: QTabWidget = self.main_window.findChild(QTabWidget, "tabWidget")
         tab.setCurrentIndex(1)
 
@@ -92,10 +118,7 @@ class Overview:
 
         interval = self.get_interval()
 
-        # ## Some parts need to be refactored to yfinancecrypto
-        crypto_mask = dataframe['Symbol'].str.contains('-USD')
-
-        df_stock = dataframe.query('@crypto_mask == False').reset_index(drop=True)
+        df_stock = dataframe.copy()
         symbols_stock = df_stock['Symbol'].tolist()
         df_indicators_stock = apply_indicators(symbols_stock, interval)
         df_signals_stock = apply_signals(df_indicators_stock, symbols_stock)
@@ -105,25 +128,16 @@ class Overview:
         df_stock['Advice'] = df_stock['Symbol'].map(advice(df_signals_stock, symbols_stock))
         self.model_stock.setDataFrame(df_stock)
 
-        df_crypto = dataframe.query('@crypto_mask').reset_index(drop=True)
-        symbols_crypto = df_crypto['Symbol'].tolist()
-        df_indicators_crypto = apply_indicators(symbols_crypto, interval)
-        df_signals_crypto = apply_signals(df_indicators_crypto, symbols_crypto)
-
-        data_crypto = df_indicators_crypto.xs('Close', axis=1, level=1).iloc[-1].rename('Price')
-        df_crypto = df_crypto.merge(data_crypto, left_on='Symbol', right_index=True)
-        df_crypto['Advice'] = df_crypto['Symbol'].map(advice(df_signals_crypto, symbols_crypto))
-        self.model_crypto.setDataFrame(df_crypto)
-
         first_select: QComboBox = self.main_window.findChild(QComboBox, "first_select")
         first_select.clear()
         first_select.addItems(df_stock.loc[:, 'Symbol'].tolist())
-        first_select.addItems(df_crypto.loc[:, 'Symbol'].tolist())
 
         second_select: QComboBox = self.main_window.findChild(QComboBox, "second_select")
         second_select.clear()
         second_select.addItems(df_stock.loc[:, 'Symbol'].tolist())
-        second_select.addItems(df_crypto.loc[:, 'Symbol'].tolist())
+
+        results_button: QPushButton = self.main_window.findChild(QPushButton, "results_button")
+        results_button.setEnabled(True)
 
 
         # ## ADD advices
