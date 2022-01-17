@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1015</width>
-    <height>745</height>
+    <width>1296</width>
+    <height>1009</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -24,7 +24,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="input">
        <property name="styleSheet">
@@ -772,7 +772,7 @@ background-color: rgb(221, 221, 221)}</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1015</width>
+     <width>1296</width>
      <height>22</height>
     </rect>
    </property>
