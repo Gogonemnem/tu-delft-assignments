@@ -45,18 +45,20 @@ class Individual:
             self.recommendationsframe = pd.DataFrame(self.recommendations)
             self.recommendationsframe = self.recommendationsframe.drop(['From Grade', 'Action'], 1)
             # Setup Recommendations Model
-            recommendations_model = DataFrameModel(self.recommendationsframe)
-            recommendationsview: QTableView = self.main_window.findChild(QTableView, 'tableView_3')
-            recommendationsview.setModel(recommendations_model)
-            recommendationsview.resizeRowsToContents()
-            header = recommendationsview.horizontalHeader()
-            header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
-            vertheader = recommendationsview.verticalHeader()
-            vertheader.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+
         else:
-            pass
+            self.recommendations = {'': f'No recommendations available for the selected currency: {symbol}'}
+            self.recommendationsframe = pd.DataFrame(self.recommendations, index=[0])
 
-
+        # Setup recommendations model
+        recommendations_model = DataFrameModel(self.recommendationsframe)
+        recommendationsview: QTableView = self.main_window.findChild(QTableView, 'tableView_3')
+        recommendationsview.setModel(recommendations_model)
+        recommendationsview.resizeRowsToContents()
+        header = recommendationsview.horizontalHeader()
+        header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+        vertheader = recommendationsview.verticalHeader()
+        vertheader.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
 
         # Setup News Model
         news_model = DataFrameModel(self.newsframe)
