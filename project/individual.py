@@ -38,7 +38,7 @@ class Individual:
             self.recommendationsframe = pd.DataFrame(self.ticker.recommendations.tail())
             self.recommendationsframe = self.recommendationsframe.drop(['From Grade', 'Action'], 1)
         else:
-            self.recommendationsframe = pd.DataFrame({'': f'No recommendations available for the selected currency: {symbol}'}, index=[0])
+            self.recommendationsframe = pd.DataFrame({'': f'No available for the selected currency: {symbol}'}, index=[0])
 
         # Setup recommendations model
         recommendations_model = DataFrameModel(self.recommendationsframe)
