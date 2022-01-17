@@ -32,15 +32,10 @@ class Individual:
         self.advice = advice
         self.price_df = dataframe[['High', 'Low', 'Close', 'Volume']].round(3)
         self.ticker = yf.Ticker(symbol)
-        self.ticker_info = yf.Ticker(symbol).info
-        print(self.ticker_info)
-        self.full_ticker = yf.Ticker(symbol).info['shortName']
-        self.news = self.ticker.news
-        self.newsframe = pd.DataFrame(self.news)
-        self.newsframe = self.newsframe.drop(['uuid', 'providerPublishTime', 'type'], 1)
+        self.news_frame = pd.DataFrame(self.ticker.news)
+        self.news_frame = self.news_frame.drop(['uuid', 'providerPublishTime', 'type'], 1)
 
-        if self.ticker_info['toCurrency'] is None:
-            self.recommendations = self.ticker.recommendations.tail()
+        if self.ticker.info['toCurrency'] is None:
             self.recommendations = self.ticker.recommendations.tail()
             self.recommendationsframe = pd.DataFrame(self.recommendations)
             self.recommendationsframe = self.recommendationsframe.drop(['From Grade', 'Action'], 1)
@@ -61,7 +56,7 @@ class Individual:
         vertheader.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
 
         # Setup News Model
-        news_model = DataFrameModel(self.newsframe)
+        news_model = DataFrameModel(self.news_frame)
         newsview: QTableView = self.main_window.findChild(QTableView, 'tableView_4')
         newsview.setModel(news_model)
         header = newsview.horizontalHeader()
@@ -88,7 +83,7 @@ class Individual:
         symbol_label = self.main_window.findChild(QLabel, "symbol_label")
         symbol_label.setText(symbol)
         full_ticker_label = self.main_window.findChild(QLabel, "label")
-        full_ticker_label.setText(self.full_ticker)
+        full_ticker_label.setText(self.ticker.info['shortName'])
 
         interval_label = self.main_window.findChild(QLabel, "interval_label")
         interval_label.setText('Interval: ' + interval)
@@ -120,4 +115,3 @@ class Individual:
 
 if __name__ == "__main__":
     raise Exception("De executie is verplaatst naar main.py")
-
