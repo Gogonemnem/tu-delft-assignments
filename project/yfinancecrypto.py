@@ -12,6 +12,26 @@ simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
 # Remove restrictions on dataframe columns/rows
 # pd.set_option('display.max_columns', None, 'display.max_rows', None)
 pd.set_option('display.max_columns', None)
+# new = yf.Ticker('CVX')
+# for key in new.info.keys():
+#     print(key)
+
+def financial_background(symb):
+    df = yf.Ticker(symb).info
+    all_comp = {}
+    all_comp['PE'] = df['trailingPE']
+    all_comp['PEG'] = df['pegRatio']
+    all_comp['PTB'] = df['priceToBook']
+    all_comp['CR'] = df['currentRatio']
+    all_comp['DTE'] = df['debtToEquity']
+    if df['dividendRate'] is None:
+        DR = 0
+    else:
+        DR = df['dividendRate']
+
+    all_comp['DPS'] = DR/df['trailingEps']
+    # all_comp['EPS'] = df['trailingEps']
+    return all_comp
 
 
 class CryptoCurrencies:
@@ -237,6 +257,59 @@ class CalculateSignals:
             self.dic[(symbol, 'Relative Strength Index')] = signal, 'RSI-14: ' + str(rsi)
         return self.dic
 
+    def finance_signals(self):
+        """""Takes all the financial data and gives an opinion
+        on if the company seems financially stable based on this data"""
+        for symbol in self.symbols:
+            information = yf.Ticker(symbol).info
+            # checks if it is not a crypto, because cryptos dont have financials
+            if '-USD' in symbol:
+                continue
+
+            PE = information['trailingPE']
+            PEG = information['pegRatio']
+            PTB = information['priceToBook']
+            CR = information['currentRatio']
+            DTE = information['debtToEquity']
+
+            # PE ratio advice
+            signalPE = splitter(PE, [10, 50], ['Undervalued', 'Neutral', 'Overvalued'])
+            self.dic[(symbol, 'PE ratio')] = signalPE, 'PE: ' + str(PE)[:5]
+
+            #PEG ratio advice
+            signalPEG = splitter(PEG, [0.9, 1.1], ['Undervalued', 'Neutral', 'Overvalued'])
+            self.dic[(symbol, 'PEG ratio')] = signalPEG, 'PEG: ' + str(PEG)[:5]
+
+            # Price to book advice
+            signalPTB = splitter(PTB, [1, 8], ['Undervalued', 'Neutral', 'Overvalued'])
+            self.dic[(symbol, 'Price to book ratio')] = signalPTB, 'PtB: ' + str(PTB)[:5]
+
+            # Current ratio advice
+            signalCR = splitter(CR, [1, 3], ['Undervalued', 'Neutral', 'Overvalued'])
+            self.dic[(symbol, 'Current ratio')] = signalCR, 'CR: ' + str(CR)[:5]
+
+            # Debt to Equity advice
+            signalDTE = splitter(DTE, [0.2, 0.7], ['Undervalued', 'Neutral', 'Overvalued'])
+            self.dic[(symbol, 'Debt to Equity')] = signalDTE, 'DtE: ' + str(DTE)[:6]
+
+            # Dividend payout ratio advice
+            DR = 0 if information['dividendRate'] is None else information['dividendRate']
+            percentage = DR/information['trailingEps']
+            signalDPS = splitter(percentage, [0, 0.55], ['Neutral', 'Undervalued', 'Overvalued'])
+            self.dic[(symbol, 'Dividend Payout Ratio')] = \
+                signalDPS, 'DPR: ' + str(percentage)[:5] + '%'
+
+            return self.dic
+
+def splitter(case, boundaries, values):
+    if len(boundaries) != len(values)-1:
+        return None
+
+    for boundary, value in zip(boundaries, values):
+        if case <= boundary:
+            return value
+
+    return values[-1]
 
 def apply_indicators(symbols, intervals, periods=None):
     """Call all indcator functions"""
@@ -257,7 +330,7 @@ def apply_indicators(symbols, intervals, periods=None):
     return btc_1.data
 
 
-def apply_signals(df, symbols):
+def apply_signals(df, symbols): #this is important func!
     if len(symbols) == 0:
         return None
 
@@ -268,11 +341,13 @@ def apply_signals(df, symbols):
     signal.macd_signal()
     signal.long_term_trend()
     signal.rsi_signal()
+    signal.finance_signals()
     signal_df = pd.DataFrame(signal.dic)
     signal_transposed = signal_df.T
     signal_transposed.columns = ['Advice', 'Values']
     signal_transposed = signal_transposed.rename_axis('Indicator', axis=1)
     return signal_transposed
+
 
 
 def advice(signals, symbols):
