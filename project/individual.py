@@ -28,7 +28,6 @@ class Individual:
         self.main_window = main_window
         dataframe = dataframe.droplevel(0, axis=1)
         self.dataframe = dataframe
-
         self.advice = advice
         self.price_df = dataframe[['High', 'Low', 'Close', 'Volume']].round(3)
         self.ticker = yf.Ticker(symbol)
@@ -36,14 +35,10 @@ class Individual:
         self.news_frame = self.news_frame.drop(['uuid', 'providerPublishTime', 'type'], 1)
 
         if self.ticker.info['toCurrency'] is None:
-            self.recommendations = self.ticker.recommendations.tail()
-            self.recommendationsframe = pd.DataFrame(self.recommendations)
+            self.recommendationsframe = pd.DataFrame(self.ticker.recommendations.tail())
             self.recommendationsframe = self.recommendationsframe.drop(['From Grade', 'Action'], 1)
-            # Setup Recommendations Model
-
         else:
-            self.recommendations = {'': f'No recommendations available for the selected currency: {symbol}'}
-            self.recommendationsframe = pd.DataFrame(self.recommendations, index=[0])
+            self.recommendationsframe = pd.DataFrame({'': f'No recommendations available for the selected currency: {symbol}'}, index=[0])
 
         # Setup recommendations model
         recommendations_model = DataFrameModel(self.recommendationsframe)
@@ -90,27 +85,7 @@ class Individual:
 
         advice_label = self.main_window.findChild(QLabel, 'label_3')
         advice_label.setText('Advice: ' + overall_advice[symbol])
-
         draw_graphs()
-
-
-# # main method, because we dont want accidental global variables.
-# def main():
-#     symbol = 'BTC-USD'
-#     interval = '1d'
-
-#     pd.options.mode.chained_assignment = None  # default='warn'
-
-#     # ADVICES:
-#     df = apply_indicators(symbol)
-#     advice = apply_signals(df, symbol)
-
-#     app = QApplication(sys.argv)
-#     window = Individual(df, advice, symbol, interval)
-#     window.showMaximized()
-#     app.exec()
-
-#     return advice
 
 
 if __name__ == "__main__":
