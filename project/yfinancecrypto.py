@@ -70,6 +70,7 @@ class CryptoCurrencies:
     def stochastic_oscillator(self):
         """Calculates stochastic oscillator indicator
         to see if a coin/stock has been oversold/overbought"""
+        print(len(self.data))
         for symbol in self.symbols:
             self.data[[(symbol, '%K'), (symbol, '%D')]] = \
                 ta.stoch(
@@ -81,10 +82,9 @@ class CryptoCurrencies:
     def simple_moving_average(self):
         """Calculates moving averages over N candlesticks"""
         for symbol in self.symbols:
-            if len(self.data) >= 200:
-                # self.ma = ta.hma(close=self.data[(symbol, 'Close')], length=30, append=True)
-                self.data[(symbol, 'MA_200')] = ta.sma(
-                    close=self.data[(symbol, 'Close')], length=200, append=True)
+            if len(self.data) >= 100:
+                self.data[(symbol, 'MA_100')] = ta.sma(
+                    close=self.data[(symbol, 'Close')], length=100, append=True)
             if len(self.data) >= 50:
                 self.data[(symbol, 'MA_50')] = ta.sma(
                     close=self.data[(symbol, 'Close')], length=50, append=True)
@@ -123,15 +123,15 @@ class CryptoCurrencies:
 
     def exponential_moving_average(self):
         for symbol in self.symbols:
-            if len(self.data) >= 200:
-                self.data[(symbol, 'EMA_200')] = ta.ema(
-                        close=self.data[(symbol, 'Close')], length=200, append=True)
             if len(self.data) >= 100:
                 self.data[(symbol, 'EMA_100')] = ta.ema(
-                    close=self.data[(symbol, 'Close')], length=100, append=True)
+                        close=self.data[(symbol, 'Close')], length=100, append=True)
             if len(self.data) >= 50:
                 self.data[(symbol, 'EMA_50')] = ta.ema(
                     close=self.data[(symbol, 'Close')], length=50, append=True)
+            if len(self.data) >= 20:
+                self.data[(symbol, 'EMA_20')] = ta.ema(
+                    close=self.data[(symbol, 'Close')], length=20, append=True)
         return self.data
 
     def money_flow_index(self):
@@ -235,14 +235,15 @@ class CalculateSignals:
 
     def long_term_trend(self):
         for symbol in self.symbols:
-            ema = self.df[(symbol, 'EMA_200')].iat[-1].round(3)
-            close = round(self.df[(symbol, 'Close')].iat[-1], 3)
-            if ema - close > 0:
-                signal = 'Buy/Bullish'
-            else:
-                signal = 'Sell/Bearish'
-            self.dic[(symbol, 'Long Term Trend')] = signal, 'EMA: ' + str(ema) + '      ' + \
-                'Close-price: ' + str(close)
+            if len(self.df) >= 100:
+                ema = self.df[(symbol, 'EMA_100')].iat[-1].round(3)
+                close = round(self.df[(symbol, 'Close')].iat[-1], 3)
+                if ema - close > 0:
+                    signal = 'Buy/Bullish'
+                else:
+                    signal = 'Sell/Bearish'
+                self.dic[(symbol, 'Long Term Trend')] = signal, 'EMA: ' + str(ema) + '      ' + \
+                    'Close-price: ' + str(close)
         return self.dic
 
     def rsi_signal(self):

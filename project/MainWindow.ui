@@ -511,7 +511,27 @@ QTableView::item:hover {
        <attribute name="title">
         <string>Individual</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout" rowstretch="1,3,0,0,0,2" columnstretch="3,1,0,5">
+       <layout class="QGridLayout" name="gridLayout" rowstretch="1,3,0,0,0,2,2" columnstretch="3,1,0,5">
+        <item row="5" column="3">
+         <widget class="QFrame" name="indicator_frame">
+          <property name="styleSheet">
+           <string notr="true">#indicator_frame
+{
+background-color: rgb(221, 221, 221)}</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <widget class="QWebEngineView" name="indicator_chart" native="true"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
         <item row="1" column="0" rowspan="4" colspan="2">
          <widget class="QFrame" name="frame_3">
           <property name="styleSheet">
@@ -534,43 +554,6 @@ background-color: rgb(221, 221, 221)}</string>
         <item row="0" column="0">
          <widget class="QFrame" name="frame_6">
           <property name="styleSheet">
-           <string notr="true">#frame_6{
-background-color: rgb(221, 221, 221)}</string>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
-          </property>
-          <layout class="QGridLayout" name="gridLayout_3">
-           <item row="0" column="0" colspan="2">
-            <widget class="QLabel" name="symbol_label">
-             <property name="text">
-              <string>TextLabel</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="interval_label">
-             <property name="text">
-              <string>TextLabel</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QLabel" name="label_3">
-             <property name="text">
-              <string>TextLabel</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QFrame" name="price_frame">
-          <property name="styleSheet">
            <string notr="true"/>
           </property>
           <property name="frameShape">
@@ -579,9 +562,56 @@ background-color: rgb(221, 221, 221)}</string>
           <property name="frameShadow">
            <enum>QFrame::Raised</enum>
           </property>
-          <layout class="QGridLayout" name="gridLayout_2">
+          <layout class="QGridLayout" name="gridLayout_3">
+           <item row="1" column="0">
+            <widget class="QLabel" name="interval_label">
+             <property name="font">
+              <font>
+               <pointsize>14</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLabel" name="label_3">
+             <property name="font">
+              <font>
+               <family>Lucida Bright</family>
+               <pointsize>14</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+           </item>
            <item row="0" column="0">
-            <widget class="QWebEngineView" name="price_change" native="true"/>
+            <widget class="QLabel" name="symbol_label">
+             <property name="font">
+              <font>
+               <pointsize>20</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLabel" name="label">
+             <property name="font">
+              <font>
+               <family>Lucida Bright</family>
+               <pointsize>20</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>
@@ -606,12 +636,10 @@ background-color: rgb(221, 221, 221)}</string>
           </layout>
          </widget>
         </item>
-        <item row="5" column="3">
-         <widget class="QFrame" name="indicator_frame">
+        <item row="0" column="1">
+         <widget class="QFrame" name="price_frame">
           <property name="styleSheet">
-           <string notr="true">#indicator_frame
-{
-background-color: rgb(221, 221, 221)}</string>
+           <string notr="true"/>
           </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
@@ -619,9 +647,9 @@ background-color: rgb(221, 221, 221)}</string>
           <property name="frameShadow">
            <enum>QFrame::Raised</enum>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_3">
-           <item>
-            <widget class="QWebEngineView" name="indicator_chart" native="true"/>
+          <layout class="QGridLayout" name="gridLayout_2">
+           <item row="0" column="0">
+            <widget class="QWebEngineView" name="price_change" native="true"/>
            </item>
           </layout>
          </widget>
@@ -641,6 +669,44 @@ background-color: rgb(221, 221, 221)}</string>
           <layout class="QGridLayout" name="gridLayout_4">
            <item row="0" column="0">
             <widget class="QTableView" name="tableView_2"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="6" column="0" colspan="2">
+         <widget class="QFrame" name="frame">
+          <property name="styleSheet">
+           <string notr="true">#frame{
+background-color: rgb(221, 221, 221)}</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QFormLayout" name="formLayout_3">
+           <item row="0" column="0" colspan="2">
+            <widget class="QTableView" name="tableView_3"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="6" column="3">
+         <widget class="QFrame" name="frame_2">
+          <property name="styleSheet">
+           <string notr="true">#frame_2{
+background-color: rgb(221, 221, 221)}</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_4">
+           <item>
+            <widget class="QTableView" name="tableView_4"/>
            </item>
           </layout>
          </widget>
