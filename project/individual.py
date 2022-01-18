@@ -95,7 +95,7 @@ class Individual:
                     self.dataframe, self.symbol).to_html(include_plotlyjs='cdn'))
 
         indicator_chart.setHtml(
-            GraphDesigner.indicator_chart(self.interval, self.symbol).to_html(include_plotlyjs='cdn'))
+            GraphDesigner.indicator_chart(self.advice, self.symbol).to_html(include_plotlyjs='cdn'))
 
 if __name__ == "__main__":
     raise Exception("De executie is verplaatst naar main.py")
