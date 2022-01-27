@@ -1,7 +1,7 @@
 # import pandas as pd
-from PyQt6.QtWidgets import (QComboBox, QHeaderView, QMainWindow, QMenu, QPushButton,
+from PyQt6.QtWidgets import (QApplication, QComboBox, QHeaderView, QMainWindow, QMenu, QPushButton,
                              QRadioButton, QTableView, QTabWidget)
-from PyQt6.QtCore import QPoint
+from PyQt6.QtCore import QPoint, Qt
 from PyQt6.QtGui import QAction
 
 from dataframe_model import DataFrameModel, FloatDelegate, FilterProxyModel
@@ -111,6 +111,7 @@ class Overview:
     # 3. Make sure it is in pd. Categorical so it can be sorted
 
     def calculate_advices(self):
+        QApplication.setOverrideCursor(Qt.CursorShape.WaitCursor)
         tab: QTabWidget = self.main_window.findChild(QTabWidget, "tabWidget")
         tab.setCurrentIndex(1)
 
@@ -139,10 +140,10 @@ class Overview:
         results_button: QPushButton = self.main_window.findChild(QPushButton, "results_button")
         results_button.setEnabled(True)
 
-
-        # ## ADD advices
+        QApplication.restoreOverrideCursor()
 
     def get_results(self):
+        QApplication.setOverrideCursor(Qt.CursorShape.WaitCursor)
         single_button: QRadioButton = self.main_window.findChild(QRadioButton, "single_button")
         compare_button: QRadioButton = self.main_window.findChild(QRadioButton, "compare_button")
 
@@ -174,12 +175,15 @@ class Overview:
                 advice1 = apply_signals(data1, [symbol1])
                 data2 = apply_indicators([symbol2], interval)
                 advice2 = apply_signals(data2, [symbol2])
-
+                overall_advice1 = advice(advice1, [symbol1])
+                overall_advice2 = advice(advice2, [symbol2])
                 Comparison(self.main_window, data1, advice1, symbol1,
-                           data2, advice2, symbol2, interval)
+                           data2, advice2, symbol2, interval, overall_advice1, overall_advice2)
 
                 tab: QTabWidget = self.main_window.findChild(QTabWidget, "tabWidget")
                 tab.setCurrentIndex(3)
+
+        QApplication.restoreOverrideCursor()
 
 
     def get_interval(self):
@@ -192,7 +196,6 @@ class Overview:
         '1 day': '1d',
         '1 week': '1wk',
         '1 month': '1mo',
-        '3 months': '3mo',
         }
         interval_box: QComboBox = self.main_window.findChild(QComboBox, "interval_box")
 

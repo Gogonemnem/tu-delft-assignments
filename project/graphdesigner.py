@@ -187,7 +187,7 @@ class GraphDesigner:
             mode='gauge',
             value=tot,
             title='Advice',
-            domain={'x': [0.01, 0.3], 'y': [0.0, 1]},
+            domain={'x': [0.01, 0.3], 'y': [0.1, 0.8]},
             gauge={
                 'axis': {'range': [-6, 6],
                          'tickmode': 'array',
@@ -225,7 +225,7 @@ class GraphDesigner:
                 mode='gauge',
                 value=tot2,
                 title='Advice',
-                domain={'x': [0.7, 0.99], 'y': [0.0, 1]},
+                domain={'x': [0.7, 0.99], 'y': [0.1, 0.8]},
                 gauge={
                     'axis': {'range': [-6, 6],
                             'tickmode': 'array',
@@ -258,7 +258,7 @@ class GraphDesigner:
             mode='gauge',
             value=index[0]/25,
             title=index[1],
-            domain={'x': [0.6, 1.0], 'y': [0., 1.00]},
+            domain={'x': [0.6, 1.0], 'y': [0.1, 0.8]},
             gauge={
                 'axis': {'range': [0, 4],
                          'tickmode': 'array',

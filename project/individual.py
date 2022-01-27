@@ -18,7 +18,7 @@ class Individual:
         self.price_df = dataframe[['High', 'Low', 'Close', 'Volume']].round(3)
         self.ticker = yf.Ticker(symbol)
         self.news_frame = pd.DataFrame(self.ticker.news)
-        self.news_frame = self.news_frame.drop(['uuid', 'providerPublishTime', 'type'], 1)
+        self.news_frame = self.news_frame.drop(['uuid', 'providerPublishTime', 'type', 'link'], 1)
         self.interval = interval
         self.symbol = symbol
         self.overall_advice = overall_advice
@@ -28,7 +28,6 @@ class Individual:
             self.recommendationsframe = self.recommendationsframe.drop(['From Grade', 'Action'], 1)
         else:
             self.recommendationsframe = pd.DataFrame({'': f'No available for the selected currency: {symbol}'}, index=[0])
-
         self.set_recommendations()
         self.set_news()
         self.set_prices()
