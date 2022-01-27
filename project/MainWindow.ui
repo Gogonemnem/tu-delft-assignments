@@ -240,7 +240,7 @@ QPushButton {
        <attribute name="title">
         <string>Overview</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout" columnstretch="0,1,1,0">
+       <layout class="QGridLayout" name="gridLayout" columnstretch="0,1,1">
         <item row="1" column="0">
          <spacer name="verticalSpacer_2">
           <property name="orientation">
@@ -320,11 +320,6 @@ QPushButton {
               <string>1 month</string>
              </property>
             </item>
-            <item>
-             <property name="text">
-              <string>3 months</string>
-             </property>
-            </item>
            </widget>
           </item>
           <item row="4" column="0">
@@ -372,6 +367,9 @@ QPushButton {
           </item>
           <item row="2" column="0">
            <widget class="QLabel" name="ov_sorting_label">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="text">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;project/images/list.svg&quot; height=&quot;16&quot; style=&quot;vertical-align: middle;&quot;/&gt; Strategy:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
@@ -382,9 +380,20 @@ QPushButton {
           </item>
           <item row="2" column="1">
            <widget class="QComboBox" name="strategy_box">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="cursor">
              <cursorShape>ArrowCursor</cursorShape>
             </property>
+            <property name="currentText">
+             <string>Techincal Analysis</string>
+            </property>
+            <item>
+             <property name="text">
+              <string>Techincal Analysis</string>
+             </property>
+            </item>
             <item>
              <property name="text">
               <string>Alphabetically</string>
@@ -515,9 +524,7 @@ QTableView::item:hover {
         <item row="5" column="3">
          <widget class="QFrame" name="indicator_frame">
           <property name="styleSheet">
-           <string notr="true">#indicator_frame
-{
-background-color: rgb(221, 221, 221)}</string>
+           <string notr="true"/>
           </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
@@ -534,9 +541,14 @@ background-color: rgb(221, 221, 221)}</string>
         </item>
         <item row="1" column="0" rowspan="4" colspan="2">
          <widget class="QFrame" name="frame_3">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="autoFillBackground">
+           <bool>false</bool>
+          </property>
           <property name="styleSheet">
-           <string notr="true">#frame_3{
-background-color: rgb(221, 221, 221)}</string>
+           <string notr="true"/>
           </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
@@ -546,7 +558,11 @@ background-color: rgb(221, 221, 221)}</string>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_5">
            <item>
-            <widget class="QTableView" name="price_table"/>
+            <widget class="QTableView" name="price_table">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>
@@ -579,7 +595,6 @@ background-color: rgb(221, 221, 221)}</string>
             <widget class="QLabel" name="label_3">
              <property name="font">
               <font>
-               <family>Lucida Bright</family>
                <pointsize>14</pointsize>
               </font>
              </property>
@@ -604,7 +619,6 @@ background-color: rgb(221, 221, 221)}</string>
             <widget class="QLabel" name="label">
              <property name="font">
               <font>
-               <family>Lucida Bright</family>
                <pointsize>20</pointsize>
               </font>
              </property>
@@ -619,9 +633,7 @@ background-color: rgb(221, 221, 221)}</string>
         <item row="0" column="3" rowspan="5">
          <widget class="QFrame" name="price_graph_frame">
           <property name="styleSheet">
-           <string notr="true">#price_graph_frame
-{
-background-color: rgb(221, 221, 221)}</string>
+           <string notr="true"/>
           </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
@@ -657,8 +669,7 @@ background-color: rgb(221, 221, 221)}</string>
         <item row="5" column="0" colspan="2">
          <widget class="QFrame" name="frame_5">
           <property name="styleSheet">
-           <string notr="true">#frame_5{
-background-color: rgb(221, 221, 221)}</string>
+           <string notr="true"/>
           </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
@@ -676,8 +687,7 @@ background-color: rgb(221, 221, 221)}</string>
         <item row="6" column="0" colspan="2">
          <widget class="QFrame" name="frame">
           <property name="styleSheet">
-           <string notr="true">#frame{
-background-color: rgb(221, 221, 221)}</string>
+           <string notr="true"/>
           </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
@@ -695,8 +705,7 @@ background-color: rgb(221, 221, 221)}</string>
         <item row="6" column="3">
          <widget class="QFrame" name="frame_2">
           <property name="styleSheet">
-           <string notr="true">#frame_2{
-background-color: rgb(221, 221, 221)}</string>
+           <string notr="true"/>
           </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>

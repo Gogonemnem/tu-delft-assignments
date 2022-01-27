@@ -11,12 +11,14 @@ pd.options.mode.chained_assignment = None  # default='warn'
 class Comparison:
     def __init__(self, main_window: QMainWindow, dataframe1: pd.DataFrame,
                  advice1: pd.DataFrame, symbol1, dataframe2: pd.DataFrame,
-                 advice2: pd.DataFrame, symbol2,  interval):
+                 advice2: pd.DataFrame, symbol2,  interval, overall_advice1, overall_advice2):
 
         self.main_window = main_window
         self.first = symbol1
         self.second = symbol2
         self.interval = interval
+        self.overall_advice1 = overall_advice1
+        self.overall_advice2 = overall_advice2
 
         dataframe1 = dataframe1.droplevel(0, axis=1)
         self.dataframe1 = dataframe1
@@ -41,6 +43,9 @@ class Comparison:
         self.main_window.findChild(QLabel, "comp_interval_2").setText(self.interval)
         self.main_window.findChild(QLabel, "comp_symbol_1").setText(self.first)
         self.main_window.findChild(QLabel, "comp_symbol_2").setText(self.second)
+        self.main_window.findChild(QLabel, "comp_advice_1").setText(self.overall_advice1[self.first])
+        self.main_window.findChild(QLabel, "comp_advice_2").setText(self.overall_advice2[self.second])
+
 
 
     def set_tables(self):

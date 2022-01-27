@@ -44,7 +44,7 @@ class CryptoCurrencies:
         '1d': '5y',
         '1wk': '10y',
         '1mo': '10y',
-        '3mo': '10y',
+        '3mo': '10y'
     }
 
     def __init__(self, symbols, intervals, periods=None):
@@ -70,7 +70,6 @@ class CryptoCurrencies:
     def stochastic_oscillator(self):
         """Calculates stochastic oscillator indicator
         to see if a coin/stock has been oversold/overbought"""
-        print(len(self.data))
         for symbol in self.symbols:
             self.data[[(symbol, '%K'), (symbol, '%D')]] = \
                 ta.stoch(
@@ -326,7 +325,6 @@ def apply_indicators(symbols, intervals, periods=None):
     btc_1.exponential_moving_average()
     btc_1.money_flow_index()
     btc_1.stochastic_rsi()
-    print(btc_1.data)
     btc_1.data = btc_1.data.sort_index(level=0, axis=1)
     return btc_1.data
 
@@ -391,7 +389,7 @@ def main(symbols):
 if __name__ == "__main__":
     start_time = time.time()
     dataframe, signal_frame, advice = main(['BTC-USD'])
-    print(f'Runtime= {time.time() - start_time}')
+    # print(f'Runtime= {time.time() - start_time}')
 
 
 # Different kind of indicators
