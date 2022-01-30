@@ -18,7 +18,7 @@
 ### Short-term trader
 As a short-term trader, you want to enter the market low and exit high within a short time range typically around a few minutes to a few days. In order to obtain these profits as often as possible, you want to spot (un)fortunate trends and keep track of current news/events. All displayed in a simple but informative overview of tickers of interest.
 
-### 'User 2' -> Long-term investor?
+### Long-term investor
 As a long-term investor, you enter the market with a capital that is enough to accept losses over a short amount of time,
 with the idea that the profit will come over a longer amount of time. To get an idea of a good long-term investing plan, 
 you are able to get an overview of financial data of stocks and cryptocurrencies. 
@@ -46,9 +46,6 @@ you are able to get an overview of financial data of stocks and cryptocurrencies
 - Yfinance
 - Plotly
 - Fear_and_greed
-
-## What the application looks like
-*add screenshot(s)*
 
 ## Developer Team
 - Betsie Hartsink 
