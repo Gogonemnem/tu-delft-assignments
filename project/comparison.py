@@ -12,7 +12,7 @@ class Comparison:
     def __init__(self, main_window: QMainWindow, dataframe1: pd.DataFrame,
                  advice1: pd.DataFrame, symbol1, dataframe2: pd.DataFrame,
                  advice2: pd.DataFrame, symbol2,  interval, overall_advice1, overall_advice2):
-
+        """Create GUI of comparison tab."""
         self.main_window = main_window
         self.first = symbol1
         self.second = symbol2
@@ -45,8 +45,6 @@ class Comparison:
         self.main_window.findChild(QLabel, "comp_symbol_2").setText(self.second)
         self.main_window.findChild(QLabel, "comp_advice_1").setText(self.overall_advice1[self.first])
         self.main_window.findChild(QLabel, "comp_advice_2").setText(self.overall_advice2[self.second])
-
-
 
     def set_tables(self):
         model = DataFrameModel(self.price_df1)
@@ -85,7 +83,6 @@ class Comparison:
         header_p1.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
         header_p2.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
 
-
     def set_graphs(self):
         graph_comparison = self.main_window.findChild(QWebEngineView, 'graph_comparison')
         graph_comparison.setHtml(GraphDesigner
@@ -107,23 +104,3 @@ class Comparison:
         price_right = self.main_window.findChild(QWebEngineView, 'price_right')
         price_right.setHtml(GraphDesigner.show_price(self.price_df2).to_html(
             include_plotlyjs='cdn'))
-
-
-# if __name__ == "__main__":
-#     import sys
-#     from project import yfinancecrypto
-#     df, indicators = yfinancecrypto.main('BTC-USD')
-#     df2, indicators_2 = yfinancecrypto.main('ETH-USD')
-
-
-#     full_df = df
-#     small_df = df[['High', 'Low', 'Close', 'Volume']]
-#     small_df = small_df.round(3)
-
-#     small_df2 = df2[['High', 'Low', 'Close', 'Volume']]
-#     small_df2 = small_df2.round(3)
-
-#     app = QApplication(sys.argv)
-#     Window = Comparison()
-#     Window.showMaximized()
-#     app.exec()
