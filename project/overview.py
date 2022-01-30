@@ -8,25 +8,12 @@ from dataframe_model import DataFrameModel, FloatDelegate, FilterProxyModel
 from individual import Individual
 from input import Input
 from comparison import Comparison
-from yfinancecrypto import apply_indicators, apply_signals, advice
-
-# column_names = ['Ticker', 'Name', 'Price', 'Advice']
-# assets = [['AAPL', 'Apple Inc.', '100', 'hold'], ['AMZN', 'Amazon.com, Inc.', '100', 'hold']]
-# df = pd.DataFrame(assets, columns = column_names)
-
-# column_names = ['Ticker', 'Name', 'Price', 'Advice']
-# assets_stock = [['AAPL', 'Apple Inc.', '100', 'hold'],
-#                 ['AMZN', 'Amazon.com, Inc.', '200', 'very strong buy'],
-#                 ['AMZN', 'Amazon.com, Inc.', '200', 'very strong sell'],
-#                 ['AMZN', 'Amazon.com, Inc.', '200', 'strong buy']]
-# df_stock = pd.DataFrame(assets_stock, columns = column_names)
-# assets_crypto= [['AAPL', 'Apple Inc.', '100', 'hold'],
-#                 ['AMZN', 'Amazon.com, Inc.', '200', 'very strong buy']]
-# df_crypto = pd.DataFrame(assets_crypto, columns = column_names)
+from project.analysis import apply_indicators, apply_signals, advice
 
 
 class Overview:
     def __init__(self, main_window: QMainWindow, input_tab: Input):
+        """Create GUI of overview tab."""
         self.main_window = main_window
         self.input = input_tab
 
@@ -57,11 +44,9 @@ class Overview:
 
         self.filter_button: QPushButton = self.main_window.findChild(QPushButton, "filter_button")
         self.filter_button.clicked.connect(self.filter)
-        # self.header_stock.sectionClicked.connect(self.filter)
 
         results_button: QPushButton = self.main_window.findChild(QPushButton, "results_button")
         results_button.clicked.connect(self.get_results)
-
 
         self.strategy_box = self.main_window.findChild(QComboBox, "strategy_box")
         self.interval_box = self.main_window.findChild(QComboBox, "interval_box")
@@ -95,22 +80,8 @@ class Overview:
             self.proxy.setFilterKeyColumn(logical_index)
             self.proxy.filter_value = action.data()
 
-    # The part we wanna keep from previous code
-    # def strategy_sort(self):
-    #     if self.comboBox_sorting_stocks.currentText() == IETS:
-    #         df_stock["Advice"] = pd.Categorical(df_stock['Advice'],
-    #             ["very strong buy", "strong buy", "buy", "hold",
-    #              "sell", "strong sell", "very strong sell"])
-    #         df_stock.sort_values(by='Advice', inplace=True)
-    #         self.model_stock = DataFrameModel(df_stock)
-    #         self.view_stock.setModel(self.model_stock)
-
-    # Steps we have to implement
-    # 1. Calculate new advices
-    # 2. Replace old advices with the new advices in dataframe
-    # 3. Make sure it is in pd. Categorical so it can be sorted
-
     def calculate_advices(self):
+        """Calculate advice (hold, buy, sell), depending on the time interval."""
         QApplication.setOverrideCursor(Qt.CursorShape.WaitCursor)
         tab: QTabWidget = self.main_window.findChild(QTabWidget, "tabWidget")
         tab.setCurrentIndex(1)
@@ -143,6 +114,7 @@ class Overview:
         QApplication.restoreOverrideCursor()
 
     def get_results(self):
+        """Get results of chosen company. Results either get displayed in individual or comparison tab."""
         QApplication.setOverrideCursor(Qt.CursorShape.WaitCursor)
         single_button: QRadioButton = self.main_window.findChild(QRadioButton, "single_button")
         compare_button: QRadioButton = self.main_window.findChild(QRadioButton, "compare_button")
@@ -198,13 +170,4 @@ class Overview:
         '1 month': '1mo',
         }
         interval_box: QComboBox = self.main_window.findChild(QComboBox, "interval_box")
-
-        # could also get currentindex for a miniscule efficiency increase
         return interval_labels[interval_box.currentText()]
-
-
-# if __name__ == "__main__":
-#     app = QApplication(sys.argv)
-#     Window = Input()
-#     Window.show()
-#     app.exec()

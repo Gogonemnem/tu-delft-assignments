@@ -9,6 +9,7 @@ from dataframe_model import DataFrameModel
 
 class Input:
     def __init__(self, main_window: QMainWindow, df=pd.DataFrame(columns=['Symbol', 'Name'])):
+        """Create GUI of input tab."""
         self.main_window = main_window
         self.view: QTableView = self.main_window.findChild(QTableView, "tableView")
 
@@ -34,6 +35,7 @@ class Input:
         header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
 
     def append_ticker(self):
+        """Append row to list in input tab with ticker and name of company."""
         line_edit: QLineEdit = self.main_window.findChild(QLineEdit, "insert")
         text = line_edit.text().upper()
         line_edit.clear()
@@ -63,7 +65,7 @@ class Input:
                              'Please check Yahoo Finance for the right ticker and try again.')
 
     def remove_rows(self):
-
+        """Remove row when row gets selected to be deleted by user."""
         rows = [row.row() for row in self.view.selectionModel().selectedRows()]
 
         # if not rows:
@@ -76,28 +78,18 @@ class Input:
             self.show_pop_up('Nothing to delete', 'No tickers were selected')
 
     def show_pop_up(self, title, message):
+        """Show pop-up with message."""
         QMessageBox.about(self.main_window, title, message)
 
     def export(self):
+        """Export data from input tab to csv file and show pop-up afterwards."""
         self.model.dataFrame.to_csv('export.csv', index=False)
         self.show_pop_up("Pop-up", "Table has been saved.")
 
     def import_csv(self):
+        """Import csv file into input tab."""
         try:
             df_imported = pd.read_csv("export.csv")
             self.model.setDataFrame(df_imported)
         except FileNotFoundError:
             self.show_pop_up("Pop-up", "File not found.")
-
-
-# if __name__ == "__main__":
-#     column_names = ['Symbol', 'Name']
-#     assets = [['AAPL', 'Apple Inc.'], ['AMZN', 'Amazon.com, Inc.'], \
-#             ['TSLA', 'Tesla, Inc.'], ['FB', 'Meta Platforms, Inc.'], \
-#             ['Test', 'TEST'], ['LALA', 'LA'], ['CH', 'CHECK']]
-#     df = pd.DataFrame(assets, columns = column_names)
-
-#     app = QApplication(sys.argv)
-#     Window = Input()
-#     Window.show()
-#     app.exec()

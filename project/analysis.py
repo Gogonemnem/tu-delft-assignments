@@ -9,12 +9,7 @@ import yfinance as yf
 # Remove performance warnings
 simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
 
-# Remove restrictions on dataframe columns/rows
-# pd.set_option('display.max_columns', None, 'display.max_rows', None)
 pd.set_option('display.max_columns', None)
-# new = yf.Ticker('CVX')
-# for key in new.info.keys():
-#     print(key)
 
 def financial_background(symb):
     df = yf.Ticker(symb).info
@@ -30,7 +25,6 @@ def financial_background(symb):
         DR = df['dividendRate']
 
     all_comp['DPS'] = DR/df['trailingEps']
-    # all_comp['EPS'] = df['trailingEps']
     return all_comp
 
 
@@ -390,6 +384,9 @@ if __name__ == "__main__":
     start_time = time.time()
     dataframe, signal_frame, advice = main(['BTC-USD'])
     # print(f'Runtime= {time.time() - start_time}')
+
+
+# ### extra indicators and strategy that didn´t work
 
 
 # Different kind of indicators
