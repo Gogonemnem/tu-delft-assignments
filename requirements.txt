@@ -1,0 +1,10 @@
+ipykernel
+ipympl
+opencv-python
+numpy
+pandas
+matplotlib
+scipy
+markdown-katex
+plotnine
+statsmodels

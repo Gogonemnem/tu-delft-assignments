@@ -1,0 +1,3001 @@
+"year","age","status","education","jobclass","insurance","wage"
+2006,18,"never married","1.primary","industrial","no",75.0431540173516
+2004,24,"never married","4.master","IT","no",70.4760196469445
+2003,45,"married","3.bachelor","industrial","yes",130.982177377461
+2003,43,"married","4.master","IT","yes",154.68529299563
+2005,50,"divorced","2.highschool","IT","yes",75.0431540173516
+2008,54,"married","4.master","IT","yes",127.115743812184
+2009,44,"married","3.bachelor","industrial","yes",169.52853803668
+2008,30,"never married","3.bachelor","IT","yes",111.720849360989
+2006,41,"never married","3.bachelor","IT","yes",118.884359339886
+2004,52,"married","2.highschool","IT","yes",128.680488220624
+2007,45,"divorced","3.bachelor","IT","yes",117.146816914805
+2007,34,"married","2.highschool","industrial","no",81.2832532842527
+2005,35,"never married","2.highschool","IT","yes",89.4924795180001
+2003,39,"married","4.master","industrial","yes",134.705375118879
+2009,54,"married","2.highschool","IT","yes",134.705375118879
+2009,51,"married","3.bachelor","industrial","yes",90.4819133566401
+2003,37,"never married","4.master","industrial","no",82.6796372966372
+2006,50,"married","5.phd","IT","no",212.842352315711
+2007,56,"married","4.master","industrial","yes",129.156693004704
+2003,37,"never married","3.bachelor","industrial","yes",98.5993438603892
+2003,38,"married","4.master","IT","no",200.543262324662
+2005,40,"divorced","2.highschool","IT","no",50.406660861266
+2009,75,"married","4.master","industrial","yes",85.3839403789827
+2007,40,"married","4.master","IT","no",160.642475408263
+2006,38,"never married","2.highschool","industrial","no",94.0727147457005
+2005,49,"married","5.phd","IT","yes",277.601417511009
+2006,43,"married","2.highschool","industrial","yes",84.0459576539924
+2004,34,"married","2.highschool","industrial","yes",65.1108537153447
+2008,57,"married","2.highschool","industrial","no",116.265324062503
+2003,18,"never married","2.highschool","industrial","yes",70.4760196469445
+2004,55,"married","5.phd","IT","yes",195.676307990453
+2005,51,"married","3.bachelor","IT","yes",101.402052302992
+2008,33,"never married","5.phd","industrial","no",81.2832532842527
+2005,34,"never married","2.highschool","industrial","no",111.720849360989
+2006,36,"married","4.master","IT","yes",89.8800467811106
+2003,56,"never married","5.phd","IT","yes",87.9810327856054
+2006,70,"never married","4.master","industrial","yes",87.9810327856054
+2004,25,"never married","4.master","industrial","yes",103.90247060316
+2006,32,"married","3.bachelor","industrial","no",105.927810775063
+2003,27,"married","1.primary","industrial","no",66.2294082943902
+2004,28,"married","4.master","industrial","no",34.6074177301288
+2007,27,"never married","4.master","IT","yes",109.833985642199
+2004,43,"never married","1.primary","industrial","no",45.282169994022
+2005,50,"never married","1.primary","industrial","yes",73.7757432746946
+2004,39,"married","2.highschool","IT","no",81.2832532842527
+2008,52,"married","5.phd","industrial","yes",154.68529299563
+2009,35,"married","4.master","industrial","yes",267.901086855275
+2007,57,"married","5.phd","IT","yes",176.989650489877
+2006,25,"never married","1.primary","industrial","no",66.2294082943902
+2006,33,"never married","2.highschool","IT","yes",116.265324062503
+2005,57,"married","5.phd","IT","no",200.543262324662
+2008,71,"married","3.bachelor","industrial","yes",101.82435207568
+2004,43,"married","4.master","industrial","yes",272.294783220064
+2003,23,"never married","3.bachelor","industrial","no",35.0334213214995
+2009,30,"never married","5.phd","IT","yes",114.475713290347
+2004,22,"never married","2.highschool","IT","yes",81.2832532842527
+2006,59,"married","5.phd","IT","yes",200.543262324662
+2003,28,"never married","4.master","IT","yes",148.413159102577
+2004,61,"married","2.highschool","industrial","yes",99.6894636984864
+2003,34,"married","2.highschool","IT","yes",111.720849360989
+2005,43,"married","4.master","industrial","yes",152.838800991182
+2006,54,"married","3.bachelor","industrial","no",117.146816914805
+2005,69,"married","2.highschool","industrial","yes",77.7376033039781
+2004,41,"married","3.bachelor","industrial","yes",87.9810327856054
+2003,48,"married","5.phd","IT","yes",125.525498433836
+2003,49,"married","3.bachelor","IT","yes",123.336103962059
+2009,42,"married","2.highschool","industrial","yes",158.294621427791
+2003,37,"married","4.master","IT","yes",200.543262324662
+2004,55,"married","2.highschool","industrial","yes",99.6894636984864
+2008,21,"never married","2.highschool","industrial","no",70.4760196469445
+2004,58,"married","2.highschool","IT","yes",94.0727147457005
+2006,31,"never married","2.highschool","industrial","no",81.2832532842527
+2006,25,"never married","2.highschool","industrial","yes",81.2832532842527
+2006,32,"never married","3.bachelor","IT","yes",100.764272842107
+2009,40,"never married","1.primary","IT","yes",94.0727147457005
+2003,44,"married","5.phd","IT","no",99.6894636984864
+2003,60,"married","4.master","industrial","yes",268.266292012557
+2006,23,"never married","1.primary","industrial","yes",81.2832532842527
+2003,63,"married","2.highschool","IT","no",113.567089569751
+2008,44,"never married","1.primary","industrial","no",87.9810327856054
+2005,47,"married","5.phd","IT","yes",128.680488220624
+2004,61,"married","3.bachelor","industrial","yes",106.723977625299
+2009,55,"married","5.phd","IT","no",66.0446942318056
+2003,24,"never married","1.primary","industrial","no",51.521956314716
+2007,42,"widowed","2.highschool","industrial","yes",85.3839403789827
+2006,25,"married","2.highschool","IT","yes",76.8936025176112
+2004,34,"divorced","2.highschool","industrial","no",90.4819133566401
+2009,53,"married","1.primary","IT","no",68.0764282889521
+2009,53,"married","4.master","IT","yes",130.982177377461
+2009,70,"married","5.phd","IT","no",127.901232979118
+2004,47,"married","4.master","IT","yes",131.224593755096
+2003,46,"married","2.highschool","industrial","yes",99.6894636984864
+2003,33,"divorced","1.primary","industrial","yes",76.8936025176112
+2005,34,"married","5.phd","IT","yes",107.903923866877
+2006,22,"never married","2.highschool","industrial","no",81.2832532842527
+2009,74,"married","2.highschool","industrial","yes",99.6894636984864
+2003,40,"married","3.bachelor","IT","yes",98.5993438603892
+2006,45,"married","4.master","IT","yes",200.543262324662
+2009,43,"married","4.master","IT","yes",156.503510882633
+2005,33,"married","4.master","IT","yes",144.944364980516
+2009,62,"married","4.master","IT","yes",118.884359339886
+2008,37,"married","4.master","IT","yes",121.430313822622
+2004,54,"married","2.highschool","IT","yes",111.720849360989
+2005,34,"married","3.bachelor","industrial","no",68.7480877337669
+2008,50,"never married","4.master","IT","yes",114.475713290347
+2006,46,"divorced","3.bachelor","industrial","yes",95.2307125669819
+2007,41,"married","1.primary","industrial","no",87.9810327856054
+2003,63,"divorced","3.bachelor","industrial","yes",64.2743972206327
+2007,38,"married","3.bachelor","industrial","yes",128.680488220624
+2006,35,"married","3.bachelor","industrial","yes",114.475713290347
+2009,29,"married","4.master","IT","yes",112.6488963421
+2008,66,"married","1.primary","industrial","yes",81.2832532842527
+2004,37,"married","2.highschool","IT","yes",75.8954848228103
+2006,39,"married","2.highschool","IT","yes",112.136922992214
+2003,42,"married","2.highschool","industrial","no",85.3839403789827
+2007,51,"divorced","2.highschool","industrial","yes",94.0727147457005
+2009,55,"married","5.phd","industrial","yes",114.475713290347
+2006,51,"married","5.phd","industrial","yes",176.989650489877
+2008,38,"married","5.phd","industrial","yes",276.778413321176
+2005,49,"married","2.highschool","IT","yes",101.82435207568
+2006,42,"married","2.highschool","IT","no",91.6992261117042
+2009,43,"separated","1.primary","IT","no",86.6951548289402
+2006,38,"married","4.master","IT","yes",162.946460744664
+2008,59,"married","2.highschool","industrial","yes",139.213788138664
+2009,57,"married","3.bachelor","industrial","yes",95.2307125669819
+2005,25,"never married","2.highschool","industrial","no",66.9616443217359
+2004,49,"married","4.master","industrial","yes",131.194323611687
+2004,41,"married","1.primary","industrial","yes",90.4819133566401
+2009,38,"married","2.highschool","industrial","yes",114.475713290347
+2003,61,"married","5.phd","industrial","yes",79.1280844956297
+2007,49,"divorced","2.highschool","industrial","yes",104.591737924918
+2008,52,"divorced","5.phd","IT","yes",132.487821126123
+2007,43,"married","5.phd","IT","yes",141.77517233318
+2008,60,"married","4.master","IT","yes",123.089699847943
+2005,46,"married","5.phd","IT","yes",134.705375118879
+2004,21,"never married","2.highschool","IT","no",55.7673905084923
+2009,61,"married","4.master","industrial","yes",106.921814091211
+2007,32,"married","5.phd","IT","yes",118.884359339886
+2004,58,"married","2.highschool","IT","yes",87.9810327856054
+2003,35,"never married","2.highschool","IT","yes",88.9296066367913
+2004,26,"never married","2.highschool","IT","yes",81.2832532842527
+2006,32,"never married","2.highschool","industrial","no",94.0727147457005
+2003,37,"married","2.highschool","IT","yes",106.921814091211
+2007,22,"never married","2.highschool","industrial","no",59.0970640815891
+2005,51,"never married","2.highschool","industrial","no",65.1108537153447
+2004,44,"divorced","5.phd","IT","yes",120.589436530402
+2005,35,"married","5.phd","industrial","yes",157.700527725737
+2004,60,"married","2.highschool","IT","yes",129.453644576626
+2007,40,"married","4.master","IT","yes",176.989650489877
+2004,35,"never married","1.primary","IT","no",59.0970640815891
+2007,35,"married","5.phd","IT","no",94.0727147457005
+2008,47,"married","2.highschool","industrial","yes",134.705375118879
+2003,43,"never married","4.master","IT","yes",81.2832532842527
+2003,33,"married","1.primary","industrial","yes",81.2832532842527
+2003,60,"divorced","5.phd","industrial","yes",153.457515308961
+2008,38,"married","5.phd","industrial","yes",136.876367635184
+2005,53,"married","2.highschool","IT","no",75.0431540173516
+2004,55,"married","3.bachelor","IT","yes",130.220832358777
+2003,57,"married","2.highschool","IT","no",104.921506533664
+2005,64,"married","4.master","IT","no",49.5553381215227
+2007,43,"married","2.highschool","industrial","yes",123.908567597957
+2008,35,"married","3.bachelor","IT","yes",123.089699847943
+2008,54,"married","2.highschool","IT","no",78.155161407934
+2007,45,"married","2.highschool","IT","yes",73.7757432746946
+2003,58,"divorced","4.master","IT","yes",138.299126920883
+2007,48,"married","4.master","IT","no",127.115743812184
+2003,46,"married","1.primary","industrial","yes",68.7480877337669
+2004,46,"married","2.highschool","industrial","yes",84.39111474778
+2009,55,"married","1.primary","industrial","yes",85.3839403789827
+2006,51,"married","3.bachelor","industrial","yes",128.680488220624
+2005,49,"married","3.bachelor","industrial","yes",70.4760196469445
+2008,34,"never married","3.bachelor","industrial","yes",76.8936025176112
+2007,53,"married","3.bachelor","industrial","no",148.413159102577
+2004,40,"married","3.bachelor","industrial","yes",148.413159102577
+2009,50,"married","3.bachelor","industrial","yes",175.960883130401
+2006,37,"divorced","1.primary","IT","yes",98.5993438603892
+2003,39,"married","3.bachelor","industrial","yes",145.143601176911
+2004,52,"married","4.master","industrial","yes",99.6894636984864
+2003,50,"married","2.highschool","IT","yes",141.08887439127
+2006,48,"married","4.master","industrial","yes",123.089699847943
+2006,47,"married","2.highschool","industrial","yes",129.453644576626
+2005,27,"married","4.master","industrial","yes",111.720849360989
+2006,39,"married","2.highschool","industrial","yes",103.90247060316
+2009,44,"married","2.highschool","IT","yes",118.884359339886
+2003,37,"married","3.bachelor","industrial","yes",151.591484239814
+2006,52,"married","2.highschool","industrial","no",101.82435207568
+2004,26,"never married","3.bachelor","industrial","yes",99.6894636984864
+2008,39,"married","5.phd","industrial","yes",99.6894636984864
+2006,25,"married","2.highschool","industrial","no",99.6894636984864
+2005,31,"never married","4.master","IT","no",94.0727147457005
+2004,58,"married","3.bachelor","industrial","yes",152.216806827106
+2005,30,"married","4.master","IT","yes",104.921506533664
+2004,27,"married","1.primary","industrial","yes",65.1108537153447
+2003,40,"divorced","2.highschool","industrial","yes",95.2307125669819
+2006,55,"married","5.phd","industrial","yes",173.879493310012
+2009,35,"married","5.phd","IT","yes",193.411070530969
+2008,48,"married","2.highschool","industrial","no",114.475713290347
+2006,29,"never married","4.master","industrial","yes",160.642475408263
+2005,25,"never married","3.bachelor","industrial","yes",89.4924795180001
+2004,40,"married","3.bachelor","industrial","yes",120.589436530402
+2006,27,"married","1.primary","IT","no",73.7757432746946
+2006,44,"married","2.highschool","IT","yes",127.115743812184
+2006,49,"married","3.bachelor","IT","yes",118.884359339886
+2003,22,"never married","3.bachelor","industrial","no",34.6074177301288
+2007,45,"married","3.bachelor","industrial","yes",114.475713290347
+2007,33,"married","3.bachelor","industrial","no",85.3839403789827
+2007,63,"married","5.phd","IT","yes",318.342430056529
+2006,49,"never married","4.master","industrial","yes",141.77517233318
+2005,39,"never married","5.phd","IT","yes",130.982177377461
+2007,25,"never married","1.primary","industrial","no",73.7757432746946
+2005,29,"never married","5.phd","IT","yes",130.982177377461
+2006,37,"married","2.highschool","industrial","yes",75.0431540173516
+2008,35,"married","5.phd","IT","yes",154.990260276812
+2009,46,"married","2.highschool","industrial","yes",104.921506533664
+2008,58,"married","4.master","industrial","yes",73.118306923864
+2003,39,"married","5.phd","industrial","yes",123.089699847943
+2008,41,"married","4.master","IT","yes",157.700527725737
+2008,29,"married","4.master","IT","yes",81.2832532842527
+2009,37,"married","4.master","IT","yes",107.256062128429
+2009,62,"married","2.highschool","IT","no",78.9816745162994
+2008,27,"never married","2.highschool","industrial","yes",73.7757432746946
+2003,37,"married","2.highschool","industrial","yes",94.0727147457005
+2006,56,"separated","4.master","IT","no",99.6894636984864
+2004,36,"married","3.bachelor","IT","yes",176.989650489877
+2005,23,"never married","2.highschool","IT","no",73.7757432746946
+2003,46,"married","3.bachelor","IT","yes",99.6894636984864
+2009,26,"never married","3.bachelor","industrial","no",94.0727147457005
+2006,43,"married","1.primary","IT","yes",95.2307125669819
+2007,36,"married","2.highschool","IT","yes",127.115743812184
+2003,54,"separated","3.bachelor","IT","yes",99.6894636984864
+2003,62,"married","2.highschool","industrial","yes",95.6888119067371
+2006,40,"married","2.highschool","industrial","yes",109.833985642199
+2006,53,"married","3.bachelor","industrial","yes",118.884359339886
+2007,48,"married","5.phd","IT","yes",176.989650489877
+2004,23,"married","4.master","industrial","no",61.1875264339915
+2009,34,"married","2.highschool","industrial","yes",81.2832532842527
+2004,43,"married","4.master","IT","no",256.400649562425
+2006,55,"married","2.highschool","IT","yes",81.2832532842527
+2007,59,"never married","2.highschool","IT","yes",81.2832532842527
+2007,60,"married","2.highschool","IT","no",55.7673905084923
+2009,49,"never married","2.highschool","industrial","yes",75.3556793180091
+2006,45,"married","3.bachelor","industrial","yes",130.982177377461
+2006,31,"divorced","2.highschool","industrial","no",43.7351116779821
+2004,34,"never married","4.master","IT","yes",114.475713290347
+2005,26,"never married","5.phd","IT","yes",114.475713290347
+2007,22,"never married","2.highschool","industrial","no",81.2832532842527
+2004,40,"married","2.highschool","IT","no",68.5721657022738
+2009,41,"married","3.bachelor","IT","yes",109.833985642199
+2006,36,"never married","3.bachelor","industrial","yes",97.4932940453934
+2007,38,"married","1.primary","industrial","no",62.3983547205685
+2003,48,"married","2.highschool","industrial","no",97.4932940453934
+2006,47,"married","3.bachelor","IT","yes",134.705375118879
+2005,47,"separated","1.primary","industrial","no",61.1875264339915
+2007,35,"married","4.master","IT","no",118.884359339886
+2008,49,"married","2.highschool","IT","yes",65.1108537153447
+2004,40,"married","3.bachelor","IT","yes",109.833985642199
+2004,32,"widowed","4.master","industrial","no",104.921506533664
+2008,57,"married","4.master","industrial","yes",73.7757432746946
+2008,56,"married","4.master","industrial","yes",141.77517233318
+2009,73,"married","1.primary","industrial","no",90.4819133566401
+2007,29,"never married","2.highschool","industrial","yes",73.7757432746946
+2003,49,"married","5.phd","industrial","yes",134.705375118879
+2009,30,"never married","2.highschool","industrial","yes",109.833985642199
+2008,29,"married","2.highschool","industrial","yes",91.6992261117042
+2004,36,"married","3.bachelor","IT","no",95.2307125669819
+2009,39,"married","5.phd","IT","yes",156.503510882633
+2007,48,"married","4.master","IT","yes",104.921506533664
+2006,45,"married","4.master","industrial","yes",99.6894636984864
+2004,50,"married","4.master","industrial","no",54.5981500331442
+2003,42,"married","4.master","IT","yes",32.3664131748549
+2007,58,"married","3.bachelor","industrial","no",118.884359339886
+2007,48,"married","2.highschool","industrial","yes",109.833985642199
+2003,48,"married","4.master","industrial","yes",109.833985642199
+2005,45,"married","3.bachelor","IT","yes",118.884359339886
+2007,41,"divorced","3.bachelor","industrial","yes",110.782650276254
+2008,27,"never married","2.highschool","industrial","yes",93.5572673479306
+2004,44,"married","2.highschool","IT","yes",109.833985642199
+2003,32,"married","4.master","IT","yes",118.884359339886
+2006,46,"married","1.primary","IT","yes",118.884359339886
+2005,52,"married","2.highschool","IT","no",52.1561711699148
+2003,22,"never married","3.bachelor","industrial","no",43.7351116779821
+2004,53,"widowed","2.highschool","industrial","yes",117.146816914805
+2008,34,"married","5.phd","industrial","yes",118.884359339886
+2009,38,"married","2.highschool","industrial","yes",148.413159102577
+2009,42,"married","1.primary","IT","yes",101.82435207568
+2005,25,"never married","3.bachelor","IT","yes",94.0727147457005
+2004,29,"never married","3.bachelor","industrial","yes",86.6951548289402
+2005,28,"married","5.phd","IT","yes",141.77517233318
+2005,46,"married","4.master","industrial","yes",66.9616443217359
+2007,55,"married","5.phd","IT","yes",118.884359339886
+2004,56,"married","2.highschool","industrial","no",105.767639622758
+2005,41,"divorced","2.highschool","IT","yes",118.884359339886
+2009,61,"married","5.phd","IT","no",176.989650489877
+2003,47,"married","2.highschool","IT","yes",65.1108537153447
+2006,52,"married","3.bachelor","industrial","yes",85.3839403789827
+2004,27,"married","2.highschool","industrial","no",72.1504556815713
+2007,33,"never married","3.bachelor","IT","yes",89.2428846644714
+2003,58,"never married","2.highschool","IT","yes",65.1108537153447
+2005,27,"married","4.master","industrial","yes",145.805163374625
+2009,52,"separated","2.highschool","industrial","yes",87.9810327856054
+2003,45,"married","5.phd","industrial","no",41.0998036301194
+2003,22,"never married","2.highschool","IT","yes",68.3956538035455
+2005,25,"never married","3.bachelor","industrial","yes",81.2832532842527
+2004,25,"never married","2.highschool","industrial","yes",73.7757432746946
+2005,41,"married","1.primary","industrial","yes",130.982177377461
+2006,54,"separated","4.master","industrial","yes",148.413159102577
+2007,23,"married","2.highschool","industrial","yes",81.226746312023
+2006,36,"never married","5.phd","industrial","yes",63.1888610037461
+2004,31,"separated","3.bachelor","industrial","yes",94.0727147457005
+2006,52,"married","2.highschool","IT","yes",92.6581301668597
+2007,46,"married","2.highschool","IT","no",76.8936025176112
+2007,45,"married","2.highschool","industrial","yes",118.884359339886
+2009,40,"married","2.highschool","industrial","no",79.8549003093467
+2004,33,"never married","4.master","IT","yes",86.6951548289402
+2007,42,"married","4.master","IT","yes",133.971500070695
+2007,41,"married","4.master","IT","yes",125.525498433836
+2007,25,"never married","2.highschool","industrial","yes",92.8958447894966
+2005,24,"divorced","2.highschool","industrial","yes",72.1504556815713
+2006,24,"never married","3.bachelor","industrial","no",118.884359339886
+2008,51,"married","2.highschool","IT","no",70.4760196469445
+2004,41,"married","2.highschool","industrial","no",127.115743812184
+2009,42,"never married","4.master","IT","yes",114.475713290347
+2005,30,"never married","4.master","industrial","yes",87.9810327856054
+2009,55,"married","1.primary","industrial","no",54.5981500331442
+2008,23,"never married","2.highschool","industrial","yes",84.0459576539924
+2003,60,"divorced","4.master","IT","no",85.3839403789827
+2003,40,"married","5.phd","IT","yes",141.77517233318
+2008,41,"never married","2.highschool","IT","yes",110.782650276254
+2003,80,"married","2.highschool","IT","yes",79.8549003093467
+2005,53,"married","2.highschool","IT","yes",97.4932940453934
+2004,40,"never married","2.highschool","industrial","no",171.765132627508
+2009,35,"married","3.bachelor","industrial","yes",137.481247831663
+2009,55,"married","1.primary","industrial","yes",75.3556793180091
+2008,24,"never married","2.highschool","IT","yes",73.7757432746946
+2007,39,"married","4.master","IT","yes",148.413159102577
+2003,30,"married","5.phd","industrial","yes",95.2307125669819
+2005,68,"married","2.highschool","industrial","yes",87.9810327856054
+2004,54,"married","2.highschool","IT","yes",109.833985642199
+2008,27,"never married","4.master","industrial","no",81.2832532842527
+2005,34,"married","2.highschool","industrial","yes",118.884359339886
+2004,53,"married","5.phd","IT","yes",127.115743812184
+2004,48,"married","5.phd","IT","no",85.3839403789827
+2005,59,"married","2.highschool","industrial","yes",81.2832532842527
+2004,30,"married","3.bachelor","industrial","no",118.884359339886
+2007,45,"married","5.phd","IT","yes",163.515863976238
+2007,39,"married","4.master","IT","yes",104.921506533664
+2008,45,"married","4.master","industrial","no",99.6894636984864
+2007,43,"married","5.phd","IT","yes",281.745970551857
+2003,30,"never married","5.phd","IT","yes",138.299126920883
+2005,57,"married","4.master","IT","yes",176.989650489877
+2004,53,"married","4.master","IT","yes",136.876367635184
+2009,42,"married","4.master","IT","yes",186.876677628007
+2005,23,"never married","2.highschool","industrial","no",90.4819133566401
+2009,58,"married","2.highschool","industrial","no",85.3839403789827
+2005,43,"married","1.primary","industrial","yes",145.143601176911
+2003,33,"divorced","5.phd","IT","yes",120.589436530402
+2004,56,"married","4.master","IT","yes",101.82435207568
+2006,37,"married","4.master","industrial","no",108.874525834712
+2009,41,"divorced","5.phd","industrial","no",38.6059145209601
+2007,33,"married","3.bachelor","IT","yes",92.8958447894966
+2007,50,"never married","5.phd","IT","yes",126.323880709786
+2003,43,"married","5.phd","IT","yes",191.573683548412
+2004,53,"married","4.master","industrial","yes",155.900506146767
+2005,37,"widowed","3.bachelor","IT","yes",87.9810327856054
+2006,20,"never married","3.bachelor","IT","no",59.0970640815891
+2003,26,"never married","3.bachelor","industrial","yes",73.7757432746946
+2003,29,"divorced","4.master","IT","no",90.4819133566401
+2008,57,"married","4.master","IT","yes",118.884359339886
+2009,47,"married","3.bachelor","IT","yes",151.591484239814
+2004,54,"married","5.phd","industrial","no",272.294783220064
+2007,38,"married","1.primary","industrial","no",97.4932940453934
+2006,23,"never married","3.bachelor","industrial","no",68.1119940653271
+2004,31,"married","2.highschool","IT","yes",127.115743812184
+2004,43,"married","4.master","IT","yes",272.294783220064
+2003,33,"married","5.phd","IT","no",111.720849360989
+2004,48,"married","2.highschool","industrial","yes",127.115743812184
+2008,33,"married","2.highschool","industrial","yes",87.9810327856054
+2009,52,"married","4.master","IT","yes",114.475713290347
+2008,30,"never married","3.bachelor","IT","no",69.7915308454408
+2004,44,"married","2.highschool","industrial","yes",94.0727147457005
+2004,38,"married","2.highschool","IT","yes",127.273347006486
+2008,51,"married","2.highschool","industrial","yes",160.642475408263
+2007,47,"married","3.bachelor","industrial","yes",171.765132627508
+2005,28,"married","4.master","IT","yes",141.77517233318
+2004,52,"divorced","3.bachelor","IT","yes",115.375038556391
+2004,23,"never married","1.primary","industrial","no",72.1504556815713
+2003,65,"married","1.primary","industrial","no",73.7757432746946
+2005,27,"never married","4.master","industrial","yes",127.115743812184
+2004,33,"married","1.primary","IT","no",20.9343779401018
+2008,49,"married","2.highschool","industrial","yes",79.8549003093467
+2008,27,"never married","3.bachelor","industrial","yes",102.870246933215
+2008,48,"divorced","2.highschool","industrial","yes",115.375038556391
+2005,38,"never married","3.bachelor","industrial","yes",97.4932940453934
+2008,58,"married","3.bachelor","industrial","no",104.921506533664
+2003,40,"married","5.phd","industrial","no",115.375038556391
+2007,46,"married","2.highschool","industrial","no",93.4866920429597
+2009,53,"married","3.bachelor","IT","yes",123.089699847943
+2009,25,"never married","5.phd","IT","yes",118.884359339886
+2003,42,"married","3.bachelor","IT","yes",96.3706528322308
+2004,40,"never married","2.highschool","industrial","yes",84.0459576539924
+2006,35,"married","2.highschool","IT","yes",127.115743812184
+2005,50,"separated","2.highschool","IT","no",95.2307125669819
+2004,34,"married","3.bachelor","industrial","yes",81.2832532842527
+2009,48,"married","2.highschool","IT","yes",102.870246933215
+2004,49,"married","5.phd","IT","yes",111.720849360989
+2009,41,"married","4.master","IT","no",94.0727147457005
+2004,37,"married","4.master","IT","yes",127.115743812184
+2003,58,"married","3.bachelor","IT","yes",104.921506533664
+2006,28,"never married","2.highschool","industrial","no",68.1119940653271
+2003,33,"married","2.highschool","industrial","yes",128.680488220624
+2003,50,"married","3.bachelor","industrial","yes",143.92735936583
+2009,38,"married","2.highschool","IT","yes",103.90247060316
+2003,48,"married","2.highschool","industrial","yes",91.6992261117042
+2008,30,"married","3.bachelor","industrial","yes",95.2307125669819
+2006,49,"married","5.phd","IT","no",138.299126920883
+2005,44,"married","4.master","IT","yes",118.55677641507
+2009,50,"married","2.highschool","industrial","yes",94.0727147457005
+2009,58,"married","4.master","IT","yes",114.475713290347
+2004,45,"never married","4.master","IT","yes",150.01328628271
+2005,44,"married","3.bachelor","IT","no",97.4932940453934
+2005,35,"divorced","4.master","IT","no",90.4819133566401
+2005,59,"married","2.highschool","IT","no",81.2832532842527
+2009,45,"married","2.highschool","IT","no",130.982177377461
+2004,51,"married","4.master","industrial","yes",150.962783462143
+2006,61,"married","3.bachelor","IT","no",130.982177377461
+2008,45,"married","2.highschool","industrial","yes",145.143601176911
+2003,34,"never married","4.master","industrial","yes",90.4819133566401
+2007,33,"married","4.master","IT","no",113.567089569751
+2005,45,"married","2.highschool","IT","yes",87.9810327856054
+2009,50,"never married","5.phd","IT","yes",157.700527725737
+2006,50,"married","2.highschool","IT","yes",109.833985642199
+2005,39,"married","3.bachelor","IT","no",84.0459576539924
+2009,26,"never married","4.master","IT","yes",160.643638171791
+2007,49,"married","2.highschool","industrial","no",47.9055670370271
+2003,20,"never married","2.highschool","industrial","no",59.0970640815891
+2003,31,"married","4.master","industrial","no",81.2832532842527
+2007,49,"married","2.highschool","IT","yes",87.9810327856054
+2007,56,"never married","2.highschool","industrial","yes",87.9810327856054
+2005,61,"married","4.master","IT","yes",143.808556824369
+2005,56,"separated","2.highschool","IT","yes",110.782650276254
+2009,51,"married","4.master","IT","no",118.884359339886
+2004,42,"married","1.primary","industrial","yes",120.589436530402
+2004,45,"married","4.master","industrial","yes",272.294783220064
+2006,30,"married","5.phd","IT","yes",105.375892660271
+2005,48,"never married","4.master","IT","no",69.0108766220885
+2009,33,"married","5.phd","industrial","yes",87.9810327856054
+2007,50,"married","3.bachelor","IT","yes",89.2428846644714
+2003,31,"married","5.phd","IT","yes",171.765132627508
+2003,48,"married","4.master","industrial","yes",133.232350826567
+2005,35,"married","5.phd","IT","yes",200.543262324662
+2009,47,"married","3.bachelor","industrial","yes",92.8958447894966
+2007,45,"married","4.master","industrial","yes",148.413159102577
+2009,52,"married","2.highschool","industrial","yes",119.742556289908
+2007,46,"married","2.highschool","industrial","yes",82.6796372966372
+2007,47,"married","4.master","IT","no",105.927810775063
+2009,49,"married","2.highschool","industrial","yes",267.901086855275
+2007,36,"married","1.primary","industrial","no",104.921506533664
+2005,51,"married","4.master","industrial","no",127.115743812184
+2008,46,"married","2.highschool","industrial","yes",157.700527725737
+2004,37,"married","4.master","IT","no",148.413159102577
+2005,23,"never married","3.bachelor","industrial","yes",65.1108537153447
+2008,43,"married","4.master","industrial","yes",104.921506533664
+2006,34,"married","4.master","IT","yes",78.3924668009837
+2008,58,"married","2.highschool","industrial","yes",139.213788138664
+2009,44,"never married","4.master","IT","yes",112.6488963421
+2008,61,"married","4.master","IT","no",79.8549003093467
+2005,40,"divorced","1.primary","industrial","no",65.1108537153447
+2003,37,"married","3.bachelor","IT","yes",111.720849360989
+2003,33,"married","2.highschool","IT","no",104.921506533664
+2004,38,"married","3.bachelor","IT","yes",176.989650489877
+2006,41,"married","2.highschool","IT","yes",99.6894636984864
+2005,30,"married","2.highschool","industrial","yes",104.921506533664
+2003,51,"married","1.primary","industrial","yes",70.8150386167557
+2003,39,"never married","3.bachelor","industrial","yes",94.0727147457005
+2006,56,"married","3.bachelor","IT","yes",127.115743812184
+2007,44,"never married","2.highschool","industrial","no",97.4932940453934
+2005,51,"divorced","5.phd","IT","yes",109.833985642199
+2006,35,"married","2.highschool","industrial","no",75.1996281485946
+2009,27,"never married","2.highschool","industrial","no",65.1108537153447
+2003,47,"married","3.bachelor","industrial","yes",146.462838515063
+2007,51,"married","3.bachelor","IT","no",81.2832532842527
+2006,41,"married","2.highschool","industrial","no",127.115743812184
+2005,63,"married","1.primary","industrial","no",73.7757432746946
+2009,61,"never married","2.highschool","IT","no",65.1108537153447
+2004,46,"married","2.highschool","industrial","yes",99.6894636984864
+2009,33,"never married","3.bachelor","industrial","no",79.8549003093467
+2009,35,"separated","1.primary","IT","no",73.7757432746946
+2003,28,"married","5.phd","IT","yes",87.9810327856054
+2007,50,"married","3.bachelor","industrial","no",118.884359339886
+2007,41,"married","5.phd","IT","yes",284.524740902214
+2008,23,"married","4.master","industrial","no",118.884359339886
+2004,45,"married","3.bachelor","IT","yes",106.921814091211
+2007,63,"married","5.phd","industrial","yes",100.013486924706
+2006,59,"married","3.bachelor","IT","yes",108.874525834712
+2005,30,"married","4.master","IT","yes",114.475713290347
+2003,30,"married","5.phd","IT","yes",115.375038556391
+2007,45,"married","2.highschool","industrial","no",130.982177377461
+2005,42,"married","2.highschool","industrial","yes",79.8549003093467
+2009,57,"married","1.primary","industrial","yes",106.921814091211
+2003,52,"divorced","3.bachelor","industrial","no",22.9624006796429
+2003,54,"married","3.bachelor","IT","yes",115.182455126581
+2005,30,"married","3.bachelor","IT","yes",103.90247060316
+2003,47,"married","4.master","industrial","yes",184.469464222499
+2003,38,"never married","3.bachelor","IT","yes",314.32933644529
+2003,47,"married","3.bachelor","IT","yes",99.6894636984864
+2008,39,"never married","4.master","industrial","yes",128.680488220624
+2005,50,"married","2.highschool","industrial","no",87.9810327856054
+2003,47,"married","2.highschool","industrial","no",54.5981500331442
+2004,45,"married","2.highschool","industrial","yes",99.6894636984864
+2007,44,"married","1.primary","IT","yes",118.884359339886
+2003,52,"married","2.highschool","industrial","yes",92.1611220323496
+2004,42,"married","4.master","industrial","no",127.115743812184
+2004,18,"never married","1.primary","industrial","no",41.7049904993395
+2006,56,"married","4.master","IT","yes",109.833985642199
+2004,50,"married","5.phd","IT","no",82.6796372966372
+2006,50,"married","5.phd","IT","yes",277.79948020565
+2006,53,"never married","3.bachelor","IT","no",99.6894636984864
+2009,38,"married","5.phd","industrial","yes",176.989650489877
+2004,27,"never married","1.primary","IT","no",84.0459576539924
+2004,56,"married","5.phd","IT","no",163.515863976238
+2003,50,"married","5.phd","IT","yes",81.2832532842527
+2003,56,"married","4.master","industrial","yes",130.982177377461
+2007,50,"married","1.primary","industrial","no",127.115743812184
+2005,49,"never married","2.highschool","IT","no",72.1504556815713
+2005,42,"never married","3.bachelor","industrial","no",104.921506533664
+2009,50,"married","5.phd","industrial","yes",186.876677628007
+2003,53,"married","4.master","IT","yes",176.989650489877
+2007,28,"married","2.highschool","industrial","no",139.703071527658
+2003,45,"married","2.highschool","industrial","yes",73.7757432746946
+2009,24,"never married","2.highschool","IT","no",66.2294082943902
+2003,25,"never married","1.primary","industrial","no",81.2832532842527
+2004,38,"married","4.master","industrial","yes",104.921506533664
+2009,47,"married","4.master","industrial","yes",109.833985642199
+2003,38,"married","4.master","industrial","yes",154.68529299563
+2007,33,"married","3.bachelor","IT","no",106.921814091211
+2006,39,"married","5.phd","IT","yes",277.79948020565
+2005,52,"divorced","2.highschool","industrial","yes",87.9810327856054
+2005,46,"divorced","2.highschool","industrial","yes",90.4819133566401
+2004,42,"married","2.highschool","IT","yes",106.921814091211
+2003,61,"married","2.highschool","industrial","yes",56.9055391446732
+2005,32,"never married","2.highschool","industrial","yes",81.2832532842527
+2009,42,"divorced","2.highschool","IT","yes",107.903923866877
+2006,61,"married","5.phd","IT","yes",196.125272594255
+2009,27,"married","2.highschool","industrial","no",91.6992261117042
+2008,45,"married","5.phd","industrial","yes",200.543262324662
+2003,58,"married","4.master","IT","no",32.3664131748549
+2007,25,"never married","4.master","industrial","yes",104.921506533664
+2007,34,"married","1.primary","industrial","no",100.764272842107
+2005,44,"married","3.bachelor","IT","yes",85.3839403789827
+2007,40,"married","3.bachelor","IT","no",82.6796372966372
+2007,51,"married","4.master","industrial","no",97.4932940453934
+2003,50,"married","5.phd","IT","yes",121.010826565755
+2009,64,"married","4.master","IT","yes",133.971500070695
+2003,54,"married","3.bachelor","industrial","yes",148.413159102577
+2008,42,"never married","4.master","IT","yes",104.921506533664
+2007,31,"married","2.highschool","industrial","no",81.2832532842527
+2003,25,"never married","4.master","industrial","yes",90.4819133566401
+2006,32,"married","3.bachelor","industrial","yes",106.921814091211
+2007,51,"married","1.primary","IT","yes",114.475713290347
+2007,75,"married","1.primary","IT","no",53.3953468905727
+2003,28,"married","2.highschool","industrial","no",87.9810327856054
+2009,28,"never married","2.highschool","industrial","no",66.2294082943902
+2007,32,"never married","5.phd","industrial","yes",96.3706528322308
+2006,53,"married","5.phd","IT","yes",272.403225755586
+2008,36,"married","3.bachelor","industrial","no",97.1582750436503
+2004,43,"married","5.phd","IT","yes",200.543262324662
+2004,51,"married","4.master","industrial","yes",123.089699847943
+2005,35,"married","4.master","IT","yes",99.6894636984864
+2004,46,"separated","2.highschool","industrial","no",94.0727147457005
+2003,38,"married","4.master","industrial","yes",81.2832532842527
+2004,43,"married","4.master","IT","no",154.68529299563
+2004,39,"married","2.highschool","industrial","no",109.833985642199
+2007,37,"divorced","3.bachelor","industrial","yes",123.089699847943
+2008,59,"divorced","5.phd","IT","yes",73.7757432746946
+2003,33,"married","4.master","industrial","no",107.903923866877
+2007,23,"never married","3.bachelor","industrial","no",73.7757432746946
+2006,37,"never married","3.bachelor","industrial","no",87.9810327856054
+2005,40,"married","2.highschool","industrial","no",27.1405792079024
+2006,25,"married","3.bachelor","IT","yes",94.0727147457005
+2008,27,"never married","4.master","industrial","yes",102.453557578372
+2004,47,"married","5.phd","IT","yes",272.294783220064
+2008,52,"married","4.master","industrial","no",94.0727147457005
+2007,23,"never married","2.highschool","IT","no",81.2832532842527
+2004,33,"married","4.master","IT","no",87.9810327856054
+2005,37,"never married","4.master","IT","yes",109.833985642199
+2008,34,"married","2.highschool","industrial","no",80.4302079458208
+2003,51,"separated","2.highschool","industrial","yes",148.413159102577
+2007,40,"divorced","3.bachelor","industrial","yes",148.413159102577
+2007,50,"married","2.highschool","IT","yes",81.2832532842527
+2005,64,"married","3.bachelor","industrial","yes",118.884359339886
+2008,54,"married","1.primary","industrial","yes",80.487444359511
+2003,50,"married","2.highschool","IT","yes",91.6992261117042
+2004,32,"married","4.master","IT","yes",109.355626400253
+2004,37,"married","4.master","IT","yes",104.921506533664
+2006,19,"never married","1.primary","industrial","no",65.1108537153447
+2006,32,"married","2.highschool","industrial","yes",76.8936025176112
+2004,42,"married","3.bachelor","industrial","yes",99.6894636984864
+2009,26,"never married","3.bachelor","industrial","no",99.6894636984864
+2009,46,"married","5.phd","IT","yes",157.700527725737
+2009,18,"never married","1.primary","industrial","no",49.5553381215227
+2005,43,"married","2.highschool","IT","yes",90.4819133566401
+2003,62,"married","3.bachelor","industrial","yes",111.720849360989
+2008,44,"married","2.highschool","industrial","yes",148.413159102577
+2005,40,"married","3.bachelor","IT","yes",133.232350826567
+2006,43,"married","2.highschool","industrial","yes",134.705375118879
+2004,32,"never married","4.master","industrial","yes",118.884359339886
+2006,48,"never married","2.highschool","IT","yes",87.9810327856054
+2009,35,"married","3.bachelor","IT","yes",109.833985642199
+2006,61,"married","3.bachelor","IT","yes",130.982177377461
+2006,47,"married","1.primary","industrial","yes",89.2428846644714
+2005,55,"divorced","2.highschool","IT","yes",102.870246933215
+2008,28,"divorced","2.highschool","industrial","yes",76.8936025176112
+2008,52,"married","5.phd","industrial","no",149.695042068453
+2009,27,"never married","5.phd","IT","yes",102.870246933215
+2006,22,"married","3.bachelor","IT","yes",90.4819133566401
+2006,20,"never married","2.highschool","industrial","no",69.9291272064087
+2006,42,"married","2.highschool","IT","yes",106.921814091211
+2007,29,"married","4.master","industrial","no",87.9810327856054
+2003,31,"never married","4.master","IT","yes",109.833985642199
+2008,59,"divorced","3.bachelor","IT","yes",151.591484239814
+2008,36,"married","5.phd","industrial","yes",148.413159102577
+2007,32,"married","1.primary","industrial","no",66.9616443217359
+2005,32,"never married","3.bachelor","IT","yes",103.90247060316
+2006,25,"never married","3.bachelor","IT","yes",99.6894636984864
+2008,43,"married","3.bachelor","IT","no",134.705375118879
+2008,44,"never married","2.highschool","industrial","no",43.7351116779821
+2009,57,"married","3.bachelor","industrial","no",116.707154559148
+2006,49,"married","4.master","IT","yes",141.77517233318
+2007,41,"married","2.highschool","IT","yes",144.47808766541
+2006,38,"married","4.master","industrial","yes",134.705375118879
+2004,58,"married","1.primary","IT","yes",118.884359339886
+2004,59,"married","5.phd","IT","no",189.244162932803
+2005,39,"married","5.phd","IT","yes",160.642475408263
+2006,60,"married","3.bachelor","industrial","yes",96.0316570194457
+2007,56,"married","2.highschool","IT","yes",111.065194319742
+2008,44,"married","3.bachelor","industrial","yes",148.413159102577
+2008,70,"married","3.bachelor","IT","yes",99.6894636984864
+2009,27,"never married","4.master","IT","no",81.2832532842527
+2004,47,"married","2.highschool","industrial","no",118.884359339886
+2003,41,"married","3.bachelor","industrial","no",127.115743812184
+2008,29,"married","3.bachelor","industrial","yes",104.921506533664
+2009,42,"married","1.primary","industrial","yes",112.6488963421
+2007,51,"divorced","4.master","IT","yes",281.745970551857
+2009,47,"married","2.highschool","industrial","yes",114.477521132502
+2008,48,"married","2.highschool","industrial","yes",111.720849360989
+2003,39,"married","2.highschool","industrial","no",134.705375118879
+2005,23,"never married","2.highschool","industrial","yes",75.3556793180091
+2007,31,"married","3.bachelor","industrial","no",119.74085129618
+2005,59,"married","2.highschool","industrial","yes",118.884359339886
+2003,19,"never married","1.primary","industrial","no",27.1405792079024
+2009,42,"married","5.phd","IT","yes",182.020620963513
+2004,35,"married","2.highschool","industrial","no",65.1108537153447
+2007,38,"married","5.phd","IT","yes",141.77517233318
+2006,45,"married","3.bachelor","IT","yes",114.475713290347
+2008,58,"married","5.phd","industrial","no",135.59805975224
+2006,26,"never married","3.bachelor","IT","yes",117.146816914805
+2003,30,"never married","2.highschool","IT","no",99.6894636984864
+2006,54,"separated","5.phd","IT","yes",277.79948020565
+2008,38,"married","2.highschool","industrial","yes",94.0727147457005
+2005,44,"married","2.highschool","industrial","yes",94.0727147457005
+2003,52,"married","4.master","IT","no",96.3706528322308
+2004,73,"divorced","2.highschool","industrial","yes",75.3556793180091
+2006,65,"married","5.phd","IT","yes",104.921506533664
+2003,28,"married","4.master","IT","no",95.2307125669819
+2009,53,"married","1.primary","industrial","yes",54.5981500331442
+2006,53,"married","3.bachelor","IT","yes",89.2428846644714
+2008,52,"married","4.master","IT","yes",145.143601176911
+2009,27,"never married","2.highschool","IT","yes",96.8667032433329
+2003,57,"married","1.primary","industrial","yes",130.982177377461
+2004,32,"never married","4.master","IT","yes",84.0459576539924
+2007,51,"never married","2.highschool","IT","yes",148.155046727428
+2008,43,"married","2.highschool","IT","yes",49.5553381215227
+2004,50,"married","3.bachelor","industrial","yes",141.77517233318
+2004,53,"married","3.bachelor","IT","yes",115.375038556391
+2007,54,"married","1.primary","industrial","no",65.1108537153447
+2007,24,"never married","2.highschool","industrial","yes",85.3839403789827
+2008,40,"married","2.highschool","IT","yes",101.82435207568
+2003,30,"married","4.master","industrial","yes",95.2307125669819
+2003,45,"married","4.master","IT","yes",99.6894636984864
+2007,55,"divorced","4.master","industrial","yes",147.116689159978
+2003,45,"never married","5.phd","IT","yes",140.398200161944
+2004,44,"never married","4.master","IT","yes",109.833985642199
+2004,37,"widowed","4.master","IT","yes",127.115743812184
+2008,41,"married","1.primary","industrial","yes",115.375038556391
+2007,44,"married","2.highschool","industrial","no",59.0970640815891
+2007,52,"never married","2.highschool","industrial","yes",76.8936025176112
+2009,55,"married","4.master","IT","yes",141.77517233318
+2003,43,"married","2.highschool","industrial","yes",70.9095858696657
+2009,27,"never married","5.phd","IT","yes",200.543262324662
+2006,43,"married","2.highschool","IT","yes",97.4932940453934
+2007,46,"married","2.highschool","industrial","yes",99.6894636984864
+2003,30,"married","3.bachelor","IT","yes",186.876677628007
+2003,43,"married","1.primary","industrial","yes",81.2832532842527
+2005,48,"married","3.bachelor","industrial","yes",160.642475408263
+2003,33,"never married","1.primary","industrial","no",63.9666908300607
+2008,29,"never married","3.bachelor","industrial","yes",87.9810327856054
+2005,24,"never married","2.highschool","IT","no",73.7757432746946
+2009,52,"married","3.bachelor","industrial","yes",145.143601176911
+2005,50,"married","5.phd","industrial","no",141.77517233318
+2005,24,"never married","2.highschool","industrial","no",76.8936025176112
+2003,42,"never married","3.bachelor","industrial","yes",123.908567597957
+2004,53,"married","4.master","industrial","yes",118.884359339886
+2008,49,"married","5.phd","IT","yes",279.1974969917
+2004,46,"married","1.primary","industrial","no",54.5981500331442
+2008,40,"married","3.bachelor","industrial","yes",154.68529299563
+2003,41,"never married","5.phd","IT","yes",180.030197076236
+2006,41,"married","4.master","IT","yes",118.884359339886
+2009,36,"married","3.bachelor","industrial","no",87.9810327856054
+2003,34,"married","3.bachelor","IT","no",91.6992261117042
+2004,24,"never married","3.bachelor","IT","no",59.0970640815891
+2008,44,"married","4.master","industrial","yes",123.908567597957
+2007,33,"married","4.master","IT","no",109.833985642199
+2007,25,"never married","2.highschool","industrial","yes",94.0727147457005
+2005,40,"married","2.highschool","industrial","no",117.146816914805
+2007,48,"never married","2.highschool","industrial","no",65.1108537153447
+2005,56,"married","2.highschool","industrial","no",97.4932940453934
+2005,25,"never married","4.master","industrial","no",118.019753340006
+2005,44,"married","4.master","industrial","yes",141.77517233318
+2003,27,"never married","3.bachelor","IT","yes",116.176695171054
+2006,58,"married","1.primary","industrial","yes",75.3556793180091
+2008,52,"divorced","4.master","IT","yes",95.2307125669819
+2007,60,"never married","5.phd","industrial","yes",111.720849360989
+2008,39,"married","3.bachelor","IT","yes",103.90247060316
+2004,51,"married","4.master","industrial","yes",147.116689159978
+2007,31,"never married","3.bachelor","IT","yes",87.9810327856054
+2005,45,"widowed","2.highschool","industrial","no",118.884359339886
+2005,43,"never married","4.master","IT","yes",100.764272842107
+2008,45,"married","4.master","industrial","yes",120.589436530402
+2004,40,"married","3.bachelor","IT","yes",193.866878146586
+2008,46,"married","2.highschool","industrial","yes",118.884359339886
+2009,51,"married","5.phd","IT","yes",267.901086855275
+2006,47,"divorced","4.master","IT","yes",174.402876012275
+2004,52,"married","5.phd","IT","yes",133.971500070695
+2003,31,"divorced","2.highschool","IT","yes",154.68529299563
+2007,40,"married","4.master","IT","yes",154.68529299563
+2009,26,"never married","4.master","IT","yes",118.884359339886
+2004,49,"married","2.highschool","industrial","no",95.2307125669819
+2009,38,"divorced","3.bachelor","industrial","no",109.833985642199
+2005,50,"married","1.primary","IT","no",111.720849360989
+2006,63,"married","3.bachelor","industrial","yes",134.705375118879
+2008,35,"married","1.primary","industrial","no",85.9010443226556
+2008,29,"never married","2.highschool","IT","no",118.884359339886
+2008,33,"married","2.highschool","industrial","yes",87.9810327856054
+2007,29,"married","2.highschool","industrial","no",92.8958447894966
+2007,62,"divorced","4.master","IT","yes",109.833985642199
+2008,45,"married","5.phd","IT","yes",124.720446242886
+2003,56,"married","1.primary","industrial","yes",127.901232979118
+2003,58,"married","1.primary","industrial","no",97.4932940453934
+2007,39,"married","5.phd","industrial","yes",198.350290464385
+2005,49,"married","3.bachelor","industrial","yes",92.8958447894966
+2004,24,"never married","4.master","IT","no",94.0727147457005
+2003,61,"divorced","2.highschool","industrial","yes",148.413159102577
+2008,58,"married","4.master","industrial","yes",79.8549003093467
+2009,47,"married","3.bachelor","IT","no",118.884359339886
+2004,41,"separated","4.master","IT","yes",87.9810327856054
+2008,71,"married","1.primary","IT","yes",94.0727147457005
+2006,47,"married","3.bachelor","industrial","yes",150.070476909424
+2005,38,"married","4.master","industrial","yes",176.989650489877
+2005,31,"never married","4.master","industrial","yes",73.7757432746946
+2007,56,"married","4.master","IT","yes",125.12381572196
+2006,44,"never married","4.master","IT","yes",277.79948020565
+2003,33,"married","4.master","IT","yes",107.903923866877
+2005,36,"never married","4.master","industrial","no",60.7397785177603
+2006,31,"married","4.master","IT","yes",92.0363233010764
+2004,55,"married","3.bachelor","IT","yes",109.833985642199
+2005,48,"married","4.master","IT","no",66.9616443217359
+2005,50,"married","3.bachelor","IT","yes",114.475713290347
+2006,42,"married","4.master","IT","no",170.6951277113
+2008,25,"never married","3.bachelor","IT","yes",130.982177377461
+2008,55,"married","2.highschool","industrial","yes",127.115743812184
+2004,28,"never married","5.phd","industrial","yes",117.146816914805
+2003,30,"married","1.primary","IT","no",123.089699847943
+2008,46,"never married","4.master","industrial","yes",120.589436530402
+2004,48,"divorced","5.phd","IT","yes",130.982177377461
+2006,42,"divorced","3.bachelor","industrial","yes",81.2832532842527
+2008,23,"married","4.master","industrial","no",36.6737041960799
+2003,60,"married","5.phd","industrial","no",104.921506533664
+2008,34,"married","1.primary","IT","yes",74.412963512917
+2003,45,"married","4.master","industrial","yes",129.067820506745
+2007,28,"never married","3.bachelor","industrial","no",84.1000101164483
+2004,33,"married","5.phd","IT","yes",185.918662879754
+2008,58,"married","2.highschool","IT","yes",105.927810775063
+2008,47,"married","5.phd","IT","yes",163.515863976238
+2003,24,"never married","3.bachelor","industrial","no",63.1888610037461
+2008,56,"married","4.master","industrial","no",134.705375118879
+2004,56,"married","4.master","industrial","yes",120.926701544426
+2005,23,"never married","4.master","IT","yes",94.0727147457005
+2003,56,"married","5.phd","IT","yes",132.487821126123
+2003,45,"married","4.master","IT","yes",133.232350826567
+2009,58,"married","3.bachelor","IT","yes",145.143601176911
+2007,30,"married","5.phd","IT","yes",118.884359339886
+2009,46,"married","5.phd","industrial","no",150.330653495766
+2004,48,"married","5.phd","industrial","yes",278.964466695847
+2006,50,"divorced","2.highschool","industrial","yes",98.2692308087927
+2008,43,"never married","4.master","IT","yes",99.6894636984864
+2006,37,"married","1.primary","industrial","no",94.0727147457005
+2003,49,"divorced","3.bachelor","IT","no",176.989650489877
+2009,31,"married","4.master","IT","yes",166.324941233877
+2009,54,"married","2.highschool","industrial","yes",94.0727147457005
+2007,52,"married","4.master","IT","yes",139.703071527658
+2003,70,"married","2.highschool","industrial","no",78.3924668009837
+2005,30,"married","5.phd","IT","yes",141.775856466307
+2006,44,"married","2.highschool","industrial","yes",116.265324062503
+2003,34,"married","4.master","IT","yes",148.413159102577
+2007,38,"married","2.highschool","industrial","no",87.9810327856054
+2006,28,"separated","1.primary","industrial","yes",90.4819133566401
+2005,38,"married","3.bachelor","industrial","yes",141.77517233318
+2003,39,"married","2.highschool","industrial","no",63.0927167348386
+2008,52,"never married","4.master","IT","yes",65.1108537153447
+2004,34,"never married","4.master","industrial","yes",151.591484239814
+2003,33,"married","4.master","IT","yes",123.089699847943
+2007,45,"married","4.master","industrial","yes",118.884359339886
+2006,58,"married","2.highschool","industrial","no",79.8549003093467
+2003,38,"married","2.highschool","industrial","no",104.004959912222
+2007,63,"married","4.master","industrial","no",55.5361044177385
+2007,38,"married","5.phd","IT","yes",99.6894636984864
+2007,31,"married","3.bachelor","industrial","no",99.6894636984864
+2007,53,"married","4.master","IT","yes",193.452606894109
+2009,21,"never married","2.highschool","IT","yes",102.870246933215
+2006,38,"married","4.master","IT","yes",164.646988930328
+2004,18,"never married","1.primary","industrial","yes",69.6190369046763
+2008,28,"never married","3.bachelor","industrial","yes",99.6894636984864
+2003,33,"never married","4.master","IT","yes",114.475713290347
+2004,32,"married","3.bachelor","industrial","no",99.6894636984864
+2009,29,"never married","2.highschool","IT","yes",95.2307125669819
+2005,28,"married","1.primary","industrial","yes",82.6796372966372
+2005,42,"married","5.phd","IT","yes",116.943081320617
+2007,28,"widowed","1.primary","IT","no",54.5981500331442
+2009,36,"married","5.phd","IT","yes",138.299126920883
+2007,47,"married","2.highschool","IT","yes",130.982177377461
+2007,53,"married","5.phd","IT","yes",281.745970551857
+2003,48,"married","5.phd","IT","yes",163.515863976238
+2006,36,"married","5.phd","industrial","yes",179.214858036271
+2007,55,"married","3.bachelor","IT","yes",126.323880709786
+2008,37,"married","1.primary","industrial","no",70.4760196469445
+2009,68,"married","4.master","IT","yes",118.019753340006
+2003,65,"married","2.highschool","industrial","no",71.3196387942183
+2007,37,"never married","4.master","IT","no",114.475713290347
+2007,33,"married","4.master","IT","yes",138.299126920883
+2003,19,"never married","2.highschool","IT","no",54.5981500331442
+2004,50,"married","4.master","IT","yes",94.0727147457005
+2004,22,"never married","3.bachelor","industrial","no",80.4302079458208
+2004,40,"married","3.bachelor","IT","yes",89.2428846644714
+2008,45,"married","3.bachelor","industrial","no",117.146816914805
+2009,36,"married","5.phd","industrial","no",127.115743812184
+2005,37,"married","1.primary","industrial","no",81.2832532842527
+2003,24,"never married","2.highschool","industrial","no",52.4070640482002
+2007,66,"married","1.primary","IT","yes",99.6894636984864
+2004,35,"married","1.primary","industrial","no",63.1888610037461
+2009,33,"never married","4.master","IT","yes",196.125272594255
+2005,44,"married","3.bachelor","industrial","yes",101.82435207568
+2004,48,"never married","3.bachelor","IT","yes",107.903923866877
+2009,47,"married","2.highschool","IT","no",51.2396549228382
+2004,41,"married","3.bachelor","industrial","yes",99.6894636984864
+2005,55,"married","4.master","IT","yes",63.1888610037461
+2008,74,"divorced","5.phd","IT","no",148.413159102577
+2007,33,"never married","4.master","IT","yes",99.6894636984864
+2003,62,"married","5.phd","IT","yes",130.982177377461
+2004,56,"divorced","2.highschool","industrial","yes",101.82435207568
+2006,29,"never married","5.phd","IT","yes",99.6894636984864
+2009,56,"never married","1.primary","IT","no",79.8549003093467
+2009,47,"married","5.phd","IT","yes",160.642475408263
+2005,45,"married","2.highschool","IT","yes",134.705375118879
+2007,44,"married","4.master","IT","yes",160.642475408263
+2004,25,"never married","4.master","IT","yes",91.6992261117042
+2005,45,"divorced","3.bachelor","IT","no",75.3556793180091
+2005,40,"married","4.master","IT","yes",136.15771083723
+2003,56,"married","2.highschool","IT","yes",134.705375118879
+2005,56,"married","3.bachelor","IT","yes",81.9853178344996
+2003,47,"married","4.master","industrial","yes",176.989650489877
+2007,39,"married","2.highschool","industrial","yes",118.886080351034
+2005,38,"married","3.bachelor","IT","yes",121.262745732618
+2009,48,"married","2.highschool","industrial","no",94.0727147457005
+2005,44,"married","2.highschool","industrial","no",99.6894636984864
+2003,42,"married","5.phd","IT","no",123.908567597957
+2009,55,"married","2.highschool","industrial","yes",118.884359339886
+2006,61,"never married","5.phd","industrial","no",82.6796372966372
+2006,39,"married","2.highschool","industrial","yes",81.2832532842527
+2005,30,"married","3.bachelor","industrial","no",104.921506533664
+2009,49,"divorced","2.highschool","industrial","yes",99.6894636984864
+2006,33,"married","4.master","IT","yes",136.15771083723
+2006,31,"married","1.primary","industrial","no",81.2832532842527
+2005,35,"never married","2.highschool","industrial","yes",68.5086896572248
+2003,55,"married","2.highschool","industrial","yes",81.2832532842527
+2008,36,"married","2.highschool","industrial","yes",114.475713290347
+2003,37,"married","2.highschool","industrial","no",118.019753340006
+2006,33,"married","2.highschool","industrial","yes",99.6894636984864
+2006,48,"married","2.highschool","industrial","yes",118.884359339886
+2004,47,"married","3.bachelor","industrial","yes",118.884359339886
+2003,60,"married","3.bachelor","IT","yes",123.089699847943
+2004,28,"never married","4.master","IT","yes",109.833985642199
+2005,28,"married","3.bachelor","IT","yes",102.870246933215
+2005,48,"married","4.master","IT","yes",163.515863976238
+2009,29,"married","5.phd","IT","no",117.146816914805
+2004,40,"never married","2.highschool","industrial","yes",92.3000614282589
+2009,32,"never married","5.phd","IT","yes",100.013486924706
+2004,33,"divorced","2.highschool","IT","no",55.0697284222779
+2003,40,"divorced","2.highschool","industrial","yes",101.82435207568
+2004,42,"married","3.bachelor","industrial","yes",148.413159102577
+2003,36,"married","2.highschool","industrial","no",115.375038556391
+2004,39,"married","1.primary","industrial","no",73.7757432746946
+2009,44,"married","5.phd","IT","yes",267.901086855275
+2009,43,"married","2.highschool","industrial","no",129.453644576626
+2008,44,"married","1.primary","industrial","yes",96.3706528322308
+2006,29,"married","5.phd","IT","yes",87.9810327856054
+2007,49,"married","3.bachelor","IT","yes",104.921506533664
+2007,47,"married","3.bachelor","IT","yes",130.982177377461
+2004,46,"married","5.phd","IT","yes",190.547678564741
+2006,41,"divorced","1.primary","industrial","yes",118.019753340006
+2008,52,"married","2.highschool","IT","no",79.8549003093467
+2003,43,"divorced","2.highschool","IT","yes",72.4793162971252
+2004,38,"married","5.phd","IT","yes",148.413159102577
+2003,42,"married","3.bachelor","IT","yes",74.4446382014083
+2005,56,"married","4.master","industrial","no",118.884359339886
+2003,39,"married","2.highschool","industrial","yes",128.680488220624
+2005,29,"married","3.bachelor","IT","yes",87.9810327856054
+2009,33,"married","5.phd","IT","yes",267.901086855275
+2004,33,"married","2.highschool","industrial","no",104.921506533664
+2004,41,"married","2.highschool","IT","no",92.8958447894966
+2004,44,"never married","1.primary","IT","yes",70.4760196469445
+2005,45,"married","5.phd","IT","yes",200.543262324662
+2004,58,"married","2.highschool","IT","yes",102.870246933215
+2005,29,"married","3.bachelor","industrial","yes",102.870246933215
+2004,42,"divorced","2.highschool","industrial","no",65.1108537153447
+2008,68,"married","2.highschool","industrial","yes",109.833985642199
+2005,47,"married","5.phd","IT","yes",127.115743812184
+2005,30,"married","4.master","IT","no",94.0727147457005
+2005,39,"married","1.primary","IT","no",67.8625234113682
+2008,42,"married","4.master","industrial","yes",125.525498433836
+2006,49,"married","3.bachelor","industrial","yes",165.208773767255
+2009,36,"never married","2.highschool","industrial","yes",81.2832532842527
+2003,44,"married","2.highschool","IT","yes",112.6488963421
+2009,54,"married","2.highschool","IT","yes",76.8936025176112
+2003,42,"married","2.highschool","industrial","yes",75.0431540173516
+2003,39,"married","4.master","industrial","yes",128.680488220624
+2008,30,"married","2.highschool","IT","no",59.0970640815891
+2004,33,"never married","2.highschool","IT","no",63.7733911962488
+2003,28,"married","2.highschool","IT","yes",84.0459576539924
+2003,38,"married","2.highschool","industrial","yes",93.9371815810521
+2005,30,"married","3.bachelor","industrial","yes",82.6796372966372
+2008,25,"never married","5.phd","industrial","yes",118.884359339886
+2007,52,"married","2.highschool","IT","yes",81.2832532842527
+2007,26,"married","2.highschool","industrial","no",66.9616443217359
+2009,54,"married","4.master","industrial","yes",166.324941233877
+2005,62,"married","4.master","IT","no",99.6894636984864
+2009,57,"married","5.phd","IT","yes",141.77517233318
+2003,32,"married","4.master","industrial","yes",143.134940811134
+2003,60,"married","2.highschool","industrial","yes",35.0334213214995
+2004,40,"married","4.master","IT","yes",109.833985642199
+2005,49,"married","2.highschool","industrial","no",111.014405508798
+2006,54,"married","4.master","industrial","yes",132.487821126123
+2009,48,"never married","5.phd","IT","yes",148.413159102577
+2009,35,"never married","1.primary","industrial","yes",73.7757432746946
+2009,46,"divorced","2.highschool","IT","yes",143.699710133813
+2007,42,"married","2.highschool","industrial","yes",99.6894636984864
+2004,58,"married","4.master","IT","yes",272.294783220064
+2003,30,"never married","4.master","IT","yes",200.543262324662
+2008,27,"never married","2.highschool","industrial","yes",85.3865890236244
+2008,55,"married","1.primary","industrial","yes",109.833985642199
+2004,50,"married","2.highschool","industrial","no",61.0524210501246
+2006,55,"divorced","2.highschool","industrial","yes",118.884359339886
+2006,40,"married","3.bachelor","industrial","yes",145.805163374625
+2005,32,"married","2.highschool","IT","no",112.6488963421
+2006,27,"married","2.highschool","industrial","yes",106.921814091211
+2007,49,"married","3.bachelor","IT","yes",106.921814091211
+2007,50,"married","4.master","IT","yes",127.115743812184
+2006,50,"married","1.primary","industrial","yes",87.9810327856054
+2008,44,"married","5.phd","IT","yes",144.47808766541
+2007,57,"married","5.phd","IT","yes",160.409701962289
+2008,72,"married","5.phd","industrial","no",87.9810327856054
+2006,23,"never married","1.primary","industrial","no",65.1108537153447
+2007,31,"never married","5.phd","IT","yes",176.989650489877
+2008,36,"married","2.highschool","IT","no",54.5981500331442
+2009,63,"married","3.bachelor","industrial","yes",109.833985642199
+2006,48,"married","1.primary","industrial","no",81.698421724729
+2005,46,"married","4.master","industrial","no",114.475713290347
+2003,55,"married","4.master","industrial","yes",142.634472767972
+2007,44,"married","5.phd","IT","yes",160.642475408263
+2006,44,"married","3.bachelor","industrial","yes",94.0727147457005
+2004,32,"married","1.primary","industrial","no",54.5981500331442
+2003,60,"married","1.primary","industrial","yes",73.7757432746946
+2004,42,"married","5.phd","IT","yes",160.642475408263
+2009,48,"married","5.phd","IT","yes",148.413159102577
+2008,36,"married","1.primary","industrial","no",87.9823064294987
+2009,31,"married","2.highschool","industrial","yes",101.82435207568
+2006,54,"married","2.highschool","IT","yes",111.720849360989
+2007,29,"married","3.bachelor","industrial","yes",106.921814091211
+2003,46,"divorced","3.bachelor","industrial","no",126.323880709786
+2003,35,"divorced","2.highschool","industrial","no",109.833985642199
+2009,50,"married","1.primary","IT","yes",92.8958447894966
+2005,25,"married","3.bachelor","industrial","yes",54.5981500331442
+2005,33,"never married","3.bachelor","IT","no",96.3706528322308
+2008,34,"married","2.highschool","industrial","yes",114.475713290347
+2006,51,"married","2.highschool","industrial","yes",94.0727147457005
+2004,33,"married","2.highschool","industrial","yes",95.2307125669819
+2007,59,"married","3.bachelor","IT","yes",139.00340805947
+2006,62,"separated","1.primary","industrial","yes",81.2832532842527
+2005,28,"separated","2.highschool","industrial","yes",94.0727147457005
+2008,40,"married","3.bachelor","IT","yes",87.9810327856054
+2003,52,"married","5.phd","industrial","yes",138.299126920883
+2007,29,"married","2.highschool","industrial","no",89.4924795180001
+2007,34,"married","1.primary","industrial","yes",92.8958447894966
+2004,25,"never married","2.highschool","industrial","no",54.5981500331442
+2005,66,"married","4.master","industrial","yes",94.0727147457005
+2005,43,"married","2.highschool","IT","yes",68.7480877337669
+2007,45,"married","2.highschool","IT","no",92.8958447894966
+2006,35,"married","5.phd","IT","yes",114.475713290347
+2005,43,"married","2.highschool","IT","yes",109.833985642199
+2007,49,"married","4.master","IT","yes",109.833985642199
+2004,60,"never married","1.primary","IT","yes",77.0452008528242
+2003,46,"married","2.highschool","IT","no",94.0727147457005
+2009,55,"married","2.highschool","industrial","yes",101.82435207568
+2006,32,"married","3.bachelor","industrial","yes",118.884359339886
+2007,53,"married","2.highschool","industrial","no",133.232350826567
+2009,57,"married","4.master","IT","yes",157.10350432345
+2007,51,"married","5.phd","IT","yes",281.745970551857
+2004,59,"married","5.phd","IT","yes",182.020620963513
+2006,45,"married","3.bachelor","IT","yes",119.09923477134
+2006,56,"never married","2.highschool","industrial","yes",71.6867436659172
+2005,30,"married","2.highschool","industrial","yes",85.3839403789827
+2006,21,"never married","2.highschool","industrial","no",72.1504556815713
+2003,60,"married","4.master","industrial","yes",138.299126920883
+2007,60,"married","2.highschool","IT","yes",101.82435207568
+2007,48,"divorced","1.primary","industrial","yes",109.833985642199
+2003,39,"divorced","4.master","IT","no",87.9810327856054
+2009,32,"never married","3.bachelor","IT","yes",115.375038556391
+2007,51,"married","5.phd","IT","yes",191.573683548412
+2006,47,"married","4.master","industrial","no",86.6951548289402
+2007,44,"married","2.highschool","IT","yes",75.8522371953675
+2008,46,"married","2.highschool","industrial","yes",166.324941233877
+2004,28,"never married","4.master","industrial","yes",56.9055391446732
+2003,24,"never married","4.master","IT","no",99.6894636984864
+2006,37,"married","2.highschool","industrial","no",92.8958447894966
+2006,31,"married","2.highschool","industrial","yes",99.6894636984864
+2004,72,"married","2.highschool","IT","yes",92.8958447894966
+2008,50,"married","3.bachelor","industrial","yes",101.82435207568
+2007,36,"married","3.bachelor","industrial","yes",145.143601176911
+2006,27,"never married","2.highschool","industrial","yes",76.8936025176112
+2009,27,"married","3.bachelor","industrial","yes",90.4819133566401
+2004,41,"married","4.master","industrial","no",127.115743812184
+2008,20,"never married","3.bachelor","IT","no",82.6796372966372
+2008,49,"married","2.highschool","industrial","yes",99.6894636984864
+2007,25,"never married","2.highschool","industrial","yes",64.1592325660882
+2006,41,"married","1.primary","industrial","yes",89.4924795180001
+2009,53,"never married","2.highschool","industrial","yes",87.9810327856054
+2009,45,"married","4.master","industrial","no",127.115743812184
+2003,32,"married","1.primary","industrial","no",66.9616443217359
+2005,47,"married","3.bachelor","IT","yes",148.413159102577
+2003,26,"married","2.highschool","industrial","yes",123.089699847943
+2009,31,"married","3.bachelor","IT","yes",133.232350826567
+2007,32,"married","5.phd","IT","yes",118.884359339886
+2006,50,"divorced","5.phd","IT","yes",120.166119635421
+2007,46,"married","2.highschool","industrial","yes",115.375038556391
+2006,47,"married","5.phd","IT","yes",112.6488963421
+2005,55,"married","3.bachelor","industrial","yes",118.884359339886
+2005,49,"married","4.master","industrial","yes",148.413159102577
+2004,25,"married","2.highschool","industrial","yes",61.1875264339915
+2008,60,"married","2.highschool","IT","no",95.6888119067371
+2008,62,"married","2.highschool","industrial","yes",89.2428846644714
+2003,63,"separated","2.highschool","IT","yes",127.901232979118
+2004,31,"never married","5.phd","IT","yes",128.680488220624
+2006,29,"married","4.master","industrial","yes",109.833985642199
+2008,51,"married","2.highschool","industrial","yes",114.475713290347
+2007,28,"married","2.highschool","industrial","no",76.1296996370986
+2005,36,"never married","3.bachelor","IT","yes",123.089699847943
+2007,28,"never married","3.bachelor","IT","yes",99.6894636984864
+2004,38,"married","4.master","IT","yes",102.870246933215
+2008,35,"married","3.bachelor","industrial","yes",96.3706528322308
+2005,46,"divorced","3.bachelor","industrial","yes",117.146816914805
+2007,37,"married","3.bachelor","IT","no",90.4819133566401
+2005,41,"divorced","3.bachelor","IT","yes",104.921506533664
+2006,59,"married","3.bachelor","industrial","no",73.7757432746946
+2006,51,"married","3.bachelor","industrial","no",107.903923866877
+2006,26,"never married","2.highschool","industrial","yes",99.6894636984864
+2003,34,"married","3.bachelor","industrial","yes",60.1541246622441
+2004,32,"married","2.highschool","IT","yes",123.089699847943
+2007,23,"never married","3.bachelor","industrial","yes",81.2832532842527
+2004,50,"married","2.highschool","IT","yes",143.134940811134
+2009,25,"never married","1.primary","industrial","yes",69.0981838087226
+2004,43,"married","2.highschool","industrial","yes",78.9816745162994
+2009,36,"married","3.bachelor","industrial","yes",128.680488220624
+2006,50,"married","2.highschool","IT","no",54.5981500331442
+2006,34,"separated","2.highschool","IT","yes",134.705375118879
+2005,34,"never married","2.highschool","industrial","no",104.921506533664
+2005,55,"married","5.phd","IT","yes",277.601417511009
+2003,39,"married","2.highschool","industrial","no",78.214575693165
+2004,40,"married","1.primary","industrial","yes",82.6796372966372
+2005,32,"married","3.bachelor","IT","yes",117.146816914805
+2006,63,"married","2.highschool","IT","yes",118.884359339886
+2004,38,"never married","2.highschool","industrial","no",109.833985642199
+2008,67,"married","2.highschool","industrial","no",59.0970640815891
+2005,39,"married","2.highschool","industrial","yes",116.265324062503
+2003,31,"married","2.highschool","industrial","no",61.1875264339915
+2006,41,"never married","3.bachelor","IT","yes",114.475713290347
+2003,47,"married","1.primary","industrial","yes",78.3924668009837
+2009,61,"married","2.highschool","industrial","yes",122.263673892802
+2005,61,"married","5.phd","industrial","yes",148.413159102577
+2008,21,"married","2.highschool","industrial","no",54.5981500331442
+2004,22,"never married","4.master","industrial","no",66.0446942318056
+2003,53,"married","4.master","industrial","yes",126.957885677185
+2004,47,"married","4.master","industrial","no",81.2832532842527
+2005,36,"married","3.bachelor","industrial","yes",127.901232979118
+2007,36,"never married","2.highschool","industrial","no",87.9810327856054
+2005,42,"married","2.highschool","industrial","yes",123.089699847943
+2004,54,"divorced","3.bachelor","industrial","no",104.921506533664
+2004,27,"married","3.bachelor","industrial","yes",87.9810327856054
+2004,36,"married","2.highschool","industrial","yes",131.737801155001
+2006,35,"never married","2.highschool","IT","no",73.7757432746946
+2003,60,"married","2.highschool","industrial","yes",104.921506533664
+2005,42,"separated","2.highschool","industrial","yes",91.6026156625341
+2008,41,"married","5.phd","IT","yes",123.089699847943
+2004,35,"never married","3.bachelor","industrial","yes",131.652698654268
+2006,34,"never married","5.phd","IT","yes",309.5717712662
+2007,22,"never married","2.highschool","industrial","yes",70.6610476694407
+2007,47,"married","2.highschool","industrial","no",84.8520440937874
+2004,59,"married","2.highschool","industrial","yes",102.870246933215
+2007,29,"never married","3.bachelor","IT","yes",103.90247060316
+2006,32,"never married","1.primary","IT","yes",94.0727147457005
+2003,49,"married","4.master","industrial","yes",128.680488220624
+2009,30,"never married","3.bachelor","IT","yes",106.326864894674
+2003,33,"never married","2.highschool","industrial","yes",99.2552868268562
+2007,51,"married","2.highschool","industrial","yes",133.232350826567
+2003,37,"married","2.highschool","industrial","no",78.3924668009837
+2003,46,"married","3.bachelor","industrial","yes",130.982177377461
+2007,63,"married","5.phd","IT","yes",109.833985642199
+2005,41,"married","2.highschool","industrial","no",96.3706528322308
+2005,40,"married","2.highschool","industrial","yes",109.833985642199
+2007,46,"married","5.phd","IT","yes",281.745970551857
+2005,45,"divorced","2.highschool","IT","yes",94.0727147457005
+2008,48,"never married","4.master","industrial","yes",200.543262324662
+2007,28,"married","3.bachelor","IT","no",87.9810327856054
+2009,65,"divorced","2.highschool","industrial","no",87.9810327856054
+2005,50,"never married","2.highschool","industrial","no",97.4932940453934
+2008,53,"married","2.highschool","industrial","no",107.903923866877
+2007,48,"married","2.highschool","industrial","no",95.6888119067371
+2003,30,"married","3.bachelor","IT","no",109.833985642199
+2006,37,"married","2.highschool","IT","yes",87.3874499713449
+2004,51,"married","4.master","IT","yes",88.8315691738135
+2008,55,"married","5.phd","IT","yes",166.324941233877
+2004,35,"married","2.highschool","IT","yes",94.6956951317195
+2006,33,"married","2.highschool","industrial","yes",122.263673892802
+2008,41,"divorced","4.master","IT","yes",132.487821126123
+2003,34,"married","5.phd","IT","yes",96.3706528322308
+2006,33,"married","2.highschool","industrial","no",89.2428846644714
+2008,49,"never married","1.primary","industrial","yes",81.2832532842527
+2006,62,"married","5.phd","IT","yes",73.7757432746946
+2004,31,"never married","1.primary","IT","yes",109.833985642199
+2007,43,"divorced","1.primary","IT","no",100.099662492042
+2008,43,"married","4.master","IT","yes",134.265677158654
+2004,43,"never married","3.bachelor","IT","yes",91.6992261117042
+2009,48,"married","4.master","IT","no",109.547296634249
+2003,48,"married","2.highschool","IT","no",70.4760196469445
+2007,50,"married","4.master","IT","yes",144.204738892859
+2009,29,"never married","4.master","IT","no",99.6894636984864
+2004,52,"married","3.bachelor","IT","no",94.0727147457005
+2004,46,"never married","2.highschool","IT","no",87.9810327856054
+2005,40,"never married","2.highschool","industrial","yes",94.0727147457005
+2004,43,"married","2.highschool","industrial","yes",81.2832532842527
+2006,54,"married","2.highschool","industrial","yes",115.375038556391
+2006,38,"never married","5.phd","IT","yes",107.903923866877
+2004,32,"married","3.bachelor","industrial","no",101.402052302992
+2008,28,"never married","4.master","IT","yes",144.479422679423
+2005,33,"never married","5.phd","industrial","yes",145.143601176911
+2004,44,"married","5.phd","industrial","no",163.515863976238
+2006,41,"married","2.highschool","IT","no",81.2832532842527
+2005,31,"never married","1.primary","industrial","no",40.4056652596845
+2007,48,"divorced","4.master","IT","yes",97.4932940453934
+2007,50,"married","4.master","industrial","no",117.146816914805
+2004,47,"married","4.master","industrial","yes",118.884359339886
+2004,31,"married","2.highschool","industrial","no",84.0459576539924
+2008,40,"married","2.highschool","industrial","yes",88.8164739741151
+2009,54,"divorced","3.bachelor","industrial","no",86.6951548289402
+2004,24,"never married","2.highschool","IT","yes",75.3556793180091
+2005,34,"married","2.highschool","IT","yes",98.5993438603892
+2003,65,"married","4.master","IT","yes",87.9810327856054
+2007,28,"married","2.highschool","industrial","yes",109.642968140263
+2008,30,"separated","2.highschool","IT","yes",79.8549003093467
+2009,45,"married","3.bachelor","industrial","no",166.324941233877
+2008,35,"separated","4.master","IT","yes",139.00340805947
+2005,46,"married","5.phd","IT","yes",145.143601176911
+2003,47,"married","2.highschool","industrial","no",85.3839403789827
+2008,71,"married","2.highschool","industrial","no",99.6916283970721
+2003,39,"married","3.bachelor","IT","yes",130.982177377461
+2009,41,"never married","1.primary","industrial","no",68.7480877337669
+2007,33,"married","2.highschool","industrial","yes",139.703071527658
+2009,76,"divorced","5.phd","IT","yes",176.989650489877
+2009,20,"never married","2.highschool","industrial","yes",76.8936025176112
+2006,34,"married","5.phd","IT","yes",134.705375118879
+2003,26,"never married","4.master","IT","yes",99.6894636984864
+2006,51,"married","4.master","IT","yes",148.413159102577
+2003,25,"married","1.primary","industrial","yes",79.8549003093467
+2006,62,"married","3.bachelor","industrial","yes",128.680488220624
+2006,37,"married","4.master","industrial","yes",180.779952229859
+2009,37,"never married","3.bachelor","industrial","yes",94.0727147457005
+2007,32,"married","3.bachelor","industrial","no",89.4924795180001
+2007,55,"married","3.bachelor","industrial","yes",130.220832358777
+2009,36,"married","1.primary","industrial","no",77.4976813877358
+2006,39,"married","2.highschool","industrial","yes",148.413159102577
+2004,46,"married","4.master","IT","yes",185.283317088498
+2007,48,"married","4.master","IT","no",128.680488220624
+2005,34,"divorced","4.master","IT","yes",147.116689159978
+2004,39,"married","3.bachelor","IT","no",106.921814091211
+2005,50,"married","5.phd","industrial","no",115.375038556391
+2006,54,"married","3.bachelor","IT","yes",91.6992261117042
+2007,60,"married","4.master","industrial","yes",148.413159102577
+2007,48,"never married","5.phd","IT","yes",111.720849360989
+2007,47,"married","4.master","industrial","no",126.323880709786
+2004,20,"never married","2.highschool","industrial","no",65.1108537153447
+2003,60,"married","2.highschool","industrial","yes",107.903923866877
+2003,37,"never married","4.master","IT","yes",54.5981500331442
+2003,46,"married","4.master","IT","yes",134.705375118879
+2003,54,"married","3.bachelor","IT","yes",72.4793162971252
+2006,51,"married","4.master","IT","yes",130.982177377461
+2009,32,"never married","2.highschool","industrial","yes",91.6992261117042
+2006,35,"married","4.master","IT","yes",154.68529299563
+2003,46,"married","2.highschool","IT","yes",114.475713290347
+2008,38,"married","1.primary","industrial","yes",87.9810327856054
+2005,62,"married","2.highschool","IT","yes",80.5731997057359
+2003,47,"married","2.highschool","industrial","yes",94.0727147457005
+2003,28,"married","5.phd","industrial","no",141.77517233318
+2007,61,"married","4.master","IT","yes",145.143601176911
+2003,26,"never married","4.master","IT","yes",94.0727147457005
+2006,49,"married","2.highschool","industrial","yes",127.115743812184
+2009,28,"married","2.highschool","IT","yes",113.567089569751
+2003,61,"married","2.highschool","IT","yes",101.595538208147
+2003,42,"married","4.master","IT","yes",134.705375118879
+2009,31,"married","5.phd","industrial","yes",127.115743812184
+2009,50,"married","2.highschool","IT","yes",87.9810327856054
+2005,44,"married","1.primary","industrial","no",78.3924668009837
+2007,46,"married","2.highschool","IT","yes",318.342430056529
+2006,54,"married","2.highschool","industrial","yes",82.6796372966372
+2003,40,"divorced","2.highschool","IT","yes",97.4932940453934
+2005,38,"married","2.highschool","industrial","no",87.8535469003831
+2006,43,"married","5.phd","IT","yes",184.167135799587
+2009,43,"never married","2.highschool","industrial","yes",109.833985642199
+2004,30,"married","3.bachelor","IT","yes",95.2307125669819
+2005,58,"married","5.phd","IT","yes",59.0970640815891
+2007,60,"married","4.master","industrial","yes",118.884359339886
+2004,45,"married","5.phd","industrial","yes",130.982177377461
+2008,47,"married","4.master","IT","yes",134.705375118879
+2005,47,"married","1.primary","industrial","no",87.9810327856054
+2003,59,"divorced","3.bachelor","IT","yes",67.3689820806645
+2006,36,"married","3.bachelor","IT","no",83.3213415447886
+2008,39,"never married","5.phd","IT","yes",118.884359339886
+2004,40,"married","1.primary","IT","no",105.927810775063
+2003,42,"married","2.highschool","IT","yes",85.3839403789827
+2009,29,"never married","5.phd","IT","no",73.7757432746946
+2005,38,"married","4.master","IT","yes",139.00340805947
+2003,58,"married","3.bachelor","industrial","yes",123.089699847943
+2004,18,"never married","2.highschool","industrial","no",55.9974338324572
+2004,35,"married","4.master","industrial","yes",141.77517233318
+2008,30,"married","5.phd","IT","no",154.072997206315
+2003,48,"married","3.bachelor","industrial","no",118.884359339886
+2004,27,"married","4.master","industrial","yes",114.475713290347
+2005,40,"married","3.bachelor","IT","yes",120.926701544426
+2007,34,"married","5.phd","IT","no",97.4932940453934
+2004,54,"married","2.highschool","IT","yes",141.77517233318
+2006,20,"never married","2.highschool","IT","yes",75.0431540173516
+2005,50,"married","2.highschool","industrial","yes",89.4924795180001
+2009,42,"married","5.phd","IT","yes",198.350290464385
+2008,45,"married","3.bachelor","IT","yes",65.2614390229194
+2003,59,"married","3.bachelor","industrial","no",107.903923866877
+2003,44,"married","1.primary","industrial","yes",81.2832532842527
+2005,67,"divorced","4.master","IT","no",76.8936025176112
+2007,26,"never married","4.master","industrial","yes",76.8936025176112
+2007,40,"married","5.phd","IT","yes",140.398200161944
+2004,42,"married","2.highschool","industrial","yes",104.921506533664
+2005,22,"never married","2.highschool","industrial","yes",81.2832532842527
+2005,43,"married","3.bachelor","industrial","no",140.398200161944
+2004,34,"never married","2.highschool","IT","no",79.8549003093467
+2004,44,"divorced","2.highschool","IT","yes",79.8549003093467
+2003,53,"married","3.bachelor","industrial","yes",268.266292012557
+2003,54,"married","5.phd","IT","yes",124.720446242886
+2008,55,"married","4.master","IT","yes",148.413159102577
+2009,30,"never married","5.phd","industrial","yes",118.884359339886
+2004,48,"married","5.phd","IT","yes",176.989650489877
+2003,48,"married","2.highschool","industrial","yes",109.833985642199
+2008,30,"married","5.phd","IT","no",127.115743812184
+2006,38,"divorced","3.bachelor","industrial","yes",110.782650276254
+2005,25,"married","3.bachelor","industrial","yes",91.6992261117042
+2009,59,"widowed","2.highschool","IT","yes",104.921506533664
+2004,38,"married","5.phd","IT","no",272.294783220064
+2003,40,"married","4.master","IT","yes",268.266292012557
+2007,36,"married","5.phd","IT","yes",163.515863976238
+2008,60,"married","4.master","industrial","yes",104.921506533664
+2005,40,"married","4.master","IT","no",123.089699847943
+2003,28,"married","3.bachelor","IT","yes",118.884359339886
+2004,34,"married","5.phd","industrial","yes",148.413159102577
+2008,39,"married","4.master","industrial","yes",175.443549299129
+2005,26,"married","2.highschool","industrial","no",96.3706528322308
+2004,28,"never married","2.highschool","IT","yes",96.9340904570115
+2004,27,"never married","4.master","IT","yes",99.6894636984864
+2008,34,"married","2.highschool","industrial","yes",99.6894636984864
+2009,38,"married","2.highschool","IT","yes",311.934568896444
+2005,51,"married","4.master","IT","yes",109.833985642199
+2008,58,"divorced","3.bachelor","industrial","yes",87.9810327856054
+2004,42,"married","4.master","industrial","yes",138.299126920883
+2005,32,"never married","3.bachelor","IT","yes",47.933671329738
+2006,27,"married","4.master","IT","yes",104.921506533664
+2009,51,"never married","4.master","industrial","yes",99.6894636984864
+2009,50,"married","2.highschool","IT","yes",133.232350826567
+2009,25,"never married","4.master","IT","yes",115.375038556391
+2006,60,"married","2.highschool","industrial","no",120.926701544426
+2004,62,"married","3.bachelor","IT","yes",148.413159102577
+2006,53,"married","3.bachelor","industrial","yes",120.589436530402
+2009,39,"married","4.master","IT","yes",144.47808766541
+2003,23,"never married","3.bachelor","IT","no",90.4819133566401
+2008,47,"married","5.phd","IT","no",148.413159102577
+2009,32,"never married","4.master","IT","yes",123.089699847943
+2003,57,"married","4.master","IT","yes",268.266292012557
+2005,40,"married","3.bachelor","IT","no",78.3924668009837
+2006,57,"married","3.bachelor","IT","yes",107.903923866877
+2005,31,"married","5.phd","industrial","yes",148.413159102577
+2005,28,"never married","3.bachelor","industrial","yes",89.2428846644714
+2007,58,"married","2.highschool","industrial","yes",130.982177377461
+2008,47,"married","2.highschool","IT","yes",87.9810327856054
+2003,41,"married","4.master","IT","no",70.4760196469445
+2004,53,"married","2.highschool","industrial","yes",108.681308237349
+2009,27,"married","4.master","IT","yes",80.5731997057359
+2003,19,"never married","1.primary","IT","no",65.1108537153447
+2007,47,"married","4.master","industrial","no",65.1108537153447
+2005,44,"separated","2.highschool","industrial","yes",118.884359339886
+2006,32,"never married","2.highschool","industrial","yes",73.7757432746946
+2005,23,"never married","2.highschool","industrial","no",54.5981500331442
+2006,31,"married","2.highschool","industrial","no",66.2294082943902
+2004,42,"married","3.bachelor","industrial","no",272.294783220064
+2003,50,"married","5.phd","IT","yes",134.705375118879
+2004,52,"married","4.master","IT","no",46.7632687977187
+2003,20,"never married","2.highschool","industrial","yes",76.8936025176112
+2004,33,"divorced","2.highschool","industrial","no",81.2832532842527
+2008,26,"never married","4.master","IT","no",99.6894636984864
+2004,40,"married","5.phd","industrial","no",166.324941233877
+2005,29,"never married","2.highschool","industrial","no",94.0727147457005
+2004,35,"never married","4.master","IT","yes",114.475713290347
+2009,34,"never married","4.master","IT","yes",87.9810327856054
+2003,37,"married","4.master","IT","yes",118.884359339886
+2008,37,"married","4.master","IT","yes",161.914951381929
+2003,22,"never married","3.bachelor","industrial","no",73.7757432746946
+2008,39,"married","2.highschool","industrial","no",99.6894636984864
+2003,42,"married","3.bachelor","industrial","yes",103.90247060316
+2006,44,"married","4.master","industrial","yes",108.874525834712
+2008,45,"divorced","1.primary","industrial","yes",107.903923866877
+2003,42,"married","5.phd","IT","yes",141.77517233318
+2009,52,"divorced","3.bachelor","IT","yes",160.642475408263
+2004,27,"divorced","3.bachelor","IT","yes",112.186122875854
+2009,46,"married","3.bachelor","IT","yes",169.073540049428
+2007,59,"married","3.bachelor","IT","yes",96.3706528322308
+2005,52,"married","2.highschool","industrial","no",81.2832532842527
+2003,19,"never married","1.primary","industrial","no",54.5981500331442
+2003,64,"married","4.master","IT","no",107.903923866877
+2007,38,"married","5.phd","IT","yes",136.876367635184
+2006,45,"separated","2.highschool","IT","yes",65.1108537153447
+2008,53,"married","3.bachelor","IT","no",179.528092196451
+2007,28,"married","2.highschool","industrial","no",66.2294082943902
+2003,39,"married","1.primary","industrial","yes",104.921506533664
+2008,52,"married","5.phd","IT","yes",176.989650489877
+2009,41,"married","1.primary","industrial","no",114.475713290347
+2004,44,"married","1.primary","industrial","no",76.8936025176112
+2005,48,"married","2.highschool","industrial","no",94.0727147457005
+2003,47,"married","2.highschool","industrial","yes",127.115743812184
+2006,31,"never married","2.highschool","industrial","no",94.0727147457005
+2005,28,"married","3.bachelor","industrial","yes",103.90247060316
+2007,45,"married","4.master","IT","yes",99.6894636984864
+2004,56,"widowed","4.master","industrial","yes",87.9810327856054
+2004,47,"married","2.highschool","IT","yes",136.15771083723
+2005,41,"married","2.highschool","industrial","no",94.0727147457005
+2006,49,"married","2.highschool","industrial","no",87.9810327856054
+2009,28,"never married","2.highschool","industrial","no",97.4932940453934
+2009,19,"never married","3.bachelor","industrial","no",43.7351116779821
+2004,48,"married","3.bachelor","IT","yes",117.146816914805
+2003,47,"married","4.master","IT","yes",127.115743812184
+2004,57,"married","4.master","IT","yes",272.294783220064
+2003,39,"married","2.highschool","IT","yes",109.833985642199
+2004,45,"never married","2.highschool","IT","yes",66.9616443217359
+2006,52,"married","1.primary","IT","yes",127.901232979118
+2008,51,"married","2.highschool","industrial","yes",118.884359339886
+2009,46,"married","5.phd","IT","yes",74.4383046681824
+2003,45,"divorced","4.master","IT","yes",143.134940811134
+2005,40,"married","2.highschool","industrial","yes",87.9810327856054
+2008,48,"married","4.master","IT","yes",128.680488220624
+2004,47,"married","3.bachelor","IT","yes",121.430313822622
+2009,45,"married","2.highschool","IT","yes",98.5993438603892
+2005,49,"married","3.bachelor","industrial","yes",117.146816914805
+2007,57,"divorced","3.bachelor","IT","yes",109.833985642199
+2005,77,"married","2.highschool","IT","yes",99.6894636984864
+2005,48,"married","4.master","IT","yes",160.642475408263
+2004,56,"married","5.phd","IT","yes",118.884359339886
+2007,39,"married","4.master","IT","yes",163.515863976238
+2003,44,"never married","2.highschool","industrial","yes",110.782650276254
+2007,49,"married","3.bachelor","IT","yes",87.9810327856054
+2008,58,"married","1.primary","IT","no",54.5981500331442
+2005,46,"married","3.bachelor","IT","no",127.036846683616
+2004,39,"married","4.master","IT","yes",123.089699847943
+2007,26,"married","2.highschool","IT","no",73.7757432746946
+2003,61,"married","3.bachelor","IT","yes",99.6894636984864
+2003,62,"divorced","3.bachelor","industrial","yes",94.0727147457005
+2008,47,"married","4.master","industrial","no",87.9810327856054
+2003,40,"married","2.highschool","industrial","no",118.884359339886
+2006,35,"married","1.primary","IT","no",65.1108537153447
+2008,61,"married","2.highschool","industrial","yes",141.77517233318
+2003,38,"married","2.highschool","industrial","yes",134.705375118879
+2008,18,"never married","2.highschool","industrial","no",76.8936025176112
+2006,45,"married","2.highschool","industrial","no",101.402052302992
+2009,27,"married","3.bachelor","IT","yes",99.6894636984864
+2004,22,"never married","3.bachelor","industrial","yes",95.2307125669819
+2008,29,"married","1.primary","IT","yes",73.7757432746946
+2006,50,"married","2.highschool","IT","yes",123.089699847943
+2003,25,"never married","3.bachelor","industrial","yes",99.6894636984864
+2007,35,"married","4.master","IT","yes",118.884359339886
+2004,41,"married","3.bachelor","industrial","yes",127.115743812184
+2009,38,"married","4.master","IT","yes",145.143601176911
+2008,49,"married","2.highschool","IT","yes",118.884359339886
+2004,36,"married","2.highschool","industrial","no",128.680488220624
+2005,66,"never married","2.highschool","IT","yes",92.8958447894966
+2003,23,"never married","1.primary","IT","no",68.7480877337669
+2004,28,"married","5.phd","IT","yes",99.6894636984864
+2007,42,"married","3.bachelor","industrial","yes",109.833985642199
+2007,20,"never married","2.highschool","industrial","no",43.7351116779821
+2009,37,"married","4.master","IT","yes",189.244162932803
+2009,58,"married","2.highschool","IT","no",32.3664131748549
+2004,45,"married","5.phd","industrial","yes",154.68529299563
+2006,64,"married","3.bachelor","IT","yes",114.475713290347
+2009,45,"married","2.highschool","industrial","yes",148.413159102577
+2007,52,"divorced","3.bachelor","IT","yes",101.82435207568
+2005,42,"married","4.master","IT","no",123.089699847943
+2005,32,"married","2.highschool","industrial","yes",118.884359339886
+2009,40,"separated","1.primary","industrial","no",75.0431540173516
+2005,55,"married","4.master","IT","yes",160.642475408263
+2004,46,"married","4.master","IT","yes",104.921506533664
+2008,55,"separated","1.primary","industrial","no",81.2832532842527
+2003,53,"never married","4.master","IT","yes",99.6894636984864
+2005,33,"married","4.master","industrial","yes",104.921506533664
+2006,45,"married","1.primary","industrial","yes",95.2307125669819
+2006,54,"married","2.highschool","IT","yes",99.6894636984864
+2004,32,"married","4.master","IT","yes",84.0459576539924
+2005,42,"married","4.master","industrial","no",176.989650489877
+2004,35,"married","5.phd","IT","yes",118.884359339886
+2004,54,"married","2.highschool","industrial","no",94.0727147457005
+2003,38,"married","3.bachelor","IT","yes",94.0727147457005
+2004,31,"never married","4.master","IT","yes",101.82435207568
+2003,41,"married","3.bachelor","industrial","yes",85.3839403789827
+2005,45,"married","4.master","industrial","yes",142.457169885112
+2003,49,"married","2.highschool","industrial","yes",118.884359339886
+2004,50,"married","3.bachelor","industrial","yes",95.2307125669819
+2003,40,"never married","2.highschool","industrial","yes",111.720849360989
+2003,29,"married","2.highschool","industrial","yes",59.6286455536557
+2006,25,"never married","3.bachelor","industrial","no",99.6894636984864
+2004,32,"married","2.highschool","industrial","no",99.6894636984864
+2007,51,"married","2.highschool","IT","yes",86.6951548289402
+2008,29,"married","3.bachelor","industrial","no",93.0440149336701
+2005,32,"married","3.bachelor","IT","yes",134.705375118879
+2008,42,"married","3.bachelor","industrial","yes",145.143601176911
+2005,59,"married","2.highschool","IT","yes",148.413159102577
+2003,31,"married","4.master","industrial","no",87.9810327856054
+2006,29,"married","3.bachelor","IT","no",108.390640020409
+2006,52,"never married","2.highschool","industrial","yes",73.7757432746946
+2006,35,"married","2.highschool","industrial","no",73.7757432746946
+2008,28,"never married","1.primary","industrial","yes",106.369647181498
+2006,50,"married","4.master","industrial","no",78.3924668009837
+2004,49,"divorced","2.highschool","industrial","no",72.5612283088075
+2009,39,"married","2.highschool","IT","no",73.7773452719489
+2003,26,"never married","4.master","IT","no",38.2235828218228
+2003,31,"never married","3.bachelor","IT","yes",99.6894636984864
+2007,50,"never married","2.highschool","industrial","no",50.4119228435697
+2009,62,"married","5.phd","IT","yes",170.460165914858
+2004,35,"married","3.bachelor","industrial","no",123.089699847943
+2005,22,"never married","3.bachelor","IT","no",73.7757432746946
+2003,55,"never married","5.phd","IT","yes",110.782650276254
+2006,63,"married","3.bachelor","IT","yes",125.525498433836
+2004,63,"divorced","2.highschool","IT","no",75.0431540173516
+2008,39,"married","4.master","industrial","yes",95.2307125669819
+2003,28,"married","1.primary","IT","no",118.884359339886
+2006,43,"married","4.master","IT","yes",127.115743812184
+2006,58,"married","1.primary","industrial","yes",70.4760196469445
+2007,38,"married","5.phd","IT","yes",166.324941233877
+2004,49,"married","3.bachelor","industrial","yes",139.156325391862
+2003,62,"married","3.bachelor","IT","no",25.2910080971035
+2004,36,"married","3.bachelor","IT","yes",81.4468348606011
+2004,54,"divorced","4.master","industrial","no",87.9810327856054
+2005,26,"married","2.highschool","IT","yes",116.442318333651
+2009,46,"married","5.phd","IT","yes",166.324941233877
+2006,58,"divorced","3.bachelor","industrial","yes",149.695042068453
+2005,22,"never married","3.bachelor","IT","yes",73.7757432746946
+2005,58,"married","5.phd","industrial","no",277.601417511009
+2008,63,"married","4.master","industrial","no",136.876367635184
+2007,67,"married","1.primary","IT","yes",129.453644576626
+2008,44,"married","2.highschool","industrial","yes",111.720849360989
+2003,51,"married","4.master","industrial","yes",178.700657207025
+2003,46,"married","2.highschool","industrial","no",49.5553381215227
+2007,43,"married","1.primary","industrial","no",82.6796372966372
+2004,40,"married","3.bachelor","industrial","no",73.7757432746946
+2008,31,"never married","3.bachelor","industrial","yes",92.8958447894966
+2007,41,"married","5.phd","IT","yes",114.475713290347
+2008,21,"never married","2.highschool","industrial","no",84.0459576539924
+2008,51,"married","3.bachelor","IT","no",76.8936025176112
+2003,43,"separated","3.bachelor","IT","yes",79.8549003093467
+2004,34,"married","3.bachelor","IT","yes",130.982177377461
+2008,45,"married","3.bachelor","industrial","yes",148.413159102577
+2008,35,"married","1.primary","industrial","no",65.1108537153447
+2004,33,"married","2.highschool","IT","yes",134.705375118879
+2003,46,"married","2.highschool","industrial","yes",94.0727147457005
+2003,38,"never married","1.primary","industrial","yes",94.0727147457005
+2004,44,"never married","4.master","IT","yes",90.4819133566401
+2006,50,"never married","2.highschool","IT","yes",111.721782427997
+2009,55,"married","2.highschool","IT","yes",107.903923866877
+2009,49,"married","5.phd","IT","yes",191.573683548412
+2006,47,"married","5.phd","IT","yes",145.143601176911
+2003,40,"married","2.highschool","IT","yes",138.639172221569
+2003,21,"never married","2.highschool","industrial","no",53.6387220221678
+2008,60,"married","1.primary","industrial","no",93.0534873610655
+2008,56,"never married","1.primary","IT","no",81.2832532842527
+2004,61,"married","3.bachelor","industrial","no",128.680488220624
+2008,44,"married","5.phd","IT","yes",136.15771083723
+2007,43,"divorced","5.phd","industrial","yes",160.642475408263
+2005,29,"married","3.bachelor","industrial","yes",109.833985642199
+2003,38,"married","4.master","IT","no",148.413159102577
+2003,26,"never married","3.bachelor","industrial","yes",108.390640020409
+2006,28,"never married","2.highschool","industrial","no",67.1430807546635
+2003,38,"never married","4.master","IT","yes",118.019753340006
+2006,45,"divorced","3.bachelor","industrial","no",109.833985642199
+2004,39,"married","2.highschool","industrial","no",47.3389060962716
+2003,33,"married","2.highschool","industrial","yes",62.91365496918
+2005,44,"married","1.primary","industrial","no",70.4760196469445
+2006,48,"married","3.bachelor","industrial","yes",99.6894636984864
+2007,45,"married","2.highschool","industrial","yes",92.7913480810133
+2007,56,"married","2.highschool","industrial","no",99.6916283970721
+2009,40,"never married","4.master","IT","no",114.475713290347
+2006,71,"married","1.primary","industrial","no",89.2428846644714
+2006,30,"married","2.highschool","industrial","no",118.884359339886
+2004,45,"married","4.master","IT","yes",148.413159102577
+2004,41,"married","2.highschool","industrial","yes",90.4819133566401
+2003,40,"married","3.bachelor","IT","yes",118.884359339886
+2004,59,"married","1.primary","IT","yes",89.1678286670778
+2007,46,"married","1.primary","industrial","no",73.7757432746946
+2003,38,"never married","2.highschool","industrial","yes",70.4760196469445
+2007,26,"married","3.bachelor","industrial","yes",93.4866920429597
+2005,53,"married","2.highschool","IT","yes",70.4760196469445
+2004,46,"divorced","4.master","IT","yes",99.6894636984864
+2007,42,"married","3.bachelor","industrial","yes",98.5993438603892
+2006,28,"never married","3.bachelor","industrial","no",54.5981500331442
+2004,30,"never married","1.primary","industrial","no",86.6951548289402
+2008,34,"married","4.master","IT","yes",118.884359339886
+2008,46,"married","4.master","industrial","no",160.642475408263
+2007,22,"never married","3.bachelor","industrial","no",59.0970640815891
+2007,37,"never married","2.highschool","IT","yes",92.7295279091354
+2008,27,"married","3.bachelor","industrial","yes",63.1888610037461
+2008,52,"married","2.highschool","IT","yes",114.475713290347
+2008,43,"married","2.highschool","industrial","no",65.1108537153447
+2004,52,"married","2.highschool","industrial","yes",148.413159102577
+2005,54,"never married","3.bachelor","IT","yes",109.489841452174
+2007,47,"married","2.highschool","industrial","yes",99.6894636984864
+2005,21,"never married","3.bachelor","IT","yes",105.927810775063
+2005,42,"married","4.master","IT","yes",134.705375118879
+2003,72,"married","5.phd","IT","yes",189.244162932803
+2003,38,"married","2.highschool","IT","yes",104.921506533664
+2009,53,"married","2.highschool","industrial","yes",82.6796372966372
+2006,35,"separated","3.bachelor","IT","no",81.2832532842527
+2008,60,"married","2.highschool","industrial","yes",76.8936025176112
+2003,39,"married","2.highschool","IT","yes",85.3839403789827
+2005,45,"divorced","2.highschool","IT","no",73.7757432746946
+2008,61,"married","2.highschool","IT","yes",106.608021493532
+2008,64,"divorced","2.highschool","IT","yes",95.2307125669819
+2004,39,"married","1.primary","industrial","yes",70.4760196469445
+2007,46,"married","3.bachelor","IT","yes",105.927810775063
+2008,25,"never married","3.bachelor","IT","no",56.4538649754188
+2003,80,"married","3.bachelor","IT","yes",94.0727147457005
+2008,51,"divorced","3.bachelor","industrial","yes",105.927810775063
+2004,58,"married","2.highschool","industrial","yes",75.0431540173516
+2009,52,"married","3.bachelor","industrial","yes",118.884359339886
+2004,45,"married","5.phd","IT","yes",138.299126920883
+2007,41,"never married","3.bachelor","industrial","yes",99.6894636984864
+2004,42,"married","2.highschool","industrial","yes",95.2307125669819
+2008,31,"never married","3.bachelor","industrial","yes",94.0727147457005
+2004,49,"divorced","2.highschool","IT","yes",123.089699847943
+2009,47,"divorced","2.highschool","industrial","yes",90.4819133566401
+2005,39,"married","2.highschool","IT","yes",87.9810327856054
+2006,53,"married","4.master","IT","yes",109.833985642199
+2003,37,"married","2.highschool","industrial","yes",85.3839403789827
+2003,52,"married","4.master","industrial","yes",191.573683548412
+2006,41,"married","2.highschool","industrial","yes",101.82435207568
+2006,39,"married","4.master","IT","yes",148.413159102577
+2009,63,"married","5.phd","IT","yes",171.765132627508
+2007,23,"never married","2.highschool","industrial","no",73.4544282607621
+2004,62,"married","2.highschool","IT","yes",87.9810327856054
+2004,43,"married","5.phd","IT","yes",272.294783220064
+2004,29,"never married","2.highschool","industrial","no",102.870246933215
+2004,43,"married","5.phd","IT","yes",160.642475408263
+2008,34,"married","4.master","IT","no",123.089699847943
+2003,38,"married","5.phd","IT","yes",91.6992261117042
+2005,25,"never married","4.master","IT","yes",85.3839403789827
+2005,64,"married","2.highschool","IT","yes",109.833985642199
+2003,49,"married","4.master","industrial","yes",114.475713290347
+2009,46,"married","4.master","industrial","yes",84.3157688645753
+2006,30,"married","5.phd","IT","yes",114.475713290347
+2003,33,"never married","3.bachelor","industrial","no",57.3525910796177
+2007,29,"married","4.master","IT","yes",104.921506533664
+2008,32,"married","2.highschool","IT","yes",125.525498433836
+2007,54,"married","2.highschool","IT","yes",108.874525834712
+2005,40,"never married","2.highschool","industrial","yes",65.1108537153447
+2005,24,"never married","4.master","industrial","yes",109.833985642199
+2008,30,"separated","1.primary","industrial","no",70.8150386167557
+2009,49,"married","4.master","industrial","yes",145.143601176911
+2006,47,"married","2.highschool","industrial","yes",101.82435207568
+2008,25,"never married","2.highschool","industrial","no",84.0459576539924
+2007,44,"married","3.bachelor","industrial","yes",134.705375118879
+2007,41,"divorced","1.primary","IT","yes",97.4932940453934
+2005,54,"separated","4.master","industrial","yes",154.68529299563
+2009,59,"married","5.phd","IT","yes",200.543262324662
+2003,25,"never married","2.highschool","industrial","no",59.7342233407467
+2009,63,"married","5.phd","industrial","no",91.6992261117042
+2009,49,"never married","3.bachelor","IT","yes",109.833985642199
+2008,35,"separated","3.bachelor","IT","yes",114.475713290347
+2006,24,"never married","2.highschool","industrial","no",66.2294082943902
+2003,66,"married","2.highschool","industrial","yes",92.8958447894966
+2008,57,"married","1.primary","industrial","no",94.0727147457005
+2003,47,"married","4.master","IT","yes",118.884359339886
+2006,44,"married","4.master","industrial","yes",132.487821126123
+2006,56,"married","4.master","industrial","yes",127.115743812184
+2004,34,"married","2.highschool","IT","no",99.6894636984864
+2006,23,"married","1.primary","industrial","no",40.4056652596845
+2008,30,"married","4.master","industrial","yes",138.299126920883
+2004,38,"married","3.bachelor","industrial","no",102.870246933215
+2004,43,"married","1.primary","IT","yes",79.8549003093467
+2007,58,"divorced","3.bachelor","IT","yes",111.720849360989
+2005,36,"married","2.highschool","industrial","no",62.198679430261
+2007,48,"never married","2.highschool","IT","yes",70.4760196469445
+2005,35,"married","2.highschool","IT","yes",86.0428011301927
+2006,22,"never married","2.highschool","IT","no",99.6894636984864
+2007,50,"married","4.master","IT","yes",113.567089569751
+2004,58,"married","1.primary","industrial","no",100.764272842107
+2003,20,"never married","2.highschool","IT","no",61.1875264339915
+2007,44,"married","2.highschool","industrial","yes",113.61274572643
+2003,50,"married","4.master","IT","yes",134.705375118879
+2009,55,"married","2.highschool","industrial","yes",104.923531700709
+2003,39,"never married","2.highschool","IT","yes",109.833985642199
+2008,32,"never married","4.master","IT","yes",276.778413321176
+2008,50,"married","4.master","IT","no",148.413159102577
+2009,24,"married","1.primary","industrial","no",148.413159102577
+2009,53,"married","3.bachelor","IT","yes",109.833985642199
+2003,35,"married","2.highschool","IT","no",81.2832532842527
+2003,25,"never married","1.primary","IT","yes",79.8549003093467
+2006,24,"never married","4.master","industrial","yes",109.833985642199
+2005,57,"separated","4.master","industrial","yes",148.413159102577
+2005,43,"married","1.primary","IT","yes",65.1108537153447
+2009,33,"married","3.bachelor","IT","yes",88.2986994723058
+2005,40,"married","3.bachelor","IT","yes",91.6992261117042
+2008,39,"never married","4.master","industrial","yes",73.7757432746946
+2004,32,"married","5.phd","IT","yes",70.4760196469445
+2005,48,"divorced","4.master","IT","yes",128.680488220624
+2004,29,"married","5.phd","industrial","yes",94.0727147457005
+2005,35,"divorced","4.master","industrial","yes",98.5993438603892
+2004,41,"married","2.highschool","industrial","yes",133.232350826567
+2009,52,"married","2.highschool","industrial","yes",134.705375118879
+2005,50,"married","2.highschool","industrial","no",91.6992261117042
+2004,35,"married","4.master","IT","no",160.635498596854
+2007,27,"married","3.bachelor","industrial","yes",99.6894636984864
+2004,57,"married","5.phd","industrial","yes",114.475713290347
+2004,48,"married","3.bachelor","IT","no",97.4932940453934
+2009,41,"divorced","3.bachelor","IT","yes",98.0483505056004
+2005,59,"married","5.phd","IT","yes",104.921506533664
+2003,55,"married","4.master","IT","yes",109.833985642199
+2005,54,"divorced","2.highschool","IT","yes",133.232350826567
+2003,34,"married","5.phd","industrial","yes",118.884359339886
+2009,43,"never married","2.highschool","IT","yes",73.7757432746946
+2003,43,"divorced","4.master","IT","yes",104.921506533664
+2003,62,"widowed","1.primary","industrial","no",62.0303046060726
+2006,45,"never married","2.highschool","IT","no",97.4932940453934
+2004,40,"married","4.master","industrial","yes",145.805163374625
+2003,33,"married","2.highschool","IT","yes",82.6796372966372
+2005,45,"married","5.phd","IT","yes",148.413159102577
+2009,21,"never married","3.bachelor","industrial","no",49.5553381215227
+2009,54,"married","1.primary","industrial","no",73.7757432746946
+2003,43,"married","4.master","industrial","no",73.7757432746946
+2004,54,"married","4.master","industrial","yes",127.115743812184
+2004,35,"married","1.primary","industrial","yes",109.833985642199
+2008,23,"never married","3.bachelor","industrial","yes",61.5945831752282
+2006,61,"widowed","2.highschool","industrial","yes",111.440469567068
+2004,51,"divorced","4.master","industrial","yes",138.299126920883
+2006,43,"married","3.bachelor","industrial","yes",127.115743812184
+2003,20,"never married","2.highschool","industrial","no",75.3556793180091
+2007,51,"married","3.bachelor","industrial","yes",139.00340805947
+2009,65,"married","2.highschool","IT","yes",118.884359339886
+2009,37,"married","2.highschool","industrial","yes",109.833985642199
+2008,24,"never married","2.highschool","industrial","no",66.2330957333126
+2003,36,"married","2.highschool","industrial","yes",73.2930820722881
+2005,45,"married","3.bachelor","IT","no",130.982177377461
+2008,33,"married","5.phd","IT","yes",276.778413321176
+2009,36,"divorced","2.highschool","industrial","no",86.9103277389946
+2004,32,"married","2.highschool","industrial","yes",109.833985642199
+2009,45,"married","2.highschool","industrial","yes",118.884359339886
+2003,51,"married","2.highschool","industrial","no",104.921506533664
+2005,33,"married","3.bachelor","IT","yes",136.876367635184
+2003,47,"divorced","3.bachelor","industrial","yes",84.0459576539924
+2003,37,"married","5.phd","IT","yes",196.125272594255
+2008,41,"married","3.bachelor","IT","yes",121.430313822622
+2005,23,"never married","2.highschool","IT","no",96.3977959023552
+2009,57,"married","4.master","industrial","yes",128.680488220624
+2006,61,"married","5.phd","IT","yes",148.413159102577
+2007,47,"divorced","3.bachelor","industrial","yes",85.3839403789827
+2003,29,"married","4.master","IT","yes",87.9810327856054
+2005,37,"married","2.highschool","industrial","yes",99.6894636984864
+2005,57,"married","2.highschool","industrial","yes",148.413159102577
+2004,39,"never married","5.phd","IT","no",81.2832532842527
+2007,59,"married","4.master","IT","yes",145.805163374625
+2007,31,"married","4.master","IT","yes",149.055895589404
+2009,26,"never married","2.highschool","industrial","no",97.4932940453934
+2009,51,"married","2.highschool","industrial","yes",118.019753340006
+2006,38,"married","2.highschool","industrial","no",99.6894636984864
+2006,51,"married","4.master","IT","no",118.884359339886
+2004,50,"married","2.highschool","IT","yes",79.8549003093467
+2005,32,"married","5.phd","industrial","yes",118.884359339886
+2007,38,"married","4.master","IT","yes",160.642475408263
+2005,49,"married","2.highschool","industrial","yes",176.989650489877
+2005,40,"never married","3.bachelor","IT","yes",73.7757432746946
+2007,60,"married","5.phd","IT","yes",154.68529299563
+2007,30,"never married","4.master","IT","yes",101.82435207568
+2003,41,"married","4.master","IT","yes",130.982177377461
+2009,32,"never married","3.bachelor","IT","yes",114.475713290347
+2009,26,"never married","4.master","IT","yes",105.927810775063
+2004,41,"married","3.bachelor","industrial","yes",81.2832532842527
+2008,53,"married","2.highschool","industrial","yes",134.705375118879
+2005,35,"married","3.bachelor","IT","no",97.4932940453934
+2008,50,"married","2.highschool","industrial","yes",109.833985642199
+2004,43,"married","4.master","IT","yes",171.765132627508
+2003,50,"separated","2.highschool","IT","yes",67.8267871319966
+2009,19,"never married","2.highschool","IT","no",73.7757432746946
+2004,42,"married","2.highschool","industrial","no",91.6992261117042
+2007,53,"married","2.highschool","industrial","yes",66.9616443217359
+2004,22,"never married","3.bachelor","IT","no",95.2307125669819
+2003,49,"married","2.highschool","industrial","yes",98.5993438603892
+2005,33,"never married","2.highschool","industrial","yes",109.833985642199
+2005,31,"never married","2.highschool","industrial","yes",81.2832532842527
+2004,43,"married","1.primary","industrial","yes",90.4819133566401
+2009,57,"married","5.phd","IT","no",109.833985642199
+2005,40,"married","5.phd","IT","yes",148.413159102577
+2003,48,"married","2.highschool","IT","yes",84.5294690248517
+2004,46,"married","4.master","industrial","yes",101.82435207568
+2009,58,"married","4.master","industrial","yes",104.921506533664
+2003,50,"married","1.primary","industrial","yes",104.921506533664
+2005,38,"married","3.bachelor","IT","yes",99.6894636984864
+2004,33,"never married","5.phd","IT","yes",101.402052302992
+2007,52,"married","3.bachelor","IT","yes",149.055895589404
+2004,48,"married","1.primary","industrial","no",73.7757432746946
+2006,53,"married","5.phd","IT","no",160.642475408263
+2008,37,"never married","3.bachelor","IT","yes",118.884359339886
+2007,43,"married","2.highschool","industrial","no",119.405204322401
+2008,54,"married","3.bachelor","industrial","yes",107.903923866877
+2004,41,"married","5.phd","IT","yes",154.868367231559
+2005,57,"married","4.master","industrial","no",75.3556793180091
+2007,54,"married","5.phd","industrial","yes",118.539502533774
+2009,25,"divorced","2.highschool","industrial","yes",76.8936025176112
+2003,35,"separated","1.primary","IT","no",62.198679430261
+2008,29,"married","3.bachelor","industrial","yes",182.020620963513
+2009,36,"married","2.highschool","industrial","yes",267.901086855275
+2005,43,"married","4.master","industrial","yes",141.77517233318
+2007,41,"married","4.master","IT","yes",186.876677628007
+2003,52,"married","4.master","industrial","no",72.1504556815713
+2005,48,"married","2.highschool","industrial","no",49.5553381215227
+2003,51,"married","2.highschool","IT","no",81.2832532842527
+2004,55,"married","3.bachelor","IT","yes",118.884359339886
+2004,37,"married","5.phd","IT","no",97.4932940453934
+2007,48,"never married","3.bachelor","industrial","yes",111.720849360989
+2003,42,"married","1.primary","industrial","yes",101.82435207568
+2007,43,"married","4.master","industrial","yes",127.115743812184
+2006,32,"married","2.highschool","industrial","no",87.9810327856054
+2006,33,"never married","4.master","industrial","yes",84.0459576539924
+2003,48,"married","2.highschool","industrial","no",78.3924668009837
+2009,20,"never married","3.bachelor","IT","no",46.3665027412862
+2005,43,"married","2.highschool","industrial","yes",132.860765311572
+2003,58,"divorced","2.highschool","IT","yes",61.5945831752282
+2004,38,"married","3.bachelor","industrial","yes",99.6894636984864
+2008,23,"never married","2.highschool","IT","no",66.2294082943902
+2009,54,"divorced","2.highschool","industrial","yes",108.874525834712
+2007,66,"married","5.phd","industrial","yes",99.6894636984864
+2009,47,"married","5.phd","IT","yes",152.838800991182
+2003,35,"married","3.bachelor","IT","no",76.8936025176112
+2008,39,"married","2.highschool","industrial","yes",143.134940811134
+2005,35,"never married","3.bachelor","IT","yes",125.20428658029
+2006,40,"married","3.bachelor","industrial","yes",75.610695863947
+2006,41,"married","2.highschool","industrial","yes",109.833985642199
+2004,40,"married","5.phd","IT","yes",176.989650489877
+2006,50,"married","2.highschool","industrial","no",59.0970640815891
+2004,35,"married","2.highschool","industrial","yes",99.6894636984864
+2009,43,"married","3.bachelor","industrial","no",95.2307125669819
+2005,26,"never married","3.bachelor","IT","yes",104.921506533664
+2009,23,"never married","2.highschool","IT","no",49.5553381215227
+2003,61,"married","5.phd","IT","no",130.982177377461
+2004,24,"never married","4.master","IT","yes",43.7351116779821
+2006,66,"married","3.bachelor","IT","yes",118.884359339886
+2006,50,"widowed","2.highschool","industrial","yes",109.833985642199
+2005,22,"never married","2.highschool","IT","no",75.0431540173516
+2004,62,"married","2.highschool","IT","yes",91.6992261117042
+2003,55,"married","4.master","IT","yes",105.927810775063
+2004,41,"married","4.master","industrial","no",73.7757432746946
+2005,54,"married","4.master","IT","yes",170.156834417801
+2009,29,"married","4.master","industrial","no",138.299126920883
+2004,39,"married","2.highschool","industrial","yes",101.82435207568
+2006,71,"divorced","4.master","IT","no",87.9810327856054
+2003,22,"never married","4.master","industrial","yes",78.3924668009837
+2007,48,"married","4.master","IT","no",123.089699847943
+2009,35,"married","3.bachelor","industrial","yes",116.265324062503
+2003,46,"married","4.master","industrial","no",90.4819133566401
+2003,51,"married","1.primary","industrial","yes",109.833985642199
+2005,55,"married","2.highschool","IT","yes",104.921506533664
+2005,36,"married","2.highschool","IT","yes",118.884359339886
+2008,57,"married","2.highschool","industrial","no",94.0727147457005
+2005,21,"married","2.highschool","industrial","yes",141.77517233318
+2006,60,"married","5.phd","IT","yes",128.680488220624
+2006,41,"never married","3.bachelor","industrial","no",73.7757432746946
+2004,56,"married","4.master","IT","yes",139.353811767493
+2005,32,"never married","4.master","IT","yes",94.0727147457005
+2003,32,"married","2.highschool","industrial","yes",73.7757432746946
+2006,36,"divorced","3.bachelor","industrial","yes",107.903923866877
+2006,28,"never married","2.highschool","industrial","no",64.5420748732979
+2009,60,"married","5.phd","IT","no",138.299126920883
+2003,41,"married","3.bachelor","IT","yes",89.2428846644714
+2006,55,"married","3.bachelor","industrial","yes",99.6894636984864
+2003,36,"married","3.bachelor","industrial","yes",109.833985642199
+2006,46,"never married","3.bachelor","IT","yes",90.4819133566401
+2008,62,"married","2.highschool","industrial","no",89.4924795180001
+2006,44,"married","2.highschool","industrial","no",102.766280877288
+2006,36,"married","4.master","industrial","yes",118.884359339886
+2004,41,"married","2.highschool","IT","yes",148.413159102577
+2006,22,"never married","4.master","IT","yes",114.475713290347
+2008,51,"married","5.phd","IT","yes",129.983634818897
+2008,57,"married","1.primary","IT","yes",110.782650276254
+2005,55,"married","2.highschool","IT","yes",114.475713290347
+2003,36,"married","4.master","IT","yes",148.413159102577
+2008,43,"married","5.phd","IT","yes",276.778413321176
+2003,38,"married","3.bachelor","IT","no",23.9529444789966
+2006,27,"never married","3.bachelor","IT","no",103.90247060316
+2007,32,"married","3.bachelor","industrial","yes",118.884359339886
+2009,44,"never married","1.primary","industrial","no",71.6867436659172
+2008,56,"married","4.master","industrial","yes",276.778413321176
+2007,38,"married","4.master","IT","yes",141.77517233318
+2003,36,"married","1.primary","industrial","no",99.6894636984864
+2005,28,"never married","3.bachelor","industrial","yes",108.874525834712
+2005,39,"married","2.highschool","industrial","yes",79.8549003093467
+2008,42,"never married","2.highschool","IT","no",78.9846061809322
+2009,51,"married","1.primary","industrial","yes",82.6796372966372
+2004,55,"married","2.highschool","IT","yes",89.4924795180001
+2007,39,"never married","5.phd","IT","yes",130.982177377461
+2003,42,"married","1.primary","industrial","no",109.706051812711
+2006,33,"married","5.phd","IT","yes",117.146816914805
+2008,23,"never married","2.highschool","IT","yes",73.7757432746946
+2003,40,"married","4.master","industrial","yes",81.2832532842527
+2003,40,"married","3.bachelor","industrial","no",80.8581959564691
+2009,51,"married","3.bachelor","industrial","yes",107.903923866877
+2007,76,"married","4.master","industrial","yes",76.8936025176112
+2007,57,"divorced","5.phd","industrial","yes",87.9810327856054
+2003,27,"separated","3.bachelor","industrial","yes",95.2307125669819
+2005,26,"never married","2.highschool","industrial","yes",84.0459576539924
+2005,25,"married","2.highschool","industrial","yes",99.6894636984864
+2005,27,"married","3.bachelor","industrial","yes",101.402052302992
+2004,33,"never married","3.bachelor","IT","yes",87.9810327856054
+2003,51,"divorced","1.primary","industrial","yes",87.9810327856054
+2005,22,"never married","4.master","IT","yes",94.0727147457005
+2005,47,"married","2.highschool","industrial","yes",128.199636871795
+2009,34,"never married","3.bachelor","IT","yes",136.517655222436
+2008,47,"divorced","3.bachelor","industrial","yes",107.903923866877
+2005,31,"never married","3.bachelor","industrial","yes",123.089699847943
+2005,46,"married","2.highschool","industrial","yes",91.6992261117042
+2006,47,"married","2.highschool","IT","yes",78.3924668009837
+2006,49,"married","4.master","industrial","yes",154.68529299563
+2003,40,"married","4.master","industrial","yes",136.15771083723
+2004,51,"married","1.primary","IT","yes",81.2832532842527
+2008,31,"married","3.bachelor","industrial","yes",76.2832778539642
+2003,58,"married","2.highschool","IT","yes",109.833985642199
+2005,48,"married","3.bachelor","industrial","no",87.7884362154584
+2004,54,"divorced","4.master","industrial","yes",127.115743812184
+2007,56,"never married","5.phd","IT","no",154.072997206315
+2007,61,"married","2.highschool","industrial","yes",109.833985642199
+2009,32,"married","5.phd","industrial","yes",138.299126920883
+2007,60,"married","4.master","IT","no",164.646988930328
+2006,42,"married","3.bachelor","industrial","yes",138.299126920883
+2003,22,"never married","3.bachelor","IT","no",44.9782920272516
+2003,46,"married","3.bachelor","industrial","yes",106.723977625299
+2005,53,"married","1.primary","IT","yes",114.475713290347
+2008,43,"divorced","4.master","industrial","yes",73.7757432746946
+2009,32,"never married","2.highschool","industrial","yes",75.3556793180091
+2009,30,"married","4.master","industrial","yes",141.77517233318
+2009,50,"never married","5.phd","IT","yes",109.833985642199
+2006,40,"married","5.phd","IT","yes",277.79948020565
+2009,55,"married","1.primary","IT","no",79.8549003093467
+2004,42,"married","4.master","IT","yes",166.324941233877
+2004,35,"never married","2.highschool","industrial","yes",75.3556793180091
+2004,33,"married","4.master","IT","yes",100.086742317948
+2004,33,"married","3.bachelor","IT","yes",102.870246933215
+2003,38,"married","2.highschool","IT","yes",118.712094053725
+2009,41,"married","2.highschool","IT","yes",117.146816914805
+2009,42,"married","5.phd","IT","no",123.500017774584
+2009,58,"married","4.master","IT","yes",148.413159102577
+2009,45,"married","2.highschool","industrial","no",76.8936025176112
+2009,47,"never married","2.highschool","IT","yes",109.833985642199
+2005,30,"married","2.highschool","IT","yes",105.927810775063
+2009,34,"married","4.master","IT","yes",160.642475408263
+2006,43,"married","5.phd","IT","no",149.695042068453
+2008,58,"separated","1.primary","industrial","yes",99.6894636984864
+2009,44,"married","3.bachelor","industrial","no",104.923531700709
+2005,28,"married","1.primary","industrial","no",61.1875264339915
+2004,46,"married","3.bachelor","IT","yes",105.927810775063
+2008,36,"married","3.bachelor","industrial","yes",107.903923866877
+2007,37,"married","2.highschool","IT","yes",70.8150386167557
+2008,47,"married","4.master","IT","yes",160.642475408263
+2007,56,"divorced","3.bachelor","IT","no",99.6894636984864
+2009,38,"married","3.bachelor","IT","yes",111.720849360989
+2007,41,"never married","1.primary","industrial","no",75.3556793180091
+2004,62,"married","3.bachelor","IT","yes",94.0727147457005
+2004,40,"married","3.bachelor","IT","yes",87.9810327856054
+2004,44,"married","5.phd","IT","yes",123.089699847943
+2007,56,"married","4.master","industrial","yes",99.6894636984864
+2008,51,"married","3.bachelor","industrial","no",76.8936025176112
+2005,41,"married","3.bachelor","industrial","no",86.6951548289402
+2005,52,"married","5.phd","IT","yes",176.989650489877
+2008,27,"married","3.bachelor","IT","yes",100.764272842107
+2004,52,"married","4.master","industrial","yes",114.475713290347
+2005,51,"divorced","2.highschool","industrial","no",67.1792914754175
+2009,51,"married","2.highschool","industrial","yes",79.8549003093467
+2005,28,"never married","4.master","IT","yes",90.4819133566401
+2007,49,"never married","2.highschool","IT","no",57.9709421772731
+2007,61,"married","1.primary","industrial","yes",114.475713290347
+2006,39,"married","2.highschool","IT","yes",99.6894636984864
+2005,23,"never married","1.primary","industrial","no",89.4924795180001
+2007,53,"married","5.phd","industrial","yes",151.805096289083
+2004,55,"never married","3.bachelor","IT","yes",87.9810327856054
+2005,48,"never married","2.highschool","IT","yes",87.9810327856054
+2007,50,"married","4.master","IT","yes",104.921506533664
+2009,31,"never married","1.primary","industrial","no",65.1108537153447
+2007,53,"married","2.highschool","industrial","yes",128.680488220624
+2008,49,"married","4.master","industrial","no",154.68529299563
+2003,49,"never married","4.master","industrial","no",130.982177377461
+2004,43,"married","2.highschool","industrial","yes",120.589436530402
+2007,20,"never married","2.highschool","industrial","yes",81.2832532842527
+2008,46,"divorced","2.highschool","IT","yes",110.172930287822
+2005,48,"married","4.master","industrial","yes",152.216806827106
+2005,19,"never married","2.highschool","industrial","no",70.4760196469445
+2004,56,"divorced","4.master","industrial","yes",85.3839403789827
+2003,44,"married","3.bachelor","industrial","no",101.82435207568
+2009,23,"never married","2.highschool","industrial","no",85.3839403789827
+2005,42,"never married","4.master","IT","yes",101.82435207568
+2008,32,"married","5.phd","industrial","no",118.884359339886
+2003,32,"never married","2.highschool","industrial","no",73.7757432746946
+2003,43,"married","2.highschool","industrial","no",73.7757432746946
+2008,57,"never married","4.master","industrial","yes",138.610994032645
+2008,26,"married","3.bachelor","IT","yes",109.833985642199
+2009,67,"divorced","3.bachelor","IT","yes",151.591484239814
+2004,31,"married","5.phd","IT","yes",176.989650489877
+2006,49,"divorced","3.bachelor","IT","yes",103.90247060316
+2005,29,"never married","4.master","industrial","yes",128.680488220624
+2008,41,"married","3.bachelor","industrial","no",108.874525834712
+2006,35,"married","2.highschool","IT","yes",87.9810327856054
+2009,39,"married","2.highschool","industrial","no",95.2307125669819
+2004,33,"separated","3.bachelor","IT","yes",98.5993438603892
+2009,53,"married","4.master","IT","yes",141.77517233318
+2009,43,"married","4.master","IT","yes",123.089699847943
+2004,36,"married","4.master","IT","yes",94.6540203819701
+2004,38,"married","5.phd","IT","yes",148.413159102577
+2003,58,"married","2.highschool","industrial","no",104.921506533664
+2004,45,"married","4.master","IT","yes",123.089699847943
+2005,34,"never married","2.highschool","industrial","no",94.5960991038653
+2007,30,"married","4.master","IT","no",127.115743812184
+2008,21,"never married","2.highschool","industrial","no",29.3769761006037
+2003,39,"married","4.master","IT","yes",129.453644576626
+2006,28,"never married","3.bachelor","industrial","yes",109.833985642199
+2008,54,"married","2.highschool","industrial","yes",99.6894636984864
+2007,24,"never married","3.bachelor","industrial","yes",90.4819133566401
+2005,57,"married","5.phd","industrial","yes",70.8150386167557
+2003,48,"separated","2.highschool","IT","no",95.2307125669819
+2004,31,"married","3.bachelor","IT","yes",109.833985642199
+2006,47,"never married","5.phd","IT","yes",182.020620963513
+2004,44,"married","4.master","IT","no",160.642475408263
+2004,30,"never married","2.highschool","industrial","yes",70.4760196469445
+2003,41,"never married","4.master","IT","yes",130.982177377461
+2008,26,"never married","4.master","industrial","yes",105.927810775063
+2009,32,"never married","3.bachelor","industrial","yes",109.833985642199
+2009,39,"married","2.highschool","IT","yes",97.4710060955894
+2004,42,"married","3.bachelor","IT","yes",111.720849360989
+2005,24,"never married","4.master","IT","yes",172.217265521809
+2006,44,"divorced","5.phd","IT","yes",129.453644576626
+2006,30,"never married","4.master","IT","yes",127.115743812184
+2006,58,"married","4.master","IT","yes",134.705375118879
+2008,33,"never married","2.highschool","IT","yes",94.0727147457005
+2008,56,"married","2.highschool","industrial","no",94.0727147457005
+2005,28,"married","3.bachelor","industrial","yes",96.9340904570115
+2008,41,"married","5.phd","IT","yes",276.778413321176
+2009,22,"married","3.bachelor","industrial","no",32.3664131748549
+2004,37,"divorced","3.bachelor","industrial","yes",84.450253670189
+2006,18,"never married","1.primary","industrial","no",65.1108537153447
+2004,37,"never married","4.master","IT","no",84.7183897030478
+2007,43,"married","4.master","industrial","yes",167.706575552614
+2008,49,"married","2.highschool","IT","yes",94.0727147457005
+2005,36,"married","4.master","industrial","yes",134.705375118879
+2007,47,"married","5.phd","industrial","no",81.2832532842527
+2003,52,"married","4.master","industrial","yes",134.705375118879
+2009,34,"married","3.bachelor","industrial","no",114.475713290347
+2004,62,"married","4.master","IT","yes",130.982177377461
+2007,44,"married","1.primary","industrial","yes",104.921506533664
+2005,48,"married","1.primary","industrial","yes",152.216806827106
+2007,51,"married","2.highschool","IT","yes",124.720446242886
+2009,35,"never married","4.master","industrial","yes",148.413159102577
+2003,42,"married","2.highschool","industrial","no",89.2428846644714
+2005,34,"never married","4.master","industrial","yes",82.6796372966372
+2003,50,"married","4.master","industrial","yes",94.0727147457005
+2006,50,"divorced","4.master","IT","yes",153.457515308961
+2004,55,"married","4.master","IT","no",46.7632687977187
+2009,56,"married","2.highschool","industrial","yes",129.453644576626
+2005,50,"married","2.highschool","IT","yes",130.982177377461
+2009,44,"married","4.master","IT","no",94.0727147457005
+2005,30,"married","4.master","IT","yes",99.6894636984864
+2005,34,"married","4.master","IT","yes",128.680488220624
+2007,50,"divorced","2.highschool","IT","yes",73.7757432746946
+2004,51,"married","4.master","IT","no",110.782650276254
+2003,53,"married","3.bachelor","IT","no",99.6894636984864
+2004,40,"never married","5.phd","IT","yes",91.6992261117042
+2006,34,"married","2.highschool","IT","yes",82.6796372966372
+2006,36,"married","3.bachelor","industrial","yes",118.884359339886
+2005,44,"married","3.bachelor","IT","yes",148.413159102577
+2008,54,"married","2.highschool","industrial","no",95.2307125669819
+2008,36,"married","4.master","industrial","no",163.515863976238
+2006,62,"married","5.phd","IT","yes",279.501781963737
+2008,33,"never married","5.phd","IT","no",114.475713290347
+2004,44,"never married","2.highschool","industrial","no",102.870246933215
+2005,80,"never married","2.highschool","IT","no",87.9810327856054
+2005,45,"married","2.highschool","IT","no",87.9810327856054
+2008,58,"divorced","4.master","IT","yes",70.4760196469445
+2004,51,"married","3.bachelor","industrial","no",101.82435207568
+2005,60,"married","3.bachelor","IT","yes",277.601417511009
+2007,33,"married","1.primary","industrial","no",87.9810327856054
+2006,28,"never married","3.bachelor","IT","yes",104.921506533664
+2004,37,"married","4.master","industrial","yes",127.115743812184
+2006,56,"married","3.bachelor","IT","yes",99.6894636984864
+2009,59,"married","5.phd","IT","yes",171.765132627508
+2004,56,"married","2.highschool","IT","yes",75.0431540173516
+2003,34,"married","1.primary","industrial","yes",72.1504556815713
+2004,37,"never married","2.highschool","industrial","yes",34.6074177301288
+2009,36,"married","4.master","industrial","yes",94.0727147457005
+2008,45,"married","4.master","IT","yes",176.989650489877
+2006,36,"married","5.phd","IT","no",140.398200161944
+2008,23,"never married","3.bachelor","IT","no",27.1405792079024
+2003,56,"married","2.highschool","IT","yes",127.115743812184
+2005,33,"married","3.bachelor","industrial","no",114.475713290347
+2009,48,"married","1.primary","industrial","yes",127.115743812184
+2008,28,"never married","2.highschool","industrial","no",82.6796372966372
+2008,37,"married","3.bachelor","industrial","yes",101.82435207568
+2006,56,"married","2.highschool","IT","no",86.6951548289402
+2005,22,"never married","3.bachelor","industrial","no",63.1888610037461
+2007,60,"married","2.highschool","industrial","no",114.926521781463
+2009,30,"never married","4.master","industrial","no",81.2832532842527
+2003,50,"married","2.highschool","industrial","yes",101.82435207568
+2003,38,"married","5.phd","IT","yes",101.82435207568
+2009,55,"married","5.phd","IT","yes",103.181326958727
+2006,26,"married","4.master","industrial","yes",113.567089569751
+2006,39,"married","3.bachelor","IT","yes",148.413159102577
+2003,42,"married","5.phd","IT","yes",148.413159102577
+2007,71,"married","4.master","IT","yes",105.69144753053
+2008,33,"married","3.bachelor","IT","yes",128.680488220624
+2004,49,"never married","2.highschool","industrial","no",51.7514403709426
+2005,45,"married","3.bachelor","industrial","no",81.2832532842527
+2004,41,"married","5.phd","industrial","yes",158.294621427791
+2005,59,"divorced","1.primary","industrial","yes",54.121205395165
+2004,33,"married","4.master","IT","yes",127.115743812184
+2009,47,"never married","1.primary","industrial","no",71.6867436659172
+2006,34,"married","3.bachelor","IT","yes",145.143601176911
+2007,23,"married","3.bachelor","IT","no",94.0727147457005
+2009,32,"married","2.highschool","industrial","yes",127.901232979118
+2009,30,"married","4.master","IT","yes",102.870246933215
+2006,54,"married","2.highschool","IT","no",89.4924795180001
+2009,46,"married","3.bachelor","industrial","yes",104.921506533664
+2005,52,"married","4.master","IT","yes",137.590142766506
+2008,50,"married","2.highschool","industrial","no",176.989650489877
+2007,57,"married","2.highschool","industrial","yes",97.4932940453934
+2005,46,"married","3.bachelor","industrial","yes",100.764272842107
+2005,30,"never married","3.bachelor","IT","no",81.2832532842527
+2006,32,"never married","3.bachelor","industrial","no",56.9055391446732
+2008,53,"married","3.bachelor","industrial","no",105.927810775063
+2005,48,"married","4.master","industrial","yes",138.299126920883
+2003,31,"married","3.bachelor","IT","yes",108.874525834712
+2003,50,"married","2.highschool","industrial","no",76.8936025176112
+2004,41,"married","4.master","industrial","yes",109.833985642199
+2008,47,"married","2.highschool","industrial","yes",94.0727147457005
+2004,37,"married","2.highschool","IT","yes",75.3556793180091
+2004,24,"never married","3.bachelor","IT","yes",74.5711617723683
+2004,53,"married","1.primary","industrial","yes",81.2832532842527
+2004,39,"divorced","2.highschool","industrial","no",95.2307125669819
+2007,47,"married","3.bachelor","industrial","yes",145.143601176911
+2006,36,"married","4.master","IT","yes",140.398200161944
+2006,34,"married","4.master","IT","yes",148.413159102577
+2004,45,"married","3.bachelor","IT","no",99.6894636984864
+2003,60,"married","1.primary","industrial","no",59.0970640815891
+2006,43,"married","1.primary","IT","yes",118.884359339886
+2009,20,"never married","2.highschool","industrial","no",64.3510245722738
+2008,27,"never married","4.master","industrial","yes",133.232350826567
+2004,35,"divorced","2.highschool","industrial","no",59.0970640815891
+2008,50,"married","2.highschool","industrial","yes",104.921506533664
+2009,56,"married","2.highschool","industrial","no",60.1541246622441
+2008,19,"never married","3.bachelor","industrial","no",30.9237526933873
+2006,35,"married","4.master","IT","no",109.833985642199
+2005,23,"never married","1.primary","industrial","no",65.1108537153447
+2003,45,"widowed","2.highschool","industrial","yes",94.0727147457005
+2004,54,"divorced","1.primary","IT","no",65.1108537153447
+2008,43,"never married","2.highschool","IT","yes",87.9810327856054
+2008,42,"married","5.phd","industrial","yes",176.989650489877
+2005,51,"married","4.master","IT","yes",189.244162932803
+2007,49,"never married","4.master","IT","yes",79.8549003093467
+2006,48,"married","2.highschool","IT","yes",111.185461930226
+2005,50,"divorced","4.master","industrial","yes",118.884359339886
+2006,37,"married","4.master","industrial","yes",81.2832532842527
+2005,38,"married","5.phd","industrial","yes",186.876677628007
+2009,58,"married","4.master","IT","no",154.68529299563
+2005,41,"married","1.primary","industrial","yes",124.720446242886
+2006,51,"married","4.master","IT","yes",277.79948020565
+2006,51,"married","3.bachelor","IT","no",99.5919888162707
+2006,44,"married","1.primary","IT","yes",87.9810327856054
+2003,43,"married","4.master","IT","yes",114.475713290347
+2004,34,"married","3.bachelor","industrial","no",145.143601176911
+2005,43,"married","4.master","industrial","yes",138.299126920883
+2004,59,"married","4.master","industrial","yes",256.400649562425
+2004,61,"divorced","2.highschool","industrial","yes",113.567089569751
+2008,40,"married","1.primary","industrial","yes",118.019753340006
+2009,49,"married","3.bachelor","IT","yes",104.921506533664
+2003,55,"married","4.master","industrial","yes",130.982177377461
+2005,54,"married","5.phd","IT","yes",123.089699847943
+2004,41,"married","2.highschool","IT","yes",109.833985642199
+2006,29,"married","2.highschool","industrial","yes",109.833985642199
+2009,66,"married","2.highschool","IT","no",138.299126920883
+2006,61,"married","5.phd","IT","yes",107.433970610403
+2003,34,"divorced","2.highschool","industrial","yes",105.927810775063
+2007,41,"never married","2.highschool","industrial","yes",121.430313822622
+2004,48,"divorced","1.primary","IT","yes",85.3839403789827
+2005,26,"never married","4.master","industrial","yes",91.6992261117042
+2006,54,"divorced","3.bachelor","IT","no",90.4819133566401
+2008,44,"married","2.highschool","industrial","yes",104.921506533664
+2008,60,"divorced","4.master","IT","yes",147.116689159978
+2008,57,"married","2.highschool","industrial","no",81.2832532842527
+2009,53,"married","2.highschool","IT","yes",107.903923866877
+2007,54,"divorced","5.phd","IT","no",118.884359339886
+2009,37,"married","4.master","IT","yes",104.921506533664
+2008,62,"married","2.highschool","IT","yes",127.115743812184
+2003,40,"married","3.bachelor","IT","yes",87.9810327856054
+2008,39,"married","2.highschool","IT","yes",111.720849360989
+2005,55,"never married","2.highschool","industrial","yes",81.2832532842527
+2006,57,"married","4.master","IT","yes",123.089699847943
+2003,45,"married","4.master","industrial","yes",176.989650489877
+2003,41,"married","4.master","industrial","no",82.6796372966372
+2007,28,"never married","3.bachelor","industrial","no",102.766280877288
+2003,58,"married","5.phd","industrial","yes",120.589436530402
+2008,47,"never married","5.phd","IT","yes",141.77517233318
+2007,60,"never married","5.phd","IT","yes",106.921814091211
+2003,26,"never married","4.master","IT","yes",268.266292012557
+2006,52,"married","3.bachelor","industrial","yes",109.833985642199
+2008,31,"married","3.bachelor","industrial","yes",99.6894636984864
+2007,63,"married","5.phd","industrial","yes",200.543262324662
+2005,42,"married","2.highschool","industrial","no",109.833985642199
+2009,30,"never married","5.phd","IT","yes",125.525498433836
+2007,52,"married","3.bachelor","IT","yes",114.475713290347
+2005,38,"married","5.phd","IT","yes",160.642475408263
+2008,29,"married","1.primary","industrial","yes",99.6894636984864
+2007,42,"married","4.master","IT","no",160.642475408263
+2007,57,"married","4.master","IT","yes",125.525498433836
+2005,46,"married","3.bachelor","industrial","yes",133.232350826567
+2003,21,"never married","1.primary","industrial","no",75.0431540173516
+2005,34,"divorced","3.bachelor","industrial","yes",109.833985642199
+2008,39,"never married","2.highschool","industrial","yes",63.1888610037461
+2006,26,"never married","3.bachelor","industrial","yes",95.2307125669819
+2004,42,"divorced","1.primary","IT","yes",111.720849360989
+2004,48,"married","3.bachelor","IT","no",78.3924668009837
+2009,54,"married","2.highschool","industrial","yes",99.6894636984864
+2003,80,"married","2.highschool","industrial","no",82.6796372966372
+2006,37,"married","2.highschool","industrial","yes",78.3924668009837
+2007,31,"never married","3.bachelor","IT","no",81.2832532842527
+2003,41,"separated","2.highschool","IT","no",70.8150386167557
+2004,37,"married","4.master","IT","yes",148.413159102577
+2003,43,"never married","4.master","IT","yes",130.602227520314
+2004,54,"married","4.master","IT","no",200.543262324662
+2004,39,"married","5.phd","IT","yes",148.413159102577
+2004,45,"married","2.highschool","IT","no",87.9810327856054
+2007,21,"never married","2.highschool","IT","no",96.1440722120499
+2005,59,"married","3.bachelor","industrial","yes",104.921506533664
+2007,29,"never married","4.master","industrial","no",62.2386812563875
+2009,29,"married","4.master","IT","no",137.590142766506
+2005,33,"never married","1.primary","IT","yes",87.9810327856054
+2003,45,"married","4.master","industrial","yes",155.900506146767
+2008,53,"divorced","5.phd","industrial","yes",176.989650489877
+2003,63,"married","4.master","industrial","yes",123.089699847943
+2004,56,"married","4.master","IT","yes",138.299126920883
+2003,21,"never married","2.highschool","industrial","yes",63.1888610037461
+2007,39,"widowed","2.highschool","industrial","yes",73.7757432746946
+2007,30,"married","4.master","IT","yes",182.020620963513
+2003,42,"married","4.master","IT","yes",116.265324062503
+2004,40,"divorced","3.bachelor","industrial","no",94.0727147457005
+2004,47,"married","3.bachelor","industrial","yes",148.413159102577
+2005,43,"married","3.bachelor","IT","no",20.0855369231877
+2005,42,"divorced","3.bachelor","IT","yes",111.720849360989
+2008,50,"married","4.master","IT","yes",148.413159102577
+2004,39,"married","2.highschool","industrial","no",81.2832532842527
+2007,50,"married","4.master","IT","no",70.4760196469445
+2005,60,"widowed","5.phd","IT","yes",92.8958447894966
+2009,57,"never married","3.bachelor","industrial","no",87.9810327856054
+2007,38,"married","2.highschool","industrial","no",89.4924795180001
+2004,49,"married","2.highschool","IT","yes",102.870246933215
+2004,51,"divorced","2.highschool","IT","yes",73.7757432746946
+2004,33,"married","3.bachelor","IT","yes",66.2294082943902
+2006,59,"never married","3.bachelor","IT","yes",117.146816914805
+2006,41,"married","2.highschool","IT","yes",101.82435207568
+2003,33,"married","5.phd","IT","no",116.265324062503
+2008,28,"never married","4.master","IT","yes",126.323880709786
+2009,49,"never married","3.bachelor","IT","no",82.7417541674462
+2005,51,"separated","4.master","industrial","yes",112.6488963421
+2008,36,"never married","4.master","industrial","yes",118.884359339886
+2003,26,"never married","3.bachelor","industrial","yes",87.9810327856054
+2005,22,"never married","4.master","IT","no",54.0299651757595
+2006,47,"married","2.highschool","IT","no",117.146816914805
+2003,59,"married","5.phd","industrial","yes",118.884359339886
+2004,41,"married","4.master","IT","yes",127.901232979118
+2006,32,"never married","4.master","IT","yes",87.9810327856054
+2008,45,"married","1.primary","industrial","yes",109.833985642199
+2008,39,"married","1.primary","industrial","yes",68.7480877337669
+2006,64,"married","2.highschool","IT","yes",95.2307125669819
+2004,36,"married","4.master","industrial","yes",134.705375118879
+2004,61,"married","2.highschool","IT","no",81.2832532842527
+2003,34,"married","1.primary","industrial","no",68.7480877337669
+2004,52,"married","5.phd","IT","yes",134.705375118879
+2008,33,"married","2.highschool","industrial","no",81.2832532842527
+2009,36,"married","4.master","industrial","yes",150.695182101741
+2005,34,"married","2.highschool","industrial","no",94.0727147457005
+2004,39,"never married","1.primary","industrial","no",75.3556793180091
+2004,59,"widowed","5.phd","IT","yes",141.77517233318
+2009,49,"married","4.master","industrial","yes",175.93299770235
+2006,40,"married","5.phd","IT","yes",198.350290464385
+2006,49,"married","2.highschool","industrial","yes",94.0727147457005
+2003,25,"married","2.highschool","industrial","no",81.2832532842527
+2009,59,"married","4.master","industrial","yes",81.2832532842527
+2007,39,"married","2.highschool","industrial","no",76.436454372814
+2005,40,"married","3.bachelor","industrial","no",94.0727147457005
+2009,51,"married","4.master","IT","yes",104.921506533664
+2009,63,"never married","2.highschool","industrial","yes",110.782650276254
+2007,53,"married","1.primary","IT","yes",92.8958447894966
+2008,25,"never married","4.master","industrial","yes",99.6894636984864
+2007,53,"divorced","2.highschool","industrial","yes",85.3839403789827
+2006,23,"married","4.master","IT","yes",75.3556793180091
+2004,36,"never married","2.highschool","industrial","no",72.1504556815713
+2005,19,"never married","2.highschool","industrial","no",31.4109962716359
+2005,47,"married","2.highschool","industrial","yes",92.8958447894966
+2005,43,"never married","5.phd","IT","yes",103.90247060316
+2004,40,"married","4.master","IT","yes",111.720849360989
+2009,38,"married","5.phd","IT","yes",180.779952229859
+2003,63,"married","3.bachelor","IT","no",109.833985642199
+2008,45,"never married","4.master","industrial","yes",36.6737041960799
+2008,32,"married","2.highschool","IT","no",73.7757432746946
+2009,37,"married","4.master","IT","yes",98.5993438603892
+2004,37,"divorced","2.highschool","industrial","no",57.4636470385133
+2008,41,"married","5.phd","IT","no",118.884359339886
+2005,45,"never married","4.master","IT","yes",82.6796372966372
+2008,22,"never married","3.bachelor","industrial","no",81.2832532842527
+2005,58,"married","5.phd","IT","yes",227.458934033008
+2003,44,"married","2.highschool","IT","yes",91.6992261117042
+2007,39,"married","3.bachelor","IT","yes",116.265324062503
+2005,40,"married","2.highschool","industrial","yes",141.77517233318
+2003,33,"never married","3.bachelor","IT","yes",81.2832532842527
+2006,35,"married","5.phd","industrial","no",91.0932184689733
+2009,63,"married","5.phd","industrial","no",114.475713290347
+2003,45,"married","5.phd","industrial","yes",160.642475408263
+2008,31,"married","2.highschool","industrial","yes",99.6894636984864
+2003,41,"never married","5.phd","industrial","yes",92.8958447894966
+2008,66,"married","5.phd","IT","yes",276.778413321176
+2009,45,"never married","2.highschool","industrial","yes",82.6796372966372
+2007,47,"never married","3.bachelor","industrial","no",99.6894636984864
+2006,35,"married","2.highschool","IT","yes",124.720446242886
+2005,52,"married","2.highschool","IT","no",100.764272842107
+2003,62,"married","4.master","IT","yes",169.800342280671
+2003,47,"married","2.highschool","industrial","yes",82.6796372966372
+2004,40,"married","3.bachelor","industrial","yes",136.876367635184
+2006,41,"married","5.phd","IT","yes",277.79948020565
+2009,48,"married","2.highschool","IT","yes",118.884359339886
+2005,55,"married","4.master","IT","yes",118.884359339886
+2009,64,"married","2.highschool","IT","yes",114.475713290347
+2004,29,"married","4.master","industrial","yes",61.1875264339915
+2003,49,"married","3.bachelor","industrial","yes",118.884359339886
+2009,32,"married","4.master","industrial","yes",133.232350826567
+2006,41,"married","2.highschool","industrial","yes",82.6796372966372
+2004,58,"married","3.bachelor","industrial","yes",148.413159102577
+2003,41,"married","3.bachelor","industrial","yes",148.413159102577
+2007,34,"never married","3.bachelor","IT","yes",96.9340904570115
+2004,43,"married","4.master","IT","yes",154.68529299563
+2003,23,"never married","1.primary","IT","no",87.9810327856054
+2003,40,"never married","5.phd","industrial","yes",102.870246933215
+2007,46,"married","5.phd","IT","yes",281.745970551857
+2004,35,"married","4.master","industrial","no",106.921814091211
+2007,42,"never married","5.phd","IT","yes",148.414448195605
+2009,47,"separated","2.highschool","industrial","no",111.720849360989
+2007,45,"married","2.highschool","industrial","yes",148.413159102577
+2008,34,"never married","4.master","IT","yes",108.874525834712
+2004,57,"married","2.highschool","industrial","yes",104.921506533664
+2005,32,"never married","3.bachelor","IT","yes",86.1737867271136
+2009,55,"divorced","2.highschool","IT","yes",102.870246933215
+2008,22,"never married","4.master","IT","no",76.2832778539642
+2005,51,"married","2.highschool","IT","yes",124.720446242886
+2006,26,"never married","2.highschool","industrial","no",66.9616443217359
+2004,27,"never married","4.master","IT","no",54.5981500331442
+2004,34,"married","4.master","IT","yes",166.324941233877
+2007,48,"married","2.highschool","IT","yes",91.7016396744449
+2008,23,"married","2.highschool","industrial","no",78.3465619952666
+2003,41,"married","2.highschool","industrial","yes",111.720849360989
+2009,49,"divorced","5.phd","IT","yes",151.591484239814
+2005,47,"married","5.phd","IT","yes",120.589436530402
+2005,35,"divorced","4.master","industrial","yes",117.146816914805
+2007,50,"married","2.highschool","industrial","yes",81.9853178344996
+2006,55,"married","2.highschool","industrial","yes",137.590142766506
+2009,69,"married","2.highschool","industrial","yes",40.4056652596845
+2004,45,"married","2.highschool","industrial","yes",154.68529299563
+2005,40,"married","3.bachelor","industrial","yes",154.68529299563
+2005,47,"never married","4.master","IT","yes",143.325318108778
+2008,22,"never married","3.bachelor","industrial","yes",78.3924668009837
+2003,42,"divorced","2.highschool","industrial","no",85.3839403789827
+2008,47,"married","4.master","IT","yes",159.474176661105
+2005,48,"married","2.highschool","industrial","no",66.2294082943902
+2009,28,"never married","2.highschool","industrial","no",111.720849360989
+2005,49,"never married","3.bachelor","industrial","yes",90.7270793135127
+2009,51,"divorced","2.highschool","industrial","yes",128.680488220624
+2003,58,"married","5.phd","industrial","yes",148.413159102577
+2005,32,"never married","3.bachelor","IT","yes",114.475713290347
+2009,55,"married","2.highschool","industrial","yes",87.9810327856054
+2007,49,"married","2.highschool","IT","yes",94.0727147457005
+2004,46,"married","2.highschool","industrial","no",87.9810327856054
+2003,44,"married","5.phd","IT","yes",182.020620963513
+2003,25,"married","3.bachelor","industrial","yes",87.9810327856054
+2004,73,"divorced","1.primary","industrial","yes",92.8958447894966
+2004,18,"never married","2.highschool","industrial","yes",72.1504556815713
+2005,52,"married","1.primary","IT","yes",122.263673892802
+2008,28,"married","2.highschool","industrial","no",72.1504556815713
+2004,51,"married","2.highschool","industrial","no",82.6796372966372
+2009,44,"married","4.master","IT","yes",176.989650489877
+2008,44,"married","3.bachelor","IT","yes",141.77517233318
+2003,29,"married","2.highschool","industrial","yes",95.2307125669819
+2006,48,"married","4.master","IT","no",141.77517233318
+2006,62,"married","2.highschool","IT","yes",101.82435207568
+2004,40,"married","5.phd","IT","yes",131.737801155001
+2003,24,"never married","3.bachelor","industrial","no",66.3251949430473
+2003,48,"married","4.master","industrial","yes",118.884359339886
+2008,54,"married","5.phd","IT","yes",163.515863976238
+2003,69,"married","1.primary","IT","yes",114.475713290347
+2006,48,"married","2.highschool","industrial","no",123.089699847943
+2003,73,"married","1.primary","industrial","no",40.1943705168112
+2009,30,"married","3.bachelor","IT","no",70.5134157015506
+2003,41,"never married","3.bachelor","IT","no",73.7757432746946
+2009,48,"married","1.primary","IT","no",100.879460918798
+2004,63,"married","4.master","IT","yes",84.0459576539924
+2003,29,"married","3.bachelor","IT","no",85.3839403789827
+2004,40,"married","3.bachelor","industrial","yes",141.77517233318
+2007,52,"married","3.bachelor","IT","yes",91.0932184689733
+2008,54,"separated","2.highschool","industrial","yes",114.475713290347
+2009,33,"married","4.master","industrial","yes",267.901086855275
+2004,42,"married","4.master","IT","yes",160.642475408263
+2007,31,"married","2.highschool","industrial","yes",94.0727147457005
+2006,46,"married","3.bachelor","IT","yes",139.675870162748
+2008,44,"married","4.master","industrial","yes",125.12381572196
+2009,45,"separated","2.highschool","industrial","no",113.567089569751
+2003,40,"married","2.highschool","industrial","no",182.020620963513
+2005,31,"never married","2.highschool","industrial","yes",102.870246933215
+2006,19,"never married","2.highschool","industrial","no",76.8936025176112
+2003,43,"married","2.highschool","industrial","yes",109.833985642199
+2007,56,"married","4.master","IT","yes",142.457169885112
+2006,55,"married","3.bachelor","industrial","yes",101.82435207568
+2006,59,"married","5.phd","IT","yes",118.884359339886
+2009,49,"divorced","1.primary","IT","yes",102.870246933215
+2009,42,"married","4.master","industrial","yes",128.680488220624
+2008,27,"never married","2.highschool","industrial","no",61.1875264339915
+2003,34,"never married","2.highschool","industrial","no",81.2860772898212
+2008,47,"married","4.master","IT","yes",276.778413321176
+2003,35,"married","5.phd","IT","yes",268.266292012557
+2004,33,"married","3.bachelor","IT","yes",104.921506533664
+2003,35,"married","2.highschool","industrial","yes",144.47808766541
+2004,40,"married","3.bachelor","IT","yes",118.884359339886
+2004,53,"married","4.master","IT","no",94.0727147457005
+2007,47,"married","4.master","IT","yes",73.7757432746946
+2006,45,"never married","5.phd","IT","yes",196.125272594255
+2009,34,"married","4.master","industrial","yes",169.073540049428
+2006,25,"married","1.primary","industrial","yes",69.6190369046763
+2006,56,"married","4.master","IT","no",124.720446242886
+2005,54,"married","3.bachelor","IT","yes",115.51808515372
+2003,41,"married","1.primary","industrial","yes",89.2428846644714
+2008,46,"married","5.phd","IT","yes",276.778413321176
+2004,44,"married","5.phd","industrial","yes",170.6951277113
+2004,44,"divorced","4.master","IT","yes",99.6894636984864
+2005,46,"married","5.phd","IT","yes",148.413159102577
+2009,38,"married","4.master","IT","yes",114.475713290347
+2008,36,"married","2.highschool","industrial","no",128.680488220624
+2009,27,"never married","4.master","IT","yes",99.6894636984864
+2008,33,"married","2.highschool","industrial","no",128.680488220624
+2006,56,"married","2.highschool","industrial","yes",140.398200161944
+2005,52,"married","2.highschool","IT","yes",111.720849360989
+2008,33,"never married","5.phd","IT","yes",125.525498433836
+2008,32,"married","4.master","industrial","no",94.0727147457005
+2008,39,"divorced","4.master","industrial","yes",118.884359339886
+2005,22,"never married","2.highschool","industrial","no",72.1504556815713
+2009,53,"married","4.master","industrial","no",104.921506533664
+2006,36,"married","4.master","industrial","yes",277.79948020565
+2005,37,"married","1.primary","industrial","no",73.7757432746946
+2008,40,"married","2.highschool","IT","yes",130.982177377461
+2005,51,"married","2.highschool","industrial","yes",78.214575693165
+2008,40,"married","2.highschool","IT","yes",90.4819133566401
+2006,56,"married","5.phd","IT","yes",117.146816914805
+2009,50,"married","2.highschool","industrial","yes",99.6894636984864
+2009,49,"married","2.highschool","industrial","yes",166.324941233877
+2007,32,"married","1.primary","IT","no",81.2832532842527
+2004,21,"never married","2.highschool","IT","yes",84.0459576539924
+2004,48,"married","4.master","IT","yes",114.475713290347
+2007,48,"married","3.bachelor","industrial","yes",73.7757432746946
+2004,32,"married","3.bachelor","industrial","yes",115.106201691293
+2003,30,"never married","3.bachelor","industrial","yes",53.0275511164817
+2006,30,"married","3.bachelor","industrial","no",118.884359339886
+2003,33,"married","1.primary","IT","no",79.8549003093467
+2005,56,"married","5.phd","industrial","no",56.4538649754188
+2004,46,"divorced","3.bachelor","IT","yes",90.4819133566401
+2003,49,"married","3.bachelor","industrial","yes",104.921506533664
+2008,24,"never married","2.highschool","industrial","no",87.9810327856054
+2009,48,"never married","3.bachelor","IT","yes",147.116689159978
+2006,37,"divorced","4.master","industrial","no",109.833985642199
+2007,53,"married","3.bachelor","industrial","yes",118.884359339886
+2004,56,"married","5.phd","IT","yes",141.77517233318
+2008,34,"married","3.bachelor","IT","no",108.874525834712
+2004,56,"married","3.bachelor","industrial","yes",104.921506533664
+2006,48,"married","2.highschool","industrial","yes",109.833985642199
+2006,47,"married","2.highschool","industrial","no",27.1405792079024
+2003,52,"married","3.bachelor","IT","yes",70.4760196469445
+2009,40,"married","3.bachelor","industrial","yes",166.879383279962
+2008,25,"married","2.highschool","IT","yes",127.115743812184
+2009,35,"married","4.master","industrial","yes",117.146816914805
+2006,40,"never married","3.bachelor","IT","yes",103.90247060316
+2009,22,"never married","2.highschool","industrial","no",34.6074177301288
+2003,50,"divorced","3.bachelor","IT","yes",100.013486924706
+2008,48,"separated","1.primary","industrial","no",64.8689691939769
+2007,40,"never married","5.phd","industrial","yes",109.833985642199
+2003,45,"married","3.bachelor","IT","yes",127.115743812184
+2004,30,"married","4.master","IT","yes",114.475713290347
+2003,46,"married","4.master","industrial","yes",117.146816914805
+2008,34,"married","2.highschool","industrial","yes",134.705375118879
+2007,32,"married","1.primary","industrial","no",65.1108537153447
+2004,53,"married","4.master","industrial","yes",143.134940811134
+2008,32,"never married","3.bachelor","industrial","no",76.8936025176112
+2004,39,"married","4.master","industrial","no",99.6894636984864
+2007,51,"married","4.master","IT","yes",94.0727147457005
+2004,40,"married","2.highschool","IT","yes",75.3556793180091
+2009,66,"married","4.master","IT","yes",127.115743812184
+2006,40,"married","4.master","industrial","yes",166.324941233877
+2009,52,"married","5.phd","IT","no",133.232350826567
+2007,36,"married","3.bachelor","IT","yes",125.525498433836
+2007,32,"never married","2.highschool","industrial","yes",89.4924795180001
+2008,45,"married","2.highschool","IT","no",84.0459576539924
+2006,37,"married","2.highschool","IT","yes",169.073540049428
+2004,47,"married","5.phd","IT","yes",160.642475408263
+2008,49,"married","2.highschool","industrial","yes",144.170606488233
+2003,53,"married","1.primary","IT","no",73.7757432746946
+2007,66,"divorced","2.highschool","IT","yes",70.4760196469445
+2006,33,"married","1.primary","IT","no",73.7757432746946
+2004,58,"divorced","2.highschool","industrial","no",94.0727147457005
+2008,41,"married","5.phd","industrial","no",83.1913242935054
+2009,54,"married","3.bachelor","IT","yes",134.705375118879
+2009,26,"never married","2.highschool","industrial","no",86.6951548289402
+2008,24,"never married","2.highschool","industrial","no",70.4760196469445
+2007,62,"married","4.master","IT","no",130.982177377461
+2005,63,"married","2.highschool","IT","yes",136.303997562054
+2005,26,"never married","4.master","industrial","yes",114.022580378556
+2004,45,"married","2.highschool","IT","yes",106.127582150788
+2003,23,"married","2.highschool","industrial","no",87.9810327856054
+2008,31,"married","4.master","industrial","no",116.265324062503
+2003,44,"married","5.phd","IT","yes",143.134940811134
+2003,43,"never married","1.primary","industrial","yes",54.5981500331442
+2004,48,"married","2.highschool","industrial","no",48.185650217039
+2008,48,"married","4.master","IT","yes",123.089699847943
+2006,55,"married","5.phd","IT","no",117.584340323354
+2004,45,"married","5.phd","IT","yes",272.294783220064
+2008,48,"married","4.master","IT","yes",145.143601176911
+2009,63,"married","2.highschool","industrial","yes",118.884359339886
+2004,57,"married","2.highschool","IT","yes",97.4932940453934
+2008,69,"married","5.phd","IT","yes",148.413159102577
+2009,31,"never married","4.master","IT","yes",127.115743812184
+2003,38,"married","4.master","IT","yes",268.266292012557
+2005,43,"separated","4.master","IT","yes",109.833985642199
+2003,19,"never married","2.highschool","industrial","no",51.9036962665682
+2005,44,"married","4.master","IT","yes",114.475713290347
+2007,31,"married","4.master","IT","no",134.705375118879
+2004,49,"never married","1.primary","industrial","yes",87.9810327856054
+2006,29,"married","3.bachelor","IT","yes",95.2307125669819
+2008,26,"married","3.bachelor","IT","yes",76.8936025176112
+2007,37,"married","5.phd","IT","yes",116.265324062503
+2006,30,"never married","2.highschool","industrial","no",81.2832532842527
+2009,35,"married","3.bachelor","industrial","yes",131.62180303309
+2004,40,"married","2.highschool","industrial","yes",117.146816914805
+2005,44,"divorced","5.phd","IT","yes",68.7480877337669
+2004,65,"married","2.highschool","industrial","yes",125.525498433836
+2007,54,"married","3.bachelor","industrial","yes",101.82435207568
+2009,56,"married","3.bachelor","industrial","yes",140.398200161944
+2008,48,"married","4.master","IT","yes",107.903923866877
+2009,37,"divorced","3.bachelor","industrial","no",58.0147820121857
+2005,30,"married","2.highschool","industrial","yes",99.6894636984864
+2005,46,"married","5.phd","industrial","no",85.3839403789827
+2009,37,"married","2.highschool","industrial","yes",131.737801155001
+2005,58,"divorced","2.highschool","IT","no",81.2832532842527
+2007,52,"married","3.bachelor","industrial","yes",86.6951548289402
+2006,45,"married","3.bachelor","IT","yes",157.700527725737
+2008,33,"married","2.highschool","industrial","no",65.11462387776
+2004,51,"married","3.bachelor","industrial","no",90.4819133566401
+2008,50,"married","1.primary","industrial","no",46.7632687977187
+2006,42,"married","2.highschool","industrial","yes",85.3839403789827
+2004,46,"never married","3.bachelor","industrial","yes",139.703071527658
+2005,43,"married","5.phd","IT","yes",148.413159102577
+2003,47,"married","3.bachelor","industrial","yes",81.2832532842527
+2005,47,"married","5.phd","IT","no",118.884359339886
+2004,44,"married","4.master","IT","no",71.1519565433031
+2008,36,"married","2.highschool","industrial","no",65.1108537153447
+2008,39,"married","2.highschool","industrial","no",65.1108537153447
+2003,29,"married","4.master","IT","yes",125.525498433836
+2005,40,"married","3.bachelor","IT","yes",123.089699847943
+2007,20,"never married","3.bachelor","industrial","yes",70.8150386167557
+2004,32,"married","5.phd","IT","yes",112.6488963421
+2003,36,"married","3.bachelor","industrial","yes",86.6951548289402
+2009,31,"never married","3.bachelor","industrial","yes",82.6796372966372
+2005,28,"married","4.master","industrial","yes",130.982177377461
+2005,41,"divorced","3.bachelor","IT","yes",117.146816914805
+2004,54,"married","4.master","industrial","yes",176.989650489877
+2004,42,"married","2.highschool","industrial","no",118.884359339886
+2003,19,"never married","2.highschool","IT","yes",68.7480877337669
+2009,59,"married","3.bachelor","IT","no",267.901086855275
+2003,64,"never married","3.bachelor","IT","yes",99.6894636984864
+2003,31,"married","3.bachelor","industrial","yes",92.6581301668597
+2004,37,"never married","3.bachelor","IT","yes",109.833985642199
+2004,30,"married","2.highschool","industrial","yes",87.9810327856054
+2005,24,"never married","4.master","industrial","yes",118.884359339886
+2006,26,"married","2.highschool","industrial","no",75.0431540173516
+2004,44,"married","4.master","IT","yes",114.475713290347
+2008,39,"married","5.phd","IT","yes",276.778413321176
+2005,48,"married","5.phd","IT","yes",277.601417511009
+2004,53,"never married","2.highschool","industrial","yes",80.5731997057359
+2004,42,"married","5.phd","IT","yes",114.475713290347
+2009,44,"married","5.phd","industrial","yes",166.324941233877
+2003,25,"never married","4.master","IT","yes",85.3839403789827
+2004,46,"married","2.highschool","industrial","yes",43.7351116779821
+2003,52,"married","3.bachelor","IT","no",101.82435207568
+2008,33,"married","3.bachelor","IT","yes",87.9810327856054
+2007,30,"married","3.bachelor","IT","no",121.430313822622
+2007,38,"never married","3.bachelor","industrial","yes",109.833985642199
+2005,29,"never married","2.highschool","IT","yes",79.8549003093467
+2008,57,"married","4.master","industrial","yes",127.115743812184
+2003,50,"married","4.master","IT","yes",115.285516994187
+2008,23,"never married","3.bachelor","industrial","no",98.6015397849967
+2006,46,"divorced","3.bachelor","IT","yes",144.47808766541
+2005,61,"married","4.master","industrial","yes",136.15771083723
+2007,70,"married","1.primary","IT","no",100.764272842107
+2009,59,"married","2.highschool","industrial","yes",76.8936025176112
+2003,57,"married","2.highschool","industrial","yes",90.4819133566401
+2003,25,"never married","2.highschool","industrial","no",86.6951548289402
+2005,48,"married","3.bachelor","industrial","yes",123.908567597957
+2009,52,"married","5.phd","IT","no",65.1108537153447
+2009,44,"separated","4.master","IT","yes",131.737801155001
+2004,40,"married","2.highschool","industrial","yes",66.9616443217359
+2008,43,"married","4.master","IT","yes",196.125272594255
+2005,51,"married","3.bachelor","industrial","yes",166.324941233877
+2003,43,"married","1.primary","IT","no",65.1108537153447
+2003,42,"married","2.highschool","industrial","yes",120.589436530402
+2008,28,"married","2.highschool","industrial","no",101.82435207568
+2003,54,"married","5.phd","IT","no",148.413159102577
+2005,34,"married","5.phd","IT","yes",159.052027129346
+2004,50,"married","4.master","IT","yes",109.833985642199
+2005,36,"married","5.phd","IT","yes",140.051197616953
+2005,36,"married","4.master","industrial","yes",132.352477709878
+2005,71,"widowed","3.bachelor","industrial","yes",118.884359339886
+2006,31,"never married","5.phd","IT","yes",97.4932940453934
+2005,43,"married","5.phd","IT","yes",134.705375118879
+2007,20,"never married","3.bachelor","industrial","no",72.1504556815713
+2007,23,"never married","1.primary","industrial","yes",87.9810327856054
+2007,42,"divorced","2.highschool","industrial","no",49.5553381215227
+2005,41,"married","5.phd","IT","yes",149.055895589404
+2009,27,"married","5.phd","IT","yes",122.263673892802
+2008,29,"married","3.bachelor","industrial","no",101.82435207568
+2008,41,"divorced","3.bachelor","industrial","yes",99.6894636984864
+2003,41,"married","2.highschool","industrial","yes",104.921506533664
+2003,22,"never married","3.bachelor","IT","no",81.2832532842527
+2003,39,"married","2.highschool","industrial","yes",73.7757432746946
+2008,50,"married","4.master","industrial","no",82.6796372966372
+2006,49,"never married","4.master","industrial","yes",148.413159102577
+2003,42,"married","3.bachelor","IT","yes",118.884359339886
+2008,38,"married","2.highschool","IT","yes",129.453644576626
+2004,55,"married","4.master","IT","no",134.705375118879
+2005,47,"never married","2.highschool","industrial","no",79.8549003093467
+2007,52,"married","1.primary","IT","no",68.1119940653271
+2009,56,"divorced","4.master","industrial","no",40.4056652596845
+2007,30,"married","3.bachelor","IT","no",131.737801155001
+2005,56,"married","2.highschool","industrial","no",134.705375118879
+2003,46,"married","2.highschool","industrial","yes",114.475713290347
+2009,43,"married","1.primary","IT","no",126.323880709786
+2003,35,"married","3.bachelor","industrial","yes",116.707154559148
+2009,58,"married","2.highschool","industrial","yes",109.833985642199
+2009,69,"married","2.highschool","industrial","yes",81.226746312023
+2006,68,"divorced","2.highschool","IT","yes",87.9810327856054
+2004,52,"married","3.bachelor","IT","yes",127.115743812184
+2005,46,"never married","4.master","IT","yes",104.921506533664
+2007,39,"never married","4.master","IT","yes",107.903923866877
+2009,66,"married","4.master","industrial","no",109.833985642199
+2005,30,"married","5.phd","industrial","yes",117.146816914805
+2006,30,"divorced","3.bachelor","industrial","yes",107.903923866877
+2005,43,"married","2.highschool","industrial","no",72.1504556815713
+2008,49,"married","5.phd","industrial","yes",160.642475408263
+2005,54,"married","5.phd","IT","yes",148.413159102577
+2008,48,"divorced","5.phd","IT","yes",143.134940811134
+2008,37,"separated","3.bachelor","IT","no",97.4932940453934
+2007,46,"married","4.master","IT","yes",141.77517233318
+2007,53,"married","2.highschool","industrial","no",148.413159102577
+2009,31,"never married","4.master","industrial","yes",109.833985642199
+2006,18,"never married","3.bachelor","IT","no",59.0970640815891
+2003,49,"married","4.master","IT","yes",152.52821689856
+2006,39,"married","2.highschool","industrial","no",81.2832532842527
+2003,40,"married","2.highschool","IT","no",43.7351116779821
+2008,37,"married","2.highschool","IT","yes",96.3706528322308
+2006,24,"married","2.highschool","industrial","yes",101.82435207568
+2007,35,"married","4.master","industrial","yes",130.982177377461
+2007,27,"never married","2.highschool","industrial","no",82.6796372966372
+2003,44,"never married","5.phd","IT","yes",130.982177377461
+2008,46,"married","4.master","industrial","no",89.2428846644714
+2005,40,"married","3.bachelor","IT","no",85.1185334226767
+2007,39,"married","5.phd","IT","yes",166.324941233877
+2008,42,"never married","1.primary","industrial","yes",100.764272842107
+2003,37,"married","2.highschool","industrial","yes",99.6894636984864
+2008,58,"married","3.bachelor","IT","yes",123.089699847943
+2005,40,"married","5.phd","industrial","yes",163.515863976238
+2003,27,"married","2.highschool","IT","yes",85.3839403789827
+2003,31,"married","3.bachelor","IT","yes",75.3556793180091
+2008,44,"married","2.highschool","industrial","no",65.1108537153447
+2003,38,"divorced","2.highschool","industrial","yes",92.6581301668597
+2004,34,"married","4.master","IT","no",137.590142766506
+2005,41,"married","2.highschool","IT","yes",134.85152633512
+2007,20,"never married","1.primary","industrial","no",72.4793162971252
+2008,28,"never married","4.master","IT","yes",178.533050380204
+2009,55,"married","4.master","IT","yes",98.5993438603892
+2008,38,"married","4.master","IT","no",115.375038556391
+2005,33,"never married","2.highschool","industrial","no",73.7757432746946
+2009,43,"never married","2.highschool","industrial","yes",36.6737041960799
+2006,50,"married","4.master","IT","yes",123.089699847943
+2008,55,"married","4.master","IT","yes",87.9810327856054
+2005,24,"never married","3.bachelor","IT","no",73.9357192871731
+2008,41,"married","4.master","IT","yes",176.989650489877
+2009,37,"divorced","4.master","IT","no",118.884359339886
+2005,42,"married","3.bachelor","IT","yes",134.705375118879
+2004,25,"never married","4.master","IT","yes",90.4819133566401
+2005,45,"married","5.phd","IT","yes",148.413159102577
+2009,40,"married","1.primary","industrial","yes",81.2832532842527
+2004,43,"married","5.phd","IT","yes",130.982177377461
+2006,50,"married","3.bachelor","industrial","yes",176.989650489877
+2003,42,"never married","2.highschool","IT","yes",82.6796372966372
+2003,38,"married","2.highschool","industrial","yes",131.737801155001
+2006,44,"divorced","1.primary","industrial","yes",82.6796372966372
+2007,19,"never married","3.bachelor","industrial","no",41.4412130349116
+2004,44,"never married","3.bachelor","IT","yes",117.146816914805
+2003,26,"never married","1.primary","industrial","yes",73.7757432746946
+2005,54,"married","2.highschool","industrial","yes",86.6951548289402
+2006,32,"married","4.master","industrial","yes",99.6894636984864
+2008,49,"married","4.master","IT","yes",141.77517233318
+2005,35,"married","1.primary","industrial","no",70.8150386167557
+2007,34,"married","1.primary","IT","no",72.1504556815713
+2003,23,"never married","1.primary","industrial","no",54.5981500331442
+2008,60,"married","3.bachelor","IT","yes",127.115743812184
+2006,54,"married","5.phd","IT","yes",73.7757432746946
+2003,31,"married","3.bachelor","IT","no",139.703071527658
+2006,47,"married","4.master","IT","no",160.642475408263
+2003,48,"divorced","2.highschool","industrial","no",23.9529444789966
+2005,48,"married","4.master","IT","yes",115.375038556391
+2004,35,"married","2.highschool","IT","no",114.475713290347
+2006,55,"married","5.phd","IT","yes",127.115743812184
+2004,35,"married","5.phd","IT","yes",137.590142766506
+2009,37,"married","4.master","IT","yes",176.989650489877
+2003,27,"never married","2.highschool","IT","no",23.2747040516601
+2007,64,"married","2.highschool","IT","yes",90.4819133566401
+2003,52,"divorced","2.highschool","industrial","yes",73.7757432746946
+2007,47,"separated","1.primary","IT","no",82.6796372966372
+2003,26,"never married","2.highschool","industrial","no",56.9055391446732
+2005,41,"married","1.primary","industrial","no",128.680488220624
+2009,22,"never married","2.highschool","industrial","yes",75.0431540173516
+2004,76,"married","3.bachelor","industrial","no",73.7757432746946
+2006,46,"married","2.highschool","industrial","yes",108.065830309718
+2006,39,"married","3.bachelor","industrial","yes",123.089699847943
+2006,39,"married","5.phd","industrial","yes",277.79948020565
+2004,23,"never married","3.bachelor","industrial","yes",73.7757432746946
+2006,49,"married","3.bachelor","industrial","yes",123.908567597957
+2009,44,"married","1.primary","industrial","no",87.9810327856054
+2006,20,"never married","2.highschool","industrial","no",70.4760196469445
+2005,43,"married","5.phd","IT","yes",277.601417511009
+2006,42,"married","4.master","IT","yes",148.413159102577
+2009,46,"married","4.master","IT","yes",114.475713290347
+2009,33,"never married","4.master","IT","yes",99.6894636984864
+2003,62,"married","5.phd","IT","yes",268.266292012557
+2006,38,"married","3.bachelor","IT","yes",130.982177377461
+2005,43,"married","4.master","industrial","no",109.833985642199
+2005,46,"divorced","4.master","IT","yes",277.601417511009
+2006,18,"never married","2.highschool","industrial","no",73.7757432746946
+2009,63,"married","5.phd","IT","no",267.901086855275
+2006,43,"never married","5.phd","industrial","yes",119.74085129618
+2009,44,"married","4.master","IT","yes",141.77517233318
+2008,53,"never married","3.bachelor","IT","yes",128.252661096619
+2008,58,"never married","1.primary","IT","yes",90.4819133566401
+2003,23,"never married","4.master","industrial","no",76.8936025176112
+2004,50,"married","4.master","IT","yes",127.115743812184
+2004,35,"never married","5.phd","IT","yes",118.884359339886
+2006,38,"married","5.phd","IT","yes",200.543262324662
+2004,36,"married","2.highschool","industrial","yes",87.9810327856054
+2005,32,"married","5.phd","IT","yes",148.413159102577
+2003,56,"married","5.phd","IT","yes",268.266292012557
+2005,41,"married","3.bachelor","IT","no",87.9810327856054
+2004,40,"never married","2.highschool","industrial","no",99.6894636984864
+2004,26,"never married","4.master","industrial","no",82.6796372966372
+2006,26,"married","2.highschool","IT","yes",130.982177377461
+2008,47,"divorced","4.master","IT","yes",108.874525834712
+2007,25,"never married","4.master","IT","no",54.5981500331442
+2006,58,"married","3.bachelor","IT","no",309.5717712662
+2008,57,"married","2.highschool","IT","no",82.6823993373301
+2003,30,"never married","1.primary","IT","no",59.6286455536557
+2007,44,"married","4.master","IT","yes",166.324941233877
+2009,29,"married","2.highschool","industrial","no",79.8549003093467
+2007,51,"married","4.master","industrial","no",118.884359339886
+2006,37,"married","1.primary","industrial","no",92.8958447894966
+2004,67,"married","5.phd","IT","yes",160.642475408263
+2009,34,"married","1.primary","industrial","no",70.4760196469445
+2003,50,"married","5.phd","IT","yes",120.589436530402
+2005,38,"married","2.highschool","industrial","yes",160.642475408263
+2008,55,"married","4.master","IT","yes",171.765132627508
+2003,27,"never married","3.bachelor","industrial","yes",120.589436530402
+2007,39,"married","3.bachelor","industrial","yes",134.705375118879
+2007,54,"married","3.bachelor","industrial","yes",148.413159102577
+2008,55,"divorced","5.phd","IT","yes",129.453644576626
+2003,49,"married","3.bachelor","IT","no",134.705375118879
+2003,42,"married","1.primary","industrial","no",56.9055391446732
+2005,39,"married","4.master","industrial","no",87.9810327856054
+2003,32,"never married","2.highschool","industrial","yes",68.1119940653271
+2005,39,"married","3.bachelor","industrial","yes",128.680488220624
+2003,50,"married","5.phd","IT","yes",134.705375118879
+2004,47,"married","2.highschool","industrial","no",94.0727147457005
+2003,40,"never married","3.bachelor","industrial","no",87.9810327856054
+2006,51,"never married","3.bachelor","IT","yes",118.884359339886
+2009,28,"married","3.bachelor","industrial","no",68.7480877337669
+2007,53,"divorced","3.bachelor","industrial","yes",94.0727147457005
+2005,54,"married","3.bachelor","IT","yes",118.884359339886
+2009,51,"married","4.master","IT","yes",91.6992261117042
+2008,33,"married","5.phd","industrial","no",134.705375118879
+2008,55,"married","4.master","industrial","no",127.115743812184
+2003,44,"married","5.phd","industrial","yes",100.764272842107
+2009,30,"married","3.bachelor","industrial","yes",105.927810775063
+2005,40,"married","5.phd","IT","yes",87.9810327856054
+2007,26,"married","2.highschool","industrial","no",99.6894636984864
+2006,49,"married","4.master","IT","yes",112.6488963421
+2004,43,"married","5.phd","industrial","yes",163.515863976238
+2004,43,"never married","3.bachelor","industrial","yes",82.6796372966372
+2008,44,"married","2.highschool","industrial","yes",79.8549003093467
+2006,32,"never married","4.master","industrial","no",49.5553381215227
+2009,34,"married","5.phd","IT","yes",152.838800991182
+2009,36,"married","4.master","IT","yes",148.413159102577
+2006,51,"married","1.primary","industrial","yes",101.402052302992
+2007,42,"married","3.bachelor","IT","no",95.6888119067371
+2003,60,"married","5.phd","industrial","yes",118.884359339886
+2004,36,"married","2.highschool","industrial","no",76.8936025176112
+2006,47,"married","3.bachelor","industrial","yes",118.884359339886
+2004,60,"married","3.bachelor","IT","yes",138.299126920883
+2003,22,"never married","2.highschool","industrial","no",54.5981500331442
+2005,41,"never married","2.highschool","industrial","no",65.1108537153447
+2003,56,"divorced","4.master","industrial","no",109.833985642199
+2003,44,"married","2.highschool","industrial","yes",73.7757432746946
+2005,49,"married","4.master","industrial","yes",105.927810775063
+2006,45,"married","4.master","IT","yes",116.265324062503
+2003,25,"never married","3.bachelor","industrial","no",94.0727147457005
+2007,52,"married","3.bachelor","industrial","yes",118.884359339886
+2003,30,"married","5.phd","IT","yes",148.413159102577
+2009,29,"married","2.highschool","industrial","no",104.921506533664
+2007,23,"married","4.master","IT","yes",79.8549003093467
+2007,48,"divorced","2.highschool","IT","yes",108.874525834712
+2009,44,"married","2.highschool","IT","no",109.833985642199
+2003,62,"married","4.master","industrial","yes",127.115743812184
+2006,33,"married","5.phd","industrial","yes",151.591484239814
+2008,51,"married","2.highschool","IT","yes",105.927810775063
+2006,36,"married","5.phd","IT","no",200.543262324662
+2005,23,"married","2.highschool","industrial","no",59.0970640815891
+2003,51,"divorced","2.highschool","industrial","yes",68.7480877337669
+2008,47,"married","4.master","industrial","yes",176.989650489877
+2003,34,"never married","2.highschool","IT","yes",103.90247060316
+2004,34,"married","2.highschool","IT","yes",82.6796372966372
+2009,43,"married","5.phd","IT","yes",200.543262324662
+2006,43,"separated","3.bachelor","IT","yes",101.82435207568
+2009,40,"never married","4.master","industrial","yes",163.515863976238
+2005,59,"married","2.highschool","IT","no",104.921506533664
+2008,53,"married","2.highschool","industrial","no",109.833985642199
+2004,32,"married","2.highschool","IT","yes",104.921506533664
+2008,48,"married","2.highschool","industrial","yes",107.903923866877
+2008,37,"never married","5.phd","IT","no",182.020620963513
+2006,20,"never married","3.bachelor","IT","no",75.0431540173516
+2004,32,"married","2.highschool","IT","no",61.1875264339915
+2004,40,"never married","2.highschool","industrial","yes",85.3839403789827
+2004,48,"married","3.bachelor","IT","yes",123.823733834101
+2005,43,"married","4.master","IT","yes",176.989650489877
+2009,56,"married","5.phd","IT","yes",118.884359339886
+2003,55,"married","5.phd","IT","no",268.266292012557
+2008,38,"never married","2.highschool","industrial","yes",89.4924795180001
+2006,52,"married","2.highschool","industrial","yes",92.8958447894966
+2003,40,"married","5.phd","IT","no",127.115743812184
+2005,29,"married","5.phd","IT","yes",115.375038556391
+2007,45,"married","4.master","IT","yes",130.983694295002
+2003,39,"married","1.primary","industrial","no",68.7480877337669
+2005,50,"married","4.master","industrial","yes",182.020620963513
+2003,50,"married","5.phd","IT","yes",143.808556824369
+2004,57,"married","5.phd","IT","yes",134.705375118879
+2003,30,"married","2.highschool","industrial","no",63.1888610037461
+2005,56,"divorced","3.bachelor","IT","yes",75.3556793180091
+2008,43,"married","5.phd","IT","yes",176.990675361059
+2004,43,"married","4.master","IT","yes",104.921506533664
+2005,67,"married","3.bachelor","IT","yes",123.089699847943
+2005,50,"married","2.highschool","IT","yes",111.720849360989
+2005,49,"married","3.bachelor","IT","yes",111.720849360989
+2004,50,"married","2.highschool","industrial","yes",87.9810327856054
+2004,59,"married","4.master","IT","yes",144.210761166057
+2007,51,"married","3.bachelor","industrial","yes",117.146816914805
+2005,39,"married","2.highschool","industrial","yes",78.3924668009837
+2009,54,"married","3.bachelor","industrial","yes",99.6894636984864
+2004,55,"married","3.bachelor","IT","yes",123.089699847943
+2005,45,"married","3.bachelor","industrial","no",127.115743812184
+2003,54,"married","3.bachelor","IT","yes",139.00340805947
+2008,23,"never married","2.highschool","industrial","yes",127.115743812184
+2003,74,"widowed","4.master","IT","no",70.4760196469445
+2005,52,"married","2.highschool","industrial","no",109.833985642199
+2005,25,"never married","2.highschool","industrial","no",70.8150386167557
+2008,45,"never married","1.primary","industrial","no",70.4760196469445
+2004,37,"married","3.bachelor","IT","yes",176.989650489877
+2005,55,"married","3.bachelor","industrial","yes",113.567089569751
+2004,25,"never married","1.primary","industrial","yes",82.6796372966372
+2008,66,"married","4.master","industrial","yes",148.413159102577
+2007,47,"never married","4.master","IT","yes",161.222495456794
+2005,36,"married","4.master","industrial","yes",127.115743812184
+2004,63,"married","2.highschool","IT","yes",134.705375118879
+2003,44,"married","4.master","industrial","yes",160.642475408263
+2009,37,"married","5.phd","IT","yes",267.901086855275
+2006,32,"never married","4.master","industrial","yes",104.921506533664
+2004,43,"married","3.bachelor","IT","yes",134.705375118879
+2009,37,"married","4.master","IT","yes",123.089699847943
+2009,26,"never married","2.highschool","industrial","no",66.9616443217359
+2004,39,"married","3.bachelor","IT","yes",91.6992261117042
+2008,45,"married","5.phd","IT","yes",160.642475408263
+2009,40,"never married","4.master","industrial","yes",136.876367635184
+2006,51,"married","5.phd","IT","yes",153.457515308961
+2009,52,"married","2.highschool","industrial","no",61.1875264339915
+2007,43,"married","2.highschool","industrial","yes",65.1108537153447
+2005,52,"married","4.master","industrial","yes",114.475713290347
+2005,50,"never married","5.phd","IT","yes",182.020620963513
+2005,54,"married","4.master","IT","no",114.475713290347
+2004,28,"married","2.highschool","industrial","yes",97.4932940453934
+2003,28,"married","2.highschool","industrial","yes",136.876367635184
+2005,26,"never married","4.master","IT","no",97.4932940453934
+2009,45,"divorced","2.highschool","industrial","yes",81.2832532842527
+2003,34,"divorced","2.highschool","IT","no",73.7757432746946
+2006,73,"married","2.highschool","IT","yes",118.884359339886
+2009,31,"never married","2.highschool","industrial","yes",113.567089569751
+2005,29,"never married","3.bachelor","industrial","yes",90.4819133566401
+2008,40,"married","5.phd","IT","yes",160.642475408263
+2003,38,"married","5.phd","IT","yes",179.528092196451
+2004,42,"married","3.bachelor","industrial","yes",147.766776237856
+2007,50,"married","2.highschool","IT","yes",87.9810327856054
+2008,51,"married","2.highschool","industrial","yes",59.0328548279404
+2009,40,"separated","2.highschool","IT","yes",107.316063157849
+2008,25,"never married","4.master","IT","no",49.5553381215227
+2009,47,"divorced","4.master","industrial","yes",144.47808766541
+2009,27,"married","3.bachelor","IT","yes",81.2832532842527
+2003,53,"divorced","4.master","industrial","no",81.6352686511494
+2004,67,"married","1.primary","IT","yes",87.9810327856054
+2008,40,"married","4.master","IT","yes",130.982177377461
+2003,44,"married","4.master","industrial","yes",87.9810327856054
+2004,33,"never married","1.primary","industrial","no",81.2832532842527
+2004,29,"never married","3.bachelor","industrial","yes",89.2428846644714
+2003,32,"never married","5.phd","IT","yes",114.113394510116
+2009,27,"never married","2.highschool","IT","yes",104.921506533664
+2003,40,"married","2.highschool","IT","yes",112.6488963421
+2008,36,"divorced","2.highschool","IT","no",56.9055391446732
+2003,48,"never married","2.highschool","IT","yes",87.9810327856054
+2004,56,"married","3.bachelor","IT","yes",118.884359339886
+2004,24,"married","1.primary","industrial","no",127.115743812184
+2006,53,"married","5.phd","industrial","yes",134.705375118879
+2008,34,"married","2.highschool","industrial","no",107.903923866877
+2007,61,"married","3.bachelor","IT","no",281.745970551857
+2004,38,"married","2.highschool","industrial","no",48.185650217039
+2007,55,"widowed","4.master","industrial","yes",127.115743812184
+2005,70,"married","4.master","IT","no",50.3540016352083
+2003,24,"never married","2.highschool","industrial","yes",81.2832532842527
+2006,22,"separated","1.primary","industrial","no",75.0431540173516
+2007,38,"divorced","4.master","IT","yes",104.921506533664
+2004,29,"married","3.bachelor","industrial","no",79.8549003093467
+2006,30,"married","3.bachelor","IT","yes",130.982177377461
+2007,38,"married","5.phd","IT","yes",171.765132627508
+2007,49,"separated","3.bachelor","IT","yes",97.4932940453934
+2009,71,"married","2.highschool","industrial","yes",98.5993438603892
+2005,32,"married","2.highschool","industrial","no",84.0459576539924
+2003,40,"married","5.phd","IT","yes",299.262976763971
+2004,32,"married","2.highschool","IT","yes",70.8150386167557
+2006,33,"never married","3.bachelor","IT","yes",82.6796372966372
+2003,40,"married","2.highschool","industrial","yes",73.7757432746946
+2005,25,"never married","2.highschool","IT","yes",77.4976813877358
+2003,36,"separated","3.bachelor","IT","no",91.6992261117042
+2003,46,"married","2.highschool","industrial","no",141.77517233318
+2009,59,"married","5.phd","IT","no",93.7216739620469
+2003,49,"never married","5.phd","industrial","no",143.134940811134
+2005,41,"married","3.bachelor","industrial","yes",91.6992261117042
+2007,42,"married","5.phd","IT","yes",130.982177377461
+2009,59,"married","3.bachelor","IT","no",87.9810327856054
+2004,27,"never married","1.primary","industrial","no",76.4884433977402
+2006,30,"married","2.highschool","industrial","no",71.6867436659172
+2005,54,"married","2.highschool","IT","yes",87.9810327856054
+2005,31,"never married","5.phd","IT","yes",80.5731997057359
+2007,34,"married","5.phd","IT","yes",163.515863976238
+2007,47,"married","2.highschool","industrial","yes",107.903923866877
+2003,40,"married","5.phd","IT","yes",133.232350826567
+2007,29,"never married","2.highschool","industrial","no",73.7757432746946
+2003,58,"married","1.primary","industrial","yes",87.9810327856054
+2006,41,"married","2.highschool","industrial","yes",119.013345237399
+2004,56,"married","2.highschool","IT","yes",102.127000914639
+2008,52,"married","2.highschool","industrial","yes",136.876367635184
+2003,53,"married","3.bachelor","industrial","yes",118.884359339886
+2003,37,"divorced","2.highschool","IT","yes",65.1108537153447
+2009,30,"never married","3.bachelor","industrial","no",94.0727147457005
+2004,35,"married","2.highschool","IT","yes",138.299126920883
+2006,40,"married","4.master","industrial","yes",118.884359339886
+2007,54,"married","2.highschool","industrial","no",79.8549003093467
+2007,22,"never married","4.master","IT","yes",63.1888610037461
+2005,37,"married","5.phd","IT","yes",134.705375118879
+2005,39,"married","2.highschool","industrial","no",295.991249982471
+2009,62,"married","2.highschool","IT","yes",109.833985642199
+2007,47,"married","3.bachelor","IT","yes",104.921506533664
+2003,51,"married","5.phd","industrial","yes",148.413159102577
+2006,47,"divorced","2.highschool","industrial","yes",99.6894636984864
+2003,28,"never married","4.master","industrial","yes",118.884359339886
+2005,65,"married","2.highschool","industrial","yes",95.6888119067371
+2005,42,"married","2.highschool","IT","yes",114.475713290347
+2007,58,"married","2.highschool","industrial","yes",104.921506533664
+2007,32,"married","3.bachelor","IT","yes",101.82435207568
+2003,34,"married","5.phd","IT","yes",146.462838515063
+2007,49,"married","2.highschool","IT","no",79.8549003093467
+2008,39,"married","5.phd","IT","yes",145.143601176911
+2008,44,"married","4.master","industrial","yes",76.4058510654515
+2009,38,"never married","3.bachelor","industrial","no",84.0459576539924
+2008,48,"married","5.phd","IT","yes",115.375038556391
+2006,47,"married","2.highschool","industrial","yes",105.927810775063
+2009,40,"married","1.primary","industrial","no",72.1504556815713
+2005,27,"separated","1.primary","industrial","yes",79.8549003093467
+2004,42,"married","4.master","IT","yes",103.90247060316
+2004,30,"divorced","2.highschool","industrial","yes",88.9923771888426
+2007,31,"married","5.phd","IT","yes",99.6894636984864
+2007,29,"married","4.master","IT","yes",112.6488963421
+2006,53,"divorced","5.phd","industrial","yes",138.299126920883
+2009,37,"married","1.primary","industrial","no",68.7480877337669
+2007,48,"married","3.bachelor","IT","no",109.315320019967
+2009,56,"divorced","5.phd","IT","yes",148.413159102577
+2003,44,"married","3.bachelor","industrial","yes",99.6894636984864
+2004,63,"married","4.master","IT","yes",118.019753340006
+2003,25,"married","4.master","industrial","yes",65.1108537153447
+2003,31,"married","4.master","IT","no",94.0727147457005
+2003,51,"married","2.highschool","industrial","yes",98.5993438603892
+2007,25,"never married","2.highschool","industrial","yes",87.9810327856054
+2007,50,"married","3.bachelor","IT","yes",99.6894636984864
+2006,34,"married","2.highschool","industrial","no",108.874525834712
+2004,20,"never married","3.bachelor","industrial","yes",82.6796372966372
+2007,30,"never married","2.highschool","IT","yes",89.4924795180001
+2009,40,"married","3.bachelor","industrial","yes",97.4932940453934
+2006,34,"married","2.highschool","industrial","no",56.9055391446732
+2004,57,"married","2.highschool","IT","yes",65.1108537153447
+2007,42,"married","2.highschool","IT","yes",89.4924795180001
+2003,30,"never married","3.bachelor","industrial","no",84.0459576539924
+2003,37,"never married","3.bachelor","industrial","yes",94.0727147457005
+2008,50,"married","2.highschool","industrial","yes",85.3839403789827
+2009,26,"never married","3.bachelor","industrial","yes",78.3924668009837
+2007,59,"married","2.highschool","IT","yes",160.409701962289
+2003,29,"never married","3.bachelor","industrial","yes",132.860765311572
+2009,22,"never married","2.highschool","IT","no",87.9810327856054
+2005,54,"married","2.highschool","industrial","yes",158.173662250538
+2003,46,"married","2.highschool","industrial","yes",118.884359339886
+2008,51,"married","2.highschool","IT","yes",101.402052302992
+2006,35,"never married","3.bachelor","industrial","no",59.0970640815891
+2007,49,"married","2.highschool","IT","no",85.3839403789827
+2003,53,"married","2.highschool","industrial","yes",87.9810327856054
+2009,61,"married","3.bachelor","industrial","yes",160.642475408263
+2007,40,"married","1.primary","IT","no",70.4760196469445
+2003,52,"married","1.primary","IT","no",47.7477845118713
+2005,40,"married","4.master","industrial","yes",130.982177377461
+2003,56,"married","1.primary","IT","yes",85.3839403789827
+2008,39,"married","2.highschool","IT","no",99.6894636984864
+2007,30,"married","2.highschool","industrial","yes",93.8786834850373
+2003,58,"married","3.bachelor","industrial","yes",130.982177377461
+2007,33,"married","5.phd","IT","yes",167.981128202758
+2007,51,"married","5.phd","IT","yes",126.085057289999
+2008,32,"never married","4.master","IT","yes",148.413159102577
+2009,50,"married","2.highschool","industrial","no",132.487821126123
+2003,26,"never married","3.bachelor","industrial","no",118.884359339886
+2007,35,"married","1.primary","industrial","no",109.833985642199
+2006,31,"married","2.highschool","IT","yes",102.870246933215
+2009,31,"married","4.master","IT","yes",133.380607661416
+2008,44,"married","3.bachelor","industrial","yes",154.68529299563
+2007,30,"married","2.highschool","industrial","no",99.6894636984864
+2005,27,"married","1.primary","industrial","no",66.2294082943902
+2005,27,"never married","3.bachelor","industrial","yes",87.9810327856054
+2009,55,"separated","2.highschool","industrial","yes",90.4819133566401
