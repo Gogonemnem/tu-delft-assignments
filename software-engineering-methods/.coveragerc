@@ -1,0 +1,6 @@
+[run]
+omit =
+    project/test/*
+    venv/Lib/*
+    project/gui/*
+    project/main/*

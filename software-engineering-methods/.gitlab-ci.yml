@@ -1,0 +1,21 @@
+image: python:latest
+
+before_script:
+  - python --version
+  - pip install --upgrade pip
+  - pip install -r requirements.txt
+  - apt-get update && apt-get install -y libgl1
+
+stages:
+  - Static Analysis
+  - Test
+
+pylint:
+  stage: Static Analysis
+  script:
+  - pylint -d C0301 project/*.py
+
+pytest:
+  stage: Test
+  script:
+  - cd project/test/;pytest -v
