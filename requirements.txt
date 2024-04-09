@@ -1,0 +1,19 @@
+# backports.entry-points-selectable
+# distlib
+# filelock
+# platformdirs
+# six
+# virtualenv
+
+ipykernel
+ipympl
+jupyter
+opencv-python==4.5.3.56
+numpy
+pandas
+matplotlib
+scipy
+markdown-katex
+plotly
+numba
+progressbar
